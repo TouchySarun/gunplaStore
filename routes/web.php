@@ -22,6 +22,7 @@ Route::get('/product', function () {
 use Illuminate\Support\Facades\DB;
 
 Route::get('/test', function () {
-    $response = DB::select('select * from customers where customerNumber = :number', ['number' => '103']); 
+    $response = DB::select('select * from customers where customerNumber = :number and customerNumber = :number2', ['number' => '103','number2' =>'102']);
+    
     return $response;
 });
