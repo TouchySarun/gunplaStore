@@ -18,3 +18,10 @@ Route::get('/', function () {
 Route::get('/product', function () {
     return view('cart');
 });
+
+use Illuminate\Support\Facades\DB;
+
+Route::get('/test', function () {
+    $response = DB::select('select * from customers where customerNumber = :number', ['number' => '103']); 
+    return $response;
+});
