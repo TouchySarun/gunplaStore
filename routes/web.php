@@ -16,5 +16,5 @@ Route::get('/', function () {
 });
 
 Route::get('/product', function () {
-    return view('welcome');
+    return view('hello');
 });
