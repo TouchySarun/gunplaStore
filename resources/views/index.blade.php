@@ -87,14 +87,19 @@
                 <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
             </div>
             <!-- Social Button -->
-            
+
         </header>
         <!-- Header Area End -->
 
+        <!--?php echo $jsonProduct; ?>;-->
+        <div id="tablelist">
+
+
+
+        </div>
         <!-- Product Catagories Area Start -->
         <div class="products-catagories-area clearfix">
-            <div class="amado-pro-catagory clearfix">
-
+            <div class="amado-pro-catagory clearfix" id="productArea">
                 <!-- Single Catagory -->
                 <div class="single-products-catagory clearfix">
                     <a href="shop.html">
@@ -214,7 +219,30 @@
             </div>
         </div>
         <!-- Product Catagories Area End -->
+
     </div>
+    <script>
+            var tableproduct = "";
+            var i = 0;
+            var json = <?php echo $jsonProduct; ?> ;
+            json.forEach(function(a) {
+             tableproduct += `
+                <div class="single-products-catagory clearfix">
+                    <a href="shop.html">
+                        <img src="./amado-master/img/bg-img/1.jpg" alt="">
+                        <!-- Hover Content -->
+                        <div class="hover-content">
+                            <div class="line"></div>
+                            <p>In Stock ${a.quantityInStock} </p>
+                            <p>prise ${a.MSRP}</p>
+                            <h4>${a.productName}</h4>
+                        </div>
+                    </a>
+                </div>
+                `
+            });
+            document.getElementById("productArea").innerHTML = tableproduct;
+         </script>
     <!-- ##### Main Content Wrapper End ##### -->
 
     <!-- ##### Newsletter Area Start ##### -->
