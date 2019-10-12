@@ -72,6 +72,9 @@
         $('.gallery_img').magnificPopup({
             type: 'image'
         });
+        $('.popup').magnificPopup({
+            
+        });
     }
 
     // :: 7.0 Nicescroll Active Code

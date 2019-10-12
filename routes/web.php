@@ -23,7 +23,9 @@ Route::get('/shop', function () {
     return view('shop');
 });
 
-
+Route::get('/detail', function () {
+    return view('product-details');
+});
 
 use Illuminate\Support\Facades\DB;
 

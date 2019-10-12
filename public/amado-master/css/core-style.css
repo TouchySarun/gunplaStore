@@ -150,6 +150,15 @@ nav {
 
 .height-800 {
   height: 800px !important; }
+  
+.white-popup {
+    position: relative;
+    background: #FFF;
+    padding: 20px;
+    width: auto;
+    max-width: 500px;
+    margin: 20px auto;
+}
 
 /* Section Padding */
 .section-padding-100 {

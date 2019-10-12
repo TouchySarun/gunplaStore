@@ -50,7 +50,6 @@
             <div class="amado-navbar-brand">
                 <a href="index.html"><img src="./amado-master/img/core-img/logo.png" alt=""></a>
             </div>
-            <div></div>
             <!-- Navbar Toggler -->
             <div class="amado-navbar-toggler">
                 <span></span><span></span><span></span>
