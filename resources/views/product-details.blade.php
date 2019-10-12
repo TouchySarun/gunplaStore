@@ -24,19 +24,8 @@
     <!-- ##### Main Content Wrapper Start ##### -->
     <div class="main-content-wrapper d-flex clearfix">
         <!-- Product Details Area Start -->
-        <align:center div class="single-product-area section-padding-100 clearfix" >
+        <div class="single-product-area section-padding-100 clearfix" >
             <div class="container-fluid" >
-                <div class="row">
-                    <div class="col-12">
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb mt-50">
-                                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Product-Details</li>
-                            </ol>
-                        </nav>
-                    </div>
-                </div>
-
                 <div class="row">
                     <div class="col-lg-7">
                         <div class="single_product_thumb">
