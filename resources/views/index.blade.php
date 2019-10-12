@@ -29,9 +29,10 @@
             <div class="row">
                 <div class="col-12">
                     <div class="search-content">
-                        <form action="#" method="get">
+                        <form action="" method="get">
                             <input type="search" name="search" id="search" placeholder="Type your keyword...">
-                            <button type="submit"><img src="img/core-img/search.png" alt=""></button>
+                            <input type="text" id="myInput" onkeyup="filterByProductName()" placeholder="Search for names..">
+                            <button type="submit"><img src="./amado-master/img/core-img/search.png" alt=""></button>
                         </form>
                     </div>
                 </div>
@@ -100,122 +101,6 @@
         <!-- Product Catagories Area Start -->
         <div class="products-catagories-area clearfix">
             <div class="amado-pro-catagory clearfix" id="productArea">
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.html">
-                        <img src="./amado-master/img/bg-img/1.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>From $180</p>
-                            <h4>Modern Chair</h4>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.html">
-                        <img src="./amado-master/img/bg-img/2.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>From $180</p>
-                            <h4>Minimalistic Plant Pot</h4>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.html">
-                        <img src="./amado-master/img/bg-img/3.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>From $180</p>
-                            <h4>Modern Chair</h4>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.html">
-                        <img src="./amado-master/img/bg-img/4.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>From $180</p>
-                            <h4>Night Stand</h4>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.html">
-                        <img src="./amado-master/img/bg-img/5.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>From $18</p>
-                            <h4>Plant Pot</h4>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.html">
-                        <img src="./amado-master/img/bg-img/6.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>From $320</p>
-                            <h4>Small Table</h4>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.html">
-                        <img src="./amado-master/img/bg-img/7.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>From $318</p>
-                            <h4>Metallic Chair</h4>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.html">
-                        <img src="./amado-master/img/bg-img/8.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>From $318</p>
-                            <h4>Modern Rocking Chair</h4>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.html">
-                        <img src="./amado-master/img/bg-img/9.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>From $318</p>
-                            <h4>Home Deco</h4>
-                        </div>
-                    </a>
-                </div>
             </div>
         </div>
         <!-- Product Catagories Area End -->
@@ -223,18 +108,18 @@
     </div>
     <script>
             var tableproduct = "";
-            var i = 0;
+            //var i = 0;
             var json = <?php echo $jsonProduct; ?> ;
             json.forEach(function(a) {
-             tableproduct += `
-                <div class="single-products-catagory clearfix">
+            tableproduct += `
+                <div class="single-products-catagory">
                     <a href="shop.html">
                         <img src="./amado-master/img/bg-img/1.jpg" alt="">
                         <!-- Hover Content -->
                         <div class="hover-content">
                             <div class="line"></div>
                             <p>In Stock ${a.quantityInStock} </p>
-                            <p>prise ${a.MSRP}</p>
+                            <p>price ${a.MSRP}</p>
                             <h4>${a.productName}</h4>
                         </div>
                     </a>
@@ -242,6 +127,27 @@
                 `
             });
             document.getElementById("productArea").innerHTML = tableproduct;
+
+
+            function filterByProductName() {
+                var input, filter, slot, howercontent, pdName, i, txtValue, a;
+                input = document.getElementById("myInput");
+                filter = input.value.toUpperCase();
+                slot = document.getElementById("productArea");
+                howercontent = slot.getElementsByClassName("single-products-catagory");
+                for (i = 0; i < howercontent.length; i++) {
+                    a = howercontent[i].getElementsByTagName("a")[0];
+                    pdName = a.getElementsByTagName("h4")[0];
+                    if (pdName) {
+                        txtValue = pdName.textContent || pdName.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            howercontent[i].style.display = "";
+                        } else {
+                            howercontent[i].style.display = "none";
+                        }
+                    }
+                }
+            }
          </script>
     <!-- ##### Main Content Wrapper End ##### -->
 
