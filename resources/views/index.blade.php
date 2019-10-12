@@ -35,25 +35,38 @@
                             <button type="submit"><img src="./amado-master/img/core-img/search.png" alt=""></button>
                         </form>
                     </div>
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
     <!-- Search Wrapper Area End -->
 
+
     <!-- ##### Main Content Wrapper Start ##### -->
     <div class="main-content-wrapper d-flex clearfix">
-
+        
         <!-- Mobile Nav (max width 767px)-->
         <div class="mobile-nav">
             <!-- Navbar Brand -->
             <div class="amado-navbar-brand">
-                <a href="index.html"><img src="./amado-master/img/core-img/logo.png" alt=""></a>
+                <a><img src="./amado-master/img/core-img/logo.png" alt=""></a>
+               
             </div>
+            
+            <li class="active"><a href="index.html">Home</a></li>
+            <li><a href="shop">Shop</a></li>
+            <li><a href="product-details.html">Product</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="checkout.html">Checkout</a></li>
+
+            <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> </a>
             <!-- Navbar Toggler -->
             <div class="amado-navbar-toggler">
                 <span></span><span></span><span></span>
-            </div>
+            </div>  
+
         </div>
 
         <!-- Header Area Start -->
@@ -66,11 +79,19 @@
             <div class="logo">
                 <a href="index.html"><img src="./amado-master/img/core-img/logo.png" alt=""></a>
             </div>
+
+            <!-- Cart Menu -->
+            <div class="cart-fav-search mb-100">
+                <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
+                <a href="cart.html" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
+                <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>    
+            </div>
+
             <!-- Amado Nav -->
             <nav class="amado-nav">
                 <ul>
                     <li class="active"><a href="index.html">Home</a></li>
-                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="shop">Shop</a></li>
                     <li><a href="product-details.html">Product</a></li>
                     <li><a href="cart.html">Cart</a></li>
                     <li><a href="checkout.html">Checkout</a></li>
@@ -80,12 +101,6 @@
             <div class="amado-btn-group mt-30 mb-100">
                 <a href="#" class="btn amado-btn mb-15">%Discount%</a>
                 <a href="#" class="btn amado-btn active">New this week</a>
-            </div>
-            <!-- Cart Menu -->
-            <div class="cart-fav-search mb-100">
-                <a href="cart.html" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
-                <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
-                <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
             </div>
             <!-- Social Button -->
 

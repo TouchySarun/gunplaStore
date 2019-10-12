@@ -19,6 +19,12 @@ Route::get('/product', function () {
     return view('cart');
 });
 
+Route::get('/shop', function () {
+    return view('shop');
+});
+
+
+
 use Illuminate\Support\Facades\DB;
 
 Route::get('/test', function () {
