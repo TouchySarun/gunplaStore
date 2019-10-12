@@ -84,9 +84,12 @@
                                 <p class="product-price">$180</p>
                                 <a href="product-details.html">
                                     <h6>White Modern Chair</h6>
+                                    <h6>Scale 1:10</h6>
+                                    <h5>Vendor Classic Metal Creations</h5>
                                 </a>
+
                                 <!-- Avaiable -->
-                                <p class="avaibility"><i class="fa fa-circle"></i> In Stock</p>
+                                <p class="avaibility"><i class="fa fa-circle"></i> 3879 In Stock</p>
                             </div>
 
                             <div class="short_overview my-5">
@@ -94,7 +97,7 @@
                             </div>
 
                             <!-- Add to Cart Form -->
-                            <form class="cart clearfix" method="post">
+                            <!-- <form class="cart clearfix" method="post">
                                 <div class="cart-btn d-flex mb-50">
                                     <p>Qty</p>
                                     <div class="quantity">
@@ -104,7 +107,7 @@
                                     </div>
                                 </div>
                                 <button type="submit" name="addtocart" value="5" class="btn amado-btn">Add to cart</button>
-                            </form>
+                            </form> -->
 
                         </div>
                     </div>

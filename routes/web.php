@@ -33,3 +33,5 @@ Route::get('/test', function () {
     $response = DB::select('select * from customers where customerNumber = :number', ['number' => '103']); 
     return $response;
 });
+
+Route::get('/shoptest','DataController@product');
