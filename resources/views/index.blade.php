@@ -54,11 +54,11 @@
                
             </div>
             
-            <li class="active"><a href="index.html">Home</a></li>
+            <!-- <li class="active"><a href="index.html">Home</a></li>
             <li><a href="shop">Shop</a></li>
             <li><a href="product-details.html">Product</a></li>
             <li><a href="cart.html">Cart</a></li>
-            <li><a href="checkout.html">Checkout</a></li>
+            <li><a href="checkout.html">Checkout</a></li> -->
 
             <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> </a>
             <!-- Navbar Toggler -->
