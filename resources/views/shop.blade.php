@@ -12,11 +12,11 @@
     <title>Amado - Furniture Ecommerce Template | Shop</title>
 
     <!-- Favicon  -->
-    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="icon" href="./amado-master/img/core-img/favicon.ico">
 
     <!-- Core Style CSS -->
-    <link rel="stylesheet" href="css/core-style.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./amado-master/css/core-style.css">
+    <link rel="stylesheet" href="./style.css">
 
 </head>
 
@@ -48,7 +48,7 @@
         <div class="mobile-nav">
             <!-- Navbar Brand -->
             <div class="amado-navbar-brand">
-                <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                <a href="index.html"><img src="./amado-master/img/core-img/logo.png" alt=""></a>
             </div>
             <!-- Navbar Toggler -->
             <div class="amado-navbar-toggler">
@@ -64,7 +64,7 @@
             </div>
             <!-- Logo -->
             <div class="logo">
-                <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                <a href="index.html"><img src="./amado-master/img/core-img/logo.png" alt=""></a>
             </div>
             <!-- Amado Nav -->
             <nav class="amado-nav">
@@ -83,9 +83,9 @@
             </div>
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-100">
-                <a href="cart.html" class="cart-nav"><img src="img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
-                <a href="#" class="fav-nav"><img src="img/core-img/favorites.png" alt=""> Favourite</a>
-                <a href="#" class="search-nav"><img src="img/core-img/search.png" alt=""> Search</a>
+                <a href="cart.html" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
+                <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
+                <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
             </div>
             <!-- Social Button -->
             <div class="social-info d-flex justify-content-between">
@@ -275,9 +275,9 @@
                         <div class="single-product-wrapper">
                             <!-- Product Image -->
                             <div class="product-img">
-                                <img src="img/product-img/product2.jpg" alt="">
+                                <img src="./amado-master/img/product-img/product2.jpg" alt="">
                                 <!-- Hover Thumb -->
-                                <img class="hover-img" src="img/product-img/product3.jpg" alt="">
+                                <img class="hover-img" src="./amado-master/img/product-img/product3.jpg" alt="">
                             </div>
 
                             <!-- Product Description -->
@@ -312,9 +312,9 @@
                         <div class="single-product-wrapper">
                             <!-- Product Image -->
                             <div class="product-img">
-                                <img src="img/product-img/product3.jpg" alt="">
+                                <img src="./amado-master/img/product-img/product3.jpg" alt="">
                                 <!-- Hover Thumb -->
-                                <img class="hover-img" src="img/product-img/product4.jpg" alt="">
+                                <img class="hover-img" src="./amado-master/img/product-img/product4.jpg" alt="">
                             </div>
 
                             <!-- Product Description -->
@@ -349,9 +349,9 @@
                         <div class="single-product-wrapper">
                             <!-- Product Image -->
                             <div class="product-img">
-                                <img src="img/product-img/product4.jpg" alt="">
+                                <img src="./amado-master/img/product-img/product4.jpg" alt="">
                                 <!-- Hover Thumb -->
-                                <img class="hover-img" src="img/product-img/product5.jpg" alt="">
+                                <img class="hover-img" src="./amado-master/img/product-img/product5.jpg" alt="">
                             </div>
 
                             <!-- Product Description -->
@@ -386,9 +386,9 @@
                         <div class="single-product-wrapper">
                             <!-- Product Image -->
                             <div class="product-img">
-                                <img src="img/product-img/product5.jpg" alt="">
+                                <img src="./amado-master/img/product-img/product5.jpg" alt="">
                                 <!-- Hover Thumb -->
-                                <img class="hover-img" src="img/product-img/product6.jpg" alt="">
+                                <img class="hover-img" src="./amado-master/img/product-img/product6.jpg" alt="">
                             </div>
 
                             <!-- Product Description -->
@@ -423,9 +423,9 @@
                         <div class="single-product-wrapper">
                             <!-- Product Image -->
                             <div class="product-img">
-                                <img src="img/product-img/product6.jpg" alt="">
+                                <img src="./amado-master/img/product-img/product6.jpg" alt="">
                                 <!-- Hover Thumb -->
-                                <img class="hover-img" src="img/product-img/product1.jpg" alt="">
+                                <img class="hover-img" src="./amado-master/img/product-img/product1.jpg" alt="">
                             </div>
 
                             <!-- Product Description -->
@@ -508,7 +508,7 @@
                     <div class="single_widget_area">
                         <!-- Logo -->
                         <div class="footer-logo mr-50">
-                            <a href="index.html"><img src="img/core-img/logo2.png" alt=""></a>
+                            <a href="index.html"><img src="./amado-master/img/core-img/logo2.png" alt=""></a>
                         </div>
                         <!-- Copywrite Text -->
                         <p class="copywrite"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
