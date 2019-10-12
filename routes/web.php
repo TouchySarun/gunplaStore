@@ -15,8 +15,16 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/product', function () {
+Route::get('/index', function () {
+    return view('index');
+});
+
+Route::get('/cart', function () {
     return view('cart');
+});
+
+Route::get('/detail', function () {
+    return view('product-details');
 });
 
 use Illuminate\Support\Facades\DB;
