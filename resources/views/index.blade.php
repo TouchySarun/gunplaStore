@@ -21,7 +21,7 @@
 
 <body>
     <!-- Search Wrapper Area Start -->
-    <div class="search-wrapper section-padding-100">
+    <div class="search-wrapper section-padding-50">
         <div class="search-close">
             <i class="fa fa-close" aria-hidden="true"></i>
         </div>
@@ -60,7 +60,8 @@
             <li><a href="cart.html">Cart</a></li>
             <li><a href="checkout.html">Checkout</a></li> -->
 
-            <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> </a>
+            <!-- <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> </a> -->
+
             <!-- Navbar Toggler -->
             <div class="amado-navbar-toggler">
                 <span></span><span></span><span></span>
@@ -71,9 +72,9 @@
         <!-- Header Area Start -->
         <header class="header-area clearfix">
             <!-- Close Icon -->
-            <div class="nav-close">
+            <!-- <div class="nav-close">
                 <i class="fa fa-close" aria-hidden="true"></i>
-            </div>
+            </div> -->
             <!-- Logo -->
             <div class="logo">
                 <a href="index.html"><img src="./amado-master/img/core-img/logo.png" alt=""></a>
@@ -89,11 +90,31 @@
             <!-- Amado Nav -->
             <nav class="amado-nav">
                 <ul>
-                    <li class="active"><a href="index.html">Home</a></li>
+                    <!-- <li class="active"><a href="index.html">Home</a></li>
                     <li><a href="shop">Shop</a></li>
                     <li><a href="product-details.html">Product</a></li>
                     <li><a href="cart.html">Cart</a></li>
-                    <li><a href="checkout.html">Checkout</a></li>
+                    <li><a href="checkout.html">Checkout</a></li> -->
+
+                <div class="amado-nav">
+                    <button class="dropdown-btn">SCALE
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-container">
+                        <a href="#">Link 1</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>
+                    <button class="dropdown-btn">VENDOR
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-container">
+                        <a href="#">Link 1</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>
+                </div>
+                
                 </ul>
             </nav>
             <!-- Button Group -->
@@ -110,8 +131,9 @@
         
         <!-- Product Catagories Area Start -->
         <div class="products-catagories-area clearfix">
+            <br><br><br>
             <div class="amado-pro-catagory clearfix">
-
+                
                 <!-- Single Catagory -->
                 <div class="single-products-catagory clearfix">
                     <a href="shop.html">

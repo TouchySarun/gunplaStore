@@ -73,13 +73,50 @@ img {
 
 
 /*TIEW ########*/
-nav {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline; }
+/* Fixed sidenav, full height */
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+/* Style the sidenav links and the dropdown button */
+.amado-nav, .dropdown-btn {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+  border: none;
+  background: none;
+  width:100%;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+}
+
+/* On mouse-over */
+.sidenav a:hover, .dropdown-btn:hover {
+  color: #f1f1f1;
+}
+
+.dropdown-container {
+  display: none;
+  background-color: #262626;
+  padding-left: 8px;
+}
+
+/* Optional: Style the caret down icon */
+.fa-caret-down {
+  float: right;
+  padding-right: 8px;
+}
 
 
 
@@ -155,6 +192,9 @@ nav {
 .section-padding-100 {
   padding-top: 100px;
   padding-bottom: 100px; }
+.section-padding-50 {
+  padding-top: 50px;
+  padding-bottom: 50px; }
 
 .section-padding-100-0 {
   padding-top: 100px;
@@ -325,7 +365,7 @@ nav {
       bottom: 30px;
       right: 30px; } }
 
-/* Essence Button */
+/* Essence  Button */
 .amado-btn {
   display: inline-block;
   min-width: 160px;
@@ -348,20 +388,20 @@ nav {
   position: fixed;
   z-index: 1;
   width: 100%;
-  height: 260px;
+  height: 170px;
   z-index: 5000;
   top: -350px;
   left: 0;
   background-color: #f5f7fa;
   -webkit-transition-duration: 500ms;
-  transition-duration: 500ms; }
+  transition-duration: 400ms; }
   .search-wrapper .search-content form {
     position: relative;
     z-index: 1;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.075); }
     .search-wrapper .search-content form input {
       width: 100%;
-      height: 60px;
+      height: 50px;
       border: none;
       padding-left: 50px;
       font-size: 14px;
@@ -372,7 +412,7 @@ nav {
       left: 0;
       border: none;
       width: 50px;
-      height: 60px;
+      height: 50px;
       z-index: 10;
       cursor: pointer;
       background-color: transparent;
@@ -415,7 +455,7 @@ nav {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 320px;
     flex: 0 0 320px;
-    width: 320px;
+    width: 100px;
     max-width: 320px;
     background-color: #fff;
     padding: 60px 75px; }
@@ -438,14 +478,14 @@ nav {
         max-width: 320px;
         position: fixed;
         z-index: 4000;
-        top: 0;
-        left: -350px;
+        top: 75px;
+        right: -1200px;
         height: 100%;
         overflow-x: hidden;
         overflow-y: scroll;
         display: block; } }
     .main-content-wrapper .header-area.bp-xs-on {
-      left: 0; }
+      right: 0; }
     .main-content-wrapper .header-area .nav-close {
       -webkit-transition-duration: 500ms;
       transition-duration: 500ms;
@@ -470,6 +510,7 @@ nav {
     .main-content-wrapper .header-area .logo {
       margin-bottom: 100px;
       display: block; }
+    
     .main-content-wrapper .header-area .amado-nav li a {
       font-size: 14px;
       text-transform: uppercase;
