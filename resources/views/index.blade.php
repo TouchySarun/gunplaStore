@@ -173,11 +173,6 @@
         </div>
         <!-- Product Catagories Area End -->
 
-<<<<<<< HEAD
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a class="popup white-popup" href="datail">
-=======
     </div>
     <script>
             var tableproduct = "";
@@ -187,7 +182,6 @@
             tableproduct += `
                 <div class="single-products-catagory">
                     <a href="shop.html">
->>>>>>> ac887219a65dc49225bc855a8c262eef4d09ef79
                         <img src="./amado-master/img/bg-img/1.jpg" alt="">
                         <!-- Hover Content -->
                         <div class="hover-content">
@@ -202,9 +196,8 @@
             });
             document.getElementById("productArea").innerHTML = tableproduct;
 
-
             function filterByProductName() {
-                var input, filter, slot, howercontent, pdName, i, txtValue, a;
+                var input, filter, slot, howercontent, vendor, i, txtValue, a;
                 input = document.getElementById("myInput");
                 filter = input.value.toUpperCase();
                 slot = document.getElementById("productArea");
@@ -222,7 +215,53 @@
                     }
                 }
             }
+
+            function dropdowVendor(){
+                var mostvendor = "";
+                var json = <?php echo $jsonProduct; ?> ;
+                json.forEach(function(a) {
+                tableproduct += `
+                    <a href="#">
+                        <h4>${a.productVendor}</h4>
+                    </a>
+                `
+                });
+                document.getElementById("Vendor").innerHTML = tableproduct;
+            }
+
+            function filterVendor(){
+                var slot, slot2, howercontent, howercontent2, vendor, i, txtValue, a;
+                slot = document.getElementById("productArea");
+                slot2 = document.getElementById("Vendor");
+                howercontent = slot.getElementsBy("single-products-catagory");
+                howercontent2 = slot2.getElementsBy("single-products-catagory");
+                for (i = 0; i < howercontent.length; i++) {
+                    a = howercontent[i].getElementsByTagName("a")[0];
+                    vendor = a.getElementsByTagName("h4")[0];
+                    if (vendor) {
+                         = vendor.textContent || vendor.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            howercontent[i].style.display = ``;
+                        } else {
+                            howercontent[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+
+            function dropdowScale(){
+                var mostscale = "";
+                var json = <?php echo $jsonProduct; ?> ;
+                json.forEach(function(a) {
+                tableproduct += `
+                    <a href="#">${a.productScale}</a>
+                `
+                });
+                document.getElementById("Scale").innerHTML = tableproduct;
+            }
          </script>
+
+
     <!-- ##### Main Content Wrapper End ##### -->
 
     <!-- ##### Newsletter Area Start ##### -->
