@@ -21,7 +21,7 @@
 
 <body>
     <!-- Search Wrapper Area Start -->
-    <div class="search-wrapper section-padding-100">
+    <div class="search-wrapper section-padding-50">
         <div class="search-close">
             <i class="fa fa-close" aria-hidden="true"></i>
         </div>
@@ -46,35 +46,36 @@
 
     <!-- ##### Main Content Wrapper Start ##### -->
     <div class="main-content-wrapper d-flex clearfix">
-        
+
         <!-- Mobile Nav (max width 767px)-->
         <div class="mobile-nav">
             <!-- Navbar Brand -->
             <div class="amado-navbar-brand">
                 <a><img src="./amado-master/img/core-img/logo.png" alt=""></a>
-               
+
             </div>
-            
-            <li class="active"><a href="index.html">Home</a></li>
+
+            <!-- <li class="active"><a href="index.html">Home</a></li>
             <li><a href="shop">Shop</a></li>
             <li><a href="product-details.html">Product</a></li>
             <li><a href="cart.html">Cart</a></li>
-            <li><a href="checkout.html">Checkout</a></li>
+            <li><a href="checkout.html">Checkout</a></li> -->
 
-            <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> </a>
+            <!-- <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> </a> -->
+
             <!-- Navbar Toggler -->
             <div class="amado-navbar-toggler">
                 <span></span><span></span><span></span>
-            </div>  
+            </div>
 
         </div>
 
         <!-- Header Area Start -->
         <header class="header-area clearfix">
             <!-- Close Icon -->
-            <div class="nav-close">
+            <!-- <div class="nav-close">
                 <i class="fa fa-close" aria-hidden="true"></i>
-            </div>
+            </div> -->
             <!-- Logo -->
             <div class="logo">
                 <a href="index.html"><img src="./amado-master/img/core-img/logo.png" alt=""></a>
@@ -84,23 +85,75 @@
             <div class="cart-fav-search mb-100">
                 <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
                 <a href="cart.html" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
-                <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>    
+                <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
             </div>
 
             <!-- Amado Nav -->
             <nav class="amado-nav">
                 <ul>
-                    <li class="active"><a href="index.html">Home</a></li>
+                    <!-- <li class="active"><a href="index.html">Home</a></li>
                     <li><a href="shop">Shop</a></li>
                     <li><a href="product-details.html">Product</a></li>
                     <li><a href="cart.html">Cart</a></li>
-                    <li><a href="checkout.html">Checkout</a></li>
+                    <li><a href="checkout.html">Checkout</a></li> -->
+
+                <div class="amado-nav">
+                    <button class="dropdown-btn">SCALE
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-container">
+                        <a href="#">Link 1</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>
+                    <button class="dropdown-btn">VENDOR
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-container">
+                        <a href="#">Link 1</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>
+                </div>
+
                 </ul>
             </nav>
+
             <!-- Button Group -->
             <div class="amado-btn-group mt-30 mb-100">
-                <a href="#" class="btn amado-btn mb-15">%Discount%</a>
-                <a href="#" class="btn amado-btn active">New this week</a>
+                <a href="#" class="btn amado-btn mb-15">Discount</a>
+                <a href="#" onclick="document.getElementById('id01').style.display='block'"
+                    class="btn amado-btn active">Login</a>
+                    <div id="id01" class="modal">
+                        <span onclick="document.getElementById('id01').style.display='none'"
+                            class="close" title="Close Modal">&times;</span>
+
+                    <!-- Modal Content -->
+                    <form class="modal-content animate" action="/action_page.php">
+                        <div class="container">
+                            <label for="uname"><b>Username</b></label>
+                                <input type="text" placeholder="Enter Username" name="uname" required>
+                            <label for="psw"><b>Password</b></label>
+                                <input type="password" placeholder="Enter Password" name="psw" required>
+                            <button type="submit">Login</button>
+                            <label>
+                                <input type="checkbox" checked="unchecked" name="remember"> Remember me
+                            </label>
+                        </div>
+                        <div class="container" style="background-color:#f1f1f1">
+                            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                                <span class="psw">Forgot <a href="#">password?</a></span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Cart Menu -->
+            <div class="cart-fav-search mb-100">
+                <a href="cart.html" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
+                <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
+                <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
+
             </div>
             <!-- Social Button -->
 
