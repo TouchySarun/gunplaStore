@@ -92,9 +92,6 @@
             <nav class="amado-nav">
                 <ul>
                 <div class="amado-nav">
-                    <!-- <button class="dropdown-btn">SCALE
-                        <i class="fa fa-caret-down"></i>
-                    </button> -->
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#footerNavContent" aria-controls="footerNavContent" aria-expanded="false" >SCALE
                         <i class="fa fa-caret-down"></i>
                     </button>
@@ -119,7 +116,8 @@
             
             <!-- Button Group -->
             <div class="amado-btn-group mt-30 mb-100">
-                <a href="#" class="btn amado-btn mb-15">Discount</a>
+                <a href="#" class="btn amado-btn active">Discount</a>
+                <br>
                 <a href="#" onclick="document.getElementById('id01').style.display='block'"
                     class="btn amado-btn active">Login</a>
                     <div id="id01" class="modal">
@@ -143,6 +141,75 @@
                                 <span class="psw">Forgot <a href="#">password?</a></span>
                         </div>
                     </form>
+                    
+                    <div id="id02" class="modal">
+                    <span onclick="document.getElementById('id02').style.display='none'"
+                        class="close" title="Close Modal">&times;
+                    </span>
+                    <form class="modal-content animate" action="/action_page.php">
+                    <div class="container">
+                        <div class="single-product-area section-padding-100 clearfix" >
+                            <div class="container-fluid" >
+                                <div class="row">
+                                    <div class="col-lg-7">
+                                        <div class="single_product_thumb">
+                                            <div id="product_details_slider" class="carousel slide" data-ride="carousel">
+                                                <ol class="carousel-indicators">
+                                                    <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(./amado-master/img/product-img/pro-big-1.jpg);"></li>
+                                                    <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(./amado-master/img/product-img/pro-big-2.jpg);"></li>
+                                                    <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(./amado-master/img/product-img/pro-big-3.jpg);"></li>
+                                                    <li data-target="#product_details_slider" data-slide-to="3" style="background-image: url(./amado-master/img/product-img/pro-big-4.jpg);"></li>
+                                                </ol>
+                                                <div class="carousel-inner">
+                                                    <div class="carousel-item active">
+                                                        <a class="gallery_img" href="./amado-master/img/product-img/pro-big-1.jpg">
+                                                        <img class="d-block w-100" src="./amado-master/img/product-img/pro-big-1.jpg" alt="First slide">
+                                                        </a>
+                                                    </div>
+                                                    <div class="carousel-item">
+                                                        <a class="gallery_img" href="./amado-master/img/product-img/pro-big-2.jpg">
+                                                        <img class="d-block w-100" src="./amado-master/img/product-img/pro-big-2.jpg" alt="Second slide">
+                                                        </a>
+                                                    </div>
+                                                    <div class="carousel-item">
+                                                        <a class="gallery_img" href="./amado-master/img/product-img/pro-big-3.jpg">
+                                                        <img class="d-block w-100" src="./amado-master/img/product-img/pro-big-3.jpg" alt="Third slide">
+                                                        </a>
+                                                    </div>
+                                                    <div class="carousel-item">
+                                                        <a class="gallery_img" href="./amado-master/img/product-img/pro-big-4.jpg">
+                                                        <img class="d-block w-100" src="./amado-master/img/product-img/pro-big-4.jpg" alt="Fourth slide">
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-5">
+                                        <div class="single_product_desc">
+                                            <div class="product-meta-data">
+                                                <div class="line"></div>
+                                                <p class="product-price">$180</p>
+                                                <a href="product-details.html">
+                                                    <h6>${a.productName}</h6>
+                                                    <h6>Scale 1:10</h6>
+                                                    <h5>Vendor Classic Metal Creations</h5>
+                                                </a>
+                                                <p class="avaibility"><i class="fa fa-circle"></i> 3879 In Stock</p>
+                                            </div>
+                                            <div class="short_overview my-5">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid quae eveniet culpa officia quidem mollitia impedit iste asperiores nisi reprehenderit consequatur, autem, nostrum pariatur enim?</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
+                    </div>
+                    </form>
+                </div>    
+                                
+
                 </div>
             </div>
 
@@ -177,20 +244,21 @@
             json.forEach(function(a) {
             tableproduct += `
                 <div class="single-products-catagory">
-                    <a href="shop.html">
-                        <img src="./amado-master/img/bg-img/1.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>In Stock ${a.quantityInStock} </p>
-                            <p>price ${a.MSRP}</p>
-                            <h4>${a.productName}</h4>
-                        </div>
+                    <a href="#">
+                    <img src="./amado-master/img/bg-img/1.jpg" alt="">            
+                    <div class="hover-content">
+                        <div class="line"></div>
+                        <p>In Stock ${a.quantityInStock} </p>
+                        <p>price ${a.MSRP}</p>
+                        <h4>${a.productName}</h4>
+                    </div>
                     </a>
                 </div>
                 `
             });
             document.getElementById("productArea").innerHTML = tableproduct;
+
+
 
             // dropdown Vender
             var mostvendor = "";
