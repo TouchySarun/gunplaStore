@@ -126,9 +126,7 @@
                 <a href="#" onclick="document.getElementById('id01').style.display='block'"
                     class="btn amado-btn active">Login</a>
                     <div id="id01" class="modal">
-                        <span onclick="document.getElementById('id01').style.display='none'"
-                            class="close" title="Close Modal">&times;</span>
-
+                    
                     <!-- Modal Content -->
                     <form class="modal-content animate" action="/action_page.php">
                         <div class="container">
@@ -136,28 +134,20 @@
                                 <input type="text" placeholder="Enter Username" name="uname" required>
                             <label for="psw"><b>Password</b></label>
                                 <input type="password" placeholder="Enter Password" name="psw" required>
-                            <button type="submit">Login</button>
+                                <button type="submit">Login</button>
                             <label>
                                 <input type="checkbox" checked="checked" name="remember"> Remember me
                             </label>
+                            <span class="psw"><a href="#">Forgot password?</a></span>
                         </div>
                         <div class="container" style="background-color:#f1f1f1">
-                            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-                                <span class="psw">Forgot <a href="#">password?</a></span>
+                        <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                            class="cancelbtn">Cancel</button>
                         </div>
                     </form>
                 </div>
             </div>
-
-            <!-- Cart Menu -->
-            <div class="cart-fav-search mb-100">
-                <a href="cart.html" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
-                <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
-                <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
-
-            </div>
-            <!-- Social Button -->
-
+        
         </header>
         <!-- Header Area End -->
 

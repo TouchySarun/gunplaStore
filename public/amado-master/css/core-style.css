@@ -1546,7 +1546,8 @@ span.psw {
 /* The Close Button */
 .close {
   /* Position it in the top right corner outside of the modal */
-  position: absolute;
+  /* position: absolute; */
+  float: right;
   right: 25px;
   top: 0;
   color: #000;
@@ -1559,6 +1560,7 @@ span.psw {
 .close:focus {
   color: #242424;
   cursor: pointer;
+  text-decoration: none;
 }
 
 /* Add Zoom Animation */
