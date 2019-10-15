@@ -160,8 +160,6 @@
 
         <!--?php echo $jsonProduct; ?>;-->
         <div id="tablelist">
-        <li id="tablelist">
-
 
         </div>
         <!-- Product Catagories Area Start -->
