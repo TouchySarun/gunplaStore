@@ -510,7 +510,7 @@ img {
     .main-content-wrapper .header-area .logo {
       margin-bottom: 100px;
       display: block; }
-    
+
     .main-content-wrapper .header-area .amado-nav li a {
       font-size: 14px;
       text-transform: uppercase;
@@ -1004,8 +1004,9 @@ img {
 
 .single-products-catagory {
   position: relative;
+  display:inline-block;
   z-index: 0;
-  width: 33.33333%;
+  width: 33%;
   top: 0; }
   @media only screen and (min-width: 992px) and (max-width: 1199px) {
     .single-products-catagory {
