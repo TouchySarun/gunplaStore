@@ -91,34 +91,32 @@
             <!-- Amado Nav -->
             <nav class="amado-nav">
                 <ul>
-                    <!-- <li class="active"><a href="index.html">Home</a></li>
-                    <li><a href="shop">Shop</a></li>
-                    <li><a href="product-details.html">Product</a></li>
-                    <li><a href="cart.html">Cart</a></li>
-                    <li><a href="checkout.html">Checkout</a></li> -->
-
                 <div class="amado-nav">
-                    <button class="dropdown-btn">SCALE
+                    <!-- <button class="dropdown-btn">SCALE
+                        <i class="fa fa-caret-down"></i>
+                    </button> -->
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#footerNavContent" aria-controls="footerNavContent" aria-expanded="false" >SCALE
                         <i class="fa fa-caret-down"></i>
                     </button>
-                    <div class="dropdown-container">
-                        <a href="#">Link 1</a>
-                        <a href="#">Link 2</a>
-                        <a href="#">Link 3</a>
+                    <div class="collapse navbar-collapse" id="footerNavContent">
+                        <ul>
+                            <li class="nav-item active" id="Scale">
+                            </li>
+                        </ul>
                     </div>
-                    <button class="dropdown-btn">VENDOR
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#footer" aria-controls="footerNavContent" aria-expanded="false" >Vendor
                         <i class="fa fa-caret-down"></i>
                     </button>
-                    <div class="dropdown-container">
-                        <a href="#">Link 1</a>
-                        <a href="#">Link 2</a>
-                        <a href="#">Link 3</a>
+                    <div class="collapse navbar-collapse" id="footer">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item active" id="Vendor">   
+                            </li>
+                        </ul>
                     </div>
                 </div>
-
                 </ul>
             </nav>
-
+            
             <!-- Button Group -->
             <div class="amado-btn-group mt-30 mb-100">
                 <a href="#" class="btn amado-btn mb-15">Discount</a>
@@ -162,7 +160,7 @@
 
         <!--?php echo $jsonProduct; ?>;-->
         <div id="tablelist">
-
+        <li id="tablelist">
 
 
         </div>
@@ -216,18 +214,27 @@
                 }
             }
 
-            function dropdowVendor(){
-                var mostvendor = "";
-                var json = <?php echo $jsonProduct; ?> ;
-                json.forEach(function(a) {
-                tableproduct += `
-                    <a href="#">
-                        <h4>${a.productVendor}</h4>
-                    </a>
-                `
-                });
-                document.getElementById("Vendor").innerHTML = tableproduct;
-            }
+            var mostvendor = "";
+            var json = <?php echo $jsonVendor; ?> ;
+            json.forEach(function(b) {
+            mostvendor += `
+                <a class="nav-link">
+                    <h5>${b.productVendor}</h5>
+                </a>
+            `
+            });
+            document.getElementById("Vendor").innerHTML = mostvendor;
+            
+            var mostscale = "";
+            var json = <?php echo $jsonScale; ?> ;
+            json.forEach(function(b) {
+            mostscale += `
+                <a class="nav-link">
+                    <h5>${b.productScale}</h5>
+                </a>
+            `
+            });
+            document.getElementById("Scale").innerHTML = mostscale;
 
             function filterVendor(){
                 var slot, slot2, howercontent, howercontent2, vendor, i, txtValue, a;
@@ -235,11 +242,11 @@
                 slot2 = document.getElementById("Vendor");
                 howercontent = slot.getElementsBy("single-products-catagory");
                 howercontent2 = slot2.getElementsBy("single-products-catagory");
-                for (i = 0; i < howercontent.length; i++) {
+                for (i = 0; i < howercontent2.length; i++) {
                     a = howercontent[i].getElementsByTagName("a")[0];
                     vendor = a.getElementsByTagName("h4")[0];
                     if (vendor) {
-                         = vendor.textContent || vendor.innerText;
+                        txtValue = vendor.textContent || vendor.innerText;
                         if (txtValue.toUpperCase().indexOf(filter) > -1) {
                             howercontent[i].style.display = ``;
                         } else {
@@ -247,17 +254,6 @@
                         }
                     }
                 }
-            }
-
-            function dropdowScale(){
-                var mostscale = "";
-                var json = <?php echo $jsonProduct; ?> ;
-                json.forEach(function(a) {
-                tableproduct += `
-                    <a href="#">${a.productScale}</a>
-                `
-                });
-                document.getElementById("Scale").innerHTML = tableproduct;
             }
          </script>
 
