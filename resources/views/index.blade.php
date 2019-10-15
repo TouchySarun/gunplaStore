@@ -17,6 +17,7 @@
     <!-- Core Style CSS -->
     <link rel="stylesheet" href="./amado-master/css/core-style.css">
     <link rel="stylesheet" href="./style.css">
+    <script src="./amado-master/js/app.js"></script>
 </head>
 
 <body>
@@ -90,14 +91,14 @@
 
             <!-- Amado Nav -->
             <nav class="amado-nav">
-                <!-- Old List -->
-                <!-- <li class="active"><a href="index.html">Home</a></li>
-                <li><a href="shop">Shop</a></li>
-                <li><a href="product-details.html">Product</a></li>
-                <li><a href="cart.html">Cart</a></li>
-                <li><a href="checkout.html">Checkout</a></li> -->
+                <ul>
+                    <!-- <li class="active"><a href="index.html">Home</a></li>
+                    <li><a href="shop">Shop</a></li>
+                    <li><a href="product-details.html">Product</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+                    <li><a href="checkout.html">Checkout</a></li> -->
 
-                <!-- <div class="amado-nav"> -->
+                <div class="amado-nav">
                     <button class="dropdown-btn">SCALE
                         <i class="fa fa-caret-down"></i>
                     </button>
@@ -114,9 +115,9 @@
                         <a href="#">Link 2</a>
                         <a href="#">Link 3</a>
                     </div>
-                <!-- </div> -->
+                </div>
 
-                
+                </ul>
             </nav>
 
             <!-- Button Group -->
@@ -148,60 +149,31 @@
                 </div>
             </div>
 
+            <!-- Cart Menu -->
+            <div class="cart-fav-search mb-100">
+                <a href="cart.html" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
+                <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
+                <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
+
+            </div>
+            <!-- Social Button -->
+
         </header>
         <!-- Header Area End -->
 
-        <!--?php echo $jsonProduct; ?>;-->
-        <div id="tablelist"></div>
         <!-- Product Catagories Area Start -->
         <div class="products-catagories-area clearfix">
             <div class="amado-pro-catagory clearfix" id="productArea">
             </div>
         </div>
+        <script>
+            var json = <?php echo $jsonProduct?>;
+            showProductList(json);
+            //document.getElementById("productArea").insertAdjacentHTML("afterend",showProductList(json));
+        </script>
         <!-- Product Catagories Area End -->
 
     </div>
-    <script>
-            var tableproduct = "";
-            //var i = 0;
-            var json = <?php echo $jsonProduct; ?> ;
-            json.forEach(function(a) {
-            tableproduct += `
-                <div class="single-products-catagory">
-                    <a href="shop.html">
-                        <img src="./amado-master/img/bg-img/1.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <h4>${a.productName}</h4>
-                            <p>In Stock ${a.quantityInStock}</p>
-                            <p>$${a.MSRP}</p>
-                        </div>
-                    </a>
-                </div>
-                `
-            });
-            document.getElementById("productArea").innerHTML = tableproduct;
-            function filterByProductName() {
-                var input, filter, slot, howercontent, pdName, i, txtValue, a;
-                input = document.getElementById("myInput");
-                filter = input.value.toUpperCase();
-                slot = document.getElementById("productArea");
-                howercontent = slot.getElementsByClassName("single-products-catagory");
-                for (i = 0; i < howercontent.length; i++) {
-                    a = howercontent[i].getElementsByTagName("a")[0];
-                    pdName = a.getElementsByTagName("h4")[0];
-                    if (pdName) {
-                        txtValue = pdName.textContent || pdName.innerText;
-                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                            howercontent[i].style.display = "";
-                        } else {
-                            howercontent[i].style.display = "none";
-                        }
-                    }
-                }
-            }
-         </script>
     <!-- ##### Main Content Wrapper End ##### -->
 
     <!-- ##### Newsletter Area Start ##### -->
@@ -291,6 +263,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="./amado-master/js/plugins.js"></script>
     <!-- Active js -->
     <script src="./amado-master/js/active.js"></script>
+
+
 
 </body>
 
