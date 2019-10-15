@@ -161,7 +161,6 @@
         </header>
         <!-- Header Area End -->
 
-        <!--?php echo $jsonProduct; ?>;-->
         <!-- Product Catagories Area Start -->
         <div class="products-catagories-area clearfix">
             <div class="amado-pro-catagory clearfix" id="productArea">
