@@ -14,10 +14,11 @@
 Route::get('/', function () {
     return view('index');
 });
-
+Route::get('/','DataController@index');
 Route::get('/index', function () {
     return view('index');
 });
+Route::get('/index','DataController@index');
 
 Route::get('/cart', function () {
     return view('cart');
@@ -37,5 +38,3 @@ Route::get('/test', function () {
 
     return $response;
 });
-
-Route::get('/testOOPLink','DataController@index');
