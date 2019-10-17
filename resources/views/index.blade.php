@@ -47,12 +47,12 @@
 
     <!-- ##### Main Content Wrapper Start ##### -->
     <div class="main-content-wrapper d-flex clearfix">
-
+    
         <!-- Mobile Nav (max width 767px)-->
         <div class="mobile-nav">
             <!-- Navbar Brand -->
             <div class="amado-navbar-brand">
-                <a><img src="./amado-master/img/core-img/logo.png" alt=""></a>
+                <a><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
 
             </div>
 
@@ -73,17 +73,18 @@
 
         <!-- Header Area Start -->
         <header class="header-area clearfix">
+            
             <!-- Close Icon -->
             <!-- <div class="nav-close">
                 <i class="fa fa-close" aria-hidden="true"></i>
             </div> -->
             <!-- Logo -->
             <div class="logo">
-                <a href="index.html"><img src="./amado-master/img/core-img/logo.png" alt=""></a>
+                <a href="index.html"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
             </div>
 
             <!-- Cart Menu -->
-            <div class="cart-fav-search mb-100">
+            <div class="cart-fav-search mb-30">
                 <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
                 <a href="cart.html" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
                 <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
@@ -118,7 +119,7 @@
                         data-target="#footer"
                         aria-controls="footerNavContent"
                         aria-expanded="false"
-                        >Vendor
+                        >VENDOR
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="collapse navbar-collapse" id="footer">
@@ -133,10 +134,10 @@
 
             <!-- Button Group -->
             <div class="amado-btn-group mt-30 mb-100">
-                <a href="#" class="btn amado-btn active">Discount</a>
+                <a href="#" class="btn amado-btn" >Discount</a>
                 <br>
                 <a href="#" onclick="document.getElementById('id01').style.display='block'"
-                    class="btn amado-btn active">Login
+                    class="btn amado-btn">Login
                 </a>
             </div>
             <!-- Pop up -->
@@ -168,19 +169,13 @@
                 <div id="id02" class="modal" style="display:none">
                     <!-- showProductDetail() -->
                 </div>
-            <!-- Cart Menu -->
-            <div class="cart-fav-search mb-100">
-                <a href="cart.html" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
-                <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
-                <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
-
-            </div>
             <!-- Social Button -->
 
         </header>
         <!-- Header Area End -->
         <!-- Product Catagories Area Start -->
         <div class="products-catagories-area clearfix">
+        <br><br><br>
             <div class="amado-pro-catagory clearfix" id="productArea">
             </div>
         </div>
