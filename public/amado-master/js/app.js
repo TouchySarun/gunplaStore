@@ -9,7 +9,7 @@ function showProductList(json){
     json.forEach( function(a) {
     tableproduct += `
         <div class="single-products-catagory">
-            <a href="#" onclick = document.GetComponentByID('id02').style.display = "block">
+                <a href="#" onclick="showProductDetail('${a.productName}', '${a.productScale}', '${a.productVendor}', '${a.productDescription}', '${a.quantityInStock}', '${a.buyPrice}')">
                 <img src="./amado-master/img/bg-img/1.jpg" alt="">
                 <!-- Hover Content -->
                 <div class="hover-content">
@@ -42,7 +42,7 @@ function dropdownVender(Vendor){
     var mostvendor = "";
     Vendor.forEach(function(b) {
     mostvendor += `
-        <a class="nav-link">
+        <a href="#" onclick="filterVendor('${b.productVendor}')">
             <h5>${b.productVendor}</h5>
         </a>
     `
@@ -54,12 +54,13 @@ function dropdownScale(Scale){
     var mostscale = "";
     Scale.forEach(function(b) {
     mostscale += `
-        <a class="nav-link">
+        <a href="#" onclick="filterScale('${b.productScale}')">
             <h5>${b.productScale}</h5>
         </a>
     `
     });
     document.getElementById('Scale').innerHTML = mostscale;
+    
 }
 
 
@@ -67,20 +68,18 @@ function dropdownScale(Scale){
 
 //------------------------------filter----------------------------- //
 function filterByProductName() {
-    document.getElementById("productArea").innerHTML = tableproduct;
-
+    // document.getElementById("productArea").innerHTML = tableproduct;
     var input, filter, slot, single_products_catagory, pdName, i, txtValue, a;
-
+    
     input = document.getElementById("myInput");
     filter = input.value.toUpperCase();
-
     slot = document.getElementById("productArea");
     single_products_catagory = slot.getElementsByClassName("single-products-catagory");
     for (i = 0; i < single_products_catagory.length; i++) {
         //single_products_catagory[i].style.position="absolute";
         a = single_products_catagory[i].getElementsByTagName("a")[0];
         pdDetail = a.getElementsByClassName("pdDetail");
-        pdName = a.getElementsByTagName("h4")[0];
+        pdName = a.getElementsByTagName("p")[3];
         if (pdName) {
             txtValue = pdName.textContent || pdName.innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -94,42 +93,48 @@ function filterByProductName() {
 }
 
 // filter Vender
-function filterVendor(){
-    var slot, slot2, howercontent, howercontent2, vendor, i, txtValue, a;
+function filterVendor(Vendor){
+    var slot, filter, single_products_catagory, pdVendor, i, txtValue, a;
+    // var Vendor = "MIN LIN DIECAST";
+    filter = Vendor.toUpperCase();
     slot = document.getElementById("productArea");
-    slot2 = document.getElementById("Vendor");
-    howercontent = slot.getElementsBy("single-products-catagory");
-    howercontent2 = slot2.getElementsBy("single-products-catagory");
-    for (i = 0; i < howercontent2.length; i++) {
-        a = howercontent[i].getElementsByTagName("a")[0];
-        vendor = a.getElementsByTagName("h4")[0];
-        if (vendor) {
-            txtValue = vendor.textContent || vendor.innerText;
+    single_products_catagory = slot.getElementsByClassName("single-products-catagory");
+    for (i = 0; i < single_products_catagory.length; i++) {
+        //single_products_catagory[i].style.position="absolute";
+        a = single_products_catagory[i].getElementsByTagName("a")[0];
+        // pdDetail = a.getElementsByClassName("pdDetail");
+        pdVendor = a.getElementsByTagName("p")[6];
+        if (pdVendor) {
+            txtValue = pdVendor.textContent || pdVendor.innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                howercontent[i].style.display = ``;
+                single_products_catagory[i].style.display = "";
+                // document.getElementById("productArea").insertAdjacentHTML("afterend", filteredList);
             } else {
-                howercontent[i].style.display = "none";
+                single_products_catagory[i].style.display = "none";
             }
         }
     }
 }
 
 // filter Scale
-function filterByProductName() {
-    var input, filter, slot, howercontent, vendor, i, txtValue, a;
-    input = document.getElementById("myInput");
-    filter = input.value.toUpperCase();
+function filterScale(Scale) {
+    var slot, filter, single_products_catagory, pdScale, i, txtValue, a;
+
+    filter = Scale.toUpperCase();
     slot = document.getElementById("productArea");
-    howercontent = slot.getElementsByClassName("single-products-catagory");
-    for (i = 0; i < howercontent.length; i++) {
-        a = howercontent[i].getElementsByTagName("a")[0];
-        pdName = a.getElementsByTagName("h4")[0];
-        if (pdName) {
-            txtValue = pdName.textContent || pdName.innerText;
+    single_products_catagory = slot.getElementsByClassName("single-products-catagory");
+    for (i = 0; i < single_products_catagory.length; i++) {
+        //single_products_catagory[i].style.position="absolute";
+        a = single_products_catagory[i].getElementsByTagName("a")[0];
+        // pdDetail = a.getElementsByClassName("pdDetail");
+        pdScale = a.getElementsByTagName("p")[5];
+        if (pdScale) {
+            txtValue = pdScale.textContent || pdScale.innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                howercontent[i].style.display = "";
+                single_products_catagory[i].style.display = "";
+                // document.getElementById("productArea").insertAdjacentHTML("afterend", filteredList);
             } else {
-                howercontent[i].style.display = "none";
+                single_products_catagory[i].style.display = "none";
             }
         }
     }
@@ -139,7 +144,7 @@ function filterByProductName() {
 //show product detail pop up
 function showProductDetail(name, scale, vendor, descrip, instock, price){
     var box = `
-    <span onclick="document.getElementById("id02").style.display='none'"
+    <span onclick="document.getElementById('id02').style.display='none'"
         class="close" title="Close Modal">&times;
     </span>
     <form class="modal-content animate" action="/action_page.php">
@@ -185,7 +190,7 @@ function showProductDetail(name, scale, vendor, descrip, instock, price){
                             <div class="single_product_desc">
                                 <div class="product-meta-data">
                                     <div class="line"></div>
-                                    <p class="product-price">$${price}</p>
+                                    <p class="product-price">${price}</p>
                                     <a href="product-details.html">
                                         <h6>${name}</h6>
                                         <h6>Scale ${scale}</h6>
