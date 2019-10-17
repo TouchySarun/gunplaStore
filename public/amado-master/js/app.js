@@ -1,6 +1,6 @@
 //require('./bootstrap');
 //code, name, line, scale, vendor, descrip, instock, price, msrp
-var tableproduct = "";//All product List in JSON
+var tableproduct = "<br><br><br>";//All product List in JSON
 
 function showProductList(json){
     //var i = 0;
@@ -42,8 +42,8 @@ function dropdownVender(Vendor){
     var mostvendor = "";
     Vendor.forEach(function(b) {
     mostvendor += `
-        <a href="#" onclick="filterVendor('${b.productVendor}')">
-            <h5>${b.productVendor}</h5>
+        <a href="#" class="avaibility" onclick="filterVendor('${b.productVendor}')">
+            ${b.productVendor}
         </a>
     `
     });
@@ -54,8 +54,8 @@ function dropdownScale(Scale){
     var mostscale = "";
     Scale.forEach(function(b) {
     mostscale += `
-        <a href="#" onclick="filterScale('${b.productScale}')">
-            <h5>${b.productScale}</h5>
+        <a href="#"  class="avaibility" onclick="filterScale('${b.productScale}')">
+            ${b.productScale}
         </a>
     `
     });

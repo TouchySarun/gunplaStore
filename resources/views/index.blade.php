@@ -46,12 +46,12 @@
 
     <!-- ##### Main Content Wrapper Start ##### -->
     <div class="main-content-wrapper d-flex clearfix">
-
+    
         <!-- Mobile Nav (max width 767px)-->
         <div class="mobile-nav">
             <!-- Navbar Brand -->
             <div class="amado-navbar-brand">
-                <a><img src="./amado-master/img/core-img/logo.png" alt=""></a>
+                <a><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
 
             </div>
 
@@ -72,13 +72,14 @@
 
         <!-- Header Area Start -->
         <header class="header-area clearfix">
+            
             <!-- Close Icon -->
             <!-- <div class="nav-close">
                 <i class="fa fa-close" aria-hidden="true"></i>
             </div> -->
             <!-- Logo -->
             <div class="logo">
-                <a href="index.html"><img src="./amado-master/img/core-img/logo.png" alt=""></a>
+                <a href="index.html"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
             </div>
 
             <!-- Cart Menu -->
@@ -117,7 +118,7 @@
                         data-target="#footer"
                         aria-controls="footerNavContent"
                         aria-expanded="false"
-                        >Vendor
+                        >VENDOR
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="collapse navbar-collapse" id="footer">
@@ -132,10 +133,10 @@
 
             <!-- Button Group -->
             <div class="amado-btn-group mt-30 mb-100">
-                <a href="#" class="btn amado-btn active">Discount</a>
+                <a href="#" class="btn amado-btn" >Discount</a>
                 <br>
                 <a href="#" onclick="document.getElementById('id01').style.display='block'"
-                    class="btn amado-btn active">Login
+                    class="btn amado-btn">Login
                 </a>
             </div>
             <!-- Pop up -->
@@ -168,14 +169,12 @@
                 <div id="id02" class="modal" style="display:none">
                     <!-- showProductDetail() -->
                 </div>
-            <!-- Cart Menu -->
         </header>
         <!-- Header Area End -->
         
         <!-- Product Catagories Area Start -->
         <div class="products-catagories-area clearfix" id="productArea">
-            <!-- <div class="amado-pro-catagory clearfix">
-            </div> -->
+        
         </div>
         <script>
             var json = <?php echo $jsonProduct?>;
@@ -224,7 +223,7 @@
                     <div class="single_widget_area">
                         <!-- Logo -->
                         <div class="footer-logo mr-50">
-                            <a href="index.html"><img src="./amado-master/img/core-img/logo2.png" alt=""></a>
+                            <a href="index.html"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
                         </div>
                         <!-- Copywrite Text -->
                         <p class="copywrite"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
