@@ -448,12 +448,12 @@ img {
       display: flex; } }
   .mobile-nav .amado-navbar-brand {
     -webkit-box-flex: 0;
-    -ms-flex: 0 0 70px;
-    flex: 0 0 70px;
-    max-width: 70px; }
+    -ms-flex: 0 0 100px;
+    flex: 0 0 100px;
+    max-width: 100px; }
     .mobile-nav .amado-navbar-brand a {
       display: block;
-      max-width: 70px; }
+      max-width: 100px; }
   .mobile-nav .amado-navbar-toggler {
     cursor: pointer; }
     .mobile-nav .amado-navbar-toggler span {
@@ -631,7 +631,7 @@ img {
       .main-content-wrapper .header-area .nav-close:hover {
         background-color: #131212; }
     .main-content-wrapper .header-area .logo {
-      margin-bottom: 100px;
+      margin-bottom: 50px;
       display: block; }
 
     .main-content-wrapper .header-area .amado-nav li a {

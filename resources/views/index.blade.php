@@ -9,7 +9,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>Amado - Furniture Ecommerce Template | Home</title>
+    <title>Gunpla Store | Plastic Model Shop</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="./amado-master/img/core-img/favicon.ico">
@@ -82,7 +82,7 @@
             </div>
 
             <!-- Cart Menu -->
-            <div class="cart-fav-search mb-50">
+            <div class="cart-fav-search mb-30">
                 <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
                 <a href="cart.html" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
                 <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
@@ -169,16 +169,9 @@
                     <!-- showProductDetail() -->
                 </div>
             <!-- Cart Menu -->
-            <div class="cart-fav-search mb-100">
-                <a href="cart.html" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
-                <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
-                <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
-
-            </div>
-            <!-- Social Button -->
-
         </header>
         <!-- Header Area End -->
+        
         <!-- Product Catagories Area Start -->
         <div class="products-catagories-area clearfix" id="productArea">
             <!-- <div class="amado-pro-catagory clearfix">
