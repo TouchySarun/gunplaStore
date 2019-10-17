@@ -44,7 +44,6 @@
     </div>
     <!-- Search Wrapper Area End -->
 
-
     <!-- ##### Main Content Wrapper Start ##### -->
     <div class="main-content-wrapper d-flex clearfix">
     
@@ -107,7 +106,7 @@
                     </button>
                     <div class="collapse navbar-collapse" id="footerNavContent">
                         <ul>
-                            <li class="nav-item active" id="Scale">
+                            <li class="nav-item" id="Scale">
                             </li>
                         </ul>
                     </div>
@@ -124,7 +123,7 @@
                     </button>
                     <div class="collapse navbar-collapse" id="footer">
                         <ul class="navbar-nav ml-auto">
-                            <li class="nav-item active" id="Vendor">
+                            <li class="nav-item" id="Vendor">
                             </li>
                         </ul>
                     </div>
