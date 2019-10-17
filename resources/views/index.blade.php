@@ -44,7 +44,6 @@
     </div>
     <!-- Search Wrapper Area End -->
 
-
     <!-- ##### Main Content Wrapper Start ##### -->
     <div class="main-content-wrapper d-flex clearfix">
 
@@ -92,41 +91,60 @@
             <!-- Amado Nav -->
             <nav class="amado-nav">
                 <ul>
-                    <!-- <li class="active"><a href="index.html">Home</a></li>
-                    <li><a href="shop">Shop</a></li>
-                    <li><a href="product-details.html">Product</a></li>
-                    <li><a href="cart.html">Cart</a></li>
-                    <li><a href="checkout.html">Checkout</a></li> -->
-
                 <div class="amado-nav">
-                    <button class="dropdown-btn">SCALE
+                    <!--Scale bar-->
+                    <button
+                        class="navbar-toggler"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#footerNavContent"
+                        aria-controls="footerNavContent"
+                        aria-expanded="false"
+                        >SCALE
                         <i class="fa fa-caret-down"></i>
                     </button>
-                    <div class="dropdown-container">
-                        <a href="#">Link 1</a>
-                        <a href="#">Link 2</a>
-                        <a href="#">Link 3</a>
+                    <div class="collapse navbar-collapse" id="footerNavContent">
+                        <ul>
+                            <li class="nav-item" id="Scale">
+                            </li>
+                        </ul>
                     </div>
-                    <button class="dropdown-btn">VENDOR
+                    <!--Vendor bar-->
+                    <button
+                        class="navbar-toggler"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#footer"
+                        aria-controls="footerNavContent"
+                        aria-expanded="false"
+                        >Vendor
                         <i class="fa fa-caret-down"></i>
                     </button>
-                    <div class="dropdown-container">
-                        <a href="#">Link 1</a>
-                        <a href="#">Link 2</a>
-                        <a href="#">Link 3</a>
+                    <div class="collapse navbar-collapse" id="footer">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item" id="Vendor">
+                            </li>
+                        </ul>
                     </div>
                 </div>
-
                 </ul>
             </nav>
 
             <!-- Button Group -->
             <div class="amado-btn-group mt-30 mb-100">
-                <a href="#" class="btn amado-btn mb-15">Discount</a>
+                <a href="#" class="btn amado-btn active">Discount</a>
+                <br>
                 <a href="#" onclick="document.getElementById('id01').style.display='block'"
-                    class="btn amado-btn active">Login</a>
-                    <div id="id01" class="modal">
-                    
+                    class="btn amado-btn active">Login
+                </a>
+            </div>
+            <!-- Pop up -->
+                <!--Login pop up-->
+                <div id="id01" class="modal">
+                    <span onclick="document.getElementById('id01').style.display='none'"
+                        class="close" title="Close Modal">&times;
+                    </span>
+
                     <!-- Modal Content -->
                     <form class="modal-content animate" action="/action_page.php">
                         <div class="container">
@@ -146,21 +164,33 @@
                         </div>
                     </form>
                 </div>
+                <!-- product pop up -->
+                <div id="id02" class="modal" style="display:none">
+                    <!-- showProductDetail() -->
+                </div>
+            <!-- Cart Menu -->
+            <div class="cart-fav-search mb-100">
+                <a href="cart.html" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
+                <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
+                <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
+
             </div>
-        
+            <!-- Social Button -->
+
         </header>
         <!-- Header Area End -->
-
         <!-- Product Catagories Area Start -->
-        <div class="products-catagories-area clearfix">
-            <div class="amado-pro-catagory clearfix" id="productArea">
-            </div>
+        <div class="products-catagories-area clearfix" id="productArea">
+            <!-- <div class="amado-pro-catagory clearfix">
+            </div> -->
         </div>
         <script>
             var json = <?php echo $jsonProduct?>;
+            var Vendor = <?php echo $jsonVendor?>;
+            var Scale = <?php echo $jsonScale?>;
             showProductList(json);
-
-            //document.getElementById("productArea").insertAdjacentHTML("afterend",showProductList(json));
+            dropdownVender(Vendor);
+            dropdownScale(Scale);
         </script>
         <!-- Product Catagories Area End -->
 
@@ -254,6 +284,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="./amado-master/js/plugins.js"></script>
     <!-- Active js -->
     <script src="./amado-master/js/active.js"></script>
+    <!-- DB function -->
+    <script src="./amado-master/js/app.js"></script>
 
 </body>
 

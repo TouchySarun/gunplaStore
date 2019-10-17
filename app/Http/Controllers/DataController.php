@@ -9,10 +9,14 @@ use Illuminate\Http\Request;
 class DataController extends Controller
 {
     public function index(){
-        $data = DB::select('select * from products ');
+        $data = DB::select('select * from products');
+        $distinctvendor = DB::select('select distinct productVendor from products');
+        $distinctscale = DB::select('select distinct productScale from products');
         $jsonProduct = json_encode($data);
+        $jsonVendor = json_encode($distinctvendor);
+        $jsonScale = json_encode($distinctscale);
 
-        return view('index',['jsonProduct'=> $jsonProduct]);
+        return view('index',['jsonProduct'=>$jsonProduct, 'jsonVendor'=>$jsonVendor, 'jsonScale'=>$jsonScale]);
     }
 
     public function viewTest(){
@@ -23,3 +27,4 @@ class DataController extends Controller
     }
 
 }
+
