@@ -22,14 +22,14 @@ function showProductList(json){
     // });
     tableproduct += `
         <div class="single-products-catagory">
-            <a href="shop.html">
+            <a href="#" onclick=document.getElementById('id02').style.display='block'>
                 <img src="./amado-master/img/bg-img/1.jpg" alt="">
                 <!-- Hover Content -->
                 <div class="hover-content">
                     <div class="line"></div>
-                    <p>In Stock ${a.quantityInStock} </p>
-                    <p>price ${a.MSRP}</p>
-                    <h4>${a.productName}</h4>
+                        <p>In Stock ${a.quantityInStock} </p>
+                        <p>price ${a.MSRP}</p>
+                        <h4>${a.productName}</h4>
                 </div>
             </a>
         </div>
@@ -38,7 +38,6 @@ function showProductList(json){
     //return tableproduct;
     document.getElementById("productArea").innerHTML = tableproduct;
 }
-
 
 function filterByProductName() {
     //document.getElementById("productArea").innerHTML = tableproduct;

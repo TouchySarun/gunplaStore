@@ -83,7 +83,7 @@
             </div>
 
             <!-- Cart Menu -->
-            <div class="cart-fav-search mb-100">
+            <div class="cart-fav-search mb-50">
                 <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
                 <a href="cart.html" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
                 <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
@@ -159,6 +159,7 @@
         <script>
             var json = <?php echo $jsonProduct?>;
             showProductList(json);
+
             //document.getElementById("productArea").insertAdjacentHTML("afterend",showProductList(json));
         </script>
         <!-- Product Catagories Area End -->
@@ -253,8 +254,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="./amado-master/js/plugins.js"></script>
     <!-- Active js -->
     <script src="./amado-master/js/active.js"></script>
-
-
 
 </body>
 

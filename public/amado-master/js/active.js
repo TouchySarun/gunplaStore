@@ -152,10 +152,5 @@
         }
     });
     }
-
-    // :: 14.0 Product Details ProductName, InStock, MSRP By Touchy
-
-
-
-
+    
 })(jQuery);
