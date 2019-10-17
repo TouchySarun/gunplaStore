@@ -12,6 +12,8 @@ class DataController extends Controller
         $data = DB::select('select * from products');
         $distinctvendor = DB::select('select distinct productVendor from products');
         $distinctscale = DB::select('select distinct productScale from products');
+        // DB::insert('insert into products (productCode,productName) values (?,?)',[5555,"Touchy"]);
+        //DB::delete('delete from products where productName = ?',["Touchy"]);
         $jsonProduct = json_encode($data);
         $jsonVendor = json_encode($distinctvendor);
         $jsonScale = json_encode($distinctscale);
