@@ -210,13 +210,13 @@ img {
 .amado-nav, .dropdown-btn {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 18px;
   color: #818181;
   display: block;
   border: none;
   background: none;
-  width:100%;
-  text-align: left;
+  width: 100%;
+  text-align: center;
   cursor: pointer;
   outline: none;
 }
@@ -235,7 +235,7 @@ img {
 /* Optional: Style the caret down icon */
 .fa-caret-down {
   float: right;
-  padding-right: 8px;
+  /* padding-right: 8px; */
 }
 
 
@@ -448,12 +448,12 @@ img {
       display: flex; } }
   .mobile-nav .amado-navbar-brand {
     -webkit-box-flex: 0;
-    -ms-flex: 0 0 70px;
-    flex: 0 0 70px;
-    max-width: 70px; }
+    -ms-flex: 0 0 100px;
+    flex: 0 0 100px;
+    max-width: 100px; }
     .mobile-nav .amado-navbar-brand a {
       display: block;
-      max-width: 70px; }
+      max-width: 100px; }
   .mobile-nav .amado-navbar-toggler {
     cursor: pointer; }
     .mobile-nav .amado-navbar-toggler span {
@@ -476,7 +476,7 @@ img {
   font-size: 24px;
   height: 40px;
   line-height: 40px;
-  right: 60px;
+  right: 30px;
   text-align: center;
   width: 40px;
   -webkit-transition-duration: 500ms;
@@ -631,7 +631,7 @@ img {
       .main-content-wrapper .header-area .nav-close:hover {
         background-color: #131212; }
     .main-content-wrapper .header-area .logo {
-      margin-bottom: 100px;
+      margin-bottom: 50px;
       display: block; }
 
     .main-content-wrapper .header-area .amado-nav li a {
@@ -1669,7 +1669,8 @@ span.psw {
 /* The Close Button */
 .close {
   /* Position it in the top right corner outside of the modal */
-  position: absolute;
+  /* position: absolute; */
+  float: right;
   right: 25px;
   top: 0;
   color: #000;
@@ -1682,6 +1683,7 @@ span.psw {
 .close:focus {
   color: #242424;
   cursor: pointer;
+  text-decoration: none;
 }
 
 /* Add Zoom Animation */

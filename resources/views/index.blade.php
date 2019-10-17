@@ -9,7 +9,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>Amado - Furniture Ecommerce Template | Home</title>
+    <title>Gunpla Store | Plastic Model Shop</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="./amado-master/img/core-img/favicon.ico">
@@ -82,7 +82,7 @@
             </div>
 
             <!-- Cart Menu -->
-            <div class="cart-fav-search mb-100">
+            <div class="cart-fav-search mb-30">
                 <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
                 <a href="cart.html" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
                 <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
@@ -152,14 +152,15 @@
                                 <input type="text" placeholder="Enter Username" name="uname" required>
                             <label for="psw"><b>Password</b></label>
                                 <input type="password" placeholder="Enter Password" name="psw" required>
-                            <button type="submit">Login</button>
+                                <button type="submit">Login</button>
                             <label>
-                                <input type="checkbox" checked="unchecked" name="remember"> Remember me
+                                <input type="checkbox" checked="checked" name="remember"> Remember me
                             </label>
+                            <span class="psw"><a href="#">Forgot password?</a></span>
                         </div>
                         <div class="container" style="background-color:#f1f1f1">
-                            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-                                <span class="psw">Forgot <a href="#">password?</a></span>
+                        <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                            class="cancelbtn">Cancel</button>
                         </div>
                     </form>
                 </div>
@@ -168,16 +169,9 @@
                     <!-- showProductDetail() -->
                 </div>
             <!-- Cart Menu -->
-            <div class="cart-fav-search mb-100">
-                <a href="cart.html" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
-                <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
-                <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
-
-            </div>
-            <!-- Social Button -->
-
         </header>
         <!-- Header Area End -->
+        
         <!-- Product Catagories Area Start -->
         <div class="products-catagories-area clearfix" id="productArea">
             <!-- <div class="amado-pro-catagory clearfix">
@@ -285,8 +279,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="./amado-master/js/active.js"></script>
     <!-- DB function -->
     <script src="./amado-master/js/app.js"></script>
-
-
 
 </body>
 

@@ -14,10 +14,10 @@ function showProductList(json){
                 <!-- Hover Content -->
                 <div class="hover-content">
                     <div class="line"></div>
-                    <p>In Stock ${a.quantityInStock} </p>
-                    <p>price ${a.buyPrice}</p>
-                    <h5>${a.productScale}</h5>
-                    <h5>${a.productVendor}</h5>
+                    <p>In Stock ${a.quantityInStock}</p>
+                    <p>$${a.buyPrice}</p>
+                    <p>${a.productScale}</p>
+                    <p>${a.productVendor}</p>
                     <h4>${a.productName}</h4>
                 </div>
                 <div class="pdDetail" style= "display:none">
