@@ -1,13 +1,15 @@
 //require('./bootstrap');
+//code, name, line, scale, vendor, descrip, instock, price, msrp
 var tableproduct = "";//All product List in JSON
 
 function showProductList(json){
     //var i = 0;
     //var json = $jsonProduct;
+    //<a href="#" onclick="showProductDetail(${a.productName}, ${a.productScale}, ${a.productVendor}, ${a.productDescription}, ${a.quantityInStock}, ${a.buyPrice})">
     json.forEach( function(a) {
     tableproduct += `
         <div class="single-products-catagory">
-            <a href="shop.html">
+            <a href="#" onclick = document.GetComponentByID('id02').style.display = "block">
                 <img src="./amado-master/img/bg-img/1.jpg" alt="">
                 <!-- Hover Content -->
                 <div class="hover-content">
@@ -33,11 +35,37 @@ function showProductList(json){
         </div>
         `
     });
-    //return tableproduct;
     document.getElementById("productArea").innerHTML = tableproduct;
 }
 
+function dropdownVender(Vendor){
+    var mostvendor = "";
+    Vendor.forEach(function(b) {
+    mostvendor += `
+        <a class="nav-link">
+            <h5>${b.productVendor}</h5>
+        </a>
+    `
+    });
+    document.getElementById('Vendor').innerHTML = mostvendor;
+}
 
+function dropdownScale(Scale){
+    var mostscale = "";
+    Scale.forEach(function(b) {
+    mostscale += `
+        <a class="nav-link">
+            <h5>${b.productScale}</h5>
+        </a>
+    `
+    });
+    document.getElementById('Scale').innerHTML = mostscale;
+}
+
+
+
+
+//------------------------------filter----------------------------- //
 function filterByProductName() {
     document.getElementById("productArea").innerHTML = tableproduct;
 
@@ -63,36 +91,6 @@ function filterByProductName() {
             }
         }
     }
-}
-
-
-
-function dropdownVender(jsonVendor){
-    // dropdown Vender
-    var mostvendor = "";
-    var json = jsonVendor ;
-    json.forEach(function(b) {
-    mostvendor += `
-        <a class="nav-link">
-            <h5>${b.productVendor}</h5>
-        </a>
-    `
-    });
-    document.getElementById("Vendor").innerHTML = mostvendor;
-}
-
-function dropdownScale(jsonScale){
-    // dropdown Scale
-    var mostscale = "";
-    var json = jsonScale;
-    json.forEach(function(b) {
-    mostscale += `
-        <a class="nav-link">
-            <h5>${b.productScale}</h5>
-        </a>
-    `
-    });
-    document.getElementById("Scale").innerHTML = mostscale;
 }
 
 // filter Vender
@@ -135,4 +133,77 @@ function filterByProductName() {
             }
         }
     }
+}
+
+
+//show product detail pop up
+function showProductDetail(name, scale, vendor, descrip, instock, price){
+    var box = `
+    <span onclick="document.getElementById("id02").style.display='none'"
+        class="close" title="Close Modal">&times;
+    </span>
+    <form class="modal-content animate" action="/action_page.php">
+        <div class="container">
+            <div class="single-product-area section-padding-100 clearfix" >
+                <div class="container-fluid" >
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <div class="single_product_thumb">
+                                <div id="product_details_slider" class="carousel slide" data-ride="carousel">
+                                    <ol class="carousel-indicators">
+                                        <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(./amado-master/img/product-img/pro-big-1.jpg);"></li>
+                                        <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(./amado-master/img/product-img/pro-big-2.jpg);"></li>
+                                        <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(./amado-master/img/product-img/pro-big-3.jpg);"></li>
+                                        <li data-target="#product_details_slider" data-slide-to="3" style="background-image: url(./amado-master/img/product-img/pro-big-4.jpg);"></li>
+                                    </ol>
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            <a class="gallery_img" href="./amado-master/img/product-img/pro-big-1.jpg">
+                                            <img class="d-block w-100" src="./amado-master/img/product-img/pro-big-1.jpg" alt="First slide">
+                                            </a>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <a class="gallery_img" href="./amado-master/img/product-img/pro-big-2.jpg">
+                                            <img class="d-block w-100" src="./amado-master/img/product-img/pro-big-2.jpg" alt="Second slide">
+                                            </a>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <a class="gallery_img" href="./amado-master/img/product-img/pro-big-3.jpg">
+                                            <img class="d-block w-100" src="./amado-master/img/product-img/pro-big-3.jpg" alt="Third slide">
+                                            </a>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <a class="gallery_img" href="./amado-master/img/product-img/pro-big-4.jpg">
+                                            <img class="d-block w-100" src="./amado-master/img/product-img/pro-big-4.jpg" alt="Fourth slide">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-5">
+                            <div class="single_product_desc">
+                                <div class="product-meta-data">
+                                    <div class="line"></div>
+                                    <p class="product-price">$${price}</p>
+                                    <a href="product-details.html">
+                                        <h6>${name}</h6>
+                                        <h6>Scale ${scale}</h6>
+                                        <h5>Vendor ${vendor}</h5>
+                                    </a>
+                                    <p class="avaibility"><i class="fa fa-circle"></i> ${instock} In Stock</p>
+                                </div>
+                                <div class="short_overview my-5">
+                                    <p>${descrip}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    `;
+    document.getElementById("id02").innerHTML = box;
+    document.getElementById("id02").style.display = 'block';
 }

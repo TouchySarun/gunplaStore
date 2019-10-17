@@ -16,7 +16,7 @@ class DataController extends Controller
         $jsonVendor = json_encode($distinctvendor);
         $jsonScale = json_encode($distinctscale);
 
-        return view('index',['jsonProduct'=> $jsonProduct,'jsonVendor'=> $jsonVendor,'jsonScale'=> $jsonScale]);
+        return view('index',['jsonProduct'=>$jsonProduct, 'jsonVendor'=>$jsonVendor, 'jsonScale'=>$jsonScale]);
     }
 
     public function viewTest(){

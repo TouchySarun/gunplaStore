@@ -9,9 +9,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return view('index');
-});
 Route::get('/product', function () {
     return view('cart');
 });
@@ -23,4 +20,4 @@ Route::get('/test', function () {
     $response = DB::select('select * from customers where customerNumber = :number or customerNumber = :number2', ['number' => '103','number2' =>'181']);
     return $response;
 });
-Route::get('/testOOPLink','DataController@index');
+Route::get('/','DataController@index');
