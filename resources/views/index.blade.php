@@ -44,7 +44,6 @@
     </div>
     <!-- Search Wrapper Area End -->
 
-
     <!-- ##### Main Content Wrapper Start ##### -->
     <div class="main-content-wrapper d-flex clearfix">
     
@@ -107,7 +106,7 @@
                     </button>
                     <div class="collapse navbar-collapse" id="footerNavContent">
                         <ul>
-                            <li class="nav-item active" id="Scale">
+                            <li class="nav-item" id="Scale">
                             </li>
                         </ul>
                     </div>
@@ -124,7 +123,7 @@
                     </button>
                     <div class="collapse navbar-collapse" id="footer">
                         <ul class="navbar-nav ml-auto">
-                            <li class="nav-item active" id="Vendor">
+                            <li class="nav-item" id="Vendor">
                             </li>
                         </ul>
                     </div>
@@ -174,10 +173,8 @@
         </header>
         <!-- Header Area End -->
         <!-- Product Catagories Area Start -->
-        <div class="products-catagories-area clearfix">
-        <br><br><br>
-            <div class="amado-pro-catagory clearfix" id="productArea">
-            </div>
+        <div class="products-catagories-area clearfix" id="productArea">
+        
         </div>
         <script>
             var json = <?php echo $jsonProduct?>;
@@ -226,7 +223,7 @@
                     <div class="single_widget_area">
                         <!-- Logo -->
                         <div class="footer-logo mr-50">
-                            <a href="index.html"><img src="./amado-master/img/core-img/logo2.png" alt=""></a>
+                            <a href="index.html"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
                         </div>
                         <!-- Copywrite Text -->
                         <p class="copywrite"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
