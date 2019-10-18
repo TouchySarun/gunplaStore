@@ -79,7 +79,7 @@ function filterByProductName() {
         //single_products_catagory[i].style.position="absolute";
         a = single_products_catagory[i].getElementsByTagName("a")[0];
         pdDetail = a.getElementsByClassName("pdDetail");
-        pdName = a.getElementsByTagName("p")[3];
+        pdName = a.getElementsByTagName("p")[5];
         if (pdName) {
             txtValue = pdName.textContent || pdName.innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
