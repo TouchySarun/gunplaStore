@@ -190,7 +190,7 @@ function showProductDetail(name, scale, vendor, descrip, instock, price){
                             <div class="single_product_desc">
                                 <div class="product-meta-data">
                                     <div class="line"></div>
-                                    <p class="product-price">${price}</p>
+                                    <p class="product-price">$${price}</p>
                                     <a href="product-details.html">
                                         <h6>${name}</h6>
                                         <h6>Scale ${scale}</h6>
