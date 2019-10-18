@@ -79,7 +79,7 @@ function filterByProductName() {
         //single_products_catagory[i].style.position="absolute";
         a = single_products_catagory[i].getElementsByTagName("a")[0];
         pdDetail = a.getElementsByClassName("pdDetail");
-        pdName = a.getElementsByTagName("p")[3];
+        pdName = a.getElementsByTagName("p")[5];
         if (pdName) {
             txtValue = pdName.textContent || pdName.innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -103,7 +103,7 @@ function filterVendor(Vendor){
         //single_products_catagory[i].style.position="absolute";
         a = single_products_catagory[i].getElementsByTagName("a")[0];
         // pdDetail = a.getElementsByClassName("pdDetail");
-        pdVendor = a.getElementsByTagName("p")[6];
+        pdVendor = a.getElementsByTagName("p")[8];
         if (pdVendor) {
             txtValue = pdVendor.textContent || pdVendor.innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -127,7 +127,7 @@ function filterScale(Scale) {
         //single_products_catagory[i].style.position="absolute";
         a = single_products_catagory[i].getElementsByTagName("a")[0];
         // pdDetail = a.getElementsByClassName("pdDetail");
-        pdScale = a.getElementsByTagName("p")[5];
+        pdScale = a.getElementsByTagName("p")[7];
         if (pdScale) {
             txtValue = pdScale.textContent || pdScale.innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -190,7 +190,7 @@ function showProductDetail(name, scale, vendor, descrip, instock, price){
                             <div class="single_product_desc">
                                 <div class="product-meta-data">
                                     <div class="line"></div>
-                                    <p class="product-price">${price}</p>
+                                    <p class="product-price">$${price}</p>
                                     <a href="product-details.html">
                                         <h6>${name}</h6>
                                         <h6>Scale ${scale}</h6>
