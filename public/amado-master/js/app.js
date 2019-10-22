@@ -94,20 +94,36 @@ function dropdownScale(Scale){
         <a href="#"  class="avaibility" onclick="filterScale('${b.productScale}')">
             ${b.productScale}
         </a>
-    `
+    `;
     });
     document.getElementById('Scale').innerHTML = mostscale;
-    
+
+}
+//-----------------------------categorize --------------------------------//
+
+function categorizeVendor(Vendor){
+    var textBox = "";
+    Vendor.forEach(function(singleVendor) {
+        textBox += `<h1>${singleVendor.productVendor}</h1>`;
+        textBox += filterVendor(singleVendor.productVendor);
+    });
+    document.getElementById("productArea").innerHTML = textBox;
 }
 
-
+function categorizeScale(Scale){
+    var textBox = "";
+    Scale.forEach(function(singleScale) {
+        textBox += `<h1>${singleScale.productScale}</h1>`;
+        textBox += filterScale(singleScale.productScale);
+    });
+    document.getElementById("productArea").innerHTML = textBox;
+}
 
 
 //------------------------------filter----------------------------- //
 function filterByProductName() {
     // document.getElementById("productArea").innerHTML = tableproduct;
     var input, filter, slot, single_products_catagory, pdName, i, txtValue, a;
-    
     input = document.getElementById("myInput");
     filter = input.value.toUpperCase();
     slot = document.getElementById("productArea");
@@ -132,6 +148,7 @@ function filterByProductName() {
 // filter Vender
 function filterVendor(Vendor){
     var slot, filter, single_products_catagory, pdVendor, i, txtValue, a;
+    var newinnerHtml = "";
     // var Vendor = "MIN LIN DIECAST";
     filter = Vendor.toUpperCase();
     slot = document.getElementById("productArea");
@@ -145,18 +162,23 @@ function filterVendor(Vendor){
             txtValue = pdVendor.textContent || pdVendor.innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 single_products_catagory[i].style.display = "";
+                newinnerHtml += `
+                    <div class="single-products-catagory">
+                        ${single_products_catagory[i].innerHTML}
+                    </div> `;
                 // document.getElementById("productArea").insertAdjacentHTML("afterend", filteredList);
             } else {
                 single_products_catagory[i].style.display = "none";
             }
         }
     }
+    return newinnerHtml;
 }
 
 // filter Scale
 function filterScale(Scale) {
     var slot, filter, single_products_catagory, pdScale, i, txtValue, a;
-
+    var newinnerHtml = "";
     filter = Scale.toUpperCase();
     slot = document.getElementById("productArea");
     single_products_catagory = slot.getElementsByClassName("single-products-catagory");
@@ -169,12 +191,17 @@ function filterScale(Scale) {
             txtValue = pdScale.textContent || pdScale.innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 single_products_catagory[i].style.display = "";
+                newinnerHtml += `
+                <div class="single-products-catagory">
+                    ${single_products_catagory[i].innerHTML}
+                </div> `;
                 // document.getElementById("productArea").insertAdjacentHTML("afterend", filteredList);
             } else {
                 single_products_catagory[i].style.display = "none";
             }
         }
     }
+    return newinnerHtml;
 }
 
 

@@ -46,7 +46,7 @@
 
     <!-- ##### Main Content Wrapper Start ##### -->
     <div class="main-content-wrapper d-flex clearfix">
-    
+
         <!-- Mobile Nav (max width 767px)-->
         <div class="mobile-nav">
             <!-- Navbar Brand -->
@@ -72,7 +72,7 @@
 
         <!-- Header Area Start -->
         <header class="header-area clearfix">
-            
+
             <!-- Close Icon -->
             <!-- <div class="nav-close">
                 <i class="fa fa-close" aria-hidden="true"></i>
@@ -135,8 +135,20 @@
             <div class="amado-btn-group mt-30 mb-100">
                 <a href="#" class="btn amado-btn" >Discount</a>
                 <br>
-                <a href="#" onclick="document.getElementById('id01').style.display='block'"
-                    class="btn amado-btn">Login
+                <a href="#" onclick = "document.getElementById('id01').style.display='block'" class="btn amado-btn">
+                    Login
+                </a>
+                <br>
+                <a href="#" onclick = "categorizeVendor(Vendor)" class="btn amado-btn">
+                    Catagorize by Vendor
+                </a>
+                <br>
+                <a href="#" onclick = "categorizeScale(Scale)" class="btn amado-btn">
+                    Catagorize by Scale
+                </a>
+                <br>
+                <a href="#" onclick = "showProductList(json)" class="btn amado-btn">
+                    No Catagorize
                 </a>
             </div>
             <!-- Pop up -->
@@ -171,10 +183,10 @@
                 </div>
         </header>
         <!-- Header Area End -->
-        
+
         <!-- Product Catagories Area Start -->
         <div class="products-catagories-area clearfix" id="productArea">
-        
+
         </div>
         <script>
             var json = <?php echo $jsonProduct?>;
