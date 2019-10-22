@@ -267,11 +267,11 @@ function showEmployeeDetail(number, lname, fname, email, office, report, job, ex
                             <div class="single_product_thumb">
                                 <div id="product_details_slider" class="carousel slide" data-ride="carousel">
                                     <div class="carousel-inner">
-                                        <div class="carousel-item active">
+                                       
                                             <a class="gallery_img" href="./amado-master/img/core-img/employeeM.png">
                                                 <img class="d-block w-100" src="./amado-master/img/core-img/employeeM.png" alt="First slide">
                                             </a>
-                                        </div>
+                                       
                                     </div>
                                 </div>
                             </div>
