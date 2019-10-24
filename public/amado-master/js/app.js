@@ -1,7 +1,7 @@
 //require('./bootstrap');
 //code, name, line, scale, vendor, descrip, instock, price, msrp
-var tableproduct = "";//All product List in JSON
-
+var tableproduct = "<br><br><br>";//All product List in JSON
+var tableemployee = "<br><br><br><br>";//All product List in JSON
 function showProductList(json){
     //var i = 0;
     //var json = $jsonProduct;
@@ -14,10 +14,10 @@ function showProductList(json){
                 <!-- Hover Content -->
                 <div class="hover-content">
                     <div class="line"></div>
-                    <p>In Stock ${a.quantityInStock} </p>
-                    <p>price ${a.buyPrice}</p>
-                    <h5>${a.productScale}</h5>
-                    <h5>${a.productVendor}</h5>
+                    <p>EmployeeNumber ${a.quantityInStock}</p>
+                    <p>$${a.buyPrice}</p>
+                    <p>${a.productScale}</p>
+                    <p>${a.productVendor}</p>
                     <h4>${a.productName}</h4>
                 </div>
                 <div class="pdDetail" style= "display:none">
@@ -38,24 +38,61 @@ function showProductList(json){
     document.getElementById("productArea").innerHTML = tableproduct;
 }
 
+//show employee
+function showEmployeeList(employee){
+    //var i = 0;
+    //var json = $jsonProduct;
+    //<a href="#" onclick="showProductDetail(${a.productName}, ${a.productScale}, ${a.productVendor}, ${a.productDescription}, ${a.quantityInStock}, ${a.buyPrice})">
+    employee.forEach( function(a) {
+    tableemployee += `
+        <div class="single-products-catagory">
+                <a href="#" onclick="showEmployeeDetail('${a.employeeNumber}', '${a.lastName}', '${a.firstName}', '${a.email}', '${a.officeCode}', '${a.reportsTo}', 
+                '${a.jobTitle}', '${a.extension}')">
+                <img src="./amado-master/img/core-img/employeeM.png" alt="">
+                <!-- Hover Content -->
+                <div class="hover-content">
+                    <div class="line"></div>
+                    <p>Number ${a.employeeNumber}</p>
+                    <h5>${a.jobTitle}</h5>
+                    <h4>${a.firstName} ${a.lastName}</h4>
+                </div>
+                <div class="pdDetail" style= "display:none">
+                    <p>${a.employeeNumber}</p>
+                    <p>${a.lastName}</p>
+                    <p>${a.firstName}</p>
+                    <p>${a.extension}</p>
+                    <p>${a.email}</p>
+                    <p>${a.officeCode}</p>
+                    <p>${a.reportsTo}</p>
+                    <p>${a.jobTitle}</p>
+                </div>
+            </a>
+        </div>
+        `
+    });
+    document.getElementById("employeeArea").innerHTML = tableemployee;
+}
+
+//drop-down vendor
 function dropdownVender(Vendor){
     var mostvendor = "";
     Vendor.forEach(function(b) {
     mostvendor += `
-        <a href="#" onclick="filterVendor('${b.productVendor}')">
-            <h5>${b.productVendor}</h5>
+        <a href="#" class="avaibility" onclick="filterVendor('${b.productVendor}')">
+            ${b.productVendor}
         </a>
     `
     });
     document.getElementById('Vendor').innerHTML = mostvendor;
 }
 
+//drop-down scale
 function dropdownScale(Scale){
     var mostscale = "";
     Scale.forEach(function(b) {
     mostscale += `
-        <a href="#" onclick="filterScale('${b.productScale}')">
-            <h5>${b.productScale}</h5>
+        <a href="#"  class="avaibility" onclick="filterScale('${b.productScale}')">
+            ${b.productScale}
         </a>
     `
     });
@@ -79,7 +116,7 @@ function filterByProductName() {
         //single_products_catagory[i].style.position="absolute";
         a = single_products_catagory[i].getElementsByTagName("a")[0];
         pdDetail = a.getElementsByClassName("pdDetail");
-        pdName = a.getElementsByTagName("p")[3];
+        pdName = a.getElementsByTagName("p")[5];
         if (pdName) {
             txtValue = pdName.textContent || pdName.innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -103,7 +140,7 @@ function filterVendor(Vendor){
         //single_products_catagory[i].style.position="absolute";
         a = single_products_catagory[i].getElementsByTagName("a")[0];
         // pdDetail = a.getElementsByClassName("pdDetail");
-        pdVendor = a.getElementsByTagName("p")[6];
+        pdVendor = a.getElementsByTagName("p")[8];
         if (pdVendor) {
             txtValue = pdVendor.textContent || pdVendor.innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -127,7 +164,7 @@ function filterScale(Scale) {
         //single_products_catagory[i].style.position="absolute";
         a = single_products_catagory[i].getElementsByTagName("a")[0];
         // pdDetail = a.getElementsByClassName("pdDetail");
-        pdScale = a.getElementsByTagName("p")[5];
+        pdScale = a.getElementsByTagName("p")[7];
         if (pdScale) {
             txtValue = pdScale.textContent || pdScale.innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -190,7 +227,7 @@ function showProductDetail(name, scale, vendor, descrip, instock, price){
                             <div class="single_product_desc">
                                 <div class="product-meta-data">
                                     <div class="line"></div>
-                                    <p class="product-price">${price}</p>
+                                    <p class="product-price">$${price}</p>
                                     <a href="product-details.html">
                                         <h6>${name}</h6>
                                         <h6>Scale ${scale}</h6>
@@ -200,6 +237,62 @@ function showProductDetail(name, scale, vendor, descrip, instock, price){
                                 </div>
                                 <div class="short_overview my-5">
                                     <p>${descrip}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    `;
+    document.getElementById("id02").innerHTML = box;
+    document.getElementById("id02").style.display = 'block';
+}
+
+//show detail employee pop up
+//'${a.employeeNumber}', '${a.lastName}', '${a.firstName}', '${a.email}', '${a.officeCode}', '${a.reportsTo}', 
+//'${a.jobTitle}', '${a.extension}'
+function showEmployeeDetail(number, lname, fname, email, office, report, job, exetension){
+    var box = `
+    <span onclick="document.getElementById('id02').style.display='none'"
+        class="close" title="Close Modal">&times;
+    </span>
+    <form class="modal-content animate" action="/action_page.php">
+        <div class="container">
+            <div class="single-product-area section-padding-100 clearfix" >
+                <div class="container-fluid" >
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <div class="single_product_thumb">
+                                <div id="product_details_slider" class="carousel slide" data-ride="carousel">
+                                    <div class="carousel-inner">
+                                       
+                                            <a class="gallery_img" href="./amado-master/img/core-img/employeeM.png">
+                                                <img class="d-block w-100" src="./amado-master/img/core-img/employeeM.png" alt="First slide">
+                                            </a>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-5">
+                            <div class="single_product_desc">
+                                <div class="product-meta-data">
+                                    <div class="line"></div>
+                                        <p class="product-price">Number ${number}</p>
+                                        <a href="product-details.html">
+                                            <h6>${fname} ${lname}</h6>
+                                            <p class="avaibility"><i class="fa fa-circle"></i> ${email}</p><br>
+                                            <h5>Job: ${job}</h5>
+                                            <h5>OfficeCode ${office}</h5>
+                                            <h5>Report To ${report}</h5>
+                                        </a>
+                                        <p>extension ${exetension}</p>
+                                    </div>
+                                    <div class="short_overview my-5">
+                                        
+                                    </div>
                                 </div>
                             </div>
                         </div>

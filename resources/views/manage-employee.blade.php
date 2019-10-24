@@ -173,16 +173,12 @@
         <!-- Header Area End -->
         
         <!-- Product Catagories Area Start -->
-        <div class="products-catagories-area clearfix" id="productArea">
+        <div class="products-catagories-area clearfix" id="employeeArea">
         
         </div>
         <script>
-            var json = <?php echo $jsonProduct?>;
-            var Vendor = <?php echo $jsonVendor?>;
-            var Scale = <?php echo $jsonScale?>;
-            showProductList(json);
-            dropdownVender(Vendor);
-            dropdownScale(Scale);
+            var Employee = <?php echo $jsonEmployee?>;
+            showEmployeeList(Employee);
         </script>
         <!-- Product Catagories Area End -->
 

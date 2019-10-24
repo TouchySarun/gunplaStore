@@ -208,15 +208,15 @@ img {
 
 /* Style the sidenav links and the dropdown button */
 .amado-nav, .dropdown-btn {
-  padding: 6px 8px 6px 16px;
+  padding: 6px 6px 6px 0px;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 18px;
   color: #818181;
   display: block;
   border: none;
   background: none;
-  width:100%;
-  text-align: left;
+  width: 100%;
+  text-align: center;
   cursor: pointer;
   outline: none;
 }
@@ -235,7 +235,7 @@ img {
 /* Optional: Style the caret down icon */
 .fa-caret-down {
   float: right;
-  padding-right: 8px;
+  /* padding-right: 8px; */
 }
 
 
@@ -410,6 +410,7 @@ img {
 .navbar-toggler {
   background-color: #fbb710;
   border-radius: 0;
+  font-size: 16px;
   margin-bottom: 15px; }
   .navbar-toggler i {
     font-size: 12px;
@@ -425,7 +426,7 @@ img {
 .mobile-nav {
   position: fixed;
   width: 100%;
-  height: 75px;
+  height: 85px;
   background-color: #fff;
   z-index: 3000;
   top: 0;
@@ -448,12 +449,12 @@ img {
       display: flex; } }
   .mobile-nav .amado-navbar-brand {
     -webkit-box-flex: 0;
-    -ms-flex: 0 0 70px;
-    flex: 0 0 70px;
-    max-width: 70px; }
+    -ms-flex: 0 0 100px;
+    flex: 0 0 100px;
+    max-width: 100px; }
     .mobile-nav .amado-navbar-brand a {
       display: block;
-      max-width: 70px; }
+      max-width: 100px; }
   .mobile-nav .amado-navbar-toggler {
     cursor: pointer; }
     .mobile-nav .amado-navbar-toggler span {
@@ -476,7 +477,7 @@ img {
   font-size: 24px;
   height: 40px;
   line-height: 40px;
-  right: 60px;
+  right: 30px;
   text-align: center;
   width: 40px;
   -webkit-transition-duration: 500ms;
@@ -499,19 +500,19 @@ img {
   padding: 0 7px;
   font-size: 18px;
   line-height: 56px;
-  background-color: #fbb710;
+  background-color: #131212;
   font-weight: 400; }
   .amado-btn.active, .amado-btn:hover, .amado-btn:focus {
     font-size: 18px;
     color: #ffffff;
-    background-color: #131212; }
+    background-color: #fb8210; }
 
 /* :: 4.0 Search Wrapper Area CSS */
 .search-wrapper {
   position: fixed;
   z-index: 1;
   width: 100%;
-  height: 170px;
+  height: 220px;
   z-index: 5000;
   top: -350px;
   left: 0;
@@ -581,7 +582,7 @@ img {
     width: 100px;
     max-width: 320px;
     background-color: #fff;
-    padding: 60px 75px; }
+    padding: 60px 55px; }
     /* @media only screen and (min-width: 768px) and (max-width: 991px) {
       .main-content-wrapper .header-area {
         -webkit-box-flex: 0;
@@ -597,8 +598,25 @@ img {
         -webkit-box-flex: 0;
         -ms-flex: 0 0 320px;
         flex: 0 0 320px;
-        width: 320px;
-        max-width: 320px;
+        width: 333px;
+        max-width: 333px;
+        position: fixed;
+        z-index: 4000;
+        top: 75px;
+        right: -1200px;
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        display: block; } }
+    @media only screen and (min-width: 768px) and (max-width: 991px){
+      .main-content-wrapper .header-area {
+        -webkit-transition-duration: 500ms;
+        transition-duration: 500ms;
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 320px;
+        flex: 0 0 320px;
+        width: 280px;
+        max-width: 280px;
         position: fixed;
         z-index: 4000;
         top: 75px;
@@ -631,7 +649,7 @@ img {
       .main-content-wrapper .header-area .nav-close:hover {
         background-color: #131212; }
     .main-content-wrapper .header-area .logo {
-      margin-bottom: 100px;
+      margin-bottom: 50px;
       display: block; }
 
     .main-content-wrapper .header-area .amado-nav li a {
@@ -669,14 +687,17 @@ img {
         .main-content-wrapper .header-area .amado-nav li.active a::after {
           left: -50px; } }
     .main-content-wrapper .header-area .amado-btn-group .amado-btn {
-      width: 160px;
+      width: 150px;
+      padding: 6px 6px 6px 0px;
+      border: 10px;
       display: block; }
     .main-content-wrapper .header-area .cart-fav-search a {
       display: block;
       text-transform: uppercase;
       font-size: 16px;
-      padding: 15px 0;
-      color: #131212;
+      padding: 15px 20px;
+      width: 200px;
+      color: #131312;
       line-height: 1; }
       .main-content-wrapper .header-area .cart-fav-search a .search-nav {
         padding-bottom: 0;
@@ -1065,7 +1086,7 @@ img {
         color: #6b6b6b;
         line-height: 1; }
         .main-content-wrapper .single-product-area .single_product_desc .product-meta-data .avaibility i {
-          color: #20d34a;
+          color: #f39d83;
           font-size: 12px; }
       .main-content-wrapper .single-product-area .single_product_desc .short_overview p {
         line-height: 2.1;
@@ -1190,22 +1211,27 @@ img {
       margin-bottom: 0;
       -webkit-transition-duration: 250ms;
       transition-duration: 250ms; }
+    .single-products-catagory .hover-content h5 {
+      margin-bottom: 0;
+      -webkit-transition-duration: 250ms;
+      transition-duration: 250ms; }
   .single-products-catagory:hover a::after, .single-products-catagory:focus a::after {
     opacity: 1;
     visibility: visible; }
   .single-products-catagory:hover .hover-content p,
   .single-products-catagory:hover .hover-content h4, .single-products-catagory:focus .hover-content p,
-  .single-products-catagory:focus .hover-content h4 {
+  .single-products-catagory:focus .hover-content h4, .single-products-catagory:hover .hover-content h5,
+  .single-products-catagory:focus .hover-content h5 {
     color: #fff; }
 
 /* :: 6.0 Newsletter Area CSS */
 .newsletter-area {
   position: relative;
-  z-index: 1;
+  z-index: 0;
   background-color: #3c3c3c; }
   .newsletter-area .newsletter-text {
     position: relative;
-    z-index: 1; }
+    z-index: 0; }
     .newsletter-area .newsletter-text h2 {
       font-size: 36px;
       margin-bottom: 10px;
@@ -1340,7 +1366,7 @@ img {
 /* :: 8.0 Footer Area CSS */
 .footer_area {
   position: relative;
-  z-index: 1;
+  z-index: 0;
   background-color: #252525;
   padding: 80px 0; }
   .footer_area .single_widget_area .copywrite {
@@ -1670,8 +1696,9 @@ span.psw {
 .close {
   /* Position it in the top right corner outside of the modal */
   position: absolute;
-  right: 25px;
-  top: 0;
+  z-index: 1;
+  right: 170px;
+  top: 70px;
   color: #000;
   font-size: 35px;
   font-weight: bold;
@@ -1682,6 +1709,7 @@ span.psw {
 .close:focus {
   color: #242424;
   cursor: pointer;
+  text-decoration: none;
 }
 
 /* Add Zoom Animation */
