@@ -15,8 +15,11 @@ Route::get('/product', function () {
 Route::get('/shop', function () {
     return view('shop');
 });
-Route::get('/detail', function () {
-    return view('product-details');
+Route::get('/mnpd', function () {
+    return view('manage-product');
+});
+Route::get('/mnem', function () {
+    return view('manage-employee');
 });
 Route::get('/welcome', function () {
     return view('welcome');
@@ -27,3 +30,5 @@ Route::get('/test', function () {
     return $response;
 });
 Route::get('/','DataController@index');
+Route::get('/mnpd','DataController@mnproduct');
+Route::get('/mnem','DataController@mnemployee');
