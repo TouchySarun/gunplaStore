@@ -138,9 +138,10 @@
 
             <!-- Button Group -->
             <div class="amado-btn-group mt-30 mb-100">
-                <a href="#" onclick="document.getElementById('id01').style.display='block'" class="btn amado-btn">Product-Order</a>
+                <a href="#" class="btn amado-btn" >Discount</a>
                 <br>
-                <a href="#" class="btn amado-btn">Logout
+                <a href="#" onclick="document.getElementById('id01').style.display='block'"
+                    class="btn amado-btn">Login
                 </a>
             </div>
             <!-- Pop up -->
@@ -149,75 +150,28 @@
                     <span onclick="document.getElementById('id01').style.display='none'"
                         class="close" title="Close Modal">&times;
                     </span>
-                    <!-- product-order -->
+
+                    <!-- Modal Content -->
                     <form class="modal-content animate" action="/action_page.php">
-                    <div class="cart-table-area section-padding-60">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12 col-lg-8">
-                        <div class="cart-title mt-50">
-                            <h2>Product-Order</h2>
+                        <div class="container">
+                            <label for="uname"><b>Username</b></label>
+                                <input type="text" placeholder="Enter Username" name="uname" required>
+                            <label for="psw"><b>Password</b></label>
+                                <input type="password" placeholder="Enter Password" name="psw" required>
+                                <button type="submit">Login</button>
+                            <label>
+                                <input type="checkbox" checked="checked" name="remember"> Remember me
+                            </label>
+                            <span class="psw"><a href="#">Forgot password?</a></span>
                         </div>
-                        <div class="cart-table clearfix">
-                            <table class="table table-responsive">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Price</th>
-                                        <th>Quantity</th>
-                                    </tr>
-                                </thead>
-                            <tbody>
-                                <tr>
-                                <td class="cart_product_desc">
-                                    <h5>White Modern Chair</h5>
-                                </td>
-                                <td class="price">
-                                    <span>$130</span>
-                                </td>
-                                <td class="qty">
-                                    <div class="qty-btn d-flex">
-                                        <p>Qty</p>
-                                        <div class="quantity">
-                                            <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                            <input type="number" class="qty-text" id="qty" step="1" min="1" max="300" name="quantity" value="1">
-                                                    <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="cart_product_desc">
-                                            <h5>Minimal Plant Pot</h5>
-                                        </td>
-                                        <td class="price">
-                                            <span>$10</span>
-                                        </td>
-                                        <td class="qty">
-                                            <div class="qty-btn d-flex">
-                                                <p>Qty</p>
-                                                <div class="quantity">
-                                                    <span class="qty-minus" onclick="var effect = document.getElementById('qty3'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                                    <input type="number" class="qty-text" id="qty3" step="1" min="1" max="300" name="quantity" value="1">
-                                                    <span class="qty-plus" onclick="var effect = document.getElementById('qty3'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="container" style="background-color:#f1f1f1">
+                        <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                            class="cancelbtn">Cancel</button>
                         </div>
-                    </div>
+                    </form>
                 </div>
-                </div>
-                    </div>
-                </div>
-                </form>
                 <!-- product pop up -->
                 <div id="id02" class="modal" style="display:none">
-                    <!-- showProductDetail() -->
-                </div>
-                <div id="id03" class="modal" style="display:none">
                     <!-- showProductDetail() -->
                 </div>
         </header>
@@ -231,7 +185,7 @@
             var json = <?php echo $jsonProduct?>;
             var Vendor = <?php echo $jsonVendor?>;
             var Scale = <?php echo $jsonScale?>;
-            updateProductList(json);
+            showProductList(json);
             dropdownVender(Vendor);
             dropdownScale(Scale);
         </script>

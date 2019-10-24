@@ -18,6 +18,9 @@ Route::get('/shop', function () {
 Route::get('/mnpd', function () {
     return view('manage-product');
 });
+Route::get('/mnod', function () {
+    return view('manage-order');
+});
 Route::get('/mnem', function () {
     return view('manage-employee');
 });
@@ -28,4 +31,5 @@ Route::get('/test', function () {
 });
 Route::get('/','DataController@index');
 Route::get('/mnpd','DataController@mnproduct');
+Route::get('/mnod','DataController@mnorder');
 Route::get('/mnem','DataController@mnemployee');
