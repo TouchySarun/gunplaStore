@@ -29,3 +29,5 @@ Route::get('/test', function () {
 Route::get('/','DataController@index');
 Route::get('/mnpd','DataController@mnproduct');
 Route::get('/mnem','DataController@mnemployee');
+
+Route::get('/cart','DataController@cart');

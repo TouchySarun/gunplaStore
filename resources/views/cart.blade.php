@@ -12,11 +12,12 @@
     <title>Amado - Furniture Ecommerce Template | Cart</title>
 
     <!-- Favicon  -->
-    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="icon" href="./amado-master/img/core-img/favicon.ico">
 
     <!-- Core Style CSS -->
-    <link rel="stylesheet" href="css/core-style.css">
+    <link rel="stylesheet" href="./amado-master/css/core-style.css">
     <link rel="stylesheet" href="style.css">
+    <script src="./amado-master/js/app.js"></script>
 
 </head>
 
@@ -32,7 +33,7 @@
                     <div class="search-content">
                         <form action="#" method="get">
                             <input type="search" name="search" id="search" placeholder="Type your keyword...">
-                            <button type="submit"><img src="img/core-img/search.png" alt=""></button>
+                            <button type="submit"><img src="./amado-master/img/core-img/search.png" alt=""></button>
                         </form>
                     </div>
                 </div>
@@ -48,7 +49,7 @@
         <div class="mobile-nav">
             <!-- Navbar Brand -->
             <div class="amado-navbar-brand">
-                <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                <a><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
             </div>
             <!-- Navbar Toggler -->
             <div class="amado-navbar-toggler">
@@ -59,41 +60,114 @@
         <!-- Header Area Start -->
         <header class="header-area clearfix">
             <!-- Close Icon -->
-            <div class="nav-close">
+            <!-- <div class="nav-close">
                 <i class="fa fa-close" aria-hidden="true"></i>
-            </div>
+            </div> -->
+            <!-- Logo -->
             <!-- Logo -->
             <div class="logo">
-                <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                <a href="index.html"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
             </div>
+
+            <!-- Cart Menu -->
+            <div class="cart-fav-search mb-30">
+                <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
+                <a href="cart.html" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
+                <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
+            </div>
+
             <!-- Amado Nav -->
             <nav class="amado-nav">
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="shop.html">Shop</a></li>
-                    <li><a href="product-details.html">Product</a></li>
-                    <li class="active"><a href="cart.html">Cart</a></li>
-                    <li><a href="checkout.html">Checkout</a></li>
+                <div class="amado-nav">
+                    <!--Scale bar-->
+                    <button
+                        class="navbar-toggler"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#footerNavContent"
+                        aria-controls="footerNavContent"
+                        aria-expanded="false"
+                        >SCALE
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="footerNavContent">
+                        <ul>
+                            <li class="nav-item" id="Scale">
+                            </li>
+                        </ul>
+                    </div>
+                    <!--Vendor bar-->
+                    <button
+                        class="navbar-toggler"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#footer"
+                        aria-controls="footerNavContent"
+                        aria-expanded="false"
+                        >VENDOR
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="footer">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item" id="Vendor">
+                            </li>
+                        </ul>
+                    </div>
+                </div>
                 </ul>
             </nav>
+
             <!-- Button Group -->
             <div class="amado-btn-group mt-30 mb-100">
-                <a href="#" class="btn amado-btn mb-15">%Discount%</a>
-                <a href="#" class="btn amado-btn active">New this week</a>
+                <a href="#" class="btn amado-btn" >Discount</a>
+                <br>
+                <a href="#" onclick = "document.getElementById('id01').style.display='block'" class="btn amado-btn">
+                    Login
+                </a>
+                <br>
+                <a href="#" onclick = "categorizeVendor(Vendor)" class="btn amado-btn">
+                    Catagorize by Vendor
+                </a>
+                <br>
+                <a href="#" onclick = "categorizeScale(Scale)" class="btn amado-btn">
+                    Catagorize by Scale
+                </a>
+                <br>
+                <a href="#" onclick = "showProductList(json)" class="btn amado-btn">
+                    No Catagorize
+                </a>
             </div>
-            <!-- Cart Menu -->
-            <div class="cart-fav-search mb-100">
-                <a href="cart.html" class="cart-nav"><img src="img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
-                <a href="#" class="fav-nav"><img src="img/core-img/favorites.png" alt=""> Favourite</a>
-                <a href="#" class="search-nav"><img src="img/core-img/search.png" alt=""> Search</a>
-            </div>
-            <!-- Social Button -->
-            <div class="social-info d-flex justify-content-between">
-                <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            </div>
+            <!-- Pop up -->
+                <!--Login pop up-->
+                <div id="id01" class="modal">
+                    <span onclick="document.getElementById('id01').style.display='none'"
+                        class="close" title="Close Modal">&times;
+                    </span>
+
+                    <!-- Modal Content -->
+                    <form class="modal-content animate" action="/action_page.php">
+                        <div class="container">
+                            <label for="uname"><b>Username</b></label>
+                                <input type="text" placeholder="Enter Username" name="uname" required>
+                            <label for="psw"><b>Password</b></label>
+                                <input type="password" placeholder="Enter Password" name="psw" required>
+                                <button type="submit">Login</button>
+                            <label>
+                                <input type="checkbox" checked="checked" name="remember"> Remember me
+                            </label>
+                            <span class="psw"><a href="#">Forgot password?</a></span>
+                        </div>
+                        <div class="container" style="background-color:#f1f1f1">
+                        <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                            class="cancelbtn">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- product pop up -->
+                <div id="id02" class="modal" style="display:none">
+                    <!-- showProductDetail() -->
+                </div>
         </header>
         <!-- Header Area End -->
 
@@ -118,7 +192,7 @@
                                 <tbody>
                                     <tr>
                                         <td class="cart_product_img">
-                                            <a href="#"><img src="img/bg-img/cart1.jpg" alt="Product"></a>
+                                            <a href="#"><img src="./amado-master/img/bg-img/cart1.jpg" alt="Product"></a>
                                         </td>
                                         <td class="cart_product_desc">
                                             <h5>White Modern Chair</h5>
@@ -139,7 +213,7 @@
                                     </tr>
                                     <tr>
                                         <td class="cart_product_img">
-                                            <a href="#"><img src="img/bg-img/cart2.jpg" alt="Product"></a>
+                                            <a href="#"><img src="./amado-master/img/bg-img/cart2.jpg" alt="Product"></a>
                                         </td>
                                         <td class="cart_product_desc">
                                             <h5>Minimal Plant Pot</h5>
@@ -160,7 +234,7 @@
                                     </tr>
                                     <tr>
                                         <td class="cart_product_img">
-                                            <a href="#"><img src="img/bg-img/cart3.jpg" alt="Product"></a>
+                                            <a href="#"><img src="./amado-master/img/bg-img/cart3.jpg" alt="Product"></a>
                                         </td>
                                         <td class="cart_product_desc">
                                             <h5>Minimal Plant Pot</h5>
@@ -236,7 +310,7 @@
                     <div class="single_widget_area">
                         <!-- Logo -->
                         <div class="footer-logo mr-50">
-                            <a href="index.html"><img src="img/core-img/logo2.png" alt=""></a>
+                            <a href="index.html"><img src="./amado-master/img/core-img/logoDarkBG.png" alt=""></a>
                         </div>
                         <!-- Copywrite Text -->
                         <p class="copywrite"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
