@@ -18,6 +18,9 @@ Route::get('/shop', function () {
 Route::get('/detail', function () {
     return view('product-details');
 });
+Route::get('/welcome', function () {
+    return view('welcome');
+});
 use Illuminate\Support\Facades\DB;
 Route::get('/test', function () {
     $response = DB::select('select * from customers where customerNumber = :number or customerNumber = :number2', ['number' => '103','number2' =>'181']);
