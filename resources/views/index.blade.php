@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Title  -->
-    <title>Amado - Furniture Ecommerce Template | Home</title>
+    <title>Gunpla Store | Plastic Model Shop</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="./amado-master/img/core-img/favicon.ico">
@@ -30,7 +30,7 @@
                 <div class="col-12">
                     <div class="search-content">
                         <form action="" method="get">
-                            <input type="search" name="search" id="search" placeholder="Type your keyword...">
+                            <!-- <input type="search" name="search" id="search" placeholder="Type your keyword..."> -->
                             <input type="text" id="myInput" onkeyup="filterByProductName()" placeholder="Search for names..">
                             <button type="submit"><img src="./amado-master/img/core-img/search.png" alt=""></button>
                         </form>
@@ -50,7 +50,7 @@
         <div class="mobile-nav">
             <!-- Navbar Brand -->
             <div class="amado-navbar-brand">
-                <a><img src="./amado-master/img/core-img/logo.png" alt=""></a>
+                <a><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
 
             </div>
 
@@ -71,17 +71,18 @@
 
         <!-- Header Area Start -->
         <header class="header-area clearfix">
+
             <!-- Close Icon -->
             <!-- <div class="nav-close">
                 <i class="fa fa-close" aria-hidden="true"></i>
             </div> -->
             <!-- Logo -->
             <div class="logo">
-                <a href="index.html"><img src="./amado-master/img/core-img/logo.png" alt=""></a>
+                <a href="index.html"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
             </div>
 
             <!-- Cart Menu -->
-            <div class="cart-fav-search mb-100">
+            <div class="cart-fav-search mb-30">
                 <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
                 <a href="cart.html" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
                 <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
@@ -116,7 +117,7 @@
                         data-target="#footer"
                         aria-controls="footerNavContent"
                         aria-expanded="false"
-                        >Vendor
+                        >VENDOR
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="collapse navbar-collapse" id="footer">
@@ -131,10 +132,22 @@
 
             <!-- Button Group -->
             <div class="amado-btn-group mt-30 mb-100">
-                <a href="#" class="btn amado-btn active">Discount</a>
+                <a href="#" class="btn amado-btn" >Discount</a>
                 <br>
-                <a href="#" onclick="document.getElementById('id01').style.display='block'"
-                    class="btn amado-btn active">Login
+                <a href="#" onclick = "document.getElementById('id01').style.display='block'" class="btn amado-btn">
+                    Login
+                </a>
+                <br>
+                <a href="#" onclick = "categorizeVendor(Vendor)" class="btn amado-btn">
+                    Catagorize by Vendor
+                </a>
+                <br>
+                <a href="#" onclick = "categorizeScale(Scale)" class="btn amado-btn">
+                    Catagorize by Scale
+                </a>
+                <br>
+                <a href="#" onclick = "showProductList(json)" class="btn amado-btn">
+                    No Catagorize
                 </a>
             </div>
             <!-- Pop up -->
@@ -151,14 +164,15 @@
                                 <input type="text" placeholder="Enter Username" name="uname" required>
                             <label for="psw"><b>Password</b></label>
                                 <input type="password" placeholder="Enter Password" name="psw" required>
-                            <button type="submit">Login</button>
+                                <button type="submit">Login</button>
                             <label>
-                                <input type="checkbox" checked="unchecked" name="remember"> Remember me
+                                <input type="checkbox" checked="checked" name="remember"> Remember me
                             </label>
+                            <span class="psw"><a href="#">Forgot password?</a></span>
                         </div>
                         <div class="container" style="background-color:#f1f1f1">
-                            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-                                <span class="psw">Forgot <a href="#">password?</a></span>
+                        <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                            class="cancelbtn">Cancel</button>
                         </div>
                     </form>
                 </div>
@@ -166,21 +180,12 @@
                 <div id="id02" class="modal" style="display:none">
                     <!-- showProductDetail() -->
                 </div>
-            <!-- Cart Menu -->
-            <div class="cart-fav-search mb-100">
-                <a href="cart.html" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
-                <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
-                <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
-
-            </div>
-            <!-- Social Button -->
-
         </header>
         <!-- Header Area End -->
+
         <!-- Product Catagories Area Start -->
         <div class="products-catagories-area clearfix" id="productArea">
-            <!-- <div class="amado-pro-catagory clearfix">
-            </div> -->
+
         </div>
         <script>
             var json = <?php echo $jsonProduct?>;
@@ -229,7 +234,7 @@
                     <div class="single_widget_area">
                         <!-- Logo -->
                         <div class="footer-logo mr-50">
-                            <a href="index.html"><img src="./amado-master/img/core-img/logo2.png" alt=""></a>
+                            <a href="index.html"><img src="./amado-master/img/core-img/logoDarkBG.png" alt=""></a>
                         </div>
                         <!-- Copywrite Text -->
                         <p class="copywrite"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
@@ -284,8 +289,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="./amado-master/js/active.js"></script>
     <!-- DB function -->
     <script src="./amado-master/js/app.js"></script>
-
-
 
 </body>
 

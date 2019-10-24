@@ -150,5 +150,5 @@ window.onclick = function(event) {
         }
     });
     }
-
+    
 })(jQuery);

@@ -1,6 +1,6 @@
 //require('./bootstrap');
 //code, name, line, scale, vendor, descrip, instock, price, msrp
-var tableproduct = "";//All product List in JSON
+var tableproduct = "<br><br><br>";//All product List in JSON
 
 function showProductList(json){
     //var i = 0;
@@ -14,10 +14,10 @@ function showProductList(json){
                 <!-- Hover Content -->
                 <div class="hover-content">
                     <div class="line"></div>
-                    <p>In Stock ${a.quantityInStock} </p>
-                    <p>price ${a.buyPrice}</p>
-                    <h5>${a.productScale}</h5>
-                    <h5>${a.productVendor}</h5>
+                    <p>In Stock ${a.quantityInStock}</p>
+                    <p>$${a.buyPrice}</p>
+                    <p>${a.productScale}</p>
+                    <p>${a.productVendor}</p>
                     <h4>${a.productName}</h4>
                 </div>
                 <div class="pdDetail" style= "display:none">
@@ -42,8 +42,8 @@ function dropdownVender(Vendor){
     var mostvendor = "";
     Vendor.forEach(function(b) {
     mostvendor += `
-        <a href="#" onclick="filterVendor('${b.productVendor}')">
-            <h5>${b.productVendor}</h5>
+        <a href="#" class="avaibility" onclick="filterVendor('${b.productVendor}')">
+            ${b.productVendor}
         </a>
     `
     });
@@ -54,23 +54,39 @@ function dropdownScale(Scale){
     var mostscale = "";
     Scale.forEach(function(b) {
     mostscale += `
-        <a href="#" onclick="filterScale('${b.productScale}')">
-            <h5>${b.productScale}</h5>
+        <a href="#"  class="avaibility" onclick="filterScale('${b.productScale}')">
+            ${b.productScale}
         </a>
-    `
+    `;
     });
     document.getElementById('Scale').innerHTML = mostscale;
-    
+
+}
+//-----------------------------categorize --------------------------------//
+
+function categorizeVendor(Vendor){
+    var textBox = "";
+    Vendor.forEach(function(singleVendor) {
+        textBox += `<h1>${singleVendor.productVendor}</h1>`;
+        textBox += filterVendor(singleVendor.productVendor);
+    });
+    document.getElementById("productArea").innerHTML = textBox;
 }
 
-
+function categorizeScale(Scale){
+    var textBox = "";
+    Scale.forEach(function(singleScale) {
+        textBox += `<h1>${singleScale.productScale}</h1>`;
+        textBox += filterScale(singleScale.productScale);
+    });
+    document.getElementById("productArea").innerHTML = textBox;
+}
 
 
 //------------------------------filter----------------------------- //
 function filterByProductName() {
     // document.getElementById("productArea").innerHTML = tableproduct;
     var input, filter, slot, single_products_catagory, pdName, i, txtValue, a;
-    
     input = document.getElementById("myInput");
     filter = input.value.toUpperCase();
     slot = document.getElementById("productArea");
@@ -79,7 +95,7 @@ function filterByProductName() {
         //single_products_catagory[i].style.position="absolute";
         a = single_products_catagory[i].getElementsByTagName("a")[0];
         pdDetail = a.getElementsByClassName("pdDetail");
-        pdName = a.getElementsByTagName("p")[3];
+        pdName = a.getElementsByTagName("p")[5];
         if (pdName) {
             txtValue = pdName.textContent || pdName.innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -95,6 +111,7 @@ function filterByProductName() {
 // filter Vender
 function filterVendor(Vendor){
     var slot, filter, single_products_catagory, pdVendor, i, txtValue, a;
+    var newinnerHtml = "";
     // var Vendor = "MIN LIN DIECAST";
     filter = Vendor.toUpperCase();
     slot = document.getElementById("productArea");
@@ -103,23 +120,28 @@ function filterVendor(Vendor){
         //single_products_catagory[i].style.position="absolute";
         a = single_products_catagory[i].getElementsByTagName("a")[0];
         // pdDetail = a.getElementsByClassName("pdDetail");
-        pdVendor = a.getElementsByTagName("p")[6];
+        pdVendor = a.getElementsByTagName("p")[8];
         if (pdVendor) {
             txtValue = pdVendor.textContent || pdVendor.innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 single_products_catagory[i].style.display = "";
+                newinnerHtml += `
+                    <div class="single-products-catagory">
+                        ${single_products_catagory[i].innerHTML}
+                    </div> `;
                 // document.getElementById("productArea").insertAdjacentHTML("afterend", filteredList);
             } else {
                 single_products_catagory[i].style.display = "none";
             }
         }
     }
+    return newinnerHtml;
 }
 
 // filter Scale
 function filterScale(Scale) {
     var slot, filter, single_products_catagory, pdScale, i, txtValue, a;
-
+    var newinnerHtml = "";
     filter = Scale.toUpperCase();
     slot = document.getElementById("productArea");
     single_products_catagory = slot.getElementsByClassName("single-products-catagory");
@@ -127,17 +149,22 @@ function filterScale(Scale) {
         //single_products_catagory[i].style.position="absolute";
         a = single_products_catagory[i].getElementsByTagName("a")[0];
         // pdDetail = a.getElementsByClassName("pdDetail");
-        pdScale = a.getElementsByTagName("p")[5];
+        pdScale = a.getElementsByTagName("p")[7];
         if (pdScale) {
             txtValue = pdScale.textContent || pdScale.innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 single_products_catagory[i].style.display = "";
+                newinnerHtml += `
+                <div class="single-products-catagory">
+                    ${single_products_catagory[i].innerHTML}
+                </div> `;
                 // document.getElementById("productArea").insertAdjacentHTML("afterend", filteredList);
             } else {
                 single_products_catagory[i].style.display = "none";
             }
         }
     }
+    return newinnerHtml;
 }
 
 
@@ -190,7 +217,7 @@ function showProductDetail(name, scale, vendor, descrip, instock, price){
                             <div class="single_product_desc">
                                 <div class="product-meta-data">
                                     <div class="line"></div>
-                                    <p class="product-price">${price}</p>
+                                    <p class="product-price">$${price}</p>
                                     <a href="product-details.html">
                                         <h6>${name}</h6>
                                         <h6>Scale ${scale}</h6>
