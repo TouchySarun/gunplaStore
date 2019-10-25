@@ -10,19 +10,28 @@
 |
 */
 
-Route::post('/login', 'DataController@login');
-Route::get('/', 'DataController@index');
-Route::get('/mnpd','DataController@mnproduct');
-Route::get('/mnem','DataController@mnemployee');
-
 Route::get('/product', function () {
     return view('cart');
 });
 Route::get('/shop', function () {
     return view('shop');
 });
+Route::get('/welcome', function () {
+    return view('welcome');
+});
+
 use Illuminate\Support\Facades\DB;
 Route::get('/test', function () {
     $response = DB::select('select * from customers where customerNumber = :number or customerNumber = :number2', ['number' => '103','number2' =>'181']);
     return $response;
 });
+//### normal page ####
+Route::get('/','DataController@index');
+Route::get('/mnpd','DataController@mnproduct');
+Route::get('/mnod','DataController@mnorder');
+Route::get('/mnem','DataController@mnemployee');
+Route::get('/order','DataController@order');
+Route::get('/checkout','DataController@checkout');
+
+//### function ###
+Route::post('/login', 'DataController@login');
