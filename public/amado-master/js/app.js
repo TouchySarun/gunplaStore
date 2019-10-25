@@ -38,11 +38,43 @@ function showProductList(json){
     document.getElementById("productArea").innerHTML = tableproduct;
 }
 
+//add bottom edit product
+function updateProductList(json){
+    json.forEach( function(a) {
+    tableproduct += `
+        <div class="single-products-catagory">
+                <a href="#" onclick="showProductDetail('${a.productName}', '${a.productScale}', '${a.productVendor}', '${a.productDescription}', '${a.quantityInStock}', '${a.buyPrice}')">
+                <img src="./amado-master/img/bg-img/1.jpg" alt="">
+                <!-- Hover Content -->
+                <div class="hover-content">
+                    <div class="line"></div>
+                    <p>EmployeeNumber ${a.quantityInStock}</p>
+                    <p>$${a.buyPrice}</p>
+                    <p>${a.productScale}</p>
+                    <p>${a.productVendor}</p>
+                    <h4>${a.productName}</h4>
+                </div>
+                <a href="#" onclick="EditProductDetail('${a.productName}', '${a.productScale}', '${a.productVendor}', '${a.productDescription}', '${a.quantityInStock}', '${a.buyPrice}')" class="btn amado-btn">Edit</a>
+                <div class="pdDetail" style= "display:none">
+                    <p>${a.productCode}</p>
+                    <p>${a.productName}</p>
+                    <p>${a.productLine}</p>
+                    <p>${a.productScale}</p>
+                    <p>${a.productVendor}</p>
+                    <p>${a.productDescription}</p>
+                    <p>${a.quantityInStock}</p>
+                    <p>${a.buyPrice}</p>
+                    <p>${a.MSRP}</p>
+                </div>
+            </a>
+        </div>
+        `
+    });
+    document.getElementById("productArea").innerHTML = tableproduct;
+}
+
 //show employee
 function showEmployeeList(employee){
-    //var i = 0;
-    //var json = $jsonProduct;
-    //<a href="#" onclick="showProductDetail(${a.productName}, ${a.productScale}, ${a.productVendor}, ${a.productDescription}, ${a.quantityInStock}, ${a.buyPrice})">
     employee.forEach( function(a) {
     tableemployee += `
         <div class="single-products-catagory">
@@ -204,7 +236,7 @@ function filterScale(Scale) {
     return newinnerHtml;
 }
 
-
+//------------------------------Pop-Up----------------------------- //
 //show product detail pop up
 function showProductDetail(name, scale, vendor, descrip, instock, price){
     var box = `
@@ -255,11 +287,9 @@ function showProductDetail(name, scale, vendor, descrip, instock, price){
                                 <div class="product-meta-data">
                                     <div class="line"></div>
                                     <p class="product-price">$${price}</p>
-                                    <a href="product-details.html">
-                                        <h6>${name}</h6>
-                                        <h6>Scale ${scale}</h6>
+                                        <h3>${name}</h6>
+                                        <h4>Scale ${scale}</h6>
                                         <h5>Vendor ${vendor}</h5>
-                                    </a>
                                     <p class="avaibility"><i class="fa fa-circle"></i> ${instock} In Stock</p>
                                 </div>
                                 <div class="short_overview my-5">
@@ -294,11 +324,9 @@ function showEmployeeDetail(number, lname, fname, email, office, report, job, ex
                             <div class="single_product_thumb">
                                 <div id="product_details_slider" class="carousel slide" data-ride="carousel">
                                     <div class="carousel-inner">
-                                       
                                             <a class="gallery_img" href="./amado-master/img/core-img/employeeM.png">
                                                 <img class="d-block w-100" src="./amado-master/img/core-img/employeeM.png" alt="First slide">
                                             </a>
-                                       
                                     </div>
                                 </div>
                             </div>
@@ -308,13 +336,11 @@ function showEmployeeDetail(number, lname, fname, email, office, report, job, ex
                                 <div class="product-meta-data">
                                     <div class="line"></div>
                                         <p class="product-price">Number ${number}</p>
-                                        <a href="product-details.html">
-                                            <h6>${fname} ${lname}</h6>
+                                            <h4>${fname} ${lname}</h6>
                                             <p class="avaibility"><i class="fa fa-circle"></i> ${email}</p><br>
                                             <h5>Job: ${job}</h5>
                                             <h5>OfficeCode ${office}</h5>
                                             <h5>Report To ${report}</h5>
-                                        </a>
                                         <p>extension ${exetension}</p>
                                     </div>
                                     <div class="short_overview my-5">
@@ -331,4 +357,77 @@ function showEmployeeDetail(number, lname, fname, email, office, report, job, ex
     `;
     document.getElementById("id02").innerHTML = box;
     document.getElementById("id02").style.display = 'block';
+}
+
+//pop-up edit product
+function EditProductDetail(name, scale, vendor, descrip, instock, price){
+    var box = `
+    <span onclick="document.getElementById('id03').style.display='none'"
+        class="close" title="Close Modal">&times;
+    </span>
+    <form class="modal-content animate" action="/action_page.php">
+        <div class="container">
+            <div class="single-product-area section-padding-100 clearfix" >
+                <div class="container-fluid" >
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <div class="single_product_thumb">
+                                <div id="product_details_slider" class="carousel slide" data-ride="carousel">
+                                    <ol class="carousel-indicators">
+                                        <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(./amado-master/img/product-img/pro-big-1.jpg);"></li>
+                                        <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(./amado-master/img/product-img/pro-big-2.jpg);"></li>
+                                        <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(./amado-master/img/product-img/pro-big-3.jpg);"></li>
+                                        <li data-target="#product_details_slider" data-slide-to="3" style="background-image: url(./amado-master/img/product-img/pro-big-4.jpg);"></li>
+                                    </ol>
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            <a class="gallery_img" href="./amado-master/img/product-img/pro-big-1.jpg">
+                                            <img class="d-block w-100" src="./amado-master/img/product-img/pro-big-1.jpg" alt="First slide">
+                                            </a>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <a class="gallery_img" href="./amado-master/img/product-img/pro-big-2.jpg">
+                                            <img class="d-block w-100" src="./amado-master/img/product-img/pro-big-2.jpg" alt="Second slide">
+                                            </a>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <a class="gallery_img" href="./amado-master/img/product-img/pro-big-3.jpg">
+                                            <img class="d-block w-100" src="./amado-master/img/product-img/pro-big-3.jpg" alt="Third slide">
+                                            </a>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <a class="gallery_img" href="./amado-master/img/product-img/pro-big-4.jpg">
+                                            <img class="d-block w-100" src="./amado-master/img/product-img/pro-big-4.jpg" alt="Fourth slide">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-5">
+                            <div class="single_product_desc">
+                                <div class="product-meta-data">
+                                    <div class="line"></div>
+                                    <form>
+                                        <p>Price: <input type="text" name="number" value="${price}"></p>
+                                        <p>Name: <input type="text" name="text" value="${name}"></p>
+                                        <p>Scale: <input type="text" name="text" value="${scale}"></p>
+                                        <p>Vendor: <input type="text" name="text" value="${vendor}"></p>
+                                        <p>Instock: <input type="text" name="text" value="${instock}"></p>
+                                    </form>
+                                </div>
+                                <div class="short_overview my-5">
+                                    <p>Description: <textarea name="message" style="width:400px; height:250px;">${descrip}</textarea></p>
+                                </div>
+                                <a href="#" class="btn amado-btn">Save</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    `;
+    document.getElementById("id03").innerHTML = box;
+    document.getElementById("id03").style.display = 'block';
 }

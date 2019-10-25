@@ -15,12 +15,6 @@ Route::get('/product', function () {
 Route::get('/shop', function () {
     return view('shop');
 });
-Route::get('/mnpd', function () {
-    return view('manage-product');
-});
-Route::get('/mnem', function () {
-    return view('manage-employee');
-});
 Route::get('/welcome', function () {
     return view('welcome');
 });
@@ -32,4 +26,8 @@ Route::get('/test', function () {
 });
 Route::get('/','DataController@index');
 Route::get('/mnpd','DataController@mnproduct');
+Route::get('/mnod','DataController@mnorder');
 Route::get('/mnem','DataController@mnemployee');
+Route::get('/order','DataController@order');
+Route::get('/checkout','DataController@checkout');
+
