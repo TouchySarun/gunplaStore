@@ -17,7 +17,6 @@ class DataController extends Controller
         $jsonProduct = json_encode($data);
         $jsonVendor = json_encode($distinctvendor);
         $jsonScale = json_encode($distinctscale);
-
         return view('index',['jsonProduct'=>$jsonProduct, 'jsonVendor'=>$jsonVendor, 'jsonScale'=>$jsonScale]);
     }
 
@@ -34,7 +33,7 @@ class DataController extends Controller
 
     public function mnemployee(){
         $employee = DB::select('select * from employees');
-        $jsonEmployee = json_encode($employee); 
+        $jsonEmployee = json_encode($employee);
 
         return view('manage-employee',['jsonEmployee'=>$jsonEmployee]);
     }
@@ -46,5 +45,17 @@ class DataController extends Controller
         return $jsonProduct;
     }
 
+    public function login(Request $input)
+    {
+        $employeekey = DB::select("select * from employees where employeeNumber like '$input->uname' and employeeNumber like '$input->psw'");
+        if($employeekey != null)
+        {
+            return redirect ('/mnem');
+        }
+        else
+        {
+            return redirect ('/')-> with('alert', json_encode($input));
+        }
+    }
 }
 
