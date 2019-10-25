@@ -259,6 +259,9 @@ img {
 .mt-100 {
   margin-top: 100px !important; }
 
+.mt-200 {
+  margin-top: 200px !important;}
+
 .mb-15 {
   margin-bottom: 15px !important; }
 
@@ -507,6 +510,24 @@ img {
     color: #ffffff;
     background-color: #fb8210; }
 
+/* Essence  Button */
+.amado-big-btn {
+  display: inline-block;
+  min-width: 150px;
+  height: 550px;
+  color: #ffffff;
+  border: none;
+  border-radius: 0;
+  padding: 7px 7px 7px 15px;
+  font-size: 24px;
+  line-height: 56px;
+  background-color: #131212;
+  font-weight: 400; }
+  .amado-big-btn.active, .amado-big-btn:hover, .amado-big-btn:focus {
+    font-size: 24px;
+    color: #ffffff;
+    background-color: #fb8210; }
+
 /* :: 4.0 Search Wrapper Area CSS */
 .search-wrapper {
   position: fixed;
@@ -691,6 +712,11 @@ img {
       padding: 6px 6px 6px 0px;
       border: 10px;
       display: block; }
+    .main-content-wrapper .amado-big-button-group .amado-big-btn {
+      width: 250px;
+      padding: 6px 6px 6px 0px;
+      border: 10px;
+      display: block;}
     .main-content-wrapper .header-area .cart-fav-search a {
       display: block;
       text-transform: uppercase;
