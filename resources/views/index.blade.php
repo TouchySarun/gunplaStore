@@ -6,6 +6,7 @@
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
     <title>Gunpla Store | Plastic Model Shop</title>
@@ -53,15 +54,6 @@
                 <a><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
 
             </div>
-
-            <!-- <li class="active"><a href="index.html">Home</a></li>
-            <li><a href="shop">Shop</a></li>
-            <li><a href="product-details.html">Product</a></li>
-            <li><a href="cart.html">Cart</a></li>
-            <li><a href="checkout.html">Checkout</a></li> -->
-
-            <!-- <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> </a> -->
-
             <!-- Navbar Toggler -->
             <div class="amado-navbar-toggler">
                 <span></span><span></span><span></span>
@@ -72,10 +64,6 @@
         <!-- Header Area Start -->
         <header class="header-area clearfix">
 
-            <!-- Close Icon -->
-            <!-- <div class="nav-close">
-                <i class="fa fa-close" aria-hidden="true"></i>
-            </div> -->
             <!-- Logo -->
             <div class="logo">
                 <a href="index.html"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
