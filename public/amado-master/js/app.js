@@ -73,6 +73,44 @@ function updateProductList(json){
     document.getElementById("productArea").innerHTML = tableproduct;
 }
 
+//add order product
+function updateProductOrderList(json){
+    json.forEach( function(a) {
+    tableproduct += `
+        <div class="single-products-catagory">
+                <a href="#" onclick="showProductDetail('${a.productName}', '${a.productScale}', '${a.productVendor}', '${a.productDescription}', '${a.quantityInStock}', '${a.buyPrice}')">
+                <img src="./amado-master/img/bg-img/1.jpg" alt="">
+                <!-- Hover Content -->
+                <div class="hover-content">
+                    <div class="line"></div>
+                    <p>EmployeeNumber ${a.quantityInStock}</p>
+                    <p>$${a.buyPrice}</p>
+                    <p>${a.productScale}</p>
+                    <p>${a.productVendor}</p>
+                    <h4>${a.productName}</h4>
+                </div>
+                <div class="pdDetail" style= "display:none">
+                    <p>${a.productCode}</p>
+                    <p>${a.productName}</p>
+                    <p>${a.productLine}</p>
+                    <p>${a.productScale}</p>
+                    <p>${a.productVendor}</p>
+                    <p>${a.productDescription}</p>
+                    <p>${a.quantityInStock}</p>
+                    <p>${a.buyPrice}</p>
+                    <p>${a.MSRP}</p>
+                </div>
+            </a>
+            <div class="qty-btn d-flex">
+                <input style="text-align: center" type="number" class="qty-text" id="qty3" step="1" min="1" max="300" name="quantity" value="1">   
+                <a href="#" class="btn amado-btn">Buy</a>
+            </div>
+        </div>
+        `
+    });
+    document.getElementById("productArea").innerHTML = tableproduct;
+}
+
 //show employee
 function showEmployeeList(employee){
     employee.forEach( function(a) {
@@ -153,6 +191,30 @@ function categorizeScale(Scale){
 
 
 //------------------------------filter----------------------------- //
+function filterByProductName() {
+    // document.getElementById("productArea").innerHTML = tableproduct;
+    var input, filter, slot, single_products_catagory, pdName, i, txtValue, a;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    slot = document.getElementById("productArea");
+    single_products_catagory = slot.getElementsByClassName("single-products-catagory");
+    for (i = 0; i < single_products_catagory.length; i++) {
+        //single_products_catagory[i].style.position="absolute";
+        a = single_products_catagory[i].getElementsByTagName("a")[0];
+        pdDetail = a.getElementsByClassName("pdDetail");
+        pdName = a.getElementsByTagName("p")[5];
+        if (pdName) {
+            txtValue = pdName.textContent || pdName.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                single_products_catagory[i].style.display = "";
+                // document.getElementById("productArea").insertAdjacentHTML("afterend", filteredList);
+            } else {
+                single_products_catagory[i].style.display = "none";
+            }
+        }
+    }
+}
+
 function filterByProductName() {
     // document.getElementById("productArea").innerHTML = tableproduct;
     var input, filter, slot, single_products_catagory, pdName, i, txtValue, a;

@@ -185,7 +185,7 @@
             var json = <?php echo $jsonProduct?>;
             var Vendor = <?php echo $jsonVendor?>;
             var Scale = <?php echo $jsonScale?>;
-            showProductList(json);
+            updateProductOrderList(json);
             dropdownVender(Vendor);
             dropdownScale(Scale);
         </script>
