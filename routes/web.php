@@ -35,3 +35,4 @@ Route::get('/checkout','DataController@checkout');
 
 //### function ###
 Route::post('/login', 'DataController@login');
+Route::delete('/deleteProduct/{code}','DataController@deleteProduct');

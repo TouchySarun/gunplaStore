@@ -179,10 +179,8 @@
                     <form class="modal-content animate" action="/login" method = "post">
                         <div class="container">
                             {{ csrf_field() }}
-                                <label for="uname"><b>Username</b></label>
-                                    <input type="text" placeholder="Enter Username" name="uname" required>
-                                <label for="psw"><b>Password</b></label>
-                                    <input type="password" placeholder="Enter Password" name="psw" required>
+                                <label for="uname"><b>Username</b></label><input type="text" name="uname" placeholder="Enter Username" required>
+                                <label for="psw"><b>Password</b></label><input type="password" name="psw" placeholder="Enter Password" required>
                                 <button type="submit">Login</button>
                         </div>
 

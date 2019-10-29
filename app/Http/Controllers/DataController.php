@@ -79,17 +79,22 @@ class DataController extends Controller
         return $jsonProduct;
     }
 
-    public function login(Request $input)
+    public function login(Request $request)
     {
-        $employeekey = DB::select("select * from employees where employeeNumber like '$input->uname' and employeeNumber like '$input->psw'");
+        $employeekey = DB::select("select * from employees where employeeNumber like '$request->uname' and employeeNumber like '$request->psw'");
         if($employeekey != null)
         {
+
             return redirect ('/mnem');
         }
         else
         {
-            return redirect ('/')-> with('alert', json_encode($input));
+            return redirect ('/')-> with('alert', 'Wrong user or password.');
         }
+    }
+
+    public function deleteProduct($code){
+        $data = DB::select("delete from products where productCode = '$code'");
     }
 }
 
