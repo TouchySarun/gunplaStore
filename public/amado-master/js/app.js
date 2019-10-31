@@ -160,6 +160,8 @@ function showEmployeeList(employee){
                     <h5>${a.jobTitle}</h5>
                     <h4>${a.firstName} ${a.lastName}</h4>
                 </div>
+                <a href="#" onclick="EditEmployeeDetail('${a.employeeNumber}', '${a.lastName}', '${a.firstName}', '${a.email}', '${a.officeCode}', '${a.reportsTo}', 
+                '${a.jobTitle}', '${a.extension}')" class="btn amado-btn">Edit</a>
                 <div class="pdDetail" style= "display:none">
                     <p>${a.employeeNumber}</p>
                     <p>${a.lastName}</p>
@@ -399,6 +401,8 @@ function showProductDetail(name, scale, vendor, descrip, instock, price){
     document.getElementById("id02").innerHTML = box;
     document.getElementById("id02").style.display = 'block';
 }
+
+// popup employee detail
 function showEmployeeDetail(number, lname, fname, email, office, report, job, exetension){
     var box = `
     <span onclick="document.getElementById('id02').style.display='none'"
@@ -432,9 +436,6 @@ function showEmployeeDetail(number, lname, fname, email, office, report, job, ex
                                             <h5>Report To ${report}</h5>
                                         <p>extension ${exetension}</p>
                                     </div>
-                                    <div class="short_overview my-5">
-
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -447,6 +448,8 @@ function showEmployeeDetail(number, lname, fname, email, office, report, job, ex
     document.getElementById("id02").innerHTML = box;
     document.getElementById("id02").style.display = 'block';
 }
+
+// edit product detail
 function EditProductDetail(name, scale, vendor, descrip, instock, price){
     var box = `
     <span onclick="document.getElementById('id03').style.display='none'"
@@ -506,7 +509,60 @@ function EditProductDetail(name, scale, vendor, descrip, instock, price){
                                 <div class="short_overview my-5">
                                     <p>Description: <textarea name="message" style="width:400px; height:250px;">${descrip}</textarea></p>
                                 </div>
+                                <a href="#" class="btn amado-btn">Delete</a>
                                 <a href="#" class="btn amado-btn">Save</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    `;
+    document.getElementById("id03").innerHTML = box;
+    document.getElementById("id03").style.display = 'block';
+}
+
+// edit product detail
+function EditEmployeeDetail(number, lname, fname, email, office, report, job, exetension){
+    var box = `
+    <span onclick="document.getElementById('id03').style.display='none'"
+        class="close" title="Close Modal">&times;
+    </span>
+    <form class="modal-content animate" action="/action_page.php">
+        <div class="container">
+            <div class="single-product-area section-padding-100 clearfix" >
+                <div class="container-fluid" >
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <div class="single_product_thumb">
+                                <div id="product_details_slider" class="carousel slide" data-ride="carousel">
+                                    <div class="carousel-inner">
+                                            <a class="gallery_img" href="./amado-master/img/core-img/employeeM.png">
+                                                <img class="d-block w-100" src="./amado-master/img/core-img/employeeM.png" alt="First slide">
+                                            </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-5">
+                            <div class="single_product_desc">
+                                <div class="product-meta-data">
+                                    <div class="line"></div>
+                                        <form>
+                                            <p>Number: <input type="text" name="number" value="${number}"></p>
+                                            <p>FirstName: <input type="text" name="text" value="${fname}"></p>
+                                            <p>LastName: <input type="text" name="text" value="${lname}"></p>
+                                            <p>Email: <input type="text" name="text" value="${email}"></p>
+                                            <p>JobTitle: <input type="text" name="text" value="${job}"></p>
+                                            <p>OfficeCode: <input type="text" name="text" value="${office}"></p>
+                                            <p>ReportTo: <input type="text" name="text" value="${report}"></p>
+                                            <p>Extension: <input type="text" name="text" value="${exetension}"></p>
+                                        </form>
+                                    </div>
+                                    <a href="#" class="btn amado-btn">Delete</a>
+                                    <a href="#" class="btn amado-btn">Save</a>
+                                </div>
                             </div>
                         </div>
                     </div>

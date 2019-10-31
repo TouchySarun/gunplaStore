@@ -45,7 +45,7 @@ class DataController extends Controller
     public function mnemployee(){
         $employee = DB::select('select * from employees');
         $jsonEmployee = json_encode($employee);
-        
+
         return view('manage-employee',['jsonEmployee'=>$jsonEmployee]);
     }
 
