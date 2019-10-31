@@ -175,35 +175,29 @@
         <!-- Header Area End -->
 
         <!-- Hyperlink Navigation Area -->
-        <div class="amado-big-button-group mt-100 mb-50 ml-50">
-            <a href="/manage-order" class="btn amado-big-btn">
+        <!-- <div class="amado-big-button-group clearfix"> -->
+        <div class="welcome-area clearfix mt-70">
+            <a href="/mnod" class="btn amado-big-btn">
                 <br><br><br>
                 <img src="./amado-master/img/core-img/shopping_cart.png"><br><br>
                 Order & Stock
             </a>
-        </div>
-        <div class="amado-big-button-group mt-100 mb-50">
-            <a href="/order-status" class="btn amado-big-btn">
+            <!-- order-status.blade.php -->
+            <a href="/odst" class="btn amado-big-btn">
                 <br><br><br>
                 <img src="./amado-master/img/core-img/shipping_details.png"><br><br>
                 Shipping Detail
             </a>
-        </div>
-        <div class="amado-big-button-group mt-100 mb-50">
-            <a href="/manage-employee" class="btn amado-big-btn">
+            <a href="/mnem" class="btn amado-big-btn">
                 <br><br><br>
                 <img src="./amado-master/img/core-img/employee.png"><br><br>
                 Employee
             </a>
-        </div>
-        <div class="amado-big-button-group mt-100 mb-50">
             <a href="#" class="btn amado-big-btn">
                 <br><br><br>
-                <img src="./amado-master/img/core-img/customer.png"><br><br>
-                Customer
+                <img src="./amado-master/img/core-img/customers.png"><br><br>
+                Customers
             </a>
-        </div>
-        <div class="amado-big-button-group mt-100 mb-50">
             <a href="/promotion" class="btn amado-big-btn">
                 <br><br><br>
                 <img src="./amado-master/img/core-img/promotion.png"><br><br>
