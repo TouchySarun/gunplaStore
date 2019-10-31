@@ -150,7 +150,7 @@
                 <img src="./amado-master/img/core-img/employee.png"><br><br>
                 Employee
             </a>
-            <a href="#" onclick = "document.getElementById('id01').style.display='block'" class="btn amado-big-btn">
+            <a href="#" onclick="document.getElementById('id01').style.display='block'" class="btn amado-big-btn">
                 <br><br><br>
                 <img src="./amado-master/img/core-img/customers.png"><br><br>
                 Customers
