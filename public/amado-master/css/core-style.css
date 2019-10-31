@@ -1763,8 +1763,8 @@ span.psw {
   right: 14%;
   top: 5%;
   color: #000;
-  font-size: 35px;
-  font-weight: bold;
+  /* font-size: 35px;
+  font-weight: bold; */
 }
 
 /* Close button on hover */
