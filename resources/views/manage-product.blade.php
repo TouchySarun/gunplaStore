@@ -140,7 +140,9 @@
             <div class="amado-btn-group mt-30 mb-100">
                 <a href="#" onclick="document.getElementById('id01').style.display='block'" class="btn amado-btn">Product-Order</a>
                 <br>
-                <a href="#" class="btn amado-btn">Logout
+                <a href="welcome" class="btn amado-btn">Back</a>
+                <br>
+                <a href="/" class="btn amado-btn">Logout
                 </a>
             </div>
             <!-- Pop up -->
@@ -152,73 +154,82 @@
                     <!-- product-order -->
                     <form class="modal-content animate" action="/action_page.php">
                     <div class="cart-table-area section-padding-60">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12 col-lg-8">
-                        <div class="cart-title mt-50">
-                            <h2>Product-Order</h2>
-                        </div>
-                        <div class="cart-table clearfix">
-                            <table class="table table-responsive">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Price</th>
-                                        <th>Quantity</th>
-                                    </tr>
-                                </thead>
-                            <tbody>
-                                <tr>
-                                <td class="cart_product_desc">
-                                    <h5>White Modern Chair</h5>
-                                </td>
-                                <td class="price">
-                                    <span>$130</span>
-                                </td>
-                                <td class="qty">
-                                    <div class="qty-btn d-flex">
-                                        <p>Qty</p>
-                                        <div class="quantity">
-                                            <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                            <input type="number" class="qty-text" id="qty" step="1" min="1" max="300" name="quantity" value="1">
-                                                    <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="cart_product_desc">
-                                            <h5>Minimal Plant Pot</h5>
-                                        </td>
-                                        <td class="price">
-                                            <span>$10</span>
-                                        </td>
-                                        <td class="qty">
-                                            <div class="qty-btn d-flex">
-                                                <p>Qty</p>
-                                                <div class="quantity">
-                                                    <span class="qty-minus" onclick="var effect = document.getElementById('qty3'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                                    <input type="number" class="qty-text" id="qty3" step="1" min="1" max="300" name="quantity" value="1">
-                                                    <span class="qty-plus" onclick="var effect = document.getElementById('qty3'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12 col-lg-8">
+                                <div class="cart-title mt-50">
+                                    <h2>Product-Order</h2>
+                                </div>
+                                <div>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>OrderNumber</th>
+                                                <th>ProductCode</th>
+                                                <th>Name</th>
+                                                <th>Number</th>
+                                                <th>Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><h5>55555</h5></td>
+                                                <td><h5>11111</h5></td>
+                                                <td class="cart_product_desc">
+                                                    <h5>White Modern Chair</h5>
+                                                </td>
+                                                <td><h5>20</h5></td>
+                                                <td><h5>10/05/52</h5></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br><br>
+                                    <a href="#" onclick="document.getElementById('id04').style.display='block'" class="btn amado-btn">Add +</a>
+                                    <br><br>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                </div>
                     </div>
-                </div>
                 </form>
+                </div>
                 <!-- product pop up -->
                 <div id="id02" class="modal" style="display:none">
                     <!-- showProductDetail() -->
                 </div>
                 <div id="id03" class="modal" style="display:none">
                     <!-- showProductDetail() -->
+                </div>
+                <!-- pop-up add order to mnpd -->
+                <div id="id04" class="modal">
+                    <span onclick="document.getElementById('id04').style.display='none'"
+                        class="close" title="Close Modal">&times;
+                    </span>
+                    <!-- product-order -->
+                    <form class="modal-content animate" action="/action_page.php">
+                    <div class="cart-table-area section-padding-60">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12 col-lg-8">
+                                <div class="cart-title mt-50">
+                                    <h2>New Product-Order</h2>
+                                </div>
+                                <div class="product-meta-data">
+                                    <form>
+                                        <p>OrderNumber: <input type="text" name="number"></p>
+                                        <p>ProductCode: <input type="text" name="text"></p>
+                                        <p>Name: <input type="text" name="text"></p>
+                                        <p>Number: <input type="text" name="text"></p>
+                                    </form>
+                                    <br>
+                                    <a href="#" class="btn amado-btn">OK</a>
+                                    <br><br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </form>
                 </div>
         </header>
         <!-- Header Area End -->
