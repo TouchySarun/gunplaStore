@@ -90,59 +90,15 @@
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-30">
                 <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
-                <a href="cart.html" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
-                <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
             </div>
-
-            <!-- Amado Nav -->
-            <nav class="amado-nav">
-                <ul>
-                <div class="amado-nav">
-                    <!--Scale bar-->
-                    <button
-                        class="navbar-toggler"
-                        type="button"
-                        data-toggle="collapse"
-                        data-target="#footerNavContent"
-                        aria-controls="footerNavContent"
-                        aria-expanded="false"
-                        >SCALE
-                        <i class="fa fa-caret-down"></i>
-                    </button>
-                    <div class="collapse navbar-collapse" id="footerNavContent">
-                        <ul>
-                            <li class="nav-item" id="Scale">
-                            </li>
-                        </ul>
-                    </div>
-                    <!--Vendor bar-->
-                    <button
-                        class="navbar-toggler"
-                        type="button"
-                        data-toggle="collapse"
-                        data-target="#footer"
-                        aria-controls="footerNavContent"
-                        aria-expanded="false"
-                        >VENDOR
-                        <i class="fa fa-caret-down"></i>
-                    </button>
-                    <div class="collapse navbar-collapse" id="footer">
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item" id="Vendor">
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                </ul>
-            </nav>
 
             <!-- Button Group -->
             <div class="amado-btn-group mt-30 mb-100">
-                <a href="#" class="btn amado-btn" >Discount</a>
+                <a href="#" class="btn amado-btn" >AddEmployee +</a>
                 <br>
-                <a href="#" onclick="document.getElementById('id01').style.display='block'"
-                    class="btn amado-btn">Login
-                </a>
+                <a href="welcome" class="btn amado-btn">Back</a>
+                <br>
+                <a href="/" class="btn amado-btn">Logout</a>
             </div>
             <!-- Pop up -->
                 <!--Login pop up-->
@@ -172,6 +128,9 @@
                 </div>
                 <!-- product pop up -->
                 <div id="id02" class="modal" style="display:none">
+                    <!-- showProductDetail() -->
+                </div>
+                <div id="id03" class="modal" style="display:none">
                     <!-- showProductDetail() -->
                 </div>
         </header>
