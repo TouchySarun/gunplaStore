@@ -150,42 +150,11 @@
                     No Catagorize
                 </a>
             </div>
-            <!-- Pop up -->
-                <!--Login pop up-->
-                <div id="id01" class="modal">
-                    <span onclick="document.getElementById('id01').style.display='none'"
-                        class="close" title="Close Modal">&times;
-                    </span>
 
-                    <!-- Modal Content -->
-                    <form class="modal-content animate" action="/action_page.php">
-                        <div class="container">
-                            <label for="uname"><b>Username</b></label>
-                                <input type="text" placeholder="Enter Username" name="uname" required>
-                            <label for="psw"><b>Password</b></label>
-                                <input type="password" placeholder="Enter Password" name="psw" required>
-                                <button type="submit">Login</button>
-                            <label>
-                                <input type="checkbox" checked="checked" name="remember"> Remember me
-                            </label>
-                            <span class="psw"><a href="#">Forgot password?</a></span>
-                        </div>
-                        <div class="container" style="background-color:#f1f1f1">
-                        <button type="button" onclick="document.getElementById('id01').style.display='none'"
-                            class="cancelbtn">Cancel</button>
-                        </div>
-                    </form>
-                </div>
-                <!-- product pop up -->
-                <div id="id02" class="modal" style="display:none">
-                    <!-- showProductDetail() -->
-                </div>
         </header>
         <!-- Header Area End -->
-
         <!-- Product Catagories Area Start -->
         <div class="products-catagories-area clearfix" id="productArea">
-
         </div>
         <script>
             var json = <?php echo $jsonProduct?>;
@@ -199,7 +168,45 @@
 
     </div>
     <!-- ##### Main Content Wrapper End ##### -->
+        <!-- Pop up -->
+                <!--Login pop up-->
+                <div id="id01" class="modal">
+                    <span onclick="document.getElementById('id01').style.display='none'"
+                        class="close" title="Close Modal">&times;
+                    </span>
 
+                    <!-- Modal Content -->
+                    <form class="modal-content animate" action="/login" method = "post">
+                        <div class="container">
+                            {{ csrf_field() }}
+                                <label for="uname"><b>Username</b></label><input type="text" name="uname" placeholder="Enter Username" required>
+                                <label for="psw"><b>Password</b></label><input type="password" name="psw" placeholder="Enter Password" required>
+                                <button type="submit">Login</button>
+                        </div>
+
+                        <div class="container" style="background-color:#f1f1f1">
+
+                        <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                            class="cancelbtn">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- alert pop up -->
+                @if(session()->has('alert'))
+                <div id = "loginError" class= "modal" style = "display:block">
+                    <form class="modal-content animate" id="loginError">
+                        <div class="container" style="background-color:#f1f1f1">
+                        <button type="button" onclick="document.getElementById('loginError').style.display='none'"
+                            class="cancelbtn">{{ session('alert') }}</button>
+                        </div>
+                    </form>
+                </div>
+                @endif
+                <!-- product pop up -->
+                <div id="id02" class="modal" style="display:none">
+                    <!-- showProductDetail() -->
+                </div>
+        <!-- pop up end -->
     <!-- ##### Newsletter Area Start ##### -->
     <section class="newsletter-area section-padding-100-0">
         <div class="container">
