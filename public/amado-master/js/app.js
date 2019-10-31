@@ -1,7 +1,39 @@
 //require('./bootstrap');
-//code, name, line, scale, vendor, descrip, instock, price, msrp
+//product = code, name, line, scale, vendor, descrip, instock, price, msrp
 var tableproduct = "<br><br><br>";//All product List in JSON
-var tableemployee = "<br><br><br><br>";//All product List in JSON
+var tableemployee = "<br><br><br>";
+//--------------Show script------------------//
+function showEmployeeList(employee){
+    employee.forEach( function(a) {
+    tableemployee += `
+        <div class="single-products-catagory">
+                <a href="#" onclick="showEmployeeDetail('${a.employeeNumber}', '${a.lastName}', '${a.firstName}', '${a.email}', '${a.officeCode}', '${a.reportsTo}',
+                '${a.jobTitle}', '${a.extension}')">
+                <img src="./amado-master/img/core-img/employeeM.png" alt="">
+                <!-- Hover Content -->
+                <div class="hover-content">
+                    <div class="line"></div>
+                    <p>Number ${a.employeeNumber}</p>
+                    <h5>${a.jobTitle}</h5>
+                    <h4>${a.firstName} ${a.lastName}</h4>
+                </div>
+                <div class="pdDetail" style= "display:none">
+                    <p>${a.employeeNumber}</p>
+                    <p>${a.lastName}</p>
+                    <p>${a.firstName}</p>
+                    <p>${a.extension}</p>
+                    <p>${a.email}</p>
+                    <p>${a.officeCode}</p>
+                    <p>${a.reportsTo}</p>
+                    <p>${a.jobTitle}</p>
+                </div>
+            </a>
+        </div>
+        `
+    });
+    document.getElementById("employeeArea").innerHTML = tableemployee;
+}
+
 function showProductList(json){
     //var i = 0;
     //var json = $jsonProduct;
@@ -14,7 +46,7 @@ function showProductList(json){
                 <!-- Hover Content -->
                 <div class="hover-content">
                     <div class="line"></div>
-                    <p>EmployeeNumber ${a.quantityInStock}</p>
+                    <p>In Stock ${a.quantityInStock}</p>
                     <p>$${a.buyPrice}</p>
                     <p>${a.productScale}</p>
                     <p>${a.productVendor}</p>
@@ -37,8 +69,9 @@ function showProductList(json){
     });
     document.getElementById("productArea").innerHTML = tableproduct;
 }
+//------------end show script------------//
 
-//add bottom edit product
+//----------Update script----------//
 function updateProductList(json){
     json.forEach( function(a) {
     tableproduct += `
@@ -72,6 +105,7 @@ function updateProductList(json){
     });
     document.getElementById("productArea").innerHTML = tableproduct;
 }
+//----------end update script----------//
 
 //add order product
 function updateProductOrderList(json){
@@ -126,6 +160,8 @@ function showEmployeeList(employee){
                     <h5>${a.jobTitle}</h5>
                     <h4>${a.firstName} ${a.lastName}</h4>
                 </div>
+                <a href="#" onclick="EditEmployeeDetail('${a.employeeNumber}', '${a.lastName}', '${a.firstName}', '${a.email}', '${a.officeCode}', '${a.reportsTo}', 
+                '${a.jobTitle}', '${a.extension}')" class="btn amado-btn">Edit</a>
                 <div class="pdDetail" style= "display:none">
                     <p>${a.employeeNumber}</p>
                     <p>${a.lastName}</p>
@@ -156,7 +192,6 @@ function dropdownVender(Vendor){
     document.getElementById('Vendor').innerHTML = mostvendor;
 }
 
-//drop-down scale
 function dropdownScale(Scale){
     var mostscale = "";
     Scale.forEach(function(b) {
@@ -169,6 +204,7 @@ function dropdownScale(Scale){
     document.getElementById('Scale').innerHTML = mostscale;
 
 }
+
 //-----------------------------categorize --------------------------------//
 
 function categorizeVendor(Vendor){
@@ -188,11 +224,10 @@ function categorizeScale(Scale){
     });
     document.getElementById("productArea").innerHTML = textBox;
 }
-
+//---------------end categorize -----------------------//
 
 //------------------------------filter----------------------------- //
 function filterByProductName() {
-    // document.getElementById("productArea").innerHTML = tableproduct;
     var input, filter, slot, single_products_catagory, pdName, i, txtValue, a;
     input = document.getElementById("myInput");
     filter = input.value.toUpperCase();
@@ -268,8 +303,6 @@ function filterVendor(Vendor){
     }
     return newinnerHtml;
 }
-
-// filter Scale
 function filterScale(Scale) {
     var slot, filter, single_products_catagory, pdScale, i, txtValue, a;
     var newinnerHtml = "";
@@ -297,9 +330,9 @@ function filterScale(Scale) {
     }
     return newinnerHtml;
 }
+//-----------------------------end filter ------------------//
 
 //------------------------------Pop-Up----------------------------- //
-//show product detail pop up
 function showProductDetail(name, scale, vendor, descrip, instock, price){
     var box = `
     <span onclick="document.getElementById('id02').style.display='none'"
@@ -369,9 +402,7 @@ function showProductDetail(name, scale, vendor, descrip, instock, price){
     document.getElementById("id02").style.display = 'block';
 }
 
-//show detail employee pop up
-//'${a.employeeNumber}', '${a.lastName}', '${a.firstName}', '${a.email}', '${a.officeCode}', '${a.reportsTo}', 
-//'${a.jobTitle}', '${a.extension}'
+// popup employee detail
 function showEmployeeDetail(number, lname, fname, email, office, report, job, exetension){
     var box = `
     <span onclick="document.getElementById('id02').style.display='none'"
@@ -405,9 +436,6 @@ function showEmployeeDetail(number, lname, fname, email, office, report, job, ex
                                             <h5>Report To ${report}</h5>
                                         <p>extension ${exetension}</p>
                                     </div>
-                                    <div class="short_overview my-5">
-                                        
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -421,7 +449,7 @@ function showEmployeeDetail(number, lname, fname, email, office, report, job, ex
     document.getElementById("id02").style.display = 'block';
 }
 
-//pop-up edit product
+// edit product detail
 function EditProductDetail(name, scale, vendor, descrip, instock, price){
     var box = `
     <span onclick="document.getElementById('id03').style.display='none'"
@@ -481,6 +509,7 @@ function EditProductDetail(name, scale, vendor, descrip, instock, price){
                                 <div class="short_overview my-5">
                                     <p>Description: <textarea name="message" style="width:400px; height:250px;">${descrip}</textarea></p>
                                 </div>
+                                <a href="#" class="btn amado-btn">Delete</a>
                                 <a href="#" class="btn amado-btn">Save</a>
                             </div>
                         </div>
@@ -493,3 +522,56 @@ function EditProductDetail(name, scale, vendor, descrip, instock, price){
     document.getElementById("id03").innerHTML = box;
     document.getElementById("id03").style.display = 'block';
 }
+
+// edit product detail
+function EditEmployeeDetail(number, lname, fname, email, office, report, job, exetension){
+    var box = `
+    <span onclick="document.getElementById('id03').style.display='none'"
+        class="close" title="Close Modal">&times;
+    </span>
+    <form class="modal-content animate" action="/action_page.php">
+        <div class="container">
+            <div class="single-product-area section-padding-100 clearfix" >
+                <div class="container-fluid" >
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <div class="single_product_thumb">
+                                <div id="product_details_slider" class="carousel slide" data-ride="carousel">
+                                    <div class="carousel-inner">
+                                            <a class="gallery_img" href="./amado-master/img/core-img/employeeM.png">
+                                                <img class="d-block w-100" src="./amado-master/img/core-img/employeeM.png" alt="First slide">
+                                            </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-5">
+                            <div class="single_product_desc">
+                                <div class="product-meta-data">
+                                    <div class="line"></div>
+                                        <form>
+                                            <p>Number: <input type="text" name="number" value="${number}"></p>
+                                            <p>FirstName: <input type="text" name="text" value="${fname}"></p>
+                                            <p>LastName: <input type="text" name="text" value="${lname}"></p>
+                                            <p>Email: <input type="text" name="text" value="${email}"></p>
+                                            <p>JobTitle: <input type="text" name="text" value="${job}"></p>
+                                            <p>OfficeCode: <input type="text" name="text" value="${office}"></p>
+                                            <p>ReportTo: <input type="text" name="text" value="${report}"></p>
+                                            <p>Extension: <input type="text" name="text" value="${exetension}"></p>
+                                        </form>
+                                    </div>
+                                    <a href="#" class="btn amado-btn">Delete</a>
+                                    <a href="#" class="btn amado-btn">Save</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    `;
+    document.getElementById("id03").innerHTML = box;
+    document.getElementById("id03").style.display = 'block';
+}
+//------------------------End Pop-up--------------------------//
