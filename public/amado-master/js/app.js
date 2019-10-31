@@ -1,7 +1,39 @@
 //require('./bootstrap');
-//code, name, line, scale, vendor, descrip, instock, price, msrp
+//product = code, name, line, scale, vendor, descrip, instock, price, msrp
 var tableproduct = "<br><br><br>";//All product List in JSON
-var tableemployee = "<br><br><br><br>";//All product List in JSON
+var tableemployee = "<br><br><br>";
+//--------------Show script------------------//
+function showEmployeeList(employee){
+    employee.forEach( function(a) {
+    tableemployee += `
+        <div class="single-products-catagory">
+                <a href="#" onclick="showEmployeeDetail('${a.employeeNumber}', '${a.lastName}', '${a.firstName}', '${a.email}', '${a.officeCode}', '${a.reportsTo}',
+                '${a.jobTitle}', '${a.extension}')">
+                <img src="./amado-master/img/core-img/employeeM.png" alt="">
+                <!-- Hover Content -->
+                <div class="hover-content">
+                    <div class="line"></div>
+                    <p>Number ${a.employeeNumber}</p>
+                    <h5>${a.jobTitle}</h5>
+                    <h4>${a.firstName} ${a.lastName}</h4>
+                </div>
+                <div class="pdDetail" style= "display:none">
+                    <p>${a.employeeNumber}</p>
+                    <p>${a.lastName}</p>
+                    <p>${a.firstName}</p>
+                    <p>${a.extension}</p>
+                    <p>${a.email}</p>
+                    <p>${a.officeCode}</p>
+                    <p>${a.reportsTo}</p>
+                    <p>${a.jobTitle}</p>
+                </div>
+            </a>
+        </div>
+        `
+    });
+    document.getElementById("employeeArea").innerHTML = tableemployee;
+}
+
 function showProductList(json){
     //var i = 0;
     //var json = $jsonProduct;
@@ -14,7 +46,7 @@ function showProductList(json){
                 <!-- Hover Content -->
                 <div class="hover-content">
                     <div class="line"></div>
-                    <p>EmployeeNumber ${a.quantityInStock}</p>
+                    <p>In Stock ${a.quantityInStock}</p>
                     <p>$${a.buyPrice}</p>
                     <p>${a.productScale}</p>
                     <p>${a.productVendor}</p>
@@ -37,8 +69,9 @@ function showProductList(json){
     });
     document.getElementById("productArea").innerHTML = tableproduct;
 }
+//------------end show script------------//
 
-//add bottom edit product
+//----------Update script----------//
 function updateProductList(json){
     json.forEach( function(a) {
     tableproduct += `
@@ -72,40 +105,8 @@ function updateProductList(json){
     });
     document.getElementById("productArea").innerHTML = tableproduct;
 }
+//----------end update script----------//
 
-//show employee
-function showEmployeeList(employee){
-    employee.forEach( function(a) {
-    tableemployee += `
-        <div class="single-products-catagory">
-                <a href="#" onclick="showEmployeeDetail('${a.employeeNumber}', '${a.lastName}', '${a.firstName}', '${a.email}', '${a.officeCode}', '${a.reportsTo}', 
-                '${a.jobTitle}', '${a.extension}')">
-                <img src="./amado-master/img/core-img/employeeM.png" alt="">
-                <!-- Hover Content -->
-                <div class="hover-content">
-                    <div class="line"></div>
-                    <p>Number ${a.employeeNumber}</p>
-                    <h5>${a.jobTitle}</h5>
-                    <h4>${a.firstName} ${a.lastName}</h4>
-                </div>
-                <div class="pdDetail" style= "display:none">
-                    <p>${a.employeeNumber}</p>
-                    <p>${a.lastName}</p>
-                    <p>${a.firstName}</p>
-                    <p>${a.extension}</p>
-                    <p>${a.email}</p>
-                    <p>${a.officeCode}</p>
-                    <p>${a.reportsTo}</p>
-                    <p>${a.jobTitle}</p>
-                </div>
-            </a>
-        </div>
-        `
-    });
-    document.getElementById("employeeArea").innerHTML = tableemployee;
-}
-
-//drop-down vendor
 function dropdownVender(Vendor){
     var mostvendor = "";
     Vendor.forEach(function(b) {
@@ -118,7 +119,6 @@ function dropdownVender(Vendor){
     document.getElementById('Vendor').innerHTML = mostvendor;
 }
 
-//drop-down scale
 function dropdownScale(Scale){
     var mostscale = "";
     Scale.forEach(function(b) {
@@ -131,6 +131,7 @@ function dropdownScale(Scale){
     document.getElementById('Scale').innerHTML = mostscale;
 
 }
+
 //-----------------------------categorize --------------------------------//
 
 function categorizeVendor(Vendor){
@@ -150,11 +151,10 @@ function categorizeScale(Scale){
     });
     document.getElementById("productArea").innerHTML = textBox;
 }
-
+//---------------end categorize -----------------------//
 
 //------------------------------filter----------------------------- //
 function filterByProductName() {
-    // document.getElementById("productArea").innerHTML = tableproduct;
     var input, filter, slot, single_products_catagory, pdName, i, txtValue, a;
     input = document.getElementById("myInput");
     filter = input.value.toUpperCase();
@@ -176,8 +176,6 @@ function filterByProductName() {
         }
     }
 }
-
-// filter Vender
 function filterVendor(Vendor){
     var slot, filter, single_products_catagory, pdVendor, i, txtValue, a;
     var newinnerHtml = "";
@@ -206,8 +204,6 @@ function filterVendor(Vendor){
     }
     return newinnerHtml;
 }
-
-// filter Scale
 function filterScale(Scale) {
     var slot, filter, single_products_catagory, pdScale, i, txtValue, a;
     var newinnerHtml = "";
@@ -235,9 +231,9 @@ function filterScale(Scale) {
     }
     return newinnerHtml;
 }
+//-----------------------------end filter ------------------//
 
 //------------------------------Pop-Up----------------------------- //
-//show product detail pop up
 function showProductDetail(name, scale, vendor, descrip, instock, price){
     var box = `
     <span onclick="document.getElementById('id02').style.display='none'"
@@ -306,10 +302,6 @@ function showProductDetail(name, scale, vendor, descrip, instock, price){
     document.getElementById("id02").innerHTML = box;
     document.getElementById("id02").style.display = 'block';
 }
-
-//show detail employee pop up
-//'${a.employeeNumber}', '${a.lastName}', '${a.firstName}', '${a.email}', '${a.officeCode}', '${a.reportsTo}', 
-//'${a.jobTitle}', '${a.extension}'
 function showEmployeeDetail(number, lname, fname, email, office, report, job, exetension){
     var box = `
     <span onclick="document.getElementById('id02').style.display='none'"
@@ -344,7 +336,7 @@ function showEmployeeDetail(number, lname, fname, email, office, report, job, ex
                                         <p>extension ${exetension}</p>
                                     </div>
                                     <div class="short_overview my-5">
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -358,8 +350,6 @@ function showEmployeeDetail(number, lname, fname, email, office, report, job, ex
     document.getElementById("id02").innerHTML = box;
     document.getElementById("id02").style.display = 'block';
 }
-
-//pop-up edit product
 function EditProductDetail(name, scale, vendor, descrip, instock, price){
     var box = `
     <span onclick="document.getElementById('id03').style.display='none'"
@@ -431,3 +421,4 @@ function EditProductDetail(name, scale, vendor, descrip, instock, price){
     document.getElementById("id03").innerHTML = box;
     document.getElementById("id03").style.display = 'block';
 }
+//------------------------End Pop-up--------------------------//
