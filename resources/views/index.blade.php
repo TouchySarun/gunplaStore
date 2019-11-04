@@ -51,7 +51,7 @@
         <div class="mobile-nav">
             <!-- Navbar Brand -->
             <div class="amado-navbar-brand">
-                <a><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
+                <a href="/"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
 
             </div>
             <!-- Navbar Toggler -->
@@ -66,7 +66,7 @@
 
             <!-- Logo -->
             <div class="logo">
-                <a href="index.html"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
+                <a href="/"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
             </div>
 
             <!-- Cart Menu -->
