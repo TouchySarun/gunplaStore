@@ -95,6 +95,7 @@ class DataController extends Controller
 
     public function deleteProduct($code){
         $data = DB::select("delete from products where productCode = '$code'");
+        return 'success';
     }
 }
 
