@@ -164,7 +164,7 @@
         </header>
         <!-- Header Area End -->
 
-        <div class="cart-table-area section-padding-100">
+        <div class="cart-order-area section-padding-100">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12 col-lg-8">
@@ -264,7 +264,7 @@
                                 </li>
                             </ul>                  
                             <div class="cart-btn mt-100">
-                                <a href="cart.html" class="btn amado-btn w-100">Checkout</a>
+                                <a href="/checkout" class="btn amado-btn w-100">Checkout</a>
                             </div>
                         </div>
                     </div>
