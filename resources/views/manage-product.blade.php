@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="UTF-8">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -171,7 +172,8 @@
         
         <!-- Product Catagories Area Start -->
         <div class="products-catagories-area clearfix" id="productArea"></div>
-        <script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script type="text/javascript">
             var json = <?php echo $jsonProduct?>;
             updateProductList(json);
         </script>

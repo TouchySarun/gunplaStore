@@ -85,7 +85,7 @@ class DataController extends Controller
         if($employeekey != null)
         {
 
-            return redirect ('/mnem');
+            return redirect ('/mnpd');
         }
         else
         {

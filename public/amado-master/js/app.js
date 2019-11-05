@@ -2,6 +2,7 @@
 //product = code, name, line, scale, vendor, descrip, instock, price, msrp
 var tableproduct = "<br><br><br>";//All product List in JSON
 var tableemployee = "<br><br><br>";
+var jasonproduct = "";
 //--------------Show script------------------//
 function showEmployeeList(employee){
     employee.forEach( function(a) {
@@ -73,6 +74,7 @@ function showProductList(json){
 
 //----------Update script----------//
 function updateProductList(json){
+    jsonproduct = json;
     json.forEach( function(a) {
     tableproduct += `
         <div class="single-products-catagory">
@@ -87,7 +89,7 @@ function updateProductList(json){
                     <p>${a.productVendor}</p>
                     <h4>${a.productName}</h4>
                 </div>
-                <a href="#" onclick="EditProductDetail('${a.productName}', '${a.productScale}', '${a.productVendor}', '${a.productDescription}', '${a.quantityInStock}', '${a.buyPrice}')" class="btn amado-btn">Edit</a>
+                <a href="#" onclick='EditProductDetail("${a.productName}", "${a.productScale}", "${a.productVendor}", "${a.productDescription}", "${a.quantityInStock}", "${a.buyPrice}", "${a.productCode}")' class="btn amado-btn">Edit</a>
                 <div class="pdDetail" style= "display:none">
                     <p>${a.productCode}</p>
                     <p>${a.productName}</p>
@@ -450,7 +452,7 @@ function showEmployeeDetail(number, lname, fname, email, office, report, job, ex
 }
 
 // edit product detail
-function EditProductDetail(name, scale, vendor, descrip, instock, price){
+function EditProductDetail(name, scale, vendor, descrip, instock, price, productid){
     var box = `
     <span onclick="document.getElementById('id03').style.display='none'"
         class="close" title="Close Modal">&times;
@@ -509,7 +511,7 @@ function EditProductDetail(name, scale, vendor, descrip, instock, price){
                                 <div class="short_overview my-5">
                                     <p>Description: <textarea name="message" style="width:400px; height:250px;">${descrip}</textarea></p>
                                 </div>
-                                <a href="#" class="btn amado-btn">Delete</a>
+                                <a href="#" class="btn amado-btn" onclick="deleteitem('${productid}')">Delete</a>
                                 <a href="#" class="btn amado-btn">Save</a>
                             </div>
                         </div>
@@ -575,3 +577,27 @@ function EditEmployeeDetail(number, lname, fname, email, office, report, job, ex
     document.getElementById("id03").style.display = 'block';
 }
 //------------------------End Pop-up--------------------------//
+
+// -----------------------Delete-----------------------------//
+function deleteitem(a){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'delete',
+        url: '/deleteProduct/'+a,
+        success: function (data) {        
+            document.getElementById('id03').style.display='none';
+            const index = jsonproduct.findIndex(function(x, a){
+                return x.productCode == a;
+            });    
+            if (index !== undefined) {
+                // jsonproduct.splice(index, 1);
+                delete jsonproduct[index];
+                updateProductList(jsonproduct);
+            }
+        }
+    });
+}
