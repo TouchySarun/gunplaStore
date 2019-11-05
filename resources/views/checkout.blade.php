@@ -106,68 +106,76 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12 col-lg-8">
-                        <div class="checkout_details_area mt-50 clearfix">
-                            <div class="cart-title">
+                        <div class="checkout_details_area clearfix">
+                            <div class="cart-title mt-50">
                                 <h2>Checkout</h2>
                             </div>
 
-                            <div class="row">
-                            
-                                <!-- PopUp Modal -->
-                                <div id="id01" class="modal">
-                                    <span onclick="document.getElementById('id01').style.display='none'"
-                                        class="close" title="Close Modal">&times;
-                                    </span>
-                                    <!-- Form inside popup -->
-                                    <form class="modal-content animate" action="/action_page.php">
-                                        <div class="container">
-                                            <h4>Adding Address</h4>
-                                            <br>
-                                            <label for="firstName"><b>First Name</b></label>
-                                                <input type="text" placeholder="" name="firstName" required>
-                                            <label for="lastName"><b>Last Name</b></label>
-                                                <input type="text" placeholder="" name="lastName" required>
-                                            <label for="customerName"><b>Company Name</b></label>
-                                                <input type="text" placeholder="" name="customerName" required>                            
-                                            <label for="country"><b>Country</b></label>
-                                                <select class="w-100" id="country">
-                                                    <option value="usa">United States</option>
-                                                    <option value="uk">United Kingdom</option>
-                                                    <option value="ger">Germany</option>
-                                                    <option value="fra">France</option>
-                                                    <option value="ind">India</option>
-                                                    <option value="aus">Australia</option>
-                                                    <option value="bra">Brazil</option>
-                                                    <option value="cana">Canada</option>
-                                                </select>
-                                            <label for="address"><b>Address</b></label>
-                                                <input type="text" placeholder="" name="address" required>
-                                            <label for="city"><b>City</b></label>
-                                                <input type="text" placeholder="" name="city" required>
-                                            <label for="postalCode"><b>Postal Code</b></label>
-                                                <input type="text" placeholder="" name="postalCode" required>
-                                            <button type="submit">Confirm</button>
-                                        </div>
-                                        <div class="container" style="background-color:#f1f1f1">
-                                            <button type="button" onclick="document.getElementById('id01').style.display='none'"
-                                                class="cancelbtn">Cancel</button>
-                                        </div>
-                                    </form>
+                            <form>
+                                <div class="form-control">
+                                    <h5>Customer Name</h5>
+                                    <p>Address Line: Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet dolor quisquam, quos alias excepturi facilis sequi, officia assumenda aliquid qui eaque voluptatum beatae saepe reprehenderit explicabo at, consequatur dolore quo.</p>
                                 </div>
-                                
-                                <!-- Add Address Button -->
-                                <div class="col-12 mt-30">
-                                    <a href="#" onclick="document.getElementById('id01').style.display='block'" class="btn amado-btn">
+                                <!-- Non-Primary Address -->
+                                <div class="form-control-white">
+                                    <h5>Customer Name</h5>
+                                    <p>Address Line: Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet dolor quisquam, quos alias excepturi facilis sequi, officia assumenda aliquid qui eaque voluptatum beatae saepe reprehenderit explicabo at, consequatur dolore quo.</p>
+                                    <a href="#" class="btn amado-btn">Set Primary</a>
+                                </div>
+                                <div class="confirm-control">
+                                    <!-- Add Address Button -->
+                                    <a href="#" onclick="document.getElementById('id01').style.display='block'" class="btn amado-btn w-100">
                                         Add Address
                                     </a>
                                 </div>
+                            </form>
+
+                            <!-- PopUp Modal -->
+                            <div id="id01" class="modal">
+                                <span onclick="document.getElementById('id01').style.display='none'"
+                                    class="close" title="Close Modal">&times;
+                                </span>
+                                <!-- Form inside popup -->
+                                <form class="modal-content animate" action="/action_page.php">
+                                    <div class="container">
+                                        <h4>Adding Address</h4><br>
+                                        <label for="firstName"><b>First Name</b></label>
+                                            <input type="text" placeholder="" name="firstName" required>
+                                        <label for="lastName"><b>Last Name</b></label>
+                                            <input type="text" placeholder="" name="lastName" required>
+                                        <label for="customerName"><b>Company Name</b></label>
+                                            <input type="text" placeholder="" name="customerName" required>                            
+                                        <label for="country"><b>Country</b></label>
+                                            <select class="w-100" id="country">
+                                                <option value="usa">United States</option>
+                                                <option value="uk">United Kingdom</option>
+                                                <option value="ger">Germany</option>
+                                                <option value="fra">France</option>
+                                                <option value="ind">India</option>
+                                                <option value="aus">Australia</option>
+                                                <option value="bra">Brazil</option>
+                                                <option value="cana">Canada</option>
+                                            </select>
+                                        <label for="address"><b>Address</b></label>
+                                            <input type="text" placeholder="" name="address" required>
+                                        <label for="city"><b>City</b></label>
+                                            <input type="text" placeholder="" name="city" required>
+                                        <label for="postalCode"><b>Postal Code</b></label>
+                                            <input type="text" placeholder="" name="postalCode" required>
+                                        <button type="submit">Confirm</button>
+                                    </div>
+                                    <div class="container" style="background-color:#f1f1f1">
+                                        <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                                            class="cancelbtn">Cancel</button>
+                                    </div>
+                                </form>
+                            </div>    
                                 <!-- Remark Area -->
                                 <!-- <div class="col-12 mb-3">
                                     <b>Remark</b>
                                     <textarea name="comment" class="form-control w-100" id="comment" cols="30" rows="10" placeholder="Leave a comment about your order"></textarea>
                                 </div> -->
-                            </div>        
-                        </div>
+                        </div>        
                     </div>
                     <div class="col-12 col-lg-4">
                         <div class="cart-summary">

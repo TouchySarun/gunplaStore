@@ -238,11 +238,6 @@ img {
   /* padding-right: 8px; */
 }
 
-
-
-
-
-
 /* Spacing */
 .mt-15 {
   margin-top: 15px !important; }
@@ -296,6 +291,9 @@ img {
   margin-right: 50px !important; }
 
 /* Height */
+.height-200 {
+  height: 200px !important; }
+  
 .height-400 {
   height: 400px !important; }
 
@@ -508,7 +506,8 @@ img {
   .amado-btn.active, .amado-btn:hover, .amado-btn:focus {
     font-size: 18px;
     color: #ffffff;
-    background-color: #fb8210; }
+    background-color: #fb8210;
+}
 
 /* Essence  Button */
 .amado-big-btn {
@@ -865,10 +864,10 @@ img {
     position: relative;
     z-index: 1;
     -webkit-box-flex: 0;
-    -ms-flex: 0 0 calc(95% - 320px);
-    flex: 0 0 calc(95% - 320px);
-    width: calc(95% - 320px);
-    max-width: calc(95% - 320px); }
+    -ms-flex: 0 0 calc(100% - 0px);
+    flex: 0 0 calc(100% - 0px);
+    width: calc(100% - 0px);
+    max-width: calc(100% - 0px); }
     @media only screen and (min-width: 992px) and (max-width: 1199px) {
       .main-content-wrapper .cart-table-area {
         -webkit-box-flex: 0;
@@ -1646,16 +1645,28 @@ img {
 
 /* :: 10.0 Checkout Area CSS */
 .checkout_details_area form .form-control {
-  height: 60px;
+  height: auto;
   border: none;
   border-radius: 0;
   background-color: #f5f7fa;
-  padding: 30px;
+  padding: 30px 150px 30px 20px;
+  color: #6b6b6b;
+  font-size: 14px; }
+.checkout_details_area form .form-control-white {
+  height: auto;
+  border: none;
+  border-radius: 0;
+  background-color: #ffffff;
+  padding: 30px 150px 30px 20px;
   color: #6b6b6b;
   font-size: 14px; }
 .checkout_details_area form textarea.form-control {
   height: 210px; }
 .checkout_details_area form .custom-control label {
+  font-size: 14px;
+  color: #6b6b6b; }
+.checkout_details_area form .confirm-control {
+  padding: 0px;
   font-size: 14px;
   color: #6b6b6b; }
 .checkout_details_area form .nice-select {

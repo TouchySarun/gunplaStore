@@ -112,7 +112,7 @@ function updateProductOrderList(json){
     json.forEach( function(a) {
     tableproduct += `
         <div class="single-products-catagory">
-                <a href="#" onclick="showProductDetail('${a.productName}', '${a.productScale}', '${a.productVendor}', '${a.productDescription}', '${a.quantityInStock}', '${a.buyPrice}')">
+            <a href="#" onclick="showProductDetail('${a.productName}', '${a.productScale}', '${a.productVendor}', '${a.productDescription}', '${a.quantityInStock}', '${a.buyPrice}')">
                 <img src="./amado-master/img/bg-img/1.jpg" alt="">
                 <!-- Hover Content -->
                 <div class="hover-content">
