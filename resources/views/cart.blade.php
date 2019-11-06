@@ -172,17 +172,17 @@
                             <h2>Order</h2>
                         </div>
 
-                        <div class="cart-table clearfix">
-                            <table class="table table-responsive">
+                        <div class="cart-table clearfix" >
+                            <table class="table table-responsive" id="order_table">
                                 <thead>
                                     <tr>
                                         <th></th>
                                         <th>Name</th>
-                                        <th>Price</th>
+                                        <th>Price (Baht)</th>
                                         <th>Quantity</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id = "order_table_body">
                                     <tr>
                                         <td class="cart_product_img">
                                             <a href="#"><img src="./amado-master/img/bg-img/cart1.jpg" alt="Product"></a>
@@ -191,15 +191,15 @@
                                             <h5>White Modern Chair</h5>
                                         </td>
                                         <td class="price">
-                                            <span>$130</span>
+                                            <span>130</span>
                                         </td>
                                         <td class="qty">
                                             <div class="qty-btn d-flex">
                                                 <p>Qty</p>
                                                 <div class="quantity">
-                                                    <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                                    <input type="number" class="qty-text" id="qty" step="1" min="1" max="300" name="quantity" value="1">
-                                                    <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                                                    <span class="qty-minus" onclick="var effect = document.getElementById('qty0'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 0 ) effect.value--;order_calculator();return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                                                    <input type="number" class="qty-text" id="qty0" step="1" min="0" max="300" name="quantity" value="0">
+                                                    <span class="qty-plus" onclick="var effect = document.getElementById('qty0'); var qty = effect.value; if( !isNaN( qty )) effect.value++;order_calculator();return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
                                                 </div>
                                             </div>
                                         </td>
@@ -212,15 +212,15 @@
                                             <h5>Minimal Plant Pot</h5>
                                         </td>
                                         <td class="price">
-                                            <span>$10</span>
+                                            <span>10</span>
                                         </td>
                                         <td class="qty">
                                             <div class="qty-btn d-flex">
                                                 <p>Qty</p>
                                                 <div class="quantity">
-                                                    <span class="qty-minus" onclick="var effect = document.getElementById('qty2'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                                    <input  vbtype="number" class="qty-text" id="qty2" step="1" min="1" max="300" name="quantity" value="1">
-                                                    <span class="qty-plus" onclick="var effect = document.getElementById('qty2'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                                                    <span class="qty-minus" onclick="var effect = document.getElementById('qty1'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                                                    <input  vbtype="number" class="qty-text" id="qty1" step="1" min="1" max="300" name="quantity" value="1">
+                                                    <span class="qty-plus" onclick="var effect = document.getElementById('qty1'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
                                                 </div>
                                             </div>
                                         </td>
@@ -233,15 +233,15 @@
                                             <h5>Minimal Plant Pot</h5>
                                         </td>
                                         <td class="price">
-                                            <span>$10</span>
+                                            <span>10</span>
                                         </td>
                                         <td class="qty">
                                             <div class="qty-btn d-flex">
                                                 <p>Qty</p>
                                                 <div class="quantity">
-                                                    <span class="qty-minus" onclick="var effect = document.getElementById('qty3'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                                    <input type="number" class="qty-text" id="qty3" step="1" min="1" max="300" name="quantity" value="1">
-                                                    <span class="qty-plus" onclick="var effect = document.getElementById('qty3'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                                                    <span class="qty-minus" onclick="var effect = document.getElementById('qty2'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                                                    <input type="number" class="qty-text" id="qty2" step="1" min="1" max="300" name="quantity" value="1">
+                                                    <span class="qty-plus" onclick="var effect = document.getElementById('qty2'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
                                                 </div>
                                             </div>
                                         </td>
@@ -254,7 +254,7 @@
                         <div class="cart-summary">
                             <h5>Cart Total</h5>
                             <ul class="summary-table">
-                                <li><span>subtotal:</span> <span>$140.00</span></li>
+                                <li><span>subtotal:</span> <span id="sumprice">$140.00</span></li>
                                 <li><span>delivery:</span> <span>Free</span></li>
                                 <li><span>total:</span> <span>$140.00</span></li>
                                 <li><span>Code:</span> <br>
@@ -262,7 +262,7 @@
                                         <input type="text" class="form-control" id="code" value="" placeholder="Code">
                                     </div> 
                                 </li>
-                            </ul>                  
+                            </ul>                 
                             <div class="cart-btn mt-100">
                                 <a href="/checkout" class="btn amado-btn w-100">Checkout</a>
                             </div>

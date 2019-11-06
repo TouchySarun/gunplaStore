@@ -140,7 +140,7 @@
                 Order & Stock
             </a>
             <!-- order-status.blade.php -->
-            <a href="#" onclick="document.getElementById('id02').style.display='block'" class="btn amado-big-btn">
+            <a href="/shipping" onclick="document.getElementById('id02').style.display='block'" class="btn amado-big-btn">
                 <br><br><br>
                 <img src="./amado-master/img/core-img/shipping_details.png"><br><br>
                 Shipping Detail

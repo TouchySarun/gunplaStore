@@ -762,7 +762,7 @@ img {
         margin-bottom: 75px; } }
   .main-content-wrapper .products-catagories-area {
     -webkit-box-flex: 0;
-    z-index=20;
+    z-index:20;
     -ms-flex: 0 0 calc(100% - 320px);
     flex: 0 0 calc(100% - 320px);
     width: calc(100% - 320px);
