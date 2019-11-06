@@ -2,7 +2,30 @@
 //product = code, name, line, scale, vendor, descrip, instock, price, msrp
 var tableproduct = "<br><br><br>";//All product List in JSON
 var tableemployee = "<br><br><br>";
+var tableaddress = "";
 //--------------Show script------------------//
+function showCustomerAddress(json) {
+    var n = 0;
+    json.forEach( function(a) {
+        if(n == json.length - 1){
+            tableaddress += `
+            <h5>${a.contactFirstName} ${a.contactLastName}</h5>
+            <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>
+            `
+        }else{
+            n++;
+            tableaddress += `
+            <h5>${a.contactFirstName} ${a.contactLastName}</h5>
+            <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>
+            <div class="line"></div>
+        `
+        }
+        
+    });
+    document.getElementById("addressArea").innerHTML = tableaddress;
+    console.log(json.length);
+}
+
 function showEmployeeList(employee){
     employee.forEach( function(a) {
     tableemployee += `
@@ -575,3 +598,4 @@ function EditEmployeeDetail(number, lname, fname, email, office, report, job, ex
     document.getElementById("id03").style.display = 'block';
 }
 //------------------------End Pop-up--------------------------//
+

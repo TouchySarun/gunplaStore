@@ -9,7 +9,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>Amado - Furniture Ecommerce Template | Checkout</title>
+    <title>Checkout | Gunpla Store Plastic Model Shop</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="./amado-master/img/core-img/favicon.ico">
@@ -17,6 +17,9 @@
     <!-- Core Style CSS -->
     <link rel="stylesheet" href="./amado-master/css/core-style.css">
     <link rel="stylesheet" href="style.css">
+
+    <!-- DB function -->
+    <script src="./amado-master/js/app.js"></script>
 
 </head>
 
@@ -110,18 +113,34 @@
                             <div class="cart-title mt-50">
                                 <h2>Checkout</h2>
                             </div>
-
                             <form>
-                                <div class="form-control">
-                                    <h5>Customer Name</h5>
-                                    <p>Address Line: Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet dolor quisquam, quos alias excepturi facilis sequi, officia assumenda aliquid qui eaque voluptatum beatae saepe reprehenderit explicabo at, consequatur dolore quo.</p>
-                                </div>
+                                <div class="form-control" id="addressArea"></div>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+
+                                            </td>
+                                            <td>
+                                                <!-- Cash on delivery -->
+                                                <div class="custom-control custom-radio">
+                                                    <input type="radio" class="custom-control-input" id="cod">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                <script>
+                                    var customer = <?php echo $jsonCustomer?>;
+                                    showCustomerAddress(customer);
+                                </script>
+                                <!-- <div class="form-control-white" id="addressArea"></div>
+                                <script>
+                                </script> -->
                                 <!-- Non-Primary Address -->
-                                <div class="form-control-white">
-                                    <h5>Customer Name</h5>
-                                    <p>Address Line: Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet dolor quisquam, quos alias excepturi facilis sequi, officia assumenda aliquid qui eaque voluptatum beatae saepe reprehenderit explicabo at, consequatur dolore quo.</p>
-                                    <a href="#" class="btn amado-btn">Set Primary</a>
-                                </div>
+            <!-- <div class="form-control-white"> 
+                <h5>${a.contactFirstName} ${a.contactLastName}</h5>
+                <p>${a.addressLine1}<br>${a.addressLine2}<br>${a.city},${a.state},${a.country},${a.postalCode}</p>
+                <a href="#" class="btn amado-btn">Set Primary</a>
+            </div> -->
                                 <div class="confirm-control">
                                     <!-- Add Address Button -->
                                     <a href="#" onclick="document.getElementById('id01').style.display='block'" class="btn amado-btn w-100">
@@ -129,6 +148,8 @@
                                     </a>
                                 </div>
                             </form>
+                        
+                            
 
                             <!-- PopUp Modal -->
                             <div id="id01" class="modal">
@@ -139,14 +160,15 @@
                                 <form class="modal-content animate" action="/action_page.php">
                                     <div class="container">
                                         <h4>Adding Address</h4><br>
-                                        <label for="firstName"><b>First Name</b></label>
-                                            <input type="text" placeholder="" name="firstName" required>
-                                        <label for="lastName"><b>Last Name</b></label>
-                                            <input type="text" placeholder="" name="lastName" required>
+                                        <label for="contactFirstName"><b>First Name</b></label>
+                                            <input type="text" placeholder="" name="contactFirstName" required>
+                                        <label for="contactLastName"><b>Last Name</b></label>
+                                            <input type="text" placeholder="" name="contactLastName" required>
                                         <label for="customerName"><b>Company Name</b></label>
                                             <input type="text" placeholder="" name="customerName" required>                            
                                         <label for="country"><b>Country</b></label>
-                                            <select class="w-100" id="country">
+                                            <input type="text" placeholder="" name="country" required>
+                                            <!-- <select class="w-100" id="country">
                                                 <option value="usa">United States</option>
                                                 <option value="uk">United Kingdom</option>
                                                 <option value="ger">Germany</option>
@@ -155,11 +177,15 @@
                                                 <option value="aus">Australia</option>
                                                 <option value="bra">Brazil</option>
                                                 <option value="cana">Canada</option>
-                                            </select>
-                                        <label for="address"><b>Address</b></label>
-                                            <input type="text" placeholder="" name="address" required>
+                                            </select> -->
+                                        <label for="addressLine1"><b>Address Line 1</b></label>
+                                            <input type="text" placeholder="" name="addressLine1" required>
+                                        <label for="addressLine2"><b>Address Line 2</b></label>
+                                            <input type="text" placeholder="" name="addressLine2" required>
                                         <label for="city"><b>City</b></label>
                                             <input type="text" placeholder="" name="city" required>
+                                        <label for="state"><b>State</b></label>
+                                            <input type="text" placeholder="" name="state" required>
                                         <label for="postalCode"><b>Postal Code</b></label>
                                             <input type="text" placeholder="" name="postalCode" required>
                                         <button type="submit">Confirm</button>
@@ -187,16 +213,35 @@
                             </ul>
 
                             <div class="payment-method">
-                                <!-- Cash on delivery -->
-                                <div class="custom-control custom-checkbox mr-sm-2">
-                                    <input type="checkbox" class="custom-control-input" id="cod" checked>
+                                <label for="payment">Select payment type</label>
+                                    <select class="w-100" id="payment">
+                                        <option value="cod">Cash On Delivery</option>
+                                        <option value="creditcard">Credit Card</option>
+                                        <option value="paypal">Paypal</option>
+                                    </select>
+                                <label></label>
+                                    <img class="ml-15" src="./amado-master/img/core-img/paypal.png" alt="">
+                                    <img class="ml-15" src="./amado-master/img/core-img/paypal2.png" alt="" height="21" width="30">
+                            
+                            
+                            
+                            
+                            
+                                <!-- Cash on delivery
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="cod">
                                     <label class="custom-control-label" for="cod">Cash on Delivery</label>
-                                </div>
+                                </div> -->
+                                <!-- Credit Card -->
+                                <!-- <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="creditcard">
+                                    <label class="custom-control-label" for="creditcard">Credit card <img class="ml-15" src="./amado-master/img/core-img/paypal.png" alt="" ></label>
+                                </div> -->
                                 <!-- Paypal -->
-                                <div class="custom-control custom-checkbox mr-sm-2">
-                                    <input type="checkbox" class="custom-control-input" id="paypal">
-                                    <label class="custom-control-label" for="paypal">Paypal <img class="ml-15" src="./amado-master/img/core-img/paypal.png" alt=""></label>
-                                </div>
+                                <!-- <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="paypal" style="cursor: pointer">
+                                    <label class="custom-control-label" for="paypal">Paypal <img class="ml-15" src="./amado-master/img/core-img/paypal2.png" alt="" height="21" width="66"></label>
+                                </div> -->
                             </div>
 
                             <div class="cart-btn mt-100">
@@ -297,8 +342,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="./amado-master/js/plugins.js"></script>
     <!-- Active js -->
     <script src="./amado-master/js/active.js"></script>
-    <!-- DB function -->
-    <script src="./amado-master/js/app.js"></script>
 
 </body>
 
