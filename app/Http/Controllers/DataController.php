@@ -31,6 +31,12 @@ class DataController extends Controller
         return view('manage-product',['jsonProduct'=>$jsonProduct, 'jsonVendor'=>$jsonVendor, 'jsonScale'=>$jsonScale]);
     }
 
+    public function editProduct($code){
+        $jdata = DB::select("select * from products where productCode = '$code'");
+        $jsoneditProduct = json_encode($jdata);
+        return $jsoneditProduct;
+    }
+
     public function mnorder(){
         $data = DB::select('select * from products');
         $distinctvendor = DB::select('select distinct productVendor from products');

@@ -28,6 +28,7 @@ Route::get('/test', function () {
 //### normal page ####
 Route::get('/','DataController@index');
 Route::get('/mnpd','DataController@mnproduct');
+Route::get('/editproduct/{code}','DataController@editProduct');
 Route::get('/mnod','DataController@mnorder');
 Route::get('/mnem','DataController@mnemployee');
 Route::get('/order','DataController@order');
