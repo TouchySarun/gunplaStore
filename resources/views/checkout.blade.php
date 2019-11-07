@@ -115,23 +115,14 @@
                             </div>
                             <form>
                                 <div class="form-control" id="addressArea" style="padding: 15px 20px 10px">
-                                
+                    
                                 </div>
-                                <!-- class="custom-control-input" -->
-                                <!-- class="custom-radio" -->
+                                
                                 <script>
                                     var customer = <?php echo $jsonCustomer?>;
                                     showCustomerAddress(customer);
                                 </script>
-                                <!-- <div class="form-control-white" id="addressArea"></div>
-                                <script>
-                                </script> -->
-                                <!-- Non-Primary Address -->
-            <!-- <div class="form-control-white"> 
-                <h5>${a.contactFirstName} ${a.contactLastName}</h5>
-                <p>${a.addressLine1}<br>${a.addressLine2}<br>${a.city},${a.state},${a.country},${a.postalCode}</p>
-                <a href="#" class="btn amado-btn">Set Primary</a>
-            </div> -->
+                                
                                 <div class="confirm-control">
                                     <!-- Add Address Button -->
                                     <a href="#" onclick="document.getElementById('id01').style.display='block'" class="btn amado-btn w-100">

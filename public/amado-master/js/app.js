@@ -9,12 +9,13 @@ function showCustomerAddress(json) {
     json.forEach( function(a) {
         if(n == json.length - 1) {
             tableaddress += `
+            <!-- class="radio-container" -->
             <table style="width: 100%">
                 <tbody>
                     <tr>
                         <td style="text-align: left; max-width: 10%; border-bottom: none">
-                            <label class="radio-container" for="addressSelect">
-                                <input type="radio" name="select" value="${n}" id="addressSelect">
+                            <label class="radio-container"> 
+                                <input type="radio" name="addressSelect" value="${n}">
                                 <span class="checkmark"></span>
                             </label>
                         </td>
@@ -33,8 +34,8 @@ function showCustomerAddress(json) {
                 <tbody>
                     <tr>
                         <td style="text-align: left; max-width: 10%; border-bottom: none">
-                            <label class="radio-container" for="addressSelect">
-                                <input type="radio" name="select" value="${n}" id="addressSelect">
+                            <label class="radio-container">
+                                <input type="radio" name="addressSelect" value="${n}">
                                 <span class="checkmark"></span>
                             </label>
                         </td>
