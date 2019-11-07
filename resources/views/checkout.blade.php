@@ -105,7 +105,7 @@
         </header>
         <!-- Header Area End -->
 
-        <div class="cart-table-area section-padding-100">
+        <div class="checkout-table-area section-padding-100">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12 col-lg-8">
@@ -114,20 +114,11 @@
                                 <h2>Checkout</h2>
                             </div>
                             <form>
-                                <div class="form-control" id="addressArea"></div>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-
-                                            </td>
-                                            <td>
-                                                <!-- Cash on delivery -->
-                                                <div class="custom-control custom-radio">
-                                                    <input type="radio" class="custom-control-input" id="cod">
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
+                                <div class="form-control" id="addressArea" style="padding: 15px 20px 10px">
+                                
+                                </div>
+                                <!-- class="custom-control-input" -->
+                                <!-- class="custom-radio" -->
                                 <script>
                                     var customer = <?php echo $jsonCustomer?>;
                                     showCustomerAddress(customer);

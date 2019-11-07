@@ -7,23 +7,48 @@ var tableaddress = "";
 function showCustomerAddress(json) {
     var n = 0;
     json.forEach( function(a) {
-        if(n == json.length - 1){
+        if(n == json.length - 1) {
             tableaddress += `
-            <h5>${a.contactFirstName} ${a.contactLastName}</h5>
-            <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>
-            `
-        }else{
+            <table style="width: 100%">
+                <tbody>
+                    <tr>
+                        <td style="text-align: left; max-width: 10%; border-bottom: none">
+                            <label class="radio-container" for="addressSelect">
+                                <input type="radio" name="select" value="${n}" id="addressSelect">
+                                <span class="checkmark"></span>
+                            </label>
+                        </td>
+                        <td style="border-bottom: none">
+                            <h5>${a.contactFirstName} ${a.contactLastName}</h5>
+                            <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>                    
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        `
+        } else {
             n++;
             tableaddress += `
-            <h5>${a.contactFirstName} ${a.contactLastName}</h5>
-            <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>
-            <div class="line"></div>
+            <table style="width: 100%">
+                <tbody>
+                    <tr>
+                        <td style="text-align: left; max-width: 10%; border-bottom: none">
+                            <label class="radio-container" for="addressSelect">
+                                <input type="radio" name="select" value="${n}" id="addressSelect">
+                                <span class="checkmark"></span>
+                            </label>
+                        </td>
+                        <td>
+                            <h5>${a.contactFirstName} ${a.contactLastName}</h5>
+                            <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>                    
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         `
         }
-        
     });
     document.getElementById("addressArea").innerHTML = tableaddress;
-    console.log(json.length);
 }
 
 function showEmployeeList(employee){
