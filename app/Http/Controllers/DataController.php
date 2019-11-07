@@ -99,6 +99,14 @@ class DataController extends Controller
         }
     }
 
+    public function insertProduct(Request $request){
+        // $productName = $request->name;
+        // DB::table('products')->insert(['productName' => $request->name]);
+        DB::insert("insert into products(productName,productCode,productLine,productScale,productVendor,productDescription,quantityInstock,buyPrice,MSRP) 
+        values ('$request->pname','$request->pcode','$request->pline','$request->pscale','$request->pvendor','$request->pnumber','$request->pprice','$request->pmsrp','$request->pdes')");
+        return 0;
+    }
+
     public function deleteProduct($code){
         $data = DB::select("delete from products where productCode = '$code'");
         return 'success';

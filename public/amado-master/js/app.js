@@ -42,30 +42,30 @@ function showProductList(json){
     json.forEach( function(a) {
     tableproduct += `
         <div class="single-products-catagory">
-                <a href="#" onclick="showProductDetail('${a.productCode}')">
-                <img src="./amado-master/img/bg-img/1.jpg" alt="">
-                <!-- Hover Content -->
-                <div class="hover-content">
-                    <div class="line"></div>
-                    <p>In Stock ${a.quantityInStock}</p>
-                    <p>$${a.buyPrice}</p>
-                    <p>${a.productScale}</p>
-                    <p>${a.productVendor}</p>
-                    <h4>${a.productName}</h4>
-                </div>
-                <div class="pdDetail" style= "display:none">
-                    <p>${a.productCode}</p>
-                    <p>${a.productName}</p>
-                    <p>${a.productLine}</p>
-                    <p>${a.productScale}</p>
-                    <p>${a.productVendor}</p>
-                    <p>${a.productDescription}</p>
-                    <p>${a.quantityInStock}</p>
-                    <p>${a.buyPrice}</p>
-                    <p>${a.MSRP}</p>
-                </div>
-            </a>
+        <a href="#" onclick="showProductDetail('${a.productCode}')">
+        <img src="./amado-master/img/bg-img/1.jpg" alt="">
+        <!-- Hover Content -->
+        <div class="hover-content">
+            <div class="line"></div>
+            <p>EmployeeNumber ${a.quantityInStock}</p>
+            <p>$${a.buyPrice}</p>
+            <p>${a.productScale}</p>
+            <p>${a.productVendor}</p>
+            <h4>${a.productName}</h4>
         </div>
+        <div class="pdDetail" style= "display:none">
+            <p>${a.productCode}</p>
+            <p>${a.productName}</p>
+            <p>${a.productLine}</p>
+            <p>${a.productScale}</p>
+            <p>${a.productVendor}</p>
+            <p>${a.productDescription}</p>
+            <p>${a.quantityInStock}</p>
+            <p>${a.buyPrice}</p>
+            <p>${a.MSRP}</p>
+        </div>
+    </a>
+    </div>
         `
     });
     document.getElementById("productArea").innerHTML = tableproduct;
@@ -79,29 +79,29 @@ function updateProductList(json){
     tableproduct += `
         <div class="single-products-catagory">
                 <a href="#" onclick="showProductDetail('${a.productCode}')">
-                <img src="./amado-master/img/bg-img/1.jpg" alt="">
-                <!-- Hover Content -->
-                <div class="hover-content">
-                    <div class="line"></div>
-                    <p>EmployeeNumber ${a.quantityInStock}</p>
-                    <p>$${a.buyPrice}</p>
-                    <p>${a.productScale}</p>
-                    <p>${a.productVendor}</p>
-                    <h4>${a.productName}</h4>
-                </div>
-                <a href="#" onclick="EditProductDetail('${a.productCode}')" class="btn amado-btn">Edit</a>
-                <div class="pdDetail" style= "display:none">
-                    <p>${a.productCode}</p>
-                    <p>${a.productName}</p>
-                    <p>${a.productLine}</p>
-                    <p>${a.productScale}</p>
-                    <p>${a.productVendor}</p>
-                    <p>${a.productDescription}</p>
-                    <p>${a.quantityInStock}</p>
-                    <p>${a.buyPrice}</p>
-                    <p>${a.MSRP}</p>
-                </div>
-            </a>
+                    <img src="./amado-master/img/bg-img/1.jpg" alt="">
+                    <!-- Hover Content -->
+                    <div class="hover-content">
+                        <div class="line"></div>
+                        <p>EmployeeNumber ${a.quantityInStock}</p>
+                        <p>$${a.buyPrice}</p>
+                        <p>${a.productScale}</p>
+                        <p>${a.productVendor}</p>
+                        <h4>${a.productName}</h4>
+                    </div>
+                    <div style="display:none">
+                        <p>${a.productCode}</p>
+                        <p>${a.productName}</p>
+                        <p>${a.productLine}</p>
+                        <p>${a.productScale}</p>
+                        <p>${a.productVendor}</p>
+                        <p>${a.productDescription}</p>
+                        <p>${a.quantityInStock}</p>
+                        <p>${a.buyPrice}</p>
+                        <p>${a.MSRP}</p>
+                    </div>
+                    <a href="#" onclick="EditProductDetail('${a.productCode}')" class="btn amado-btn">Edit</a>
+                </a>
         </div>
         `
     });
@@ -125,7 +125,7 @@ function updateProductOrderList(json){
                     <p>${a.productVendor}</p>
                     <h4>${a.productName}</h4>
                 </div>
-                <div class="pdDetail" style= "display:none">
+                <div style="display:none">
                     <p>${a.productCode}</p>
                     <p>${a.productName}</p>
                     <p>${a.productLine}</p>
@@ -252,24 +252,17 @@ function filterByProductName() {
     }
 }
 
-function filterByProductName() {
-    // document.getElementById("productArea").innerHTML = tableproduct;
-    var input, filter, slot, single_products_catagory, pdName, i, txtValue, a;
-    input = document.getElementById("myInput");
-    filter = input.value.toUpperCase();
+// use when delete product
+function findProductCode(input) {
+    var slot, single_products_catagory, pdName, i, txtValue, a;
     slot = document.getElementById("productArea");
     single_products_catagory = slot.getElementsByClassName("single-products-catagory");
     for (i = 0; i < single_products_catagory.length; i++) {
-        //single_products_catagory[i].style.position="absolute";
         a = single_products_catagory[i].getElementsByTagName("a")[0];
-        pdDetail = a.getElementsByClassName("pdDetail");
-        pdName = a.getElementsByTagName("p")[5];
+        pdName = a.getElementsByTagName("p")[4];
         if (pdName) {
             txtValue = pdName.textContent || pdName.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                single_products_catagory[i].style.display = "";
-                // document.getElementById("productArea").insertAdjacentHTML("afterend", filteredList);
-            } else {
+            if (txtValue.indexOf(input) > -1) {
                 single_products_catagory[i].style.display = "none";
             }
         }
@@ -358,12 +351,12 @@ function showProductDetail(a){
                         <div class="col-lg-7">
                             <div class="single_product_thumb">
                                 <div id="product_details_slider" class="carousel slide" data-ride="carousel">
-                                    <ol class="carousel-indicators">
-                                        <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(./amado-master/img/product-img/pro-big-1.jpg);"></li>
-                                        <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(./amado-master/img/product-img/pro-big-2.jpg);"></li>
-                                        <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(./amado-master/img/product-img/pro-big-3.jpg);"></li>
-                                        <li data-target="#product_details_slider" data-slide-to="3" style="background-image: url(./amado-master/img/product-img/pro-big-4.jpg);"></li>
-                                    </ol>
+                                <ol class="carousel-indicators">
+                                <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(./amado-master/img/product-img/pro-big-1.jpg);"></li>
+                                <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(./amado-master/img/product-img/pro-big-2.jpg);"></li>
+                                <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(./amado-master/img/product-img/pro-big-3.jpg);"></li>
+                                <li data-target="#product_details_slider" data-slide-to="3" style="background-image: url(./amado-master/img/product-img/pro-big-4.jpg);"></li>
+                            </ol>
                                     <div class="carousel-inner">
                                         <div class="carousel-item active">
                                             <a class="gallery_img" href="./amado-master/img/product-img/pro-big-1.jpg">
@@ -602,7 +595,39 @@ function EditEmployeeDetail(number, lname, fname, email, office, report, job, ex
 }
 //------------------------End Pop-up--------------------------//
 
+// ----------------------Insert-------------------------------//
+// Product
+function insertitem(){
+    var product = { "pname": document.getElementById("name").value.toString(),
+                    "pcode": document.getElementById("code").value.toString(),
+                    "pline": document.getElementById("line").value.toString(),
+                    "pscale": document.getElementById("scale").value.toString(),
+                    "pvendor": document.getElementById("vendor").value.toString(),
+                    "pnumber": document.getElementById("number").value.toString(),
+                    "pprice": document.getElementById("price").value.toString(),
+                    "pmsrp": document.getElementById("msrp").value.toString(),
+                    "pdes": document.getElementById("d").value.toString()};
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/insertProduct',
+        data: product,
+        dataType: "json",
+        success: function (data) { 
+            console.log(55555555);
+            document.getElementById('id04').style.display='none';
+            // updateProductList(data);
+        }
+    });
+}
+// ---------------------End Insert---------------------------//
+
 // -----------------------Delete-----------------------------//
+//Product
 function deleteitem(a){
     $.ajaxSetup({
         headers: {
@@ -618,10 +643,11 @@ function deleteitem(a){
                 return x.productCode == a;
             });    
             if (index !== undefined) {
-                // jsonproduct.splice(index, 1);
-                delete jsonproduct[index];
-                updateProductList(jsonproduct);
+                findProductCode(a);
+                // delete jsonproduct[index];
+                // updateProductList(jsonproduct);
             }
         }
     });
 }
+// ----------------------End Delete-----------------------------//

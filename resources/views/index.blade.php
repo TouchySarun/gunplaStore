@@ -34,12 +34,10 @@
                             <input type="text" id="myInput" onkeyup="filterByProductName()" placeholder="Search for names..">
                             <button type="submit"><img src="./amado-master/img/core-img/search.png" alt=""></button>
                         </form>
-                    </div>
-                    </div>
+                    </div>  
                 </div>
             </div>
         </div>
-
     </div>
     <!-- Search Wrapper Area End -->
 
@@ -53,15 +51,6 @@
                 <a><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
 
             </div>
-
-            <!-- <li class="active"><a href="index.html">Home</a></li>
-            <li><a href="shop">Shop</a></li>
-            <li><a href="product-details.html">Product</a></li>
-            <li><a href="cart.html">Cart</a></li>
-            <li><a href="checkout.html">Checkout</a></li> -->
-
-            <!-- <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> </a> -->
-
             <!-- Navbar Toggler -->
             <div class="amado-navbar-toggler">
                 <span></span><span></span><span></span>
@@ -71,11 +60,6 @@
 
         <!-- Header Area Start -->
         <header class="header-area clearfix">
-
-            <!-- Close Icon -->
-            <!-- <div class="nav-close">
-                <i class="fa fa-close" aria-hidden="true"></i>
-            </div> -->
             <!-- Logo -->
             <div class="logo">
                 <a href="index.html"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
@@ -154,8 +138,7 @@
         </header>
         <!-- Header Area End -->
         <!-- Product Catagories Area Start -->
-        <div class="products-catagories-area clearfix" id="productArea">
-        </div>
+        <div class="products-catagories-area clearfix" id="productArea"></div>
         <script>
             var json = <?php echo $jsonProduct?>;
             var Vendor = <?php echo $jsonVendor?>;
@@ -181,7 +164,7 @@
                             {{ csrf_field() }}
                                 <label for="uname"><b>Username</b></label><input type="text" name="uname" placeholder="Enter Username" required>
                                 <label for="psw"><b>Password</b></label><input type="password" name="psw" placeholder="Enter Password" required>
-                                <button type="submit">Login</button>
+                                <button>Login</button>
                         </div>
 
                         <div class="container" style="background-color:#f1f1f1">
