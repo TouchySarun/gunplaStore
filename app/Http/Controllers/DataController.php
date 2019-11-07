@@ -100,10 +100,14 @@ class DataController extends Controller
     }
 
     public function insertProduct(Request $request){
-        // $productName = $request->name;
-        // DB::table('products')->insert(['productName' => $request->name]);
         DB::insert("insert into products(productName,productCode,productLine,productScale,productVendor,productDescription,quantityInstock,buyPrice,MSRP) 
         values ('$request->pname','$request->pcode','$request->pline','$request->pscale','$request->pvendor','$request->pnumber','$request->pprice','$request->pmsrp','$request->pdes')");
+        return 0;
+    }
+
+    public function updateProduct(Request $request,$code){
+        DB::update("update products set productName = ?,productScale = ?,productVendor = ?,productDescription = ?,quantityInstock = ?,buyPrice = ? where productCode = ?",
+        [$request->pname,$request->pscale,$request->pvendor,$request->pdes,$request->pnumber,$request->pprice,$code]);
         return 0;
     }
 

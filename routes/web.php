@@ -34,6 +34,7 @@ Route::get('/mnem','DataController@mnemployee');
 Route::get('/order','DataController@order');
 Route::get('/checkout','DataController@checkout');
 Route::post('/insertProduct','DataController@insertProduct');
+Route::post('/updateProduct/{code}','DataController@updateProduct');
 
 //### function ###
 Route::post('/login', 'DataController@login');

@@ -516,18 +516,18 @@ function EditProductDetail(a){
                                     <div class="product-meta-data">
                                         <div class="line"></div>
                                         <form>
-                                            <p>Price: <input type="text" name="number" value="${b.buyPrice}"></p>
-                                            <p>Name: <input type="text" name="text" value="${b.productName}"></p>
-                                            <p>Scale: <input type="text" name="text" value="${b.productScale}"></p>
-                                            <p>Vendor: <input type="text" name="text" value="${b.productVendor}"></p>
-                                            <p>Instock: <input type="text" name="text" value="${b.quantityInStock}"></p>
+                                            <p>Price: <input type="text" id="price" name="number" value="${b.buyPrice}"></p>
+                                            <p>Name: <input type="text" id="name" name="text" value="${b.productName}"></p>
+                                            <p>Scale: <input type="text" id="scale" name="text" value="${b.productScale}"></p>
+                                            <p>Vendor: <input type="text" id="vendor" name="text" value="${b.productVendor}"></p>
+                                            <p>Instock: <input type="text" id="stock" name="text" value="${b.quantityInStock}"></p>
                                         </form>
                                     </div>
                                     <div class="short_overview my-5">
-                                        <p>Description: <textarea name="message" style="width:400px; height:250px;">${b.productDescription}</textarea></p>
+                                        <p>Description: <textarea id="des" name="message" style="width:400px; height:250px;">${b.productDescription}</textarea></p>
                                     </div>
                                     <a href="#" class="btn amado-btn" onclick="deleteitem('${b.productCode}')">Delete</a>
-                                    <a href="#" class="btn amado-btn">Save</a>
+                                    <a href="#" class="btn amado-btn" onclick="updateitem('${b.productCode}')">Save</a>
                                 </div>
                             </div>
                         </div>
@@ -597,6 +597,35 @@ function EditEmployeeDetail(number, lname, fname, email, office, report, job, ex
 
 // ----------------------Insert-------------------------------//
 // Product
+function updateitem(a){
+    var product = { "pname": document.getElementById("name").value.toString(),
+                    // "pcode": document.getElementById("code").value.toString(),
+                    // "pline": document.getElementById("line").value.toString(),
+                    "pscale": document.getElementById("scale").value.toString(),
+                    "pvendor": document.getElementById("vendor").value.toString(),
+                    "pnumber": document.getElementById("stock").value.toString(),
+                    "pprice": document.getElementById("price").value.toString(),
+                    // "pmsrp": document.getElementById("msrp").value.toString(),
+                    "pdes": document.getElementById("d").value.toString()};
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/updateProduct/'+a,
+        data: product,
+        dataType: "json",
+        success: function (data) {
+            document.getElementById('id03').style.display='none';
+            // updateProductList();
+        }
+    });
+}
+// ---------------------End Insert---------------------------//
+
+// ---------------------Update-------------------------------//
 function insertitem(){
     var product = { "pname": document.getElementById("name").value.toString(),
                     "pcode": document.getElementById("code").value.toString(),
@@ -617,14 +646,14 @@ function insertitem(){
         url: '/insertProduct',
         data: product,
         dataType: "json",
-        success: function (data) { 
-            console.log(55555555);
+        success: function (data) {
+            console.log(data);
             document.getElementById('id04').style.display='none';
-            // updateProductList(data);
+            // updateProductList();
         }
     });
 }
-// ---------------------End Insert---------------------------//
+// -----------------------End Update-------------------------//
 
 // -----------------------Delete-----------------------------//
 //Product
