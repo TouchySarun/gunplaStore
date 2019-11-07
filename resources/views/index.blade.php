@@ -198,7 +198,7 @@
     </div>
     <!-- ##### Main Content Wrapper End ##### -->
 
-    
+    <br>
     <footer class="footer_area">
         <div >
         <!-- Logo -->

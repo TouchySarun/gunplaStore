@@ -123,14 +123,13 @@
                 </ul>
             </nav>
 
-            <!-- Button Group -->
-            <div class="amado-btn-group mt-30 mb-100">
-                <a href="#" class="btn amado-btn" >Discount</a>
+          <!-- Button Group -->
+          <div class="amado-btn-group mt-30 mb-100">
+                <a href="/welcome" class="btn amado-btn">Back</a>
                 <br>
-                <a href="#" onclick="document.getElementById('id01').style.display='block'"
-                    class="btn amado-btn">Login
-                </a>
+                <a href="/" class="btn amado-btn">Logout</a>
             </div>
+            
             <!-- Pop up -->
                 <!--Login pop up-->
                 <div id="id01" class="modal">
@@ -246,13 +245,14 @@
     </div>
     <!-- ##### Main Content Wrapper End ##### -->
 
-    
+    <br>
     <footer class="footer_area">
         <div >
         <!-- Logo -->
         <a href="/welcome" style="padding:0px 0px 0px 50px"><img src="./amado-master/img/core-img/logoDarkBG.png" alt=""></a>  
         </div>
     </footer>
+
     <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
     <script src="./amado-master/js/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->

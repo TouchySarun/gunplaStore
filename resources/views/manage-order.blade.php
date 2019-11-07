@@ -140,7 +140,7 @@
             <div class="amado-btn-group mt-30 mb-100">
                 <a href="#" class="btn amado-btn" >Discount</a>
                 <br>
-                <a href="welcome" class="btn amado-btn">Back</a>
+                <a href="/welcome" class="btn amado-btn">Back</a>
                 <br>
                 <a href="/" class="btn amado-btn">Logout</a>
             </div>
@@ -192,7 +192,7 @@
         <!-- Product Catagories Area End -->
 
     </div>
-    <br><br>
+    <br>
     <!-- ##### Main Content Wrapper End ##### -->
     
     <footer class="footer_area">

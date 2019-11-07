@@ -125,12 +125,11 @@
 
             <!-- Button Group -->
             <div class="amado-btn-group mt-30 mb-100">
-                <a href="#" class="btn amado-btn" >Discount</a>
+                <a href="/welcome" class="btn amado-btn">Back</a>
                 <br>
-                <a href="#" onclick="document.getElementById('id01').style.display='block'"
-                    class="btn amado-btn">Login
-                </a>
+                <a href="/" class="btn amado-btn">Logout</a>
             </div>
+            
             <!-- Pop up -->
                 <!--Login pop up-->
                 <div id="id01" class="modal">
@@ -233,7 +232,7 @@
 
     </div>
     <!-- ##### Main Content Wrapper End ##### -->
-
+    <br>
     <footer class="footer_area">
         <div >
         <!-- Logo -->

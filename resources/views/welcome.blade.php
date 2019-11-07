@@ -128,6 +128,7 @@
                     Logout
                 </a>
             </div>
+            
         </header>
         <!-- Header Area End -->
 
@@ -327,8 +328,9 @@
                 <span></span><span></span><span></span>
             </div>
         </div>
+
+    <br>
     <!-- ##### Footer Area Start ##### -->
-    
     <footer class="footer_area">
         <div >
         <!-- Logo -->

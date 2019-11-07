@@ -573,6 +573,7 @@ function EditEmployeeDetail(number, lname, fname, email, office, report, job, ex
     `;
     document.getElementById("id03").innerHTML = box;
     document.getElementById("id03").style.display = 'block';
+
 }
 //------------------------End Pop-up--------------------------//
 

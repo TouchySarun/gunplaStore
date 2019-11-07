@@ -500,7 +500,7 @@
     <!-- ##### Newsletter Area End ##### -->
 
     <!-- ##### Footer Area Start ##### -->
-   
+    <br>
     <footer class="footer_area">
         <div >
         <!-- Logo -->

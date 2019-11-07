@@ -81,10 +81,11 @@
                     <li class="active"><a href="checkout.html">Checkout</a></li>
                 </ul>
             </nav>
-            <!-- Button Group -->
-            <div class="amado-btn-group mt-30 mb-100">
-                <a href="#" class="btn amado-btn mb-15">%Discount%</a>
-                <a href="#" class="btn amado-btn active">New this week</a>
+           <!-- Button Group -->
+           <div class="amado-btn-group mt-30 mb-100">
+                <a href="/order" class="btn amado-btn">Back</a>
+                <br>
+                <a href="/" class="btn amado-btn">Logout</a>
             </div>
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-100">
@@ -227,7 +228,7 @@
     <!-- ##### Newsletter Area End ##### -->
 
     <!-- ##### Footer Area Start ##### -->
-    
+    <br>
     <footer class="footer_area">
         <div >
         <!-- Logo -->
