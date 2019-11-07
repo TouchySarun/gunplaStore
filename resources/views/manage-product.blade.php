@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="UTF-8">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -83,6 +84,28 @@
 
             <!-- Pop up -->
                 <!--Login pop up-->
+                <div id="id06" class="modal">
+                    <span onclick="document.getElementById('id06').style.display='none'"
+                        class="close" title="Close Modal">&times;
+                    </span>
+
+                    <!-- Modal Content -->
+                    <form class="modal-content animate" action="/login" method = "post">
+                        <div class="container">
+                            {{ csrf_field() }}
+                                <label for="uname"><b>Username</b></label><input type="text" name="uname" placeholder="Enter Username" required>
+                                <label for="psw"><b>Password</b></label><input type="password" name="psw" placeholder="Enter Password" required>
+                                <button>Login</button>
+                        </div>
+
+                        <div class="container" style="background-color:#f1f1f1">
+
+                        <button type="button" onclick="document.getElementById('id06').style.display='none'"
+                            class="cancelbtn">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+                
                 <div id="id01" class="modal">
                     <span onclick="document.getElementById('id01').style.display='none'"
                         class="close" title="Close Modal">&times;
@@ -151,14 +174,21 @@
                                 </div>
                                 <div class="product-meta-data">
                                     <form>
-                                        <p>OrderNumber: <input type="text" name="number"></p>
-                                        <p>ProductCode: <input type="text" name="text"></p>
-                                        <p>Name: <input type="text" name="text"></p>
-                                        <p>Number: <input type="text" name="text"></p>
+                                    {{ csrf_field() }}
+                                        <p>OrderNumber: <input type="text" id="onumber" name="onumber" placeholder="10100"></p>
+                                        <p>ProductCode: <input type="text" id="code" name="code" placeholder="S10_1678"></p>
+                                        <p>Name: <input type="text" id="name" name="name" placeholder="1972 Alfa Romeo GTA"></p>
+                                        <p>Line: <input type="text" id="line" name="line" placeholder="Motocycles"></p>
+                                        <p>Scale: <input type="text" id="scale" name="scale" placeholder="1:10"></p>
+                                        <p>Vendor: <input type="text" id="vendor" name="vendor" placeholder="Highway 66 Mini Classics"></p>
+                                        <p>Number: <input type="text" id="number" name="number" placeholder="7933"></p>
+                                        <p>buyPrice: <input type="text" id="price" name="price" placeholder="48.81"></p>
+                                        <p>MSRP: <input type="text" id="msrp" name="msrp" placeholder="95.70"></p>
+                                        <p>Description: <br><textarea id="d" name="description" style="width:600px; height:250px;"></textarea></p>
+                                        <!-- <button>OK</button> -->
+                                        <a href="#" onclick="insertitem()" class="btn amado-btn" type="submit">OK</a>
+                                        <br><br>
                                     </form>
-                                    <br>
-                                    <a href="#" class="btn amado-btn">OK</a>
-                                    <br><br>
                                 </div>
                             </div>
                         </div>
@@ -171,9 +201,11 @@
         
         <!-- Product Catagories Area Start -->
         <div class="products-catagories-area clearfix" id="productArea"></div>
-        <script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script type="text/javascript">
             var json = <?php echo $jsonProduct?>;
             updateProductList(json);
+            
         </script>
         <!-- Product Catagories Area End -->
     </div>

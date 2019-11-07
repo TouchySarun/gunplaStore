@@ -31,6 +31,12 @@ class DataController extends Controller
         return view('manage-product',['jsonProduct'=>$jsonProduct, 'jsonVendor'=>$jsonVendor, 'jsonScale'=>$jsonScale]);
     }
 
+    public function editProduct($code){
+        $jdata = DB::select("select * from products where productCode = '$code'");
+        $jsoneditProduct = json_encode($jdata);
+        return $jsoneditProduct;
+    }
+
     public function mnorder(){
         $data = DB::select('select * from products');
         $distinctvendor = DB::select('select distinct productVendor from products');
@@ -85,7 +91,7 @@ class DataController extends Controller
         if($employeekey != null)
         {
             // return redirect ('/welcome');
-            return redirect ('/mnem');
+            return redirect ('/welcome');
         }
         else
         {
@@ -93,8 +99,21 @@ class DataController extends Controller
         }
     }
 
+    public function insertProduct(Request $request){
+        DB::insert("insert into products(productName,productCode,productLine,productScale,productVendor,productDescription,quantityInstock,buyPrice,MSRP)
+        values ('$request->pname','$request->pcode','$request->pline','$request->pscale','$request->pvendor','$request->pnumber','$request->pprice','$request->pmsrp','$request->pdes')");
+        return 0;
+    }
+
+    public function updateProduct(Request $request,$code){
+        DB::update("update products set productName = ?,productScale = ?,productVendor = ?,productDescription = ?,quantityInstock = ?,buyPrice = ? where productCode = ?",
+        [$request->pname,$request->pscale,$request->pvendor,$request->pdes,$request->pnumber,$request->pprice,$code]);
+        return 0;
+    }
+
     public function deleteProduct($code){
         $data = DB::select("delete from products where productCode = '$code'");
+        return 'success';
     }
 }
 

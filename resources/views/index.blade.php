@@ -35,12 +35,10 @@
                             <input type="text" id="myInput" onkeyup="filterByProductName()" placeholder="Search for names..">
                             <button type="submit"><img src="./amado-master/img/core-img/search.png" alt=""></button>
                         </form>
-                    </div>
-                    </div>
+                    </div>  
                 </div>
             </div>
         </div>
-
     </div>
     <!-- Search Wrapper Area End -->
 
@@ -63,7 +61,10 @@
 
         <!-- Header Area Start -->
         <header class="header-area clearfix">
+<<<<<<< HEAD
 
+=======
+>>>>>>> f7bffa7a4259868303adc8953c049c842f56a000
             <!-- Logo -->
             <div class="logo">
                 <a href="index.html"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
@@ -142,8 +143,7 @@
         </header>
         <!-- Header Area End -->
         <!-- Product Catagories Area Start -->
-        <div class="products-catagories-area clearfix" id="productArea">
-        </div>
+        <div class="products-catagories-area clearfix" id="productArea"></div>
         <script>
             var json = <?php echo $jsonProduct?>;
             var Vendor = <?php echo $jsonVendor?>;
@@ -169,7 +169,7 @@
                             {{ csrf_field() }}
                                 <label for="uname"><b>Username</b></label><input type="text" name="uname" placeholder="Enter Username" required>
                                 <label for="psw"><b>Password</b></label><input type="password" name="psw" placeholder="Enter Password" required>
-                                <button type="submit">Login</button>
+                                <button>Login</button>
                         </div>
 
                         <div class="container" style="background-color:#f1f1f1">
