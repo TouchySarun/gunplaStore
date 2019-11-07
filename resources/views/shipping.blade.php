@@ -54,7 +54,7 @@
         <div class="mobile-nav">
             <!-- Navbar Brand -->
             <div class="amado-navbar-brand">
-                <a><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
+                <a href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
             </div>
             <!-- Navbar Toggler -->
             <div class="amado-navbar-toggler">
@@ -71,7 +71,7 @@
             </div> -->
             <!-- Logo -->
             <div class="logo">
-                <a href="index.html"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
+                <a href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
             </div>
 
             <!-- Cart Menu -->
@@ -246,9 +246,13 @@
     </div>
     <!-- ##### Main Content Wrapper End ##### -->
 
-
-   
-
+    
+    <footer class="footer_area">
+        <div >
+        <!-- Logo -->
+        <a href="/welcome" style="padding:0px 0px 0px 50px"><img src="./amado-master/img/core-img/logoDarkBG.png" alt=""></a>  
+        </div>
+    </footer>
     <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
     <script src="./amado-master/js/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->

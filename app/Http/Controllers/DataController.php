@@ -102,5 +102,11 @@ class DataController extends Controller
         $jsonOrder = json_encode($Order);
         return view('shipping',['jsonOrder'=>$jsonOrder]);
     }
+
+    public function promotion(){
+        $Order = DB::select('select * from orders');
+        $jsonOrder = json_encode($Order);
+        return view('promotion',['jsonOrder'=>$jsonOrder]);
+    }
 }
 

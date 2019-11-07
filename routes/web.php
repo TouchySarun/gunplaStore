@@ -33,6 +33,7 @@ Route::get('/mnem','DataController@mnemployee');
 Route::get('/order','DataController@order');
 Route::get('/checkout','DataController@checkout');
 Route::get('/shipping','DataController@shipping');
+Route::get('/promotion','DataController@promotion');
 
 //### function ###
 Route::post('/login', 'DataController@login');
