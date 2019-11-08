@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="UTF-8">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -94,7 +95,7 @@
 
             <!-- Button Group -->
             <div class="amado-btn-group mt-30 mb-100">
-                <a href="#" class="btn amado-btn" >AddEmployee +</a>
+                <a href="#" onclick="document.getElementById('id04').style.display='block'"  class="btn amado-btn" >AddEmployee +</a>
                 <br>
                 <a href="welcome" class="btn amado-btn">Back</a>
                 <br>
@@ -133,14 +134,47 @@
                 <div id="id03" class="modal" style="display:none">
                     <!-- showProductDetail() -->
                 </div>
+                <!-- popup add new employee -->
+                <div id="id04" class="modal">
+                    <span onclick="document.getElementById('id04').style.display='none'"
+                        class="close" title="Close Modal">&times;
+                    </span>
+                    <!-- product-order -->
+                    <form class="modal-content animate" action="/action_page.php">
+                    <div class="cart-table-area section-padding-60">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12 col-lg-8">
+                                <div class="cart-title mt-50">
+                                    <h2>New Product-Order</h2>
+                                </div>
+                                <div class="product-meta-data">
+                                    <form>
+                                        <p>EmployeeNumber: <input type="text" id="enumber" name="enumber" placeholder="1002"></p>
+                                        <p>FirstName: <input type="text" id="efname" name="efname" placeholder="Diane"></p>
+                                        <p>LastName: <input type="text" id="elname" name="elname" placeholder="Murphy"></p>
+                                        <p>Extension: <input type="text" id="eex" name="eex" placeholder="x5800"></p>
+                                        <p>Email: <input type="text" id="eemail" name="eemail" placeholder=".....@classicmodelcars.com"></p>
+                                        <p>OfficeCode: <input type="text" id="ecode" name="ecode" placeholder="1"></p>
+                                        <p>ReportsTo: <input type="text" id="ere" name="ere" placeholder="1002"></p>
+                                        <p>JobTitle: <input type="text" id="ejob" name="ejob" placeholder="VP Sales"></p>
+                                        <a href="#" onclick="insertem()" class="btn amado-btn" type="submit">OK</a>
+                                        <br><br>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    </form>
+                </div>
         </header>
         <!-- Header Area End -->
         
         <!-- Product Catagories Area Start -->
-        <div class="products-catagories-area clearfix" id="employeeArea">
-        
-        </div>
-        <script>
+        <div class="products-catagories-area clearfix" id="employeeArea"></div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script type="text/javascript">
             var Employee = <?php echo $jsonEmployee?>;
             showEmployeeList(Employee);
         </script>

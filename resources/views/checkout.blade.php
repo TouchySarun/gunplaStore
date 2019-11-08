@@ -102,6 +102,40 @@
                 <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                 <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
             </div>
+
+            <!-- PopUp Modal -->
+            <div id="id01" class="modal">
+                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;
+                </span>
+                <!-- Form inside popup -->
+                <form class="modal-content animate" action="/action_page.php">
+                    <div class="container">
+                        <h4>Adding Address</h4><br>
+                        <label for="contactFirstName"><b>First Name</b></label>
+                            <input type="text" placeholder="" name="contactFirstName" required>
+                        <label for="contactLastName"><b>Last Name</b></label>
+                            <input type="text" placeholder="" name="contactLastName" required>
+                        <label for="customerName"><b>Company Name</b></label>
+                            <input type="text" placeholder="" name="customerName" required>
+                        <label for="country"><b>Country</b></label>
+                            <input type="text" placeholder="" name="country" required>
+                        <label for="addressLine1"><b>Address Line 1</b></label>
+                            <input type="text" placeholder="" name="addressLine1" required>
+                        <label for="addressLine2"><b>Address Line 2</b></label>
+                            <input type="text" placeholder="" name="addressLine2" required>
+                        <label for="city"><b>City</b></label>
+                            <input type="text" placeholder="" name="city" required>
+                        <label for="state"><b>State</b></label>
+                            <input type="text" placeholder="" name="state" required>
+                        <label for="postalCode"><b>Postal Code</b></label>
+                            <input type="text" placeholder="" name="postalCode" required>
+                        <button type="submit">Confirm</button>
+                    </div>
+                    <div class="container" style="background-color:#f1f1f1">
+                        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                    </div>
+                </form>
+            </div>
         </header>
         <!-- Header Area End -->
 
@@ -115,14 +149,14 @@
                             </div>
                             <form>
                                 <div class="form-control" id="addressArea" style="padding: 15px 20px 10px">
-                    
+
                                 </div>
-                                
+
                                 <script>
-                                    var customer = <?php echo $jsonCustomer?>;
+                                    var customer = <?php echo $jsonCustomer ?>;
                                     showCustomerAddress(customer);
                                 </script>
-                                
+
                                 <div class="confirm-control">
                                     <!-- Add Address Button -->
                                     <a href="#" onclick="document.getElementById('id01').style.display='block'" class="btn amado-btn w-100">
@@ -130,60 +164,13 @@
                                     </a>
                                 </div>
                             </form>
-                        
-                            
 
-                            <!-- PopUp Modal -->
-                            <div id="id01" class="modal">
-                                <span onclick="document.getElementById('id01').style.display='none'"
-                                    class="close" title="Close Modal">&times;
-                                </span>
-                                <!-- Form inside popup -->
-                                <form class="modal-content animate" action="/action_page.php">
-                                    <div class="container">
-                                        <h4>Adding Address</h4><br>
-                                        <label for="contactFirstName"><b>First Name</b></label>
-                                            <input type="text" placeholder="" name="contactFirstName" required>
-                                        <label for="contactLastName"><b>Last Name</b></label>
-                                            <input type="text" placeholder="" name="contactLastName" required>
-                                        <label for="customerName"><b>Company Name</b></label>
-                                            <input type="text" placeholder="" name="customerName" required>                            
-                                        <label for="country"><b>Country</b></label>
-                                            <input type="text" placeholder="" name="country" required>
-                                            <!-- <select class="w-100" id="country">
-                                                <option value="usa">United States</option>
-                                                <option value="uk">United Kingdom</option>
-                                                <option value="ger">Germany</option>
-                                                <option value="fra">France</option>
-                                                <option value="ind">India</option>
-                                                <option value="aus">Australia</option>
-                                                <option value="bra">Brazil</option>
-                                                <option value="cana">Canada</option>
-                                            </select> -->
-                                        <label for="addressLine1"><b>Address Line 1</b></label>
-                                            <input type="text" placeholder="" name="addressLine1" required>
-                                        <label for="addressLine2"><b>Address Line 2</b></label>
-                                            <input type="text" placeholder="" name="addressLine2" required>
-                                        <label for="city"><b>City</b></label>
-                                            <input type="text" placeholder="" name="city" required>
-                                        <label for="state"><b>State</b></label>
-                                            <input type="text" placeholder="" name="state" required>
-                                        <label for="postalCode"><b>Postal Code</b></label>
-                                            <input type="text" placeholder="" name="postalCode" required>
-                                        <button type="submit">Confirm</button>
-                                    </div>
-                                    <div class="container" style="background-color:#f1f1f1">
-                                        <button type="button" onclick="document.getElementById('id01').style.display='none'"
-                                            class="cancelbtn">Cancel</button>
-                                    </div>
-                                </form>
-                            </div>    
-                                <!-- Remark Area -->
-                                <!-- <div class="col-12 mb-3">
+                            <!-- Remark Area -->
+                            <!-- <div class="col-12 mb-3">
                                     <b>Remark</b>
                                     <textarea name="comment" class="form-control w-100" id="comment" cols="30" rows="10" placeholder="Leave a comment about your order"></textarea>
                                 </div> -->
-                        </div>        
+                        </div>
                     </div>
                     <div class="col-12 col-lg-4">
                         <div class="cart-summary">
@@ -196,19 +183,19 @@
 
                             <div class="payment-method">
                                 <label for="payment">Select payment type</label>
-                                    <select class="w-100" id="payment">
-                                        <option value="cod">Cash On Delivery</option>
-                                        <option value="creditcard">Credit Card</option>
-                                        <option value="paypal">Paypal</option>
-                                    </select><br>
+                                <select class="w-100" id="payment">
+                                    <option value="cod">Cash On Delivery</option>
+                                    <option value="creditcard">Credit Card</option>
+                                    <option value="paypal">Paypal</option>
+                                </select><br>
                                 <label></label>
-                                    <img class="ml-15" src="./amado-master/img/core-img/paypal.png" alt="">
-                                    <img class="ml-15" src="./amado-master/img/core-img/paypal2.png" alt="" height="21" width="30">
-                            
-                            
-                            
-                            
-                            
+                                <img class="ml-15" src="./amado-master/img/core-img/paypal.png" alt="">
+                                <img class="ml-15" src="./amado-master/img/core-img/paypal2.png" alt="" height="21" width="30">
+
+
+
+
+
                                 <!-- Cash on delivery
                                 <div class="custom-control custom-radio">
                                     <input type="radio" class="custom-control-input" id="cod">
@@ -274,9 +261,13 @@
                             <a href="index.html"><img src="./amado-master/img/core-img/logoDarkBG.png" alt=""></a>
                         </div>
                         <!-- Copywrite Text -->
-                        <p class="copywrite"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> & Re-distributed by <a href="https://themewagon.com/" target="_blank">Themewagon</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                        <p class="copywrite">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;<script>
+                                document.write(new Date().getFullYear());
+                            </script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> & Re-distributed by <a href="https://themewagon.com/" target="_blank">Themewagon</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
                     </div>
                 </div>
                 <!-- Single Widget Area -->

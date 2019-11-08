@@ -61,7 +61,7 @@ class DataController extends Controller
     }
 
     public function checkout(){
-        $data = DB::select('select * from customers');
+        $data = DB::select("select * from customers");
         $jsonCustomer = json_encode($data);
 
         return view('checkout', ['jsonCustomer' => $jsonCustomer]);
@@ -79,8 +79,7 @@ class DataController extends Controller
         $employeekey = DB::select("select * from employees where employeeNumber like '$request->uname' and employeeNumber like '$request->psw'");
         if($employeekey != null)
         {
-            // return redirect ('/welcome');
-            return redirect ('/mnem');
+            return redirect ('/welcome');
         }
         else
         {
