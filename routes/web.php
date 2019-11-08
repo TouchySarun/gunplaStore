@@ -34,8 +34,11 @@ Route::get('/mnem','DataController@mnemployee');
 Route::get('/order','DataController@order');
 Route::get('/checkout','DataController@checkout');
 Route::post('/insertProduct','DataController@insertProduct');
+Route::post('/insertEm','DataController@insertEm');
 Route::post('/updateProduct/{code}','DataController@updateProduct');
+Route::post('/updateEm/{code}','DataController@updateEm');
 
 //### function ###
 Route::post('/login', 'DataController@login');
 Route::delete('/deleteProduct/{code}','DataController@deleteProduct');
+Route::delete('/deleteEm/{code}','DataController@deleteEm');

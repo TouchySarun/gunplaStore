@@ -3,42 +3,10 @@
 var tableproduct = "<br><br><br>";//All product List in JSON
 var tableemployee = "<br><br><br>";
 var jasonproduct = "";
+var jasonemployee = "";
 //--------------Show script------------------//
-function showEmployeeList(employee){
-    employee.forEach( function(a) {
-    tableemployee += `
-        <div class="single-products-catagory">
-                <a href="#" onclick="showEmployeeDetail('${a.employeeNumber}', '${a.lastName}', '${a.firstName}', '${a.email}', '${a.officeCode}', '${a.reportsTo}',
-                '${a.jobTitle}', '${a.extension}')">
-                <img src="./amado-master/img/core-img/employeeM.png" alt="">
-                <!-- Hover Content -->
-                <div class="hover-content">
-                    <div class="line"></div>
-                    <p>Number ${a.employeeNumber}</p>
-                    <h5>${a.jobTitle}</h5>
-                    <h4>${a.firstName} ${a.lastName}</h4>
-                </div>
-                <div class="pdDetail" style= "display:none">
-                    <p>${a.employeeNumber}</p>
-                    <p>${a.lastName}</p>
-                    <p>${a.firstName}</p>
-                    <p>${a.extension}</p>
-                    <p>${a.email}</p>
-                    <p>${a.officeCode}</p>
-                    <p>${a.reportsTo}</p>
-                    <p>${a.jobTitle}</p>
-                </div>
-            </a>
-        </div>
-        `
-    });
-    document.getElementById("employeeArea").innerHTML = tableemployee;
-}
-
 function showProductList(json){
-    //var i = 0;
-    //var json = $jsonProduct;
-    //<a href="#" onclick="showProductDetail(${a.productName}, ${a.productScale}, ${a.productVendor}, ${a.productDescription}, ${a.quantityInStock}, ${a.buyPrice})">
+    tableproduct="";
     json.forEach( function(a) {
     tableproduct += `
         <div class="single-products-catagory">
@@ -74,6 +42,7 @@ function showProductList(json){
 
 //----------edit product ----------//
 function updateProductList(json){
+    tableproduct="";
     jsonproduct = json;
     json.forEach( function(a) {
     tableproduct += `
@@ -111,6 +80,7 @@ function updateProductList(json){
 
 //add order product
 function updateProductOrderList(json){
+    tableproduct="";
     json.forEach( function(a) {
     tableproduct += `
         <div class="single-products-catagory">
@@ -149,6 +119,8 @@ function updateProductOrderList(json){
 
 //show employee
 function showEmployeeList(employee){
+    tableemployee="";
+    jsonemployee = employee;
     employee.forEach( function(a) {
     tableemployee += `
         <div class="single-products-catagory">
@@ -162,8 +134,6 @@ function showEmployeeList(employee){
                     <h5>${a.jobTitle}</h5>
                     <h4>${a.firstName} ${a.lastName}</h4>
                 </div>
-                <a href="#" onclick="EditEmployeeDetail('${a.employeeNumber}', '${a.lastName}', '${a.firstName}', '${a.email}', '${a.officeCode}', '${a.reportsTo}', 
-                '${a.jobTitle}', '${a.extension}')" class="btn amado-btn">Edit</a>
                 <div class="pdDetail" style= "display:none">
                     <p>${a.employeeNumber}</p>
                     <p>${a.lastName}</p>
@@ -174,6 +144,8 @@ function showEmployeeList(employee){
                     <p>${a.reportsTo}</p>
                     <p>${a.jobTitle}</p>
                 </div>
+                <a href="#" onclick="EditEmployeeDetail('${a.employeeNumber}', '${a.lastName}', '${a.firstName}', '${a.email}', '${a.officeCode}', '${a.reportsTo}', 
+                '${a.jobTitle}', '${a.extension}')" class="btn amado-btn">Edit</a>
             </a>
         </div>
         `
@@ -246,23 +218,6 @@ function filterByProductName() {
                 single_products_catagory[i].style.display = "";
                 // document.getElementById("productArea").insertAdjacentHTML("afterend", filteredList);
             } else {
-                single_products_catagory[i].style.display = "none";
-            }
-        }
-    }
-}
-
-// use when delete product
-function findProductCode(input) {
-    var slot, single_products_catagory, pdName, i, txtValue, a;
-    slot = document.getElementById("productArea");
-    single_products_catagory = slot.getElementsByClassName("single-products-catagory");
-    for (i = 0; i < single_products_catagory.length; i++) {
-        a = single_products_catagory[i].getElementsByTagName("a")[0];
-        pdName = a.getElementsByTagName("p")[4];
-        if (pdName) {
-            txtValue = pdName.textContent || pdName.innerText;
-            if (txtValue.indexOf(input) > -1) {
                 single_products_catagory[i].style.display = "none";
             }
         }
@@ -569,18 +524,17 @@ function EditEmployeeDetail(number, lname, fname, email, office, report, job, ex
                                 <div class="product-meta-data">
                                     <div class="line"></div>
                                         <form>
-                                            <p>Number: <input type="text" name="number" value="${number}"></p>
-                                            <p>FirstName: <input type="text" name="text" value="${fname}"></p>
-                                            <p>LastName: <input type="text" name="text" value="${lname}"></p>
-                                            <p>Email: <input type="text" name="text" value="${email}"></p>
-                                            <p>JobTitle: <input type="text" name="text" value="${job}"></p>
-                                            <p>OfficeCode: <input type="text" name="text" value="${office}"></p>
-                                            <p>ReportTo: <input type="text" name="text" value="${report}"></p>
-                                            <p>Extension: <input type="text" name="text" value="${exetension}"></p>
+                                            <p>FirstName: <input type="text" id="efn" name="text" value="${fname}"></p>
+                                            <p>LastName: <input type="text" id="eln" name="text" value="${lname}"></p>
+                                            <p>Email: <input type="text" id="eem" name="text" value="${email}"></p>
+                                            <p>JobTitle: <input type="text" id="ej" name="text" value="${job}"></p>
+                                            <p>OfficeCode: <input type="text" id="eof" name="text" value="${office}"></p>
+                                            <p>ReportTo: <input type="text" id="er" name="text" value="${report}"></p>
+                                            <p>Extension: <input type="text" id="ee" name="text" value="${exetension}"></p>
                                         </form>
                                     </div>
-                                    <a href="#" class="btn amado-btn">Delete</a>
-                                    <a href="#" class="btn amado-btn">Save</a>
+                                    <a href="#" class="btn amado-btn" onclick="deleteem('${number}')">Delete</a>
+                                    <a href="#" class="btn amado-btn" onclick="updateem('${number}')">Save</a>
                                 </div>
                             </div>
                         </div>
@@ -595,7 +549,64 @@ function EditEmployeeDetail(number, lname, fname, email, office, report, job, ex
 }
 //------------------------End Pop-up--------------------------//
 
-// ----------------------Insert-------------------------------//
+// ---------------------Insert-------------------------------//
+//Product
+function insertitem(){
+    var product = { "pname": document.getElementById("name").value.toString(),
+                    "pcode": document.getElementById("code").value.toString(),
+                    "pline": document.getElementById("line").value.toString(),
+                    "pscale": document.getElementById("scale").value.toString(),
+                    "pvendor": document.getElementById("vendor").value.toString(),
+                    "pnumber": document.getElementById("number").value.toString(),
+                    "pprice": document.getElementById("price").value.toString(),
+                    "pmsrp": document.getElementById("msrp").value.toString(),
+                    "pdes": document.getElementById("d").value.toString()};
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/insertProduct',
+        data: product,
+        dataType: "json",
+        success: function (data) {
+            document.getElementById('id04').style.display='none';
+            updateProductList(data);
+        }
+    });
+}
+
+//Employee
+function insertem(){
+    var product = { "enumber": document.getElementById("enumber").value.toString(),
+                    "efname": document.getElementById("efname").value.toString(),
+                    "elname": document.getElementById("elname").value.toString(),
+                    "eex": document.getElementById("eex").value.toString(),
+                    "eemail": document.getElementById("eemail").value.toString(),
+                    "ecode": document.getElementById("ecode").value.toString(),
+                    "ere": document.getElementById("ere").value.toString(),
+                    "ejob": document.getElementById("ejob").value.toString()};
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/insertEm',
+        data: product,
+        dataType: "json",
+        success: function (data) {
+            document.getElementById('id04').style.display='none';
+            showEmployeeList(data);
+        }
+    });
+}
+// -----------------------End Insert-------------------------//
+
+// ----------------------Update-------------------------------//
 // Product
 function updateitem(a){
     var product = { "pname": document.getElementById("name").value.toString(),
@@ -619,23 +630,20 @@ function updateitem(a){
         dataType: "json",
         success: function (data) {
             document.getElementById('id03').style.display='none';
-            // updateProductList();
+            updateProductList(data);
         }
     });
 }
-// ---------------------End Insert---------------------------//
 
-// ---------------------Update-------------------------------//
-function insertitem(){
-    var product = { "pname": document.getElementById("name").value.toString(),
-                    "pcode": document.getElementById("code").value.toString(),
-                    "pline": document.getElementById("line").value.toString(),
-                    "pscale": document.getElementById("scale").value.toString(),
-                    "pvendor": document.getElementById("vendor").value.toString(),
-                    "pnumber": document.getElementById("number").value.toString(),
-                    "pprice": document.getElementById("price").value.toString(),
-                    "pmsrp": document.getElementById("msrp").value.toString(),
-                    "pdes": document.getElementById("d").value.toString()};
+// Employee
+function updateem(a){
+    var product = { "efn": document.getElementById("efn").value.toString(),
+                    "eln": document.getElementById("eln").value.toString(),
+                    "ee": document.getElementById("ee").value.toString(),
+                    "eem": document.getElementById("eem").value.toString(),
+                    "eof": document.getElementById("eof").value.toString(),
+                    "er": document.getElementById("er").value.toString(),
+                    "ej": document.getElementById("ej").value.toString()};
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -643,17 +651,16 @@ function insertitem(){
     });
     $.ajax({
         type: 'post',
-        url: '/insertProduct',
+        url: '/updateEm/'+a,
         data: product,
         dataType: "json",
         success: function (data) {
-            console.log(data);
-            document.getElementById('id04').style.display='none';
-            // updateProductList();
+            document.getElementById('id03').style.display='none';
+            showEmployeeList(data);
         }
     });
 }
-// -----------------------End Update-------------------------//
+// ---------------------End Update---------------------------//
 
 // -----------------------Delete-----------------------------//
 //Product
@@ -668,14 +675,24 @@ function deleteitem(a){
         url: '/deleteProduct/'+a,
         success: function (data) {        
             document.getElementById('id03').style.display='none';
-            const index = jsonproduct.findIndex(function(x, a){
-                return x.productCode == a;
-            });    
-            if (index !== undefined) {
-                findProductCode(a);
-                // delete jsonproduct[index];
-                // updateProductList(jsonproduct);
-            }
+            updateProductList(data);
+        }
+    });
+}
+
+// Employee
+function deleteem(a){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'delete',
+        url: '/deleteEm/'+a,
+        success: function (data) {   
+            document.getElementById('id03').style.display='none';
+            showEmployeeList(data);
         }
     });
 }
