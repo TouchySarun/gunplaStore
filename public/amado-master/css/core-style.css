@@ -238,10 +238,71 @@ img {
   /* padding-right: 8px; */
 }
 
+/* Customize the label (the container) */
+.radio-container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 
+/* Hide the browser's default radio button */
+.radio-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
 
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
 
+/* On mouse-over, add a grey background color */
+.radio-container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
 
+/* When the radio button is checked, add a blue background */
+.radio-container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.radio-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.radio-container .checkmark:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
 
 /* Spacing */
 .mt-15 {
@@ -296,6 +357,9 @@ img {
   margin-right: 50px !important; }
 
 /* Height */
+.height-200 {
+  height: 200px !important; }
+  
 .height-400 {
   height: 400px !important; }
 
@@ -508,7 +572,8 @@ img {
   .amado-btn.active, .amado-btn:hover, .amado-btn:focus {
     font-size: 18px;
     color: #ffffff;
-    background-color: #fb8210; }
+    background-color: #fb8210;
+}
 
 /* Essence  Button */
 .amado-big-btn {
@@ -1042,10 +1107,10 @@ img {
     position: relative;
     z-index: 1;
     -webkit-box-flex: 0;
-    -ms-flex: 0 0 calc(95% - 320px);
-    flex: 0 0 calc(95% - 320px);
-    width: calc(95% - 320px);
-    max-width: calc(95% - 320px); }
+    -ms-flex: 0 0 calc(100% - 320px);
+    flex: 0 0 calc(100% - 320px);
+    width: calc(100% - 320px);
+    max-width: calc(100% - 320px); }
     @media only screen and (min-width: 992px) and (max-width: 1199px) {
       .main-content-wrapper .cart-table-area {
         -webkit-box-flex: 0;
@@ -1203,6 +1268,177 @@ img {
             color: #6b6b6b;
             font-size: 14px; }
       .main-content-wrapper .cart-table-area .cart-summary .payment-method label {
+        font-size: 14px;
+        color: #6b6b6b;
+        font-weight: 400;
+        margin-bottom: 15px; }
+  .main-content-wrapper .checkout-table-area {
+    position: relative;
+    z-index: 1;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 calc(100% - 320px);
+    flex: 0 0 calc(100% - 320px);
+    width: calc(100% - 320px);
+    max-width: calc(100% - 320px); }
+    @media only screen and (min-width: 992px) and (max-width: 1199px) {
+      .main-content-wrapper .checkout-table-area {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 calc(100% - 320px);
+        flex: 0 0 calc(100% - 320px);
+        width: calc(100% - 320px);
+        max-width: calc(100% - 320px); } }
+    @media only screen and (min-width: 768px) and (max-width: 991px) {
+      .main-content-wrapper .checkout-table-area {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 calc(100% - 280px);
+        flex: 0 0 calc(100% - 280px);
+        width: calc(100% - 280px);
+        max-width: calc(100% - 280px); } }
+    @media only screen and (max-width: 767px) {
+      .main-content-wrapper .checkout-table-area {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        width: 100%;
+        max-width: 100%;
+        padding-top: 0; } }
+    .main-content-wrapper .checkout-table-area .cart-title h2 {
+      font-size: 30px;
+      margin-bottom: 30px;
+      color: #242424; }
+    .main-content-wrapper .checkout-table-area table thead {
+      width: 100%;
+      display: block; }
+      .main-content-wrapper .checkout-table-area table thead tr {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        width: 100%;
+        height: 40px;}
+        .main-content-wrapper .checkout-table-area table thead tr th {
+          text-align: center;
+          border-top: none;
+          border-bottom: none;
+          -webkit-box-flex: 0;
+          -ms-flex: 0 0 40%;
+          flex: 0 0 40%;
+          width: 40%;
+          font-size: 20px;
+          color: #ffffff;
+          background-color: #faa332;
+          text-transform: capitalize;
+          font-weight: 400; }
+    .main-content-wrapper .checkout-table-area table tbody {
+      width: 100%;
+      display: block; }
+      .main-content-wrapper .checkout-table-area table tbody tr {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -ms-grid-row-align: center;
+        align-items: center;
+        width: 100%; }
+        .main-content-wrapper .checkout-table-area table tbody tr td {
+          text-align: left;
+          border: none;
+          -webkit-box-flex: 0;
+          -ms-flex: 0 0 100%;
+          flex: 0 0 100%;
+          width: 90%;
+          max-width: 90%; 
+          border-bottom: 1px solid #252525; }
+          .main-content-wrapper .checkout-table-area table tbody tr td h5 {
+            font-size: 18px;
+            color: #252525;
+            margin-top: 1rem; }
+            @media only screen and (min-width: 992px) and (max-width: 1199px) {
+              .main-content-wrapper .checkout-table-area table tbody tr td h5 {
+                font-size: 14px; } }
+            @media only screen and (min-width: 768px) and (max-width: 991px) {
+              .main-content-wrapper .checkout-table-area table tbody tr td h5 {
+                font-size: 14px; } }
+            @media only screen and (max-width: 767px) {
+              .main-content-wrapper .checkout-table-area table tbody tr td h5 {
+                font-size: 12px; } }
+          .main-content-wrapper .checkout-table-area table tbody tr td .qty-btn p {
+            margin-bottom: 0;
+            line-height: 40px;
+            height: 40px;
+            padding: 0 15px;
+            background-color: #f5f7fa;
+            color: #242424;
+            font-size: 14px; }
+            @media only screen and (min-width: 768px) and (max-width: 991px) {
+              .main-content-wrapper .checkout-table-area table tbody tr td .qty-btn p {
+                padding: 0 10px; } }
+          .main-content-wrapper .checkout-table-area table tbody tr td .qty-btn .quantity {
+            position: relative;
+            z-index: 1; }
+            .main-content-wrapper .checkout-table-area table tbody tr td .qty-btn .quantity input {
+              text-align: center;
+              background-color: #f5f7fa;
+              height: 40px;
+              width: 60px;
+              border: none;
+              -moz-appearance: textfield;
+              -webkit-appearance: textfield;
+              appearance: textfield;
+              color: #242424;
+              font-size: 14px; }
+              @media only screen and (min-width: 768px) and (max-width: 991px) {
+                .main-content-wrapper .checkout-table-area table tbody tr td .qty-btn .quantity input {
+                  width: 45px; } }
+            .main-content-wrapper .checkout-table-area table tbody tr td .qty-btn .quantity .qty-plus {
+              position: absolute;
+              right: 0;
+              top: 0;
+              line-height: 40px;
+              width: 20px;
+              text-align: center;
+              height: 40px;
+              cursor: pointer;
+              color: #242424;
+              font-size: 10px; }
+            .main-content-wrapper .checkout-table-area table tbody tr td .qty-btn .quantity .qty-minus {
+              position: absolute;
+              top: 0;
+              right: 40px;
+              line-height: 40px;
+              width: 20px;
+              height: 40px;
+              text-align: center;
+              cursor: pointer;
+              color: #242424;
+              font-size: 10px; }
+              @media only screen and (min-width: 768px) and (max-width: 991px) {
+                .main-content-wrapper .checkout-table-area table tbody tr td .qty-btn .quantity .qty-minus {
+                  right: 30px; } }
+    .main-content-wrapper .checkout-table-area .cart-summary {
+      background-color: #f5f7fa;
+      margin-top: 118px;
+      position: relative;
+      z-index: 1;
+      padding: 30px 20px; }
+      .main-content-wrapper .checkout-table-area .cart-summary h5 {
+        font-size: 18px;
+        margin-bottom: 0; }
+      .main-content-wrapper .checkout-table-area .cart-summary .summary-table {
+        margin-top: 30px; }
+        .main-content-wrapper .checkout-table-area .cart-summary .summary-table li {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-pack: justify;
+          -ms-flex-pack: justify;
+          justify-content: space-between;
+          margin-bottom: 30px;
+          text-transform: capitalize; }
+          .main-content-wrapper .checkout-table-area .cart-summary .summary-table li span {
+            color: #6b6b6b;
+            font-size: 14px; }
+      .main-content-wrapper .checkout-table-area .cart-summary .payment-method label {
         font-size: 14px;
         color: #6b6b6b;
         font-weight: 400;
@@ -1823,16 +2059,34 @@ img {
 
 /* :: 10.0 Checkout Area CSS */
 .checkout_details_area form .form-control {
-  height: 60px;
+  height: auto;
   border: none;
   border-radius: 0;
   background-color: #f5f7fa;
-  padding: 30px;
+  padding: 30px 20px 10px;
+  color: #6b6b6b;
+  font-size: 14px; }
+  .checkout_details_area form .form-control .line {
+    width: 100%;
+    height: 2px;
+    background-color: #6b6b6b;
+    display: block;
+    margin-bottom: 15px; }
+.checkout_details_area form .form-control-white {
+  height: auto;
+  border: none;
+  border-radius: 0;
+  background-color: #ffffff;
+  padding: 30px 20px 10px;
   color: #6b6b6b;
   font-size: 14px; }
 .checkout_details_area form textarea.form-control {
   height: 210px; }
 .checkout_details_area form .custom-control label {
+  font-size: 14px;
+  color: #6b6b6b; }
+.checkout_details_area form .confirm-control {
+  padding: 0px;
   font-size: 14px;
   color: #6b6b6b; }
 .checkout_details_area form .nice-select {

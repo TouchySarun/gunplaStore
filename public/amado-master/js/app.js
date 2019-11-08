@@ -2,8 +2,60 @@
 //product = code, name, line, scale, vendor, descrip, instock, price, msrp
 var tableproduct = "<br><br><br>";//All product List in JSON
 var tableemployee = "<br><br><br>";
+<<<<<<< HEAD
 var jasonproduct = "";
+=======
+var tableaddress = "";
+>>>>>>> 43a1ad8755b09a7a46bc03992ae64fe46e287d0d
 //--------------Show script------------------//
+function showCustomerAddress(json) {
+    var n = 0;
+    json.forEach( function(a) {
+        if(n == json.length - 1) {
+            tableaddress += `
+            <!-- class="radio-container" -->
+            <table style="width: 100%">
+                <tbody>
+                    <tr>
+                        <td style="text-align: left; max-width: 10%; border-bottom: none">
+                            <label class="radio-container"> 
+                                <input type="radio" name="addressSelect" value="${n}">
+                                <span class="checkmark"></span>
+                            </label>
+                        </td>
+                        <td style="border-bottom: none">
+                            <h5>${a.contactFirstName} ${a.contactLastName}</h5>
+                            <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>                    
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        `
+        } else {
+            n++;
+            tableaddress += `
+            <table style="width: 100%">
+                <tbody>
+                    <tr>
+                        <td style="text-align: left; max-width: 10%; border-bottom: none">
+                            <label class="radio-container">
+                                <input type="radio" name="addressSelect" value="${n}">
+                                <span class="checkmark"></span>
+                            </label>
+                        </td>
+                        <td>
+                            <h5>${a.contactFirstName} ${a.contactLastName}</h5>
+                            <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>                    
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        `
+        }
+    });
+    document.getElementById("addressArea").innerHTML = tableaddress;
+}
+
 function showEmployeeList(employee){
     employee.forEach( function(a) {
     tableemployee += `
@@ -114,7 +166,11 @@ function updateProductOrderList(json){
     json.forEach( function(a) {
     tableproduct += `
         <div class="single-products-catagory">
+<<<<<<< HEAD
                 <a href="#" onclick="showProductDetail('${a.productCode}')">
+=======
+            <a href="#" onclick="showProductDetail('${a.productName}', '${a.productScale}', '${a.productVendor}', '${a.productDescription}', '${a.quantityInStock}', '${a.buyPrice}')">
+>>>>>>> 43a1ad8755b09a7a46bc03992ae64fe46e287d0d
                 <img src="./amado-master/img/bg-img/1.jpg" alt="">
                 <!-- Hover Content -->
                 <div class="hover-content">
@@ -596,6 +652,7 @@ function EditEmployeeDetail(number, lname, fname, email, office, report, job, ex
 }
 //------------------------End Pop-up--------------------------//
 
+<<<<<<< HEAD
 // ----------------------Insert-------------------------------//
 // Product
 function updateitem(a){
@@ -716,3 +773,5 @@ function ShowShipping(input){
     document.getElementById('order_table_body').innerHTML = shipping_table;
 
 }
+=======
+>>>>>>> 43a1ad8755b09a7a46bc03992ae64fe46e287d0d
