@@ -82,7 +82,18 @@ class DataController extends Controller
 
     public function login(Request $request)
     {
-        $employeekey = DB::select("select * from employees where employeeNumber like '$request->uname' and employeeNumber like '$request->psw'");
+        // $a = '';
+        // foreach ($data as $a) {
+        //     # code...
+        //     $x = sha1($a->employeeNumber);
+        //     DB::insert("insert into passwords(employeeNumber, password)
+        //     values ('$a->employeeNumber','$x')");
+        // }
+        // $data = DB::select("select *from passwords");
+        // $jdata = json_encode($data);
+        // return redirect ('/')-> with('alert',$jdata);
+        $x = sha1($request->psw);
+        $employeekey = DB::select("select * from passwords where employeeNumber like '$request->uname' and password like '$x'");
         if($employeekey != null)
         {
             // return redirect ('/welcome');
@@ -90,8 +101,9 @@ class DataController extends Controller
         }
         else
         {
-            return redirect ('/')-> with('alert', 'Wrong user or password.');
+            return redirect ('/')-> with('alert', 'wrong username or password');
         }
+
     }
 
     public function insertProduct(Request $request){

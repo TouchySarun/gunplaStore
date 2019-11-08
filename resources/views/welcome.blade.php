@@ -51,11 +51,7 @@
         <div class="mobile-nav">
             <!-- Navbar Brand -->
             <div class="amado-navbar-brand">
-<<<<<<< HEAD
                 <a href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
-=======
-                <a href="/"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
->>>>>>> 43a1ad8755b09a7a46bc03992ae64fe46e287d0d
             </div>
             <!-- Navbar Toggler -->
             <div class="amado-navbar-toggler">
@@ -72,21 +68,12 @@
             </div> -->
             <!-- Logo -->
             <div class="logo">
-<<<<<<< HEAD
                 <a href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
-=======
-                <a href="/"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
->>>>>>> 43a1ad8755b09a7a46bc03992ae64fe46e287d0d
             </div>
 
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-30">
-<<<<<<< HEAD
-                <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
-                <a href="#" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
-=======
                 <a href="cart.html" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
->>>>>>> 43a1ad8755b09a7a46bc03992ae64fe46e287d0d
                 <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
             </div>
 
@@ -140,7 +127,7 @@
                     Logout
                 </a>
             </div>
-            
+
         </header>
         <!-- Header Area End -->
 
@@ -173,7 +160,7 @@
                 <img src="./amado-master/img/core-img/promotion.png"><br><br>
                 Promotion
             </a>
-            
+
             <!-- PopUp Modal -->
             <div id="id01" class="modal">
                 <span onclick="document.getElementById('id01').style.display='none'"
@@ -207,7 +194,7 @@
                 </form>
             </div>
 
-            
+
             <div id="id04" class="modal">
                     <span onclick="document.getElementById('id04').style.display='none'"
                         class="close" title="Close Modal">&times;
@@ -250,7 +237,7 @@
                     </form>
                 </div>
 
-                
+
         <!-- pop up shipping -->
         <div id="id05" class="modal">
                     <span onclick="document.getElementById('id05').style.display='none'"
@@ -325,7 +312,7 @@
                     </div>
                     </form>
                 </div>
-            
+
         </div>
     </div>
 
@@ -346,7 +333,7 @@
     <footer class="footer_area">
         <div >
         <!-- Logo -->
-        <a href="/welcome" style="padding:0px 0px 0px 50px"><img src="./amado-master/img/core-img/logoDarkBG.png" alt=""></a>  
+        <a href="/welcome" style="padding:0px 0px 0px 50px"><img src="./amado-master/img/core-img/logoDarkBG.png" alt=""></a>
         </div>
     </footer>
     <!-- ##### Footer Area End ##### -->
@@ -364,5 +351,5 @@
     <!-- DB function -->
     <script src="./amado-master/js/app.js"></script>
 
-</body>    
+</body>
 </html>

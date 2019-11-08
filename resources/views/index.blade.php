@@ -181,7 +181,7 @@
                     <form class="modal-content animate" id="loginError">
                         <div class="container" style="background-color:#f1f1f1">
                         <button type="button" onclick="document.getElementById('loginError').style.display='none'"
-                            class="cancelbtn">{{ session('alert') }}</button>
+                            class="cancelbtn" id="aleartsession">{{ session('alert') }}</button>
                         </div>
                     </form>
                 </div>
