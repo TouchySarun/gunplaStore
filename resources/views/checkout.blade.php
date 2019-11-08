@@ -200,7 +200,7 @@
                                         <option value="cod">Cash On Delivery</option>
                                         <option value="creditcard">Credit Card</option>
                                         <option value="paypal">Paypal</option>
-                                    </select>
+                                    </select><br>
                                 <label></label>
                                     <img class="ml-15" src="./amado-master/img/core-img/paypal.png" alt="">
                                     <img class="ml-15" src="./amado-master/img/core-img/paypal2.png" alt="" height="21" width="30">
