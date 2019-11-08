@@ -28,14 +28,15 @@ Route::get('/test', function () {
 //### normal page ####
 Route::get('/','DataController@index');
 Route::get('/mnpd','DataController@mnproduct');
-Route::get('/editproduct/{code}','DataController@editProduct');
 Route::get('/mnod','DataController@mnorder');
 Route::get('/mnem','DataController@mnemployee');
 Route::get('/order','DataController@order');
 Route::get('/checkout','DataController@checkout');
+Route::get('/shipping','DataController@shipping');
+Route::get('/promotion','DataController@promotion');
+//### function ###
+Route::get('/editproduct/{code}','DataController@editProduct');
 Route::post('/insertProduct','DataController@insertProduct');
 Route::post('/updateProduct/{code}','DataController@updateProduct');
-
-//### function ###
 Route::post('/login', 'DataController@login');
 Route::delete('/deleteProduct/{code}','DataController@deleteProduct');

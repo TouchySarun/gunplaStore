@@ -138,8 +138,8 @@ function updateProductOrderList(json){
                 </div>
             </a>
             <div class="qty-btn d-flex">
-                <input style="text-align: center" type="number" class="qty-text" id="qty3" step="1" min="1" max="300" name="quantity" value="1">   
-                <a href="#" class="btn amado-btn">Buy</a>
+                <input style="text-align: center" type="number" class="qty-text" id="qty3" step="1" min="0" max="300" name="quantity" value="0">
+                <button href="#" class="btn amado-btn" style="margin:0px">Buy</button>
             </div>
         </div>
         `
@@ -152,7 +152,7 @@ function showEmployeeList(employee){
     employee.forEach( function(a) {
     tableemployee += `
         <div class="single-products-catagory">
-                <a href="#" onclick="showEmployeeDetail('${a.employeeNumber}', '${a.lastName}', '${a.firstName}', '${a.email}', '${a.officeCode}', '${a.reportsTo}', 
+                <a href="#" onclick="showEmployeeDetail('${a.employeeNumber}', '${a.lastName}', '${a.firstName}', '${a.email}', '${a.officeCode}', '${a.reportsTo}',
                 '${a.jobTitle}', '${a.extension}')">
                 <img src="./amado-master/img/core-img/employeeM.png" alt="">
                 <!-- Hover Content -->
@@ -162,7 +162,7 @@ function showEmployeeList(employee){
                     <h5>${a.jobTitle}</h5>
                     <h4>${a.firstName} ${a.lastName}</h4>
                 </div>
-                <a href="#" onclick="EditEmployeeDetail('${a.employeeNumber}', '${a.lastName}', '${a.firstName}', '${a.email}', '${a.officeCode}', '${a.reportsTo}', 
+                <a href="#" onclick="EditEmployeeDetail('${a.employeeNumber}', '${a.lastName}', '${a.firstName}', '${a.email}', '${a.officeCode}', '${a.reportsTo}',
                 '${a.jobTitle}', '${a.extension}')" class="btn amado-btn">Edit</a>
                 <div class="pdDetail" style= "display:none">
                     <p>${a.employeeNumber}</p>
@@ -406,7 +406,7 @@ function showProductDetail(a){
     document.getElementById("id02").innerHTML = box;
     document.getElementById("id02").style.display = 'block';
         }
-    });  
+    });
 }
 
 // popup employee detail
@@ -537,7 +537,7 @@ function EditProductDetail(a){
         </form>
         `;
     document.getElementById("id03").innerHTML = box;
-    document.getElementById("id03").style.display = 'block'; 
+    document.getElementById("id03").style.display = 'block';
     }
     });
 }
@@ -592,6 +592,7 @@ function EditEmployeeDetail(number, lname, fname, email, office, report, job, ex
     `;
     document.getElementById("id03").innerHTML = box;
     document.getElementById("id03").style.display = 'block';
+
 }
 //------------------------End Pop-up--------------------------//
 
@@ -666,11 +667,11 @@ function deleteitem(a){
     $.ajax({
         type: 'delete',
         url: '/deleteProduct/'+a,
-        success: function (data) {        
+        success: function (data) {
             document.getElementById('id03').style.display='none';
             const index = jsonproduct.findIndex(function(x, a){
                 return x.productCode == a;
-            });    
+            });
             if (index !== undefined) {
                 findProductCode(a);
                 // delete jsonproduct[index];
@@ -680,3 +681,38 @@ function deleteitem(a){
     });
 }
 // ----------------------End Delete-----------------------------//
+function order_calculator(){
+    //var table = document.getElementById("order_table");
+    var body = document.getElementById("order_table_body");
+    var tr = body.getElementsByTagName("tr");
+    console.log(tr);
+    var sum = 0;
+    for(var i=0; i<tr.length; i++){
+        var price = tr[i].getElementsByTagName("td")[2].innerText;
+        console.log(price);
+        var num = document.getElementById(`qty${i}`).value;
+        console.log(num);
+        sum += price*num;
+    }
+    document.getElementById("sumprice").innerHTML = sum;
+}
+
+function ShowShipping(input){
+    var shipping_table="";
+    input.forEach(function(a){
+        shipping_table+=`
+        <tr>
+            <td><h5>${a.orderNumber}</h5></td>
+            <td><h5>${a.orderDate}</h5></td>
+            <td><h5>${a.requiredDate}</h5></td>
+            <td><h5>${a.shippedDate}</h5></td>
+            <td><h5>${a.status}</h5></td>
+            <td><h5>${a.comments}</h5></td>
+            <td><h5>${a.customerNumber}</h5></td>
+            <td><a href="#" onclick="document.getElementById('id04').style.display='block'" class="btn amado-btn" style="min-width:50px">Edit</a></td>
+        </tr>
+        `;
+    });
+    document.getElementById('order_table_body').innerHTML = shipping_table;
+
+}
