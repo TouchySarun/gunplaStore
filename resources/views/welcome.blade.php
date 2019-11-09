@@ -51,7 +51,9 @@
         <div class="mobile-nav">
             <!-- Navbar Brand -->
             <div class="amado-navbar-brand">
+
                 <a href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
+
             </div>
             <!-- Navbar Toggler -->
             <div class="amado-navbar-toggler">
@@ -68,13 +70,17 @@
             </div> -->
             <!-- Logo -->
             <div class="logo">
+
                 <a href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
+
             </div>
 
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-30">
+
                 <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
                 <a href="#" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
+
                 <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
             </div>
 
@@ -179,7 +185,7 @@
                             <label for="lastName"><b>Last Name</b></label>
                                 <input type="text" placeholder="" name="lastName" required>
                             <label for="phoneNum"><b>Phone number</b></label>
-                                <input type="text" placeholder="Ex. 088268xxxx" name="phoneNum" required>
+                                <input type="text" placeholder="Ex. 088xxxxxx" name="phoneNum" required>
                             <label for="addrline1"><b>Address Line 1</b></label>
                                 <input type="text" placeholder="" name="addrline1" required>
                             <label for="addrline2"><b>Address Line 2</b></label>

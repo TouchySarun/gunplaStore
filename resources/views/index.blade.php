@@ -35,12 +35,10 @@
                             <input type="text" id="myInput" onkeyup="filterByProductName()" placeholder="Search for names..">
                             <button type="submit"><img src="./amado-master/img/core-img/search.png" alt=""></button>
                         </form>
-                    </div>
-                    </div>
+                    </div>  
                 </div>
             </div>
         </div>
-
     </div>
     <!-- Search Wrapper Area End -->
 
@@ -152,7 +150,7 @@
                             {{ csrf_field() }}
                                 <label for="uname"><b>Username</b></label><input type="text" name="uname" placeholder="Enter Username" required>
                                 <label for="psw"><b>Password</b></label><input type="password" name="psw" placeholder="Enter Password" required>
-                                <button type="submit">Login</button>
+                                <button>Login</button>
                         </div>
 
                         <div class="container" style="background-color:#f1f1f1">
