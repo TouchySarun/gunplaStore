@@ -125,54 +125,11 @@
             <div class="amado-btn-group mt-30 mb-100">
                 <a href="#" class="btn amado-btn" >Discount</a>
                 <br>
-                <a href="#" onclick = "document.getElementById('id01').style.display='block'" class="btn amado-btn">
-                    Login
-                </a>
-                <br>
-                <a href="#" onclick = "categorizeVendor(Vendor)" class="btn amado-btn">
-                    Catagorize by Vendor
-                </a>
-                <br>
-                <a href="#" onclick = "categorizeScale(Scale)" class="btn amado-btn">
-                    Catagorize by Scale
-                </a>
-                <br>
-                <a href="#" onclick = "showProductList(json)" class="btn amado-btn">
-                    No Catagorize
+                <a href="#" class="btn amado-btn">
+                    Logout
                 </a>
                 
             </div>
-            <!-- Pop up -->
-                <!--Login pop up-->
-                <div id="id01" class="modal">
-                    <span onclick="document.getElementById('id01').style.display='none'"
-                        class="close" title="Close Modal">&times;
-                    </span>
-
-                    <!-- Modal Content -->
-                    <form class="modal-content animate" action="/action_page.php">
-                        <div class="container">
-                            <label for="uname"><b>Username</b></label>
-                                <input type="text" placeholder="Enter Username" name="uname" required>
-                            <label for="psw"><b>Password</b></label>
-                                <input type="password" placeholder="Enter Password" name="psw" required>
-                                <button type="submit">Login</button>
-                            <label>
-                                <input type="checkbox" checked="checked" name="remember"> Remember me
-                            </label>
-                            <span class="psw"><a href="#">Forgot password?</a></span>
-                        </div>
-                        <div class="container" style="background-color:#f1f1f1">
-                        <button type="button" onclick="document.getElementById('id01').style.display='none'"
-                            class="cancelbtn">Cancel</button>
-                        </div>
-                    </form>
-                </div>
-                <!-- product pop up -->
-                <div id="id02" class="modal" style="display:none">
-                    <!-- showProductDetail() -->
-                </div>
-        
         </header>
         <!-- Header Area End -->
 
@@ -197,7 +154,7 @@
                 <img src="./amado-master/img/core-img/employee.png"><br><br>
                 Employee
             </a>
-            <a href="#" class="btn amado-big-btn">
+            <a href="#" onclick="document.getElementById('id01').style.display='block'" class="btn amado-big-btn">
                 <br><br><br>
                 <img src="./amado-master/img/core-img/customers.png"><br><br>
                 Customers
@@ -207,6 +164,39 @@
                 <img src="./amado-master/img/core-img/promotion.png"><br><br>
                 Promotion
             </a>
+            
+            <!-- PopUp Modal -->
+            <div id="id01" class="modal">
+                <span onclick="document.getElementById('id01').style.display='none'"
+                    class="close" title="Close Modal">&times;
+                </span>
+                <!-- Form inside popup -->
+                <form class="modal-content animate" action="/action_page.php">
+                        <div class="container">
+                            <h4>New Customer</h4>
+                            <br>
+                            <label for="customerName"><b>Customer Name</b></label>
+                                <input type="text" placeholder="Your Company" name="customerName" required>
+                            <label for="firstName"><b>First Name</b></label>
+                                <input type="text" placeholder="" name="firstName" required>
+                            <label for="lastName"><b>Last Name</b></label>
+                                <input type="text" placeholder="" name="lastName" required>
+                            <label for="phoneNum"><b>Phone number</b></label>
+                                <input type="text" placeholder="Ex. 088268xxxx" name="phoneNum" required>
+                            <label for="addrline1"><b>Address Line 1</b></label>
+                                <input type="text" placeholder="" name="addrline1" required>
+                            <label for="addrline2"><b>Address Line 2</b></label>
+                                <input type="text" placeholder="" name="addrline2">
+                            <label for="saleRepEmNum"><b>SaleRepEmployeeNumber</b></label>
+                                <input type="text" placeholder="4-digit code" name="saleRepEmNum" required>
+                            <button type="submit">Confirm</button>
+                        </div>
+                    <div class="container" style="background-color:#f1f1f1">
+                        <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                            class="cancelbtn">Cancel</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
     <!-- ##### Footer Area Start ##### -->

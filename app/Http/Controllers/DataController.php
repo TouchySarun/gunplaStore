@@ -90,8 +90,13 @@ class DataController extends Controller
         $employeekey = DB::select("select * from employees where employeeNumber like '$request->uname' and employeeNumber like '$request->psw'");
         if($employeekey != null)
         {
+<<<<<<< HEAD
 
             return redirect ('/welcome');
+=======
+            // return redirect ('/welcome');
+            return redirect ('/mnem');
+>>>>>>> 7bb0dbc78fcd4024862072d61285b900eeee2e2c
         }
         else
         {

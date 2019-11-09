@@ -6,6 +6,7 @@
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
     <title>Gunpla Store | Plastic Model Shop</title>
@@ -60,6 +61,10 @@
 
         <!-- Header Area Start -->
         <header class="header-area clearfix">
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7bb0dbc78fcd4024862072d61285b900eeee2e2c
             <!-- Logo -->
             <div class="logo">
                 <a href="index.html"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
