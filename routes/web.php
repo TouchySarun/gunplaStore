@@ -13,6 +13,7 @@
 Route::get('/product', function () {
     return view('cart');
 });
+
 Route::get('/shop', function () {
     return view('shop');
 });
@@ -33,12 +34,14 @@ Route::get('/mnod','DataController@mnorder');
 Route::get('/mnem','DataController@mnemployee');
 Route::get('/order','DataController@order');
 Route::get('/checkout','DataController@checkout');
+
+
+//### function ###
+Route::post('/login', 'DataController@login');
+Route::post('/stock', 'DataController@stock');
 Route::post('/insertProduct','DataController@insertProduct');
 Route::post('/insertEm','DataController@insertEm');
 Route::post('/updateProduct/{code}','DataController@updateProduct');
 Route::post('/updateEm/{code}','DataController@updateEm');
-
-//### function ###
-Route::post('/login', 'DataController@login');
 Route::delete('/deleteProduct/{code}','DataController@deleteProduct');
 Route::delete('/deleteEm/{code}','DataController@deleteEm');

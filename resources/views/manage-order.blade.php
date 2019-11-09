@@ -162,6 +162,7 @@
         </header>
         <!-- Header Area End -->
         
+        
         <!-- Product Catagories Area Start -->
         <div class="products-catagories-area clearfix" id="productArea">
         
@@ -173,6 +174,7 @@
             updateProductOrderList(json);
             dropdownVender(Vendor);
             dropdownScale(Scale);
+            
         </script>
         <!-- Product Catagories Area End -->
 
@@ -256,6 +258,11 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     </footer>
     <!-- ##### Footer Area End ##### -->
 
+    <?php
+session_start();
+ob_start();
+$_SESSION['a']="Hello World";
+?>
     <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
     <script src="./amado-master/js/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->

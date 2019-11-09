@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="UTF-8">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -139,6 +140,7 @@
                 <a href="#" onclick = "showProductList(json)" class="btn amado-btn">
                     No Catagorize
                 </a>
+                
             </div>
             <!-- Pop up -->
                 <!--Login pop up-->
@@ -174,10 +176,12 @@
         </header>
         <!-- Header Area End -->
 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
         <!-- Hyperlink Navigation Area -->
         <!-- <div class="amado-big-button-group clearfix"> -->
         <div class="welcome-area clearfix mt-70">
-            <a href="/mnod" class="btn amado-big-btn">
+            <a class="btn amado-big-btn" onclick="stock()">
                 <br><br><br>
                 <img src="./amado-master/img/core-img/shopping_cart.png"><br><br>
                 Order & Stock
@@ -256,6 +260,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         </div>
     </footer>
     <!-- ##### Footer Area End ##### -->
+    
 
     <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
     <script src="./amado-master/js/jquery/jquery-2.2.4.min.js"></script>

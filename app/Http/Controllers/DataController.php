@@ -91,12 +91,20 @@ class DataController extends Controller
         if($employeekey != null)
         {
 
-            return redirect ('/mnpd');
+            return redirect ('/welcome');
         }
         else
         {
             return redirect ('/')-> with('alert', 'Wrong user or password.');
         }
+    }
+
+    public function stock(Request $request)
+    {
+        $employeejob = DB::select("select employeeNumber from employees where jobTitle like '%Sales%'");
+        $jsonem = json_encode($employeejob);
+
+        return $jsonem;
     }
 
     public function insertProduct(Request $request){

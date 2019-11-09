@@ -1,12 +1,12 @@
 //require('./bootstrap');
 //product = code, name, line, scale, vendor, descrip, instock, price, msrp
-var tableproduct = "<br><br><br>";//All product List in JSON
-var tableemployee = "<br><br><br>";
+var tableproduct = "";//All product List in JSON
+var tableemployee = "";
 var jasonproduct = "";
 var jasonemployee = "";
 //--------------Show script------------------//
 function showProductList(json){
-    tableproduct="";
+    tableproduct="<br><br><br>";
     json.forEach( function(a) {
     tableproduct += `
         <div class="single-products-catagory">
@@ -42,7 +42,7 @@ function showProductList(json){
 
 //----------edit product ----------//
 function updateProductList(json){
-    tableproduct="";
+    tableproduct="<br><br><br>";
     jsonproduct = json;
     json.forEach( function(a) {
     tableproduct += `
@@ -80,7 +80,7 @@ function updateProductList(json){
 
 //add order product
 function updateProductOrderList(json){
-    tableproduct="";
+    tableproduct="<br><br><br>";
     json.forEach( function(a) {
     tableproduct += `
         <div class="single-products-catagory">
@@ -119,7 +119,7 @@ function updateProductOrderList(json){
 
 //show employee
 function showEmployeeList(employee){
-    tableemployee="";
+    tableemployee="<br><br><br>";
     jsonemployee = employee;
     employee.forEach( function(a) {
     tableemployee += `
@@ -697,3 +697,18 @@ function deleteem(a){
     });
 }
 // ----------------------End Delete-----------------------------//
+
+function stock(){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/stock',
+        success: function (data) {   
+            console.log(data);
+        }
+    });
+}
