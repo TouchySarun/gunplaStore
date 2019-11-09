@@ -136,8 +136,8 @@ function updateProductOrderList(json){
                 </div>
             </a>
             <div class="qty-btn d-flex">
-                <input style="text-align: center" type="number" class="qty-text" id="qty3" step="1" min="1" max="300" name="quantity" value="1">   
-                <a href="#" class="btn amado-btn">Buy</a>
+                <input style="text-align: center" type="number" class="qty-text" id="qty3" step="1" min="0" max="300" name="quantity" value="0">   
+                <button href="#" class="btn amado-btn" style="margin:0px">Buy</button>
             </div>
         </div>
         `
@@ -573,5 +573,42 @@ function EditEmployeeDetail(number, lname, fname, email, office, report, job, ex
     `;
     document.getElementById("id03").innerHTML = box;
     document.getElementById("id03").style.display = 'block';
+
 }
 //------------------------End Pop-up--------------------------//
+
+function order_calculator(){
+    //var table = document.getElementById("order_table");
+    var body = document.getElementById("order_table_body");
+    var tr = body.getElementsByTagName("tr");
+    console.log(tr);
+    var sum = 0;
+    for(var i=0; i<tr.length; i++){
+        var price = tr[i].getElementsByTagName("td")[2].innerText;
+        console.log(price);
+        var num = document.getElementById(`qty${i}`).value;
+        console.log(num);
+        sum += price*num;
+    }
+    document.getElementById("sumprice").innerHTML = sum;
+}
+
+function ShowShipping(input){
+    var shipping_table="";
+    input.forEach(function(a){
+        shipping_table+=`
+        <tr>
+            <td><h5>${a.orderNumber}</h5></td>
+            <td><h5>${a.orderDate}</h5></td>
+            <td><h5>${a.requiredDate}</h5></td>
+            <td><h5>${a.shippedDate}</h5></td>
+            <td><h5>${a.status}</h5></td>
+            <td><h5>${a.comments}</h5></td>
+            <td><h5>${a.customerNumber}</h5></td>
+            <td><a href="#" onclick="document.getElementById('id04').style.display='block'" class="btn amado-btn" style="min-width:50px">Edit</a></td>
+        </tr>
+        `;
+    });
+    document.getElementById('order_table_body').innerHTML = shipping_table;
+
+}
