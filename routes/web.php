@@ -33,11 +33,15 @@ Route::get('/mnod','DataController@mnorder');
 Route::get('/mnem','DataController@mnemployee');
 Route::get('/order','DataController@order');
 Route::get('/checkout','DataController@checkout');
+
 Route::get('/getCustAddr/{code}','DataController@getCustAddr');
 Route::post('/insertProduct','DataController@insertProduct');
 Route::post('/insertEm','DataController@insertEm');
 Route::post('/updateProduct/{code}','DataController@updateProduct');
 Route::post('/updateEm/{code}','DataController@updateEm');
+
+Route::get('/shipping','DataController@shipping');
+Route::get('/promotion','DataController@promotion');
 
 //### function ###
 Route::post('/login', 'DataController@login');

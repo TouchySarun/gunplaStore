@@ -90,5 +90,17 @@ class DataController extends Controller
     public function deleteProduct($code){
         $data = DB::select("delete from products where productCode = '$code'");
     }
+
+    public function shipping(){
+        $Order = DB::select('select * from orders');
+        $jsonOrder = json_encode($Order);
+        return view('shipping',['jsonOrder'=>$jsonOrder]);
+    }
+
+    public function promotion(){
+        $Order = DB::select('select * from orders');
+        $jsonOrder = json_encode($Order);
+        return view('promotion',['jsonOrder'=>$jsonOrder]);
+    }
 }
 
