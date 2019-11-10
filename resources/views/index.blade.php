@@ -32,7 +32,7 @@
                     <div class="search-content">
                         <form action="" method="get">
                             <!-- <input type="search" name="search" id="search" placeholder="Type your keyword..."> -->
-                            <input type="text" id="myInput" onkeyup="filterByProductName()" placeholder="Search for names..">
+                            <input type="text" id="myInput" onkeyup="filter(this.value,5)" placeholder="Search for names..">
                             <button type="submit"><img src="./amado-master/img/core-img/search.png" alt=""></button>
                         </form>
                     </div>
@@ -123,15 +123,15 @@
                     Login
                 </a>
                 <br>
-                <a href="#" onclick = "categorizeVendor(Vendor)" class="btn amado-btn">
+                <a href="#" onclick = "categorize(Vendor,'Vendor')" class="btn amado-btn">
                     Catagorize by Vendor
                 </a>
                 <br>
-                <a href="#" onclick = "categorizeScale(Scale)" class="btn amado-btn">
+                <a href="#" onclick = "categorize(Scale,'Scale')" class="btn amado-btn">
                     Catagorize by Scale
                 </a>
                 <br>
-                <a href="#" onclick = "showProductList(json)" class="btn amado-btn">
+                <a href="#" onclick = "showProduct(json,false,false)" class="btn amado-btn">
                     No Catagorize
                 </a>
             </div>
@@ -144,7 +144,7 @@
             var json = <?php echo $jsonProduct?>;
             var Vendor = <?php echo $jsonVendor?>;
             var Scale = <?php echo $jsonScale?>;
-            showProductList(json);
+            showProduct(json,false,false);
             dropdownVender(Vendor);
             dropdownScale(Scale);
         </script>
@@ -202,7 +202,7 @@
             var json = <?php echo $jsonProduct?>;
             var Vendor = <?php echo $jsonVendor?>;
             var Scale = <?php echo $jsonScale?>;
-            showProductList(json);
+            showProduct(json, false, false);
             dropdownVender(Vendor);
             dropdownScale(Scale);
         </script>

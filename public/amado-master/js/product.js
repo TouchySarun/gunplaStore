@@ -5,35 +5,9 @@ var tableemployee = "<br><br><br>";
 var jasonproduct = "";
 var tableaddress = "";
 //--------------Show script------------------//
-function filter(input, type){
-    //name 5 / id 4 / scale 7 / vendor 8
-    console.log(input||type);
-    var filter, product_area, single, value, i, txtValue, a, returnValue="";
-    filter = input.toUpperCase();
-    product_area = document.getElementById("productArea");
-    single = product_area.getElementsByClassName("single-products-catagory");
-    for (i=0; i<single.length; i++){
-        a = single[i].getElementsByTagName("a")[0];
-        value = a.getElementsByTagName("p")[type];
-        console.log(value.innerHTML);
-        if(value){
-            txtValue = value.textContent || value.innerText;
-            if(txtValue.toUpperCase().indexOf(filter) > -1){
-                returnValue += `<div class="single-products-catagory">${single[i].innerHTML}</div>`;
-                single[i].style.display = '';
-            }else{
-                single[i].style.display = 'none';
-            }
-        }
-    }
-    //document.getElementById("productArea").innerHTML = returnValue;
-    return returnValue;
-}
-
 function showProduct(json,editable,orderable){
-    //updateProductList = showProduct(json,true,false)
-    //updateProductOrderList = showProduct(json,false,true)
     tableproduct = '<br><br><br>';
+    console.log(editable, orderable)
     json.forEach( function(a) {
     tableproduct += `
         <div class="single-products-catagory">
@@ -74,93 +48,13 @@ function showProduct(json,editable,orderable){
     });
     document.getElementById("productArea").innerHTML = tableproduct;
 }
-
-function showCustomerAddress(json) {
-    var n = 0;
-    json.forEach( function(a) {
-        if(n == json.length - 1) {
-            tableaddress += `
-            <!-- class="radio-container" -->
-            <table style="width: 100%">
-                <tbody>
-                    <tr>
-                        <td style="text-align: left; max-width: 10%; border-bottom: none">
-                            <label class="radio-container">
-                                <input type="radio" name="addressSelect" value="${n}">
-                                <span class="checkmark"></span>
-                            </label>
-                        </td>
-                        <td style="border-bottom: none">
-                            <h5>${a.contactFirstName} ${a.contactLastName}</h5>
-                            <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        `
-        } else {
-            n++;
-            tableaddress += `
-            <table style="width: 100%">
-                <tbody>
-                    <tr>
-                        <td style="text-align: left; max-width: 10%; border-bottom: none">
-                            <label class="radio-container">
-                                <input type="radio" name="addressSelect" value="${n}">
-                                <span class="checkmark"></span>
-                            </label>
-                        </td>
-                        <td>
-                            <h5>${a.contactFirstName} ${a.contactLastName}</h5>
-                            <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        `
-        }
-    });
-    document.getElementById("addressArea").innerHTML = tableaddress;
-}
-
-function showEmployeeList(employee){
-    employee.forEach( function(a) {
-    tableemployee += `
-        <div class="single-products-catagory">
-                <a href="#" onclick="showEmployeeDetail('${a.employeeNumber}', '${a.lastName}', '${a.firstName}', '${a.email}', '${a.officeCode}', '${a.reportsTo}',
-                '${a.jobTitle}', '${a.extension}')">
-                <img src="./amado-master/img/core-img/employeeM.png" alt="">
-                <!-- Hover Content -->
-                <div class="hover-content">
-                    <div class="line"></div>
-                    <p>Number ${a.employeeNumber}</p>
-                    <h5>${a.jobTitle}</h5>
-                    <h4>${a.firstName} ${a.lastName}</h4>
-                </div>
-                <div class="pdDetail" style= "display:none">
-                    <p>${a.employeeNumber}</p>
-                    <p>${a.lastName}</p>
-                    <p>${a.firstName}</p>
-                    <p>${a.extension}</p>
-                    <p>${a.email}</p>
-                    <p>${a.officeCode}</p>
-                    <p>${a.reportsTo}</p>
-                    <p>${a.jobTitle}</p>
-                </div>
-            </a>
-        </div>
-        `
-    });
-    document.getElementById("employeeArea").innerHTML = tableemployee;
-}
 //------------end show script------------//
-
 //drop-down vendor
 function dropdownVender(Vendor){
     var mostvendor = "";
     Vendor.forEach(function(b) {
     mostvendor += `
-        <a href="#" class="avaibility" onclick="filter('${b.productVendor}',8)">
+        <a href="#" class="avaibility" onclick="filterVendor('${b.productVendor}')">
             ${b.productVendor}
         </a>
     `
@@ -172,7 +66,7 @@ function dropdownScale(Scale){
     var mostscale = "";
     Scale.forEach(function(b) {
     mostscale += `
-        <a href="#"  class="avaibility" onclick="filter('${b.productScale}',7)">
+        <a href="#"  class="avaibility" onclick="filterScale('${b.productScale}')">
             ${b.productScale}
         </a>
     `;
@@ -183,29 +77,68 @@ function dropdownScale(Scale){
 
 //-----------------------------categorize --------------------------------//
 
-function categorize(input,type){
+function categorizeVendor(Vendor){
     var textBox = "";
-    input.forEach(function(a) {
-        if(type == 'Vendor'){
-            textBox += `<h1>${a.productVendor}</h1>`;
-            textBox += filter(a.productVendor,8);
-        }
-        if(type == 'Scale'){
-            textBox += `<h1>${a.productScale}</h1>`;
-            textBox += filter(a.productScale,7);
-        }
-        if(type == 'Name'){
-            textBox += `<h1>${a.productScale}</h1>`;
-            textBox += filter(a.productScale,5);
-        }
+    Vendor.forEach(function(singleVendor) {
+        textBox += `<h1>${singleVendor.productVendor}</h1>`;
+        textBox += filterVendor(singleVendor.productVendor);
+    });
+    document.getElementById("productArea").innerHTML = textBox;
+}
 
+function categorizeScale(Scale){
+    var textBox = "";
+    Scale.forEach(function(singleScale) {
+        textBox += `<h1>${singleScale.productScale}</h1>`;
+        textBox += filterScale(singleScale.productScale);
     });
     document.getElementById("productArea").innerHTML = textBox;
 }
 //---------------end categorize -----------------------//
 
 //------------------------------filter----------------------------- //
+function filter(input, type){
+    var filter, product_area, single, value, i, txtValue, a, returnValue;
+    filter = input.value.toUpperCase();
+    product_area = document.getElementById("productArea");
+    single = product_area.getElementsByClassName("single-products-catagory");
+    for (i=0; i<single.length; i++){
+        a = single.getElementsByTagName("a")[0];
+        value = a.getElementsByTagName("p")[type];
+        if(value){
+            txtValue = value.textContent || value.innerText;
+            if(txtValue.toUpperCase().indexOf(filter) > -1){
+                returnValue += `<div class="single-products-catagory">${single[i].innerHTML}</div>`;
+                a.style.display = '';
+            }else{
+                a.style.display = 'none';
+            }
+        }
+    }
+    document.getElementById("productArea").innerHTML = returnvalue;
+    return returnValue;
+}
 
+function filterByProductName() {
+    var input, filter, slot, single_products_catagory, pdName, i, txtValue, a;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    slot = document.getElementById("productArea");
+    single_products_catagory = slot.getElementsByClassName("single-products-catagory");
+    for (i = 0; i < single_products_catagory.length; i++) {
+        a = single_products_catagory[i].getElementsByTagName("a")[0];
+        pdDetail = a.getElementsByClassName("pdDetail");
+        pdName = a.getElementsByTagName("p")[5];
+        if (pdName) {
+            txtValue = pdName.textContent || pdName.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                single_products_catagory[i].style.display = "";
+            } else {
+                single_products_catagory[i].style.display = "none";
+            }
+        }
+    }
+}
 // use when delete product
 function findProductCode(input) {
     var slot, single_products_catagory, pdName, i, txtValue, a;
@@ -221,6 +154,63 @@ function findProductCode(input) {
             }
         }
     }
+}
+
+// filter Vender
+function filterVendor(Vendor){
+    var slot, filter, single_products_catagory, pdVendor, i, txtValue, a;
+    var newinnerHtml = "";
+    // var Vendor = "MIN LIN DIECAST";
+    filter = Vendor.toUpperCase();
+    slot = document.getElementById("productArea");
+    single_products_catagory = slot.getElementsByClassName("single-products-catagory");
+    for (i = 0; i < single_products_catagory.length; i++) {
+        //single_products_catagory[i].style.position="absolute";
+        a = single_products_catagory[i].getElementsByTagName("a")[0];
+        // pdDetail = a.getElementsByClassName("pdDetail");
+        pdVendor = a.getElementsByTagName("p")[8];
+        if (pdVendor) {
+            txtValue = pdVendor.textContent || pdVendor.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                single_products_catagory[i].style.display = "";
+                newinnerHtml += `
+                    <div class="single-products-catagory">
+                        ${single_products_catagory[i].innerHTML}
+                    </div> `;
+                // document.getElementById("productArea").insertAdjacentHTML("afterend", filteredList);
+            } else {
+                single_products_catagory[i].style.display = "none";
+            }
+        }
+    }
+    return newinnerHtml;
+}
+function filterScale(Scale) {
+    var slot, filter, single_products_catagory, pdScale, i, txtValue, a;
+    var newinnerHtml = "";
+    filter = Scale.toUpperCase();
+    slot = document.getElementById("productArea");
+    single_products_catagory = slot.getElementsByClassName("single-products-catagory");
+    for (i = 0; i < single_products_catagory.length; i++) {
+        //single_products_catagory[i].style.position="absolute";
+        a = single_products_catagory[i].getElementsByTagName("a")[0];
+        // pdDetail = a.getElementsByClassName("pdDetail");
+        pdScale = a.getElementsByTagName("p")[7];
+        if (pdScale) {
+            txtValue = pdScale.textContent || pdScale.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                single_products_catagory[i].style.display = "";
+                newinnerHtml += `
+                <div class="single-products-catagory">
+                    ${single_products_catagory[i].innerHTML}
+                </div> `;
+                // document.getElementById("productArea").insertAdjacentHTML("afterend", filteredList);
+            } else {
+                single_products_catagory[i].style.display = "none";
+            }
+        }
+    }
+    return newinnerHtml;
 }
 //-----------------------------end filter ------------------//
 
@@ -307,52 +297,6 @@ function showProductDetail(a){
 }
 
 // popup employee detail
-function showEmployeeDetail(number, lname, fname, email, office, report, job, exetension){
-    var box = `
-    <span onclick="document.getElementById('id02').style.display='none'"
-        class="close" title="Close Modal">&times;
-    </span>
-    <form class="modal-content animate" action="/action_page.php">
-        <div class="container">
-            <div class="single-product-area section-padding-100 clearfix" >
-                <div class="container-fluid" >
-                    <div class="row">
-                        <div class="col-lg-7">
-                            <div class="single_product_thumb">
-                                <div id="product_details_slider" class="carousel slide" data-ride="carousel">
-                                    <div class="carousel-inner">
-                                            <a class="gallery_img" href="./amado-master/img/core-img/employeeM.png">
-                                                <img class="d-block w-100" src="./amado-master/img/core-img/employeeM.png" alt="First slide">
-                                            </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-lg-5">
-                            <div class="single_product_desc">
-                                <div class="product-meta-data">
-                                    <div class="line"></div>
-                                        <p class="product-price">Number ${number}</p>
-                                            <h4>${fname} ${lname}</h6>
-                                            <p class="avaibility"><i class="fa fa-circle"></i> ${email}</p><br>
-                                            <h5>Job: ${job}</h5>
-                                            <h5>OfficeCode ${office}</h5>
-                                            <h5>Report To ${report}</h5>
-                                        <p>extension ${exetension}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-    `;
-    document.getElementById("id02").innerHTML = box;
-    document.getElementById("id02").style.display = 'block';
-}
-
 // edit product detail
 function EditProductDetail(a){
     $.ajaxSetup({
@@ -437,59 +381,6 @@ function EditProductDetail(a){
     document.getElementById("id03").style.display = 'block';
     }
     });
-}
-
-// edit employee detail
-function EditEmployeeDetail(number, lname, fname, email, office, report, job, exetension){
-    var box = `
-    <span onclick="document.getElementById('id03').style.display='none'"
-        class="close" title="Close Modal">&times;
-    </span>
-    <form class="modal-content animate" action="/action_page.php">
-        <div class="container">
-            <div class="single-product-area section-padding-100 clearfix" >
-                <div class="container-fluid" >
-                    <div class="row">
-                        <div class="col-lg-7">
-                            <div class="single_product_thumb">
-                                <div id="product_details_slider" class="carousel slide" data-ride="carousel">
-                                    <div class="carousel-inner">
-                                            <a class="gallery_img" href="./amado-master/img/core-img/employeeM.png">
-                                                <img class="d-block w-100" src="./amado-master/img/core-img/employeeM.png" alt="First slide">
-                                            </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-lg-5">
-                            <div class="single_product_desc">
-                                <div class="product-meta-data">
-                                    <div class="line"></div>
-                                        <form>
-                                            <p>Number: <input type="text" name="number" value="${number}"></p>
-                                            <p>FirstName: <input type="text" name="text" value="${fname}"></p>
-                                            <p>LastName: <input type="text" name="text" value="${lname}"></p>
-                                            <p>Email: <input type="text" name="text" value="${email}"></p>
-                                            <p>JobTitle: <input type="text" name="text" value="${job}"></p>
-                                            <p>OfficeCode: <input type="text" name="text" value="${office}"></p>
-                                            <p>ReportTo: <input type="text" name="text" value="${report}"></p>
-                                            <p>Extension: <input type="text" name="text" value="${exetension}"></p>
-                                        </form>
-                                    </div>
-                                    <a href="#" class="btn amado-btn">Delete</a>
-                                    <a href="#" class="btn amado-btn">Save</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-    `;
-    document.getElementById("id03").innerHTML = box;
-    document.getElementById("id03").style.display = 'block';
-
 }
 //------------------------End Pop-up--------------------------//
 
@@ -578,38 +469,3 @@ function deleteitem(a){
     });
 }
 // ----------------------End Delete-----------------------------//
-function order_calculator(){
-    //var table = document.getElementById("order_table");
-    var body = document.getElementById("order_table_body");
-    var tr = body.getElementsByTagName("tr");
-    console.log(tr);
-    var sum = 0;
-    for(var i=0; i<tr.length; i++){
-        var price = tr[i].getElementsByTagName("td")[2].innerText;
-        console.log(price);
-        var num = document.getElementById(`qty${i}`).value;
-        console.log(num);
-        sum += price*num;
-    }
-    document.getElementById("sumprice").innerHTML = sum;
-}
-
-function ShowShipping(input){
-    var shipping_table="";
-    input.forEach(function(a){
-        shipping_table+=`
-        <tr>
-            <td><h5>${a.orderNumber}</h5></td>
-            <td><h5>${a.orderDate}</h5></td>
-            <td><h5>${a.requiredDate}</h5></td>
-            <td><h5>${a.shippedDate}</h5></td>
-            <td><h5>${a.status}</h5></td>
-            <td><h5>${a.comments}</h5></td>
-            <td><h5>${a.customerNumber}</h5></td>
-            <td><a href="#" onclick="document.getElementById('id04').style.display='block'" class="btn amado-btn" style="min-width:50px">Edit</a></td>
-        </tr>
-        `;
-    });
-    document.getElementById('order_table_body').innerHTML = shipping_table;
-
-}

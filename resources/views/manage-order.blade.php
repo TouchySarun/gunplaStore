@@ -51,7 +51,7 @@
 
     <!-- ##### Main Content Wrapper Start ##### -->
     <div class="main-content-wrapper d-flex clearfix">
-    
+
         <!-- Mobile Nav (max width 767px)-->
         <div class="mobile-nav">
             <!-- Navbar Brand -->
@@ -77,7 +77,7 @@
 
         <!-- Header Area Start -->
         <header class="header-area clearfix">
-            
+
             <!-- Close Icon -->
             <!-- <div class="nav-close">
                 <i class="fa fa-close" aria-hidden="true"></i>
@@ -176,16 +176,16 @@
                 </div>
         </header>
         <!-- Header Area End -->
-        
+
         <!-- Product Catagories Area Start -->
         <div class="products-catagories-area clearfix" id="productArea" >
-        
+
         </div>
         <script>
             var json = <?php echo $jsonProduct?>;
             var Vendor = <?php echo $jsonVendor?>;
             var Scale = <?php echo $jsonScale?>;
-            updateProductOrderList(json);
+            showProduct(json,false,true);
             dropdownVender(Vendor);
             dropdownScale(Scale);
         </script>
@@ -194,11 +194,11 @@
     </div>
     <br>
     <!-- ##### Main Content Wrapper End ##### -->
-    
+
     <footer class="footer_area">
         <div >
         <!-- Logo -->
-        <a href="/welcome" style="padding:0px 0px 0px 50px"><img src="./amado-master/img/core-img/logoDarkBG.png" alt=""></a>  
+        <a href="/welcome" style="padding:0px 0px 0px 50px"><img src="./amado-master/img/core-img/logoDarkBG.png" alt=""></a>
         </div>
     </footer>
 

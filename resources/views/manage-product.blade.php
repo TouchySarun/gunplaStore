@@ -25,7 +25,7 @@
         <p>jobTitle</p>
         <p>employeeNumber</p>
     </div>
-    
+
     <!-- Search Wrapper Area Start -->
     <div class="search-wrapper section-padding-50">
         <div class="search-close">
@@ -105,7 +105,7 @@
                         </div>
                     </form>
                 </div>
-                
+
                 <div id="id01" class="modal">
                     <span onclick="document.getElementById('id01').style.display='none'"
                         class="close" title="Close Modal">&times;
@@ -198,14 +198,14 @@
                 </div>
         </header>
         <!-- Header Area End -->
-        
+
         <!-- Product Catagories Area Start -->
         <div class="products-catagories-area clearfix" id="productArea"></div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script type="text/javascript">
             var json = <?php echo $jsonProduct?>;
-            updateProductList(json);
-            
+            showProduct(json,true,false);
+
         </script>
         <!-- Product Catagories Area End -->
     </div>
@@ -216,7 +216,7 @@
     <footer class="footer_area">
         <div >
         <!-- Logo -->
-        <a href="/welcome" style="padding:0px 0px 0px 50px"><img src="./amado-master/img/core-img/logoDarkBG.png" alt=""></a>  
+        <a href="/welcome" style="padding:0px 0px 0px 50px"><img src="./amado-master/img/core-img/logoDarkBG.png" alt=""></a>
         </div>
     </footer>
     <!-- ##### Footer Area End ##### -->
