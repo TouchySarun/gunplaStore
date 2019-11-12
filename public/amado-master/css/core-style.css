@@ -338,6 +338,12 @@ img {
 .mb-100 {
   margin-bottom: 100px !important; }
 
+.ml-5 {
+  margin-left: 5px !important; }
+
+.ml-10 {
+  margin-left: 10px !important; }
+
 .ml-15 {
   margin-left: 15px !important; }
 
@@ -514,6 +520,10 @@ img {
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex; } }
+  .mobile-nav .amado-navbar-user {
+    text-align: right; }
+    .mobile-nav .amado-navbar-user p {
+      color: #fbb710;}
   .mobile-nav .amado-navbar-brand {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 100px;

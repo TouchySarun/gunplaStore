@@ -61,6 +61,10 @@
 
         <!-- Header Area Start -->
         <header class="header-area clearfix">
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4471b21efff154c635463391bde7275d8417da9f
             <!-- Logo -->
             <div class="logo">
                 <a href="/"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
@@ -136,6 +140,7 @@
                 </a>
             </div>
 
+<<<<<<< HEAD
         </header>
         <!-- Header Area End -->
         <!-- Product Catagories Area Start -->
@@ -152,6 +157,8 @@
 
     </div>
     <!-- ##### Main Content Wrapper End ##### -->
+=======
+>>>>>>> 4471b21efff154c635463391bde7275d8417da9f
         <!-- Pop up -->
                 <!--Login pop up-->
                 <div id="id01" class="modal">

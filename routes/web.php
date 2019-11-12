@@ -32,6 +32,7 @@ Route::get('/mnpd','DataController@mnproduct');
 Route::get('/mnod','DataController@mnorder');
 Route::get('/mnem','DataController@mnemployee');
 Route::get('/order','DataController@order');
+<<<<<<< HEAD
 Route::get('/checkout','DataController@checkout');
 Route::get('/shipping','DataController@shipping');
 Route::get('/promotion','DataController@promotion');
@@ -41,9 +42,24 @@ Route::post('/insertProduct','DataController@insertProduct');
 Route::post('/updateProduct/{code}','DataController@updateProduct');
 Route::post('/login', 'DataController@login');
 Route::post('/stock', 'DataController@stock');
+=======
+// Route::get('/checkout','DataController@checkout');
+Route::get('/shipping','DataController@shipping');
+Route::get('/promotion','DataController@promotion');
+
+//### Login ###
+Route::post('/login', 'DataController@login');
+
+//### Insert and Update Function ###
+>>>>>>> 4471b21efff154c635463391bde7275d8417da9f
 Route::post('/insertProduct','DataController@insertProduct');
 Route::post('/insertEm','DataController@insertEm');
 Route::post('/updateProduct/{code}','DataController@updateProduct');
 Route::post('/updateEm/{code}','DataController@updateEm');
+<<<<<<< HEAD
+=======
+
+//### Delete Function ###
+>>>>>>> 4471b21efff154c635463391bde7275d8417da9f
 Route::delete('/deleteProduct/{code}','DataController@deleteProduct');
 Route::delete('/deleteEm/{code}','DataController@deleteEm');
