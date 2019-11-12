@@ -7,7 +7,6 @@ var tableaddress = "";
 //--------------Show script------------------//
 function filter(input, type){
     //name 5 / id 4 / scale 7 / vendor 8
-    console.log(input||type);
     var filter, product_area, single, value, i, txtValue, a, returnValue="";
     filter = input.toUpperCase();
     product_area = document.getElementById("productArea");
@@ -15,7 +14,6 @@ function filter(input, type){
     for (i=0; i<single.length; i++){
         a = single[i].getElementsByTagName("a")[0];
         value = a.getElementsByTagName("p")[type];
-        console.log(value.innerHTML);
         if(value){
             txtValue = value.textContent || value.innerText;
             if(txtValue.toUpperCase().indexOf(filter) > -1){
@@ -26,7 +24,6 @@ function filter(input, type){
             }
         }
     }
-    //document.getElementById("productArea").innerHTML = returnValue;
     return returnValue;
 }
 
@@ -306,52 +303,7 @@ function showProductDetail(a){
     });
 }
 
-// popup employee detail
-function showEmployeeDetail(number, lname, fname, email, office, report, job, exetension){
-    var box = `
-    <span onclick="document.getElementById('id02').style.display='none'"
-        class="close" title="Close Modal">&times;
-    </span>
-    <form class="modal-content animate" action="/action_page.php">
-        <div class="container">
-            <div class="single-product-area section-padding-100 clearfix" >
-                <div class="container-fluid" >
-                    <div class="row">
-                        <div class="col-lg-7">
-                            <div class="single_product_thumb">
-                                <div id="product_details_slider" class="carousel slide" data-ride="carousel">
-                                    <div class="carousel-inner">
-                                            <a class="gallery_img" href="./amado-master/img/core-img/employeeM.png">
-                                                <img class="d-block w-100" src="./amado-master/img/core-img/employeeM.png" alt="First slide">
-                                            </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-lg-5">
-                            <div class="single_product_desc">
-                                <div class="product-meta-data">
-                                    <div class="line"></div>
-                                        <p class="product-price">Number ${number}</p>
-                                            <h4>${fname} ${lname}</h6>
-                                            <p class="avaibility"><i class="fa fa-circle"></i> ${email}</p><br>
-                                            <h5>Job: ${job}</h5>
-                                            <h5>OfficeCode ${office}</h5>
-                                            <h5>Report To ${report}</h5>
-                                        <p>extension ${exetension}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-    `;
-    document.getElementById("id02").innerHTML = box;
-    document.getElementById("id02").style.display = 'block';
-}
+
 
 // edit product detail
 function EditProductDetail(a){
@@ -490,6 +442,97 @@ function EditEmployeeDetail(number, lname, fname, email, office, report, job, ex
     document.getElementById("id03").innerHTML = box;
     document.getElementById("id03").style.display = 'block';
 
+}
+// popup employee detail
+function showEmployeeDetail(number, lname, fname, email, office, report, job, exetension){
+    var box = `
+    <span onclick="document.getElementById('id02').style.display='none'"
+        class="close" title="Close Modal">&times;
+    </span>
+    <form class="modal-content animate" action="/action_page.php">
+        <div class="container">
+            <div class="single-product-area section-padding-100 clearfix" >
+                <div class="container-fluid" >
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <div class="single_product_thumb">
+                                <div id="product_details_slider" class="carousel slide" data-ride="carousel">
+                                    <div class="carousel-inner">
+                                            <a class="gallery_img" href="./amado-master/img/core-img/employeeM.png">
+                                                <img class="d-block w-100" src="./amado-master/img/core-img/employeeM.png" alt="First slide">
+                                            </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-5">
+                            <div class="single_product_desc">
+                                <div class="product-meta-data">
+                                    <div class="line"></div>
+                                        <p class="product-price">Number ${number}</p>
+                                            <h4>${fname} ${lname}</h6>
+                                            <p class="avaibility"><i class="fa fa-circle"></i> ${email}</p><br>
+                                            <h5>Job: ${job}</h5>
+                                            <h5>OfficeCode ${office}</h5>
+                                            <h5>Report To ${report}</h5>
+                                        <p>extension ${exetension}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    `;
+    document.getElementById("id02").innerHTML = box;
+    document.getElementById("id02").style.display = 'block';
+}
+function showEmployeeDetail(number, lname, fname, email, office, report, job, exetension, editAble){
+    var box = `
+    <span onclick="document.getElementById('id02').style.display='none'"
+        class="close" title="Close Modal">&times;
+    </span>
+    <form class="modal-content animate" action="/action_page.php">
+        <div class="container">
+            <div class="single-product-area section-padding-100 clearfix" >
+                <div class="container-fluid" >
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <div class="single_product_thumb">
+                                <div id="product_details_slider" class="carousel slide" data-ride="carousel">
+                                    <div class="carousel-inner">
+                                            <a class="gallery_img" href="./amado-master/img/core-img/employeeM.png">
+                                                <img class="d-block w-100" src="./amado-master/img/core-img/employeeM.png" alt="First slide">
+                                            </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-5">
+                            <div class="single_product_desc">
+                                <div class="product-meta-data">
+                                    <div class="line"></div>
+                                        <p class="product-price">Number ${number}</p>
+                                            <h4>${fname} ${lname}</h6>
+                                            <p class="avaibility"><i class="fa fa-circle"></i> ${email}</p><br>
+                                            <h5>Job: ${job}</h5>
+                                            <h5>OfficeCode ${office}</h5>
+                                            <h5>Report To ${report}</h5>
+                                        <p>extension ${exetension}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    `;
+    document.getElementById("id02").innerHTML = box;
+    document.getElementById("id02").style.display = 'block';
 }
 //------------------------End Pop-up--------------------------//
 
