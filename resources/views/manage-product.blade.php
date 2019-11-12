@@ -174,7 +174,6 @@
                                 </div>
                                 <div class="product-meta-data">
                                     <form>
-                                    {{ csrf_field() }}
                                         <p>OrderNumber: <input type="text" id="onumber" name="onumber" placeholder="10100"></p>
                                         <p>ProductCode: <input type="text" id="code" name="code" placeholder="S10_1678"></p>
                                         <p>Name: <input type="text" id="name" name="name" placeholder="1972 Alfa Romeo GTA"></p>

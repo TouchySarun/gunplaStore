@@ -1,7 +1,7 @@
 //require('./bootstrap');
 //product = code, name, line, scale, vendor, descrip, instock, price, msrp
-var tableproduct = "<br><br><br>";//All product List in JSON
-var tableemployee = "<br><br><br>";
+var tableproduct = "";//All product List in JSON
+var tableemployee = "";
 var jasonproduct = "";
 var tableaddress = "";
 //--------------Show script------------------//
@@ -26,15 +26,15 @@ function filter(input, type){
     }
     return returnValue;
 }
-
 function showProduct(json,editable,orderable){
     //updateProductList = showProduct(json,true,false)
     //updateProductOrderList = showProduct(json,false,true)
+    var i = 0;
     tableproduct = '<br><br><br>';
     json.forEach( function(a) {
     tableproduct += `
         <div class="single-products-catagory">
-            <a href="#" onclick="showProductDetail('${a.productCode}')">
+            <a href="#" onclick="PopUpProduct('${a.productCode}, editable')">
                 <img src="./amado-master/img/bg-img/1.jpg" alt="">
                 <!-- Hover Content -->
                 <div class="hover-content">
@@ -58,20 +58,25 @@ function showProduct(json,editable,orderable){
                 </div>
             </a>`;
     if(editable === true){
-        tableproduct += `<button href="#" onclick="EditProductDetail('${a.productCode}')" class="btn amado-btn qty-btn">Edit</button>`;
+        tableproduct += `<button href="#" onclick="PopUpProduct('${a.productCode}',true)" class="btn amado-btn qty-btn">Edit</button>`;
     }
     if(orderable === true){
+
         tableproduct += `
-        <div class="qty-btn d-flex">
-            <input style="text-align: center" type="number" class="qty-text" id="qty3" step="1" min="0" max="300" name="quantity" value="0">
-            <button href="#" class="btn amado-btn" style="margin:0px">Buy</button>
+        <div class="d-flex" class="btn amado-btn">
+            <div style="width:20%;margin:15px 0px">
+                <span class="qty-minus" onclick="var effect = document.getElementById('qty${i}'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 0 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                <input style="width:20%" id="qty${i}" step="1" min="0" max="300" name="quantity" value="0">
+                <span class="qty-plus" onclick="var effect = document.getElementById('qty${i}'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
+            </div>
+            <button href="#" onclick="AddToOrder('${a.productCode}', '${a.price}', document.getElementById('qty${i}').value)" class="btn amado-btn" style="margin:0px">Buy</button>
         </div>`;
+        i++;
     }
     tableproduct += `</div>`;
     });
     document.getElementById("productArea").innerHTML = tableproduct;
 }
-
 function showCustomerAddress(json) {
     var n = 0;
     json.forEach( function(a) {
@@ -119,8 +124,9 @@ function showCustomerAddress(json) {
     });
     document.getElementById("addressArea").innerHTML = tableaddress;
 }
-
-function showEmployeeList(employee){
+function showEmployee(employee){
+    tableemployee="<br><br><br>";
+    jsonemployee = employee;
     employee.forEach( function(a) {
     tableemployee += `
         <div class="single-products-catagory">
@@ -144,85 +150,65 @@ function showEmployeeList(employee){
                     <p>${a.reportsTo}</p>
                     <p>${a.jobTitle}</p>
                 </div>
+                <a href="#" onclick="PopUpEmployee('${a.employeeNumber}', '${a.lastName}', '${a.firstName}', '${a.email}', '${a.officeCode}', '${a.reportsTo}',
+                '${a.jobTitle}', '${a.extension}', true)" class="btn amado-btn">Edit</a>
             </a>
         </div>
         `
     });
     document.getElementById("employeeArea").innerHTML = tableemployee;
 }
-//------------end show script------------//
+//---------------Pop Up ----------------//
+function PopUpEmployee(number, lname, fname, email, office, report, job, exetension, editAble){
 
-//drop-down vendor
-function dropdownVender(Vendor){
-    var mostvendor = "";
-    Vendor.forEach(function(b) {
-    mostvendor += `
-        <a href="#" class="avaibility" onclick="filter('${b.productVendor}',8)">
-            ${b.productVendor}
-        </a>
-    `
-    });
-    document.getElementById('Vendor').innerHTML = mostvendor;
-}
-
-function dropdownScale(Scale){
-    var mostscale = "";
-    Scale.forEach(function(b) {
-    mostscale += `
-        <a href="#"  class="avaibility" onclick="filter('${b.productScale}',7)">
-            ${b.productScale}
-        </a>
-    `;
-    });
-    document.getElementById('Scale').innerHTML = mostscale;
-
-}
-
-//-----------------------------categorize --------------------------------//
-
-function categorize(input,type){
-    var textBox = "";
-    input.forEach(function(a) {
-        if(type == 'Vendor'){
-            textBox += `<h1>${a.productVendor}</h1>`;
-            textBox += filter(a.productVendor,8);
-        }
-        if(type == 'Scale'){
-            textBox += `<h1>${a.productScale}</h1>`;
-            textBox += filter(a.productScale,7);
-        }
-        if(type == 'Name'){
-            textBox += `<h1>${a.productScale}</h1>`;
-            textBox += filter(a.productScale,5);
-        }
-
-    });
-    document.getElementById("productArea").innerHTML = textBox;
-}
-//---------------end categorize -----------------------//
-
-//------------------------------filter----------------------------- //
-
-// use when delete product
-function findProductCode(input) {
-    var slot, single_products_catagory, pdName, i, txtValue, a;
-    slot = document.getElementById("productArea");
-    single_products_catagory = slot.getElementsByClassName("single-products-catagory");
-    for (i = 0; i < single_products_catagory.length; i++) {
-        a = single_products_catagory[i].getElementsByTagName("a")[0];
-        pdName = a.getElementsByTagName("p")[4];
-        if (pdName) {
-            txtValue = pdName.textContent || pdName.innerText;
-            if (txtValue.indexOf(input) > -1) {
-                single_products_catagory[i].style.display = "none";
-            }
-        }
+    //showEmployeeDetail(a) = PopUpProduct(a, false)
+    //EditEmployeeDetail(a) = PopUpProduct(a, true)
+    var box = `
+            <span onclick="document.getElementById('id03').style.display='none'"
+                class="close" title="Close Modal">&times;
+            </span>
+            <form class="modal-content animate" action="/action_page.php">
+                <div class="container">
+                    <div class="single-product-area section-padding-100 clearfix" >
+                        <div class="container-fluid" >
+                            <div class="row">
+                                <div class="col-lg-7">
+                                    <div class="single_product_thumb">
+                                        <div id="product_details_slider" class="carousel slide" data-ride="carousel">
+                                            <div class="carousel-inner">
+                                                    <a class="gallery_img" href="./amado-master/img/core-img/employeeM.png">
+                                                        <img class="d-block w-100" src="./amado-master/img/core-img/employeeM.png" alt="First slide">
+                                                    </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-5">
+                                    <div class="single_product_desc">
+                                        <div class="product-meta-data">
+                                            <div class="line"></div>
+                                                <form>
+                                                    <p>FirstName: <input type="text" id="efn" name="text" value="${fname}"></p>
+                                                    <p>LastName: <input type="text" id="eln" name="text" value="${lname}"></p>
+                                                    <p>Email: <input type="text" id="eem" name="text" value="${email}"></p>
+                                                    <p>JobTitle: <input type="text" id="ej" name="text" value="${job}"></p>
+                                                    <p>OfficeCode: <input type="text" id="eof" name="text" value="${office}"></p>
+                                                    <p>ReportTo: <input type="text" id="er" name="text" value="${report}"></p>
+                                                    <p>Extension: <input type="text" id="ee" name="text" value="${exetension}"></p>
+                                                </form>
+                                            </div>`;
+    if(editAble===true){
+        box += `<a href="#" class="btn amado-btn" onclick="deleteem('${number}')">Delete</a>
+                <a href="#" class="btn amado-btn" onclick="updateem('${number}')">Save</a>`;
     }
-}
-//-----------------------------end filter ------------------//
+    box += `</div></div></div></div></div></div></div></form>`;
+    document.getElementById("id03").innerHTML = box;
+    document.getElementById("id03").style.display = 'block';
 
-//------------------------------Pop-Up----------------------------- //
-function showProductDetail(a){
+}
+function PopUpProduct(a, editAble){
+    //showProductDetail(a) = PopUpProduct(a, false)
+    //EditProductDetail(a) = PopUpProduct(a, true)
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -277,296 +263,112 @@ function showProductDetail(a){
                             </div>
                         </div>
                         <div class="col-12 col-lg-5">
-                            <div class="single_product_desc">
-                                <div class="product-meta-data">
-                                    <div class="line"></div>
-                                    <p class="product-price">$${b.buyPrice}</p>
-                                        <h3>${b.productName}</h6>
-                                        <h4>Scale ${b.productScale}</h6>
-                                        <h5>Vendor ${b.productVendor}</h5>
-                                    <p class="avaibility"><i class="fa fa-circle"></i> ${b.quantityInStock} In Stock</p>
-                                </div>
-                                <div class="short_overview my-5">
-                                    <p>${b.productDescription}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                            <div class="single_product_desc">`;
+    if(editAble === true){
+        box += `<div class="product-meta-data">
+                <div class="line"></div>
+                <form>
+                    <p>Price: <input type="text" id="price" name="number" value="${b.buyPrice}"></p>
+                    <p>Name: <input type="text" id="name" name="text" value="${b.productName}"></p>
+                    <p>Scale: <input type="text" id="scale" name="text" value="${b.productScale}"></p>
+                    <p>Vendor: <input type="text" id="vendor" name="text" value="${b.productVendor}"></p>
+                    <p>Instock: <input type="text" id="stock" name="text" value="${b.quantityInStock}"></p>
+                </form>
             </div>
+            <div class="short_overview my-5">
+                <p>Description: <textarea id="des" name="message" style="width:400px; height:250px;">${b.productDescription}</textarea></p>
+            </div>
+            <a href="#" class="btn amado-btn" onclick="deleteitem('${b.productCode}')">Delete</a>
+            <a href="#" class="btn amado-btn" onclick="updateitem('${b.productCode}')">Save</a>
+
+            </div></div></div></div></div></div></form>`;
+    }else{
+        box += `
+        <div class="product-meta-data">
+            <div class="line"></div>
+            <p class="product-price">$${b.buyPrice}</p>
+                <h3>${b.productName}</h6>
+                <h4>Scale ${b.productScale}</h6>
+                <h5>Vendor ${b.productVendor}</h5>
+            <p class="avaibility"><i class="fa fa-circle"></i> ${b.quantityInStock} In Stock</p>
         </div>
-    </form>
-    `;
+        <div class="short_overview my-5">
+            <p>${b.productDescription}</p>
+        </div>
+        </div></div></div></div></div></div></form>`
+    }
     document.getElementById("id02").innerHTML = box;
     document.getElementById("id02").style.display = 'block';
-        }
-    });
-}
-
-
-
-// edit product detail
-function EditProductDetail(a){
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    $.ajax({
-        type: 'get',
-        url: '/editproduct/'+a,
-        success: function (data) {
-            var b = JSON.parse(data)[0];
-        var box = `
-        <span onclick="document.getElementById('id03').style.display='none'"
-            class="close" title="Close Modal">&times;
-        </span>
-        <form class="modal-content animate" action="/action_page.php">
-            <div class="container">
-                <div class="single-product-area section-padding-100 clearfix" >
-                    <div class="container-fluid" >
-                        <div class="row">
-                            <div class="col-lg-7">
-                                <div class="single_product_thumb">
-                                    <div id="product_details_slider" class="carousel slide" data-ride="carousel">
-                                        <ol class="carousel-indicators">
-                                            <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(./amado-master/img/product-img/pro-big-1.jpg);"></li>
-                                            <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(./amado-master/img/product-img/pro-big-2.jpg);"></li>
-                                            <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(./amado-master/img/product-img/pro-big-3.jpg);"></li>
-                                            <li data-target="#product_details_slider" data-slide-to="3" style="background-image: url(./amado-master/img/product-img/pro-big-4.jpg);"></li>
-                                        </ol>
-                                        <div class="carousel-inner">
-                                            <div class="carousel-item active">
-                                                <a class="gallery_img" href="./amado-master/img/product-img/pro-big-1.jpg">
-                                                <img class="d-block w-100" src="./amado-master/img/product-img/pro-big-1.jpg" alt="First slide">
-                                                </a>
-                                            </div>
-                                            <div class="carousel-item">
-                                                <a class="gallery_img" href="./amado-master/img/product-img/pro-big-2.jpg">
-                                                <img class="d-block w-100" src="./amado-master/img/product-img/pro-big-2.jpg" alt="Second slide">
-                                                </a>
-                                            </div>
-                                            <div class="carousel-item">
-                                                <a class="gallery_img" href="./amado-master/img/product-img/pro-big-3.jpg">
-                                                <img class="d-block w-100" src="./amado-master/img/product-img/pro-big-3.jpg" alt="Third slide">
-                                                </a>
-                                            </div>
-                                            <div class="carousel-item">
-                                                <a class="gallery_img" href="./amado-master/img/product-img/pro-big-4.jpg">
-                                                <img class="d-block w-100" src="./amado-master/img/product-img/pro-big-4.jpg" alt="Fourth slide">
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-5">
-                                <div class="single_product_desc">
-                                    <div class="product-meta-data">
-                                        <div class="line"></div>
-                                        <form>
-                                            <p>Price: <input type="text" id="price" name="number" value="${b.buyPrice}"></p>
-                                            <p>Name: <input type="text" id="name" name="text" value="${b.productName}"></p>
-                                            <p>Scale: <input type="text" id="scale" name="text" value="${b.productScale}"></p>
-                                            <p>Vendor: <input type="text" id="vendor" name="text" value="${b.productVendor}"></p>
-                                            <p>Instock: <input type="text" id="stock" name="text" value="${b.quantityInStock}"></p>
-                                        </form>
-                                    </div>
-                                    <div class="short_overview my-5">
-                                        <p>Description: <textarea id="des" name="message" style="width:400px; height:250px;">${b.productDescription}</textarea></p>
-                                    </div>
-                                    <a href="#" class="btn amado-btn" onclick="deleteitem('${b.productCode}')">Delete</a>
-                                    <a href="#" class="btn amado-btn" onclick="updateitem('${b.productCode}')">Save</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-        `;
-    document.getElementById("id03").innerHTML = box;
-    document.getElementById("id03").style.display = 'block';
     }
     });
 }
+//------------end show script------------//
 
-// edit employee detail
-function EditEmployeeDetail(number, lname, fname, email, office, report, job, exetension){
-    var box = `
-    <span onclick="document.getElementById('id03').style.display='none'"
-        class="close" title="Close Modal">&times;
-    </span>
-    <form class="modal-content animate" action="/action_page.php">
-        <div class="container">
-            <div class="single-product-area section-padding-100 clearfix" >
-                <div class="container-fluid" >
-                    <div class="row">
-                        <div class="col-lg-7">
-                            <div class="single_product_thumb">
-                                <div id="product_details_slider" class="carousel slide" data-ride="carousel">
-                                    <div class="carousel-inner">
-                                            <a class="gallery_img" href="./amado-master/img/core-img/employeeM.png">
-                                                <img class="d-block w-100" src="./amado-master/img/core-img/employeeM.png" alt="First slide">
-                                            </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-lg-5">
-                            <div class="single_product_desc">
-                                <div class="product-meta-data">
-                                    <div class="line"></div>
-                                        <form>
-                                            <p>Number: <input type="text" name="number" value="${number}"></p>
-                                            <p>FirstName: <input type="text" name="text" value="${fname}"></p>
-                                            <p>LastName: <input type="text" name="text" value="${lname}"></p>
-                                            <p>Email: <input type="text" name="text" value="${email}"></p>
-                                            <p>JobTitle: <input type="text" name="text" value="${job}"></p>
-                                            <p>OfficeCode: <input type="text" name="text" value="${office}"></p>
-                                            <p>ReportTo: <input type="text" name="text" value="${report}"></p>
-                                            <p>Extension: <input type="text" name="text" value="${exetension}"></p>
-                                        </form>
-                                    </div>
-                                    <a href="#" class="btn amado-btn">Delete</a>
-                                    <a href="#" class="btn amado-btn">Save</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-    `;
-    document.getElementById("id03").innerHTML = box;
-    document.getElementById("id03").style.display = 'block';
-
-}
-// popup employee detail
-function showEmployeeDetail(number, lname, fname, email, office, report, job, exetension){
-    var box = `
-    <span onclick="document.getElementById('id02').style.display='none'"
-        class="close" title="Close Modal">&times;
-    </span>
-    <form class="modal-content animate" action="/action_page.php">
-        <div class="container">
-            <div class="single-product-area section-padding-100 clearfix" >
-                <div class="container-fluid" >
-                    <div class="row">
-                        <div class="col-lg-7">
-                            <div class="single_product_thumb">
-                                <div id="product_details_slider" class="carousel slide" data-ride="carousel">
-                                    <div class="carousel-inner">
-                                            <a class="gallery_img" href="./amado-master/img/core-img/employeeM.png">
-                                                <img class="d-block w-100" src="./amado-master/img/core-img/employeeM.png" alt="First slide">
-                                            </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-lg-5">
-                            <div class="single_product_desc">
-                                <div class="product-meta-data">
-                                    <div class="line"></div>
-                                        <p class="product-price">Number ${number}</p>
-                                            <h4>${fname} ${lname}</h6>
-                                            <p class="avaibility"><i class="fa fa-circle"></i> ${email}</p><br>
-                                            <h5>Job: ${job}</h5>
-                                            <h5>OfficeCode ${office}</h5>
-                                            <h5>Report To ${report}</h5>
-                                        <p>extension ${exetension}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-    `;
-    document.getElementById("id02").innerHTML = box;
-    document.getElementById("id02").style.display = 'block';
-}
-function showEmployeeDetail(number, lname, fname, email, office, report, job, exetension, editAble){
-    var box = `
-    <span onclick="document.getElementById('id02').style.display='none'"
-        class="close" title="Close Modal">&times;
-    </span>
-    <form class="modal-content animate" action="/action_page.php">
-        <div class="container">
-            <div class="single-product-area section-padding-100 clearfix" >
-                <div class="container-fluid" >
-                    <div class="row">
-                        <div class="col-lg-7">
-                            <div class="single_product_thumb">
-                                <div id="product_details_slider" class="carousel slide" data-ride="carousel">
-                                    <div class="carousel-inner">
-                                            <a class="gallery_img" href="./amado-master/img/core-img/employeeM.png">
-                                                <img class="d-block w-100" src="./amado-master/img/core-img/employeeM.png" alt="First slide">
-                                            </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-lg-5">
-                            <div class="single_product_desc">
-                                <div class="product-meta-data">
-                                    <div class="line"></div>
-                                        <p class="product-price">Number ${number}</p>
-                                            <h4>${fname} ${lname}</h6>
-                                            <p class="avaibility"><i class="fa fa-circle"></i> ${email}</p><br>
-                                            <h5>Job: ${job}</h5>
-                                            <h5>OfficeCode ${office}</h5>
-                                            <h5>Report To ${report}</h5>
-                                        <p>extension ${exetension}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-    `;
-    document.getElementById("id02").innerHTML = box;
-    document.getElementById("id02").style.display = 'block';
-}
-//------------------------End Pop-up--------------------------//
-
-// ----------------------Insert-------------------------------//
-// Product
-function updateitem(a){
-    var product = { "pname": document.getElementById("name").value.toString(),
-                    // "pcode": document.getElementById("code").value.toString(),
-                    // "pline": document.getElementById("line").value.toString(),
-                    "pscale": document.getElementById("scale").value.toString(),
-                    "pvendor": document.getElementById("vendor").value.toString(),
-                    "pnumber": document.getElementById("stock").value.toString(),
-                    "pprice": document.getElementById("price").value.toString(),
-                    // "pmsrp": document.getElementById("msrp").value.toString(),
-                    "pdes": document.getElementById("d").value.toString()};
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+//drop-down
+function dropdownVender(Vendor){
+    var mostvendor = "";
+    Vendor.forEach(function(b) {
+    mostvendor += `
+        <a href="#" class="avaibility" onclick="filter('${b.productVendor}',8)">
+            ${b.productVendor}
+        </a>
+    `
     });
-    $.ajax({
-        type: 'post',
-        url: '/updateProduct/'+a,
-        data: product,
-        dataType: "json",
-        success: function (data) {
-            document.getElementById('id03').style.display='none';
-            // updateProductList();
-        }
-    });
+    document.getElementById('Vendor').innerHTML = mostvendor;
 }
-// ---------------------End Insert---------------------------//
+function dropdownScale(Scale){
+    var mostscale = "";
+    Scale.forEach(function(b) {
+    mostscale += `
+        <a href="#"  class="avaibility" onclick="filter('${b.productScale}',7)">
+            ${b.productScale}
+        </a>
+    `;
+    });
+    document.getElementById('Scale').innerHTML = mostscale;
 
-// ---------------------Update-------------------------------//
+}
+//-----------------------------categorize --------------------------------//
+function categorize(input,type){
+    var textBox = "";
+    input.forEach(function(a) {
+        if(type == 'Vendor'){
+            textBox += `<h1>${a.productVendor}</h1>`;
+            textBox += filter(a.productVendor,8);
+        }
+        if(type == 'Scale'){
+            textBox += `<h1>${a.productScale}</h1>`;
+            textBox += filter(a.productScale,7);
+        }
+        if(type == 'Name'){
+            textBox += `<h1>${a.productScale}</h1>`;
+            textBox += filter(a.productScale,5);
+        }
+
+    });
+    document.getElementById("productArea").innerHTML = textBox;
+}
+//---------------end categorize -----------------------//
+//------------------------------filter----------------------------- //
+function findProductCode(input) {
+    var slot, single_products_catagory, pdName, i, txtValue, a;
+    slot = document.getElementById("productArea");
+    single_products_catagory = slot.getElementsByClassName("single-products-catagory");
+    for (i = 0; i < single_products_catagory.length; i++) {
+        a = single_products_catagory[i].getElementsByTagName("a")[0];
+        pdName = a.getElementsByTagName("p")[4];
+        if (pdName) {
+            txtValue = pdName.textContent || pdName.innerText;
+            if (txtValue.indexOf(input) > -1) {
+                single_products_catagory[i].style.display = "none";
+            }
+        }
+    }
+}
+//-----------------------------end filter ------------------//
+
+// ---------------------Insert-------------------------------//
+//Product
 function insertitem(){
     var product = { "pname": document.getElementById("name").value.toString(),
                     "pcode": document.getElementById("code").value.toString(),
@@ -588,13 +390,92 @@ function insertitem(){
         data: product,
         dataType: "json",
         success: function (data) {
-            console.log(data);
             document.getElementById('id04').style.display='none';
-            // updateProductList();
+            showProduct(data,true,false);
         }
     });
 }
-// -----------------------End Update-------------------------//
+function insertem(){
+    var product = { "enumber": document.getElementById("enumber").value.toString(),
+                    "efname": document.getElementById("efname").value.toString(),
+                    "elname": document.getElementById("elname").value.toString(),
+                    "eex": document.getElementById("eex").value.toString(),
+                    "eemail": document.getElementById("eemail").value.toString(),
+                    "ecode": document.getElementById("ecode").value.toString(),
+                    "ere": document.getElementById("ere").value.toString(),
+                    "ejob": document.getElementById("ejob").value.toString()};
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/insertEm',
+        data: product,
+        dataType: "json",
+        success: function (data) {
+            document.getElementById('id04').style.display='none';
+            showEmployee(data);
+        }
+    });
+}
+// -----------------------End Insert-------------------------//
+
+// ----------------------Update-------------------------------//
+// Product
+function updateitem(a){
+    var product = { "pname": document.getElementById("name").value.toString(),
+                    // "pcode": document.getElementById("code").value.toString(),
+                    // "pline": document.getElementById("line").value.toString(),
+                    "pscale": document.getElementById("scale").value.toString(),
+                    "pvendor": document.getElementById("vendor").value.toString(),
+                    "pnumber": document.getElementById("stock").value.toString(),
+                    "pprice": document.getElementById("price").value.toString(),
+                    // "pmsrp": document.getElementById("msrp").value.toString(),
+                    "pdes": document.getElementById("des").value.toString()};
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/updateProduct/'+a,
+        data: product,
+        dataType: "json",
+        success: function (data) {
+            document.getElementById('id03').style.display='none';
+            document.getElementById('id02').style.display='none';
+            showProduct(data, true, false);
+        }
+    });
+}
+function updateem(a){
+    var product = { "efn": document.getElementById("efn").value.toString(),
+                    "eln": document.getElementById("eln").value.toString(),
+                    "ee": document.getElementById("ee").value.toString(),
+                    "eem": document.getElementById("eem").value.toString(),
+                    "eof": document.getElementById("eof").value.toString(),
+                    "er": document.getElementById("er").value.toString(),
+                    "ej": document.getElementById("ej").value.toString()};
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/updateEm/'+a,
+        data: product,
+        dataType: "json",
+        success: function (data) {
+            document.getElementById('id03').style.display='none';
+            showEmployee(data);
+        }
+    });
+}
+// ---------------------End Update---------------------------//
 
 // -----------------------Delete-----------------------------//
 //Product
@@ -609,14 +490,22 @@ function deleteitem(a){
         url: '/deleteProduct/'+a,
         success: function (data) {
             document.getElementById('id03').style.display='none';
-            const index = jsonproduct.findIndex(function(x, a){
-                return x.productCode == a;
-            });
-            if (index !== undefined) {
-                findProductCode(a);
-                // delete jsonproduct[index];
-                // updateProductList(jsonproduct);
-            }
+            showProduct(data, true, false);
+        }
+    });
+}
+function deleteem(a){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'delete',
+        url: '/deleteEm/'+a,
+        success: function (data) {
+            document.getElementById('id03').style.display='none';
+            showEmployee(data);
         }
     });
 }
@@ -625,18 +514,16 @@ function order_calculator(){
     //var table = document.getElementById("order_table");
     var body = document.getElementById("order_table_body");
     var tr = body.getElementsByTagName("tr");
-    console.log(tr);
     var sum = 0;
     for(var i=0; i<tr.length; i++){
         var price = tr[i].getElementsByTagName("td")[2].innerText;
-        console.log(price);
+
         var num = document.getElementById(`qty${i}`).value;
-        console.log(num);
+
         sum += price*num;
     }
     document.getElementById("sumprice").innerHTML = sum;
 }
-
 function ShowShipping(input){
     var shipping_table="";
     input.forEach(function(a){
@@ -655,4 +542,18 @@ function ShowShipping(input){
     });
     document.getElementById('order_table_body').innerHTML = shipping_table;
 
+}
+function stock(){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/stock',
+        success: function (data) {
+            console.log(data);
+        }
+    });
 }

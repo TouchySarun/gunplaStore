@@ -13,6 +13,7 @@
 Route::get('/cart', function () {
     return view('cart');
 });
+
 Route::get('/shop', function () {
     return view('shop');
 });
@@ -39,4 +40,10 @@ Route::get('/editproduct/{code}','DataController@editProduct');
 Route::post('/insertProduct','DataController@insertProduct');
 Route::post('/updateProduct/{code}','DataController@updateProduct');
 Route::post('/login', 'DataController@login');
+Route::post('/stock', 'DataController@stock');
+Route::post('/insertProduct','DataController@insertProduct');
+Route::post('/insertEm','DataController@insertEm');
+Route::post('/updateProduct/{code}','DataController@updateProduct');
+Route::post('/updateEm/{code}','DataController@updateEm');
 Route::delete('/deleteProduct/{code}','DataController@deleteProduct');
+Route::delete('/deleteEm/{code}','DataController@deleteEm');

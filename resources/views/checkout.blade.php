@@ -56,11 +56,7 @@
         <div class="mobile-nav">
             <!-- Navbar Brand -->
             <div class="amado-navbar-brand">
-<<<<<<< HEAD
                 <a  href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
-=======
-                <a href="/"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
->>>>>>> 43a1ad8755b09a7a46bc03992ae64fe46e287d0d
             </div>
             <!-- Navbar Toggler -->
             <div class="amado-navbar-toggler">
@@ -76,11 +72,7 @@
             </div>
             <!-- Logo -->
             <div class="logo">
-<<<<<<< HEAD
                 <a  href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
-=======
-                <a href="/"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
->>>>>>> 43a1ad8755b09a7a46bc03992ae64fe46e287d0d
             </div>
             <!-- Amado Nav -->
             <nav class="amado-nav">
@@ -124,14 +116,14 @@
                             </div>
                             <form>
                                 <div class="form-control" id="addressArea" style="padding: 15px 20px 10px">
-                    
+
                                 </div>
-                                
+
                                 <script>
                                     var customer = <?php echo $jsonCustomer?>;
                                     showCustomerAddress(customer);
                                 </script>
-                                
+
                                 <div class="confirm-control">
                                     <!-- Add Address Button -->
                                     <a href="#" onclick="document.getElementById('id01').style.display='block'" class="btn amado-btn w-100">
@@ -139,8 +131,8 @@
                                     </a>
                                 </div>
                             </form>
-                        
-                            
+
+
 
                             <!-- PopUp Modal -->
                             <div id="id01" class="modal">
@@ -156,7 +148,7 @@
                                         <label for="contactLastName"><b>Last Name</b></label>
                                             <input type="text" placeholder="" name="contactLastName" required>
                                         <label for="customerName"><b>Company Name</b></label>
-                                            <input type="text" placeholder="" name="customerName" required>                            
+                                            <input type="text" placeholder="" name="customerName" required>
                                         <label for="country"><b>Country</b></label>
                                             <input type="text" placeholder="" name="country" required>
                                             <!-- <select class="w-100" id="country">
@@ -186,13 +178,13 @@
                                             class="cancelbtn">Cancel</button>
                                     </div>
                                 </form>
-                            </div>    
+                            </div>
                                 <!-- Remark Area -->
                                 <!-- <div class="col-12 mb-3">
                                     <b>Remark</b>
                                     <textarea name="comment" class="form-control w-100" id="comment" cols="30" rows="10" placeholder="Leave a comment about your order"></textarea>
                                 </div> -->
-                        </div>        
+                        </div>
                     </div>
                     <div class="col-12 col-lg-4">
                         <div class="cart-summary">
@@ -213,11 +205,11 @@
                                 <label></label>
                                     <img class="ml-15" src="./amado-master/img/core-img/paypal.png" alt="">
                                     <img class="ml-15" src="./amado-master/img/core-img/paypal2.png" alt="" height="21" width="30">
-                            
-                            
-                            
-                            
-                            
+
+
+
+
+
                                 <!-- Cash on delivery
                                 <div class="custom-control custom-radio">
                                     <input type="radio" class="custom-control-input" id="cod">
@@ -276,7 +268,7 @@
     <footer class="footer_area">
         <div >
         <!-- Logo -->
-        <a href="/welcome" style="padding:0px 0px 0px 50px"><img src="./amado-master/img/core-img/logoDarkBG.png" alt=""></a>  
+        <a href="/welcome" style="padding:0px 0px 0px 50px"><img src="./amado-master/img/core-img/logoDarkBG.png" alt=""></a>
         </div>
     </footer>
     <!-- ##### Footer Area End ##### -->

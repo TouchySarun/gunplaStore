@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="./amado-master/css/core-style.css">
     <link rel="stylesheet" href="./style.css">
     <script src="./amado-master/js/app.js"></script>
+    <script src="./amado-master/js/order.js"></script>
 </head>
 
 <body>
@@ -59,15 +60,6 @@
                 <a  href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
 
             </div>
-
-            <!-- <li class="active"><a href="index.html">Home</a></li>
-            <li><a href="shop">Shop</a></li>
-            <li><a href="product-details.html">Product</a></li>
-            <li><a href="cart.html">Cart</a></li>
-            <li><a href="checkout.html">Checkout</a></li> -->
-
-            <!-- <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> </a> -->
-
             <!-- Navbar Toggler -->
             <div class="amado-navbar-toggler">
                 <span></span><span></span><span></span>
@@ -77,11 +69,6 @@
 
         <!-- Header Area Start -->
         <header class="header-area clearfix">
-
-            <!-- Close Icon -->
-            <!-- <div class="nav-close">
-                <i class="fa fa-close" aria-hidden="true"></i>
-            </div> -->
             <!-- Logo -->
             <div class="logo">
                 <a  href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
@@ -89,9 +76,8 @@
 
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-30">
-                <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
-                <a href="/order" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Order <span>(0)</span></a>
-                <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
+                <a href="/order" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span id="NumberCart">(0)</span></a>
+                <a href="#" onclick="console.log(GetOrder())" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
             </div>
 
             <!-- Amado Nav -->
@@ -138,7 +124,7 @@
 
             <!-- Button Group -->
             <div class="amado-btn-group mt-30 mb-100">
-                <a href="#" class="btn amado-btn" >Discount</a>
+                <a href="/mnpd" class="btn amado-btn" >Manage Product</a>
                 <br>
                 <a href="/welcome" class="btn amado-btn">Back</a>
                 <br>
@@ -177,6 +163,7 @@
         </header>
         <!-- Header Area End -->
 
+
         <!-- Product Catagories Area Start -->
         <div class="products-catagories-area clearfix" id="productArea" >
 
@@ -188,6 +175,7 @@
             showProduct(json,false,true);
             dropdownVender(Vendor);
             dropdownScale(Scale);
+
         </script>
         <!-- Product Catagories Area End -->
 
@@ -201,6 +189,7 @@
         <a href="/welcome" style="padding:0px 0px 0px 50px"><img src="./amado-master/img/core-img/logoDarkBG.png" alt=""></a>
         </div>
     </footer>
+
 
     <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
     <script src="./amado-master/js/jquery/jquery-2.2.4.min.js"></script>

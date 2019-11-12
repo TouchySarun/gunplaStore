@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="UTF-8">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,6 +23,13 @@
 
 <body>
     <!-- Search Wrapper Area Start -->
+    <!-- @if(session()->has('success')) -->
+    <!-- @endif -->
+    <script>
+        var user = <?php echo $userDetail?>;
+        sessionStorage.setItem('employeeNumber',user[0].employeeNumber);
+        sessionStorage.setItem('title',user[0].jobTitle);
+    </script>
     <div class="search-wrapper section-padding-50">
         <div class="search-close">
             <i class="fa fa-close" aria-hidden="true"></i>
@@ -54,7 +62,7 @@
                 <a href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
             </div>
             <!-- Navbar Toggler -->
-            <div class="amado-navbar-toggler">
+            <div class="amado-navbar-toggler" >
                 <span></span><span></span><span></span>
             </div>
         </div>
@@ -73,6 +81,8 @@
 
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-30">
+                <p id="showUser">xxxxxxx</p>
+                <script>document.getElementById('showUser').innerHTML=sessionStorage.getItem('employeeNumber')</script>
                 <a href="cart.html" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
                 <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
             </div>
@@ -126,15 +136,18 @@
                 <a href="/" class="btn amado-btn">
                     Logout
                 </a>
+
             </div>
 
         </header>
         <!-- Header Area End -->
 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
         <!-- Hyperlink Navigation Area -->
         <!-- <div class="amado-big-button-group clearfix"> -->
         <div class="welcome-area clearfix mt-70">
-            <a href="/mnod" class="btn amado-big-btn">
+            <a class="btn amado-big-btn" onclick="stock()">
                 <br><br><br>
                 <img src="./amado-master/img/core-img/shopping_cart.png"><br><br>
                 Order & Stock
@@ -337,6 +350,7 @@
         </div>
     </footer>
     <!-- ##### Footer Area End ##### -->
+
 
     <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
     <script src="./amado-master/js/jquery/jquery-2.2.4.min.js"></script>
