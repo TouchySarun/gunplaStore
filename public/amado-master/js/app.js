@@ -4,6 +4,7 @@ var tableproduct = "";//All product List in JSON
 var tableemployee = "";
 var jasonproduct = "";
 var jasonemployee = "";
+
 //--------------Show script------------------//
 function showProductList(json){
     tableproduct="<br><br><br>";
