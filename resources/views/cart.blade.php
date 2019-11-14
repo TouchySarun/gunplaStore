@@ -167,8 +167,8 @@
         <div class="cart-order-area section-padding-100">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-3 col-lg-6">
-                        <div class="cart-title mt-50">
+                    <div class="tab-order">
+                        <div class="cart-title mt-50" style="margin-left:15px">
                             <h2>Order</h2>
                         </div>
 
@@ -250,13 +250,13 @@
                             </table>
                         </div>
                     </div>
-                    <div class="col-lg-3">
+                    <div style="margin-left:15px">
                         <div class="cart-summary">
                             <h5>Cart Total</h5>
                             <ul class="summary-table">
                                 <li><span>Subtotal :</span> <span id="sumprice">$ 0.00</span></li>
                                 <li><span>Promotion Code :</span>
-                                    <div class="col-10 mb-2">
+                                    <div class="col-8">
                                         <input type="text" class="form-control" id="code" value="" placeholder="Code">
                                     </div> 
                                 </li>
@@ -268,15 +268,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3">
+                    <div style="margin-left:15px">
                         <div class="cart-summary">
                             <h5>Customers</h5>
                             <ul class="summary-table">
-                                <div class="col-12">
+                                <div class="col-10" >
                                     <div class="search-content">
                                     <form action="#" method="get">
                                         <input type="search" name="search" id="search" placeholder="Type your keyword...">
-                                        <!-- <button type="submit"><img src="./amado-master/img/core-img/search.png" alt=""></button> -->
+                                        <button type="submit"><img src="./amado-master/img/core-img/search.png" alt=""></button>
                                     </form>
                                     </div>
                                 </div><br>

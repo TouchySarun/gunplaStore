@@ -90,7 +90,7 @@
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-30">
                 <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
-                <a href="/order" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Order <span>(0)</span></a>
+                <a href="#" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
                 <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
             </div>
 
@@ -138,7 +138,7 @@
 
             <!-- Button Group -->
             <div class="amado-btn-group mt-30 mb-100">
-                <a href="#" class="btn amado-btn" >Discount</a>
+                <a href="/order" class="btn amado-btn" >Order</a>
                 <br>
                 <a href="/welcome" class="btn amado-btn">Back</a>
                 <br>
