@@ -76,15 +76,8 @@
 
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-30">
-<<<<<<< HEAD
                 <a href="/order" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span id="NumberCart">(0)</span></a>
                 <a href="#" onclick="console.log(GetOrder())" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
-=======
-
-                <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
-                <a href="/order" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Order <span>(0)</span></a>
-                <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
->>>>>>> 4471b21efff154c635463391bde7275d8417da9f
             </div>
 
             <!-- Amado Nav -->

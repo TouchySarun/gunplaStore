@@ -1,9 +1,25 @@
 var Order = new Array();
 var orderIndex = 0;
-function AddToOrder(pdCode, price, num){
+function AddToOrder(orderNumber, pdCode, num){
     console.log(pdCode);
     console.log(num);
-    Order[orderIndex] = `{"productCode":${pdCode},"price":${price},"qty":${num}}`;
+    var product = {
+        "orderNumber": orderNumber,
+        "productCode": pdCode,
+        "price": price,
+        "qty": num
+    };
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/insertToCart',
+        data: product,
+        dataType: "json"
+    });
 }
 
 function GetOrder(){

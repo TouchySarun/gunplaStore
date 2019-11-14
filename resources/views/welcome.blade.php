@@ -59,13 +59,7 @@
         <div class="mobile-nav">
             <!-- Navbar Brand -->
             <div class="amado-navbar-brand">
-<<<<<<< HEAD
                 <a href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
-=======
-
-                <a href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
-
->>>>>>> 4471b21efff154c635463391bde7275d8417da9f
             </div>
             <!-- Navbar Toggler -->
             <div class="amado-navbar-toggler" >
@@ -82,27 +76,14 @@
             </div> -->
             <!-- Logo -->
             <div class="logo">
-<<<<<<< HEAD
                 <a href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
-=======
-
-                <a href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
-
->>>>>>> 4471b21efff154c635463391bde7275d8417da9f
             </div>
 
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-30">
-<<<<<<< HEAD
                 <p id="showUser">xxxxxxx</p>
                 <script>document.getElementById('showUser').innerHTML=sessionStorage.getItem('employeeNumber')</script>
                 <a href="cart.html" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
-=======
-
-                <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
-                <a href="#" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
-
->>>>>>> 4471b21efff154c635463391bde7275d8417da9f
                 <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
             </div>
 
@@ -143,7 +124,6 @@
                 </a>
 
             </div>
-<<<<<<< HEAD
 
         </header>
         <!-- Header Area End -->
@@ -180,9 +160,6 @@
                 Promotion
             </a>
 
-=======
-
->>>>>>> 4471b21efff154c635463391bde7275d8417da9f
             <!-- PopUp Modal -->
             <div id="id01" class="modal">
                 <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;
@@ -214,64 +191,13 @@
                 </form>
             </div>
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 4471b21efff154c635463391bde7275d8417da9f
             <div id="id04" class="modal">
                 <span onclick="document.getElementById('id04').style.display='none'" class="close" title="Close Modal">&times;
                 </span>
                 <!-- order-status -->
                 <form class="modal-content animate" action="/action_page.php">
                     <div class="cart-table-area section-padding-60">
-<<<<<<< HEAD
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-12 col-lg-8">
-                                <div class="cart-title mt-50">
-                                    <h2>New Order Status</h2>
-                                </div>
-                                <div class="product-meta-data">
-                                    <form>
-                                        <p>Firstname: <input type="text" name="text"></p>
-                                        <p>Lastname: <input type="text" name="text"></p>
-                                        <p>Order ID: <input type="text" name="number"></p>
-                                        <div class="dropdown">
-                                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="order_status">STATUS
-                                            <span class="caret"></span></button>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="btn btn-primary" href="#" onclick="document.getElementById('order_status').innerHTML='Cancelled'">Cancelled</a></li>
-                                                <li><a class="btn btn-primary" href="#" onclick="document.getElementById('order_status').innerHTML='Disputed'">Disputed</a></li>
-                                                <li><a class="btn btn-primary" href="#" onclick="document.getElementById('order_status').innerHTML='In process'">In process</a></li>
-                                                <li><a class="btn btn-primary" href="#" onclick="document.getElementById('order_status').innerHTML='On hold'">On hold</a></li>
-                                                <li><a class="btn btn-primary" href="#" onclick="document.getElementById('order_status').innerHTML='Resolved'">Resolved</a></li>
-                                                <li><a class="btn btn-primary" href="#" onclick="document.getElementById('order_status').innerHTML='Shipped'">Shipped</a></li>
-                                            </ul>
-                                        </div>
-                                    </form>
-                                    <br>
-                                    <a href="#" class="btn amado-btn">SAVE</a>
-                                    <br><br>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                    </form>
-                </div>
-
-
-        <!-- pop up shipping -->
-        <div id="id05" class="modal">
-                    <span onclick="document.getElementById('id05').style.display='none'"
-                        class="close" title="Close Modal">&times;
-                    </span>
-                    <!-- product-order -->
-                    <form class="modal-content animate" action="/action_page.php">
-                        <div class="cart-table-area section-padding-60">
-=======
                         <div class="container-fluid">
->>>>>>> 4471b21efff154c635463391bde7275d8417da9f
                             <div class="row">
                                 <div class="col-12 col-lg-8">
                                     <div class="cart-title mt-50">
@@ -382,12 +308,6 @@
                             </div>
                         </div>
                     </div>
-<<<<<<< HEAD
-                    </form>
-                </div>
-
-        </div>
-=======
                 </form>
             </div>
     </header>
@@ -422,7 +342,6 @@
             <img src="./amado-master/img/core-img/promotion.png"><br><br>
             Promotion
         </a>
->>>>>>> 4471b21efff154c635463391bde7275d8417da9f
     </div>
 
     <!-- Mobile Nav (max width 767px)-->
@@ -440,15 +359,9 @@
     <br>
     <!-- ##### Footer Area Start ##### -->
     <footer class="footer_area">
-<<<<<<< HEAD
         <div >
         <!-- Logo -->
         <a href="/welcome" style="padding:0px 0px 0px 50px"><img src="./amado-master/img/core-img/logoDarkBG.png" alt=""></a>
-=======
-        <div>
-            <!-- Logo -->
-            <a href="/welcome" style="padding:0px 0px 0px 50px"><img src="./amado-master/img/core-img/logoDarkBG.png" alt=""></a>
->>>>>>> 4471b21efff154c635463391bde7275d8417da9f
         </div>
     </footer>
     <!-- ##### Footer Area End ##### -->
@@ -468,9 +381,4 @@
     <script src="./amado-master/js/app.js"></script>
 
 </body>
-<<<<<<< HEAD
 </html>
-=======
-
-</html>
->>>>>>> 4471b21efff154c635463391bde7275d8417da9f
