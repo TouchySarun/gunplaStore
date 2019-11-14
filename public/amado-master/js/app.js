@@ -618,7 +618,7 @@ function updateitem(a){
                     "pnumber": document.getElementById("stock").value.toString(),
                     "pprice": document.getElementById("price").value.toString(),
                     // "pmsrp": document.getElementById("msrp").value.toString(),
-                    "pdes": document.getElementById("d").value.toString()};
+                    "pdes": document.getElementById("des").value.toString()};
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

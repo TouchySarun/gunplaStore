@@ -57,11 +57,7 @@ class DataController extends Controller
 
     public function order(){
         $data = DB::select('select * from products');
-        $distinctvendor = DB::select('select distinct productVendor from products');
-        $distinctscale = DB::select('select distinct productScale from products');
         $jsonProduct = json_encode($data);
-        $jsonVendor = json_encode($distinctvendor);
-        $jsonScale = json_encode($distinctscale);
 
         return view('cart',['jsonProduct'=>$jsonProduct]);
     }
@@ -75,14 +71,6 @@ class DataController extends Controller
         $jsonScale = json_encode($distinctscale);
 
         return view('checkout',['jsonProduct'=>$jsonProduct]);
-    }
-
-
-    public function viewTest(){
-        $data = DB::select('select * from products where productCode = "S10_1768"');
-        $jsonProduct = json_encode($data);
-
-        return $jsonProduct;
     }
 
     public function login(Request $request)
