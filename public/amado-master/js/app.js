@@ -13,7 +13,7 @@ function showCustomerAddress(json) {
                 <table style="width: 100%">
                     <tbody>
                         <tr>
-                            <td style="text-align: left; max-width: 10%; border-bottom: none">
+                            <td style="text-align: left; margin-right: 10px; max-width: 10%; border-bottom: none;">
                                 <label class="radio-container"> 
                                     <input type="radio" name="addressSelect" value="${n}">
                                     <span class="checkmark"></span>
@@ -33,7 +33,7 @@ function showCustomerAddress(json) {
                 <table style="width: 100%">
                     <tbody>
                         <tr>
-                            <td style="text-align: left; max-width: 10%; border-bottom: none">
+                            <td style="text-align: left; margin-right: 10px; max-width: 10%; border-bottom: none">
                                 <label class="radio-container">
                                     <input type="radio" name="addressSelect" value="${n}">
                                     <span class="checkmark"></span>

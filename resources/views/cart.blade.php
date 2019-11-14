@@ -249,18 +249,18 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                         <div class="cart-summary">
                             <h5>Cart Total</h5>
                             <ul class="summary-table">
-                                <li><span>Subtotal:</span> <span id="sumprice">$ 0.00</span></li>
+                                <li><span>Subtotal:</span> <span id="sumprice">$ </span></li>
                                 <li><span>Promotion Code:</span>
                                     <div class="col-10">
                                         <input type="text" class="form-control" style="padding: 5px 10px" id="code" placeholder="Code">
                                     </div>
                                 </li>
                                 <li><span>Discount:</span> <span>-</span></li>
-                                <li><span>Total:</span> <span id="sumprice">$ 0.00</span></li>
+                                <li><span>Total:</span> <span id="sumprice">$ </span></li>
                             </ul>
                             <div class="payment-method">
                                 <label for="payment">Select payment type</label>
@@ -274,42 +274,33 @@
                                         </select>
                                     </div>
                             </div>
+                            <h5>Select Shipping Address</h5>
+                            <div class="col-12" style="padding: 0px">
+                                <div class="search-content">
+                                    <form action="#" method="get" style="border: none">
+                                        <input class="w-75" type="text" name="search" id="search" placeholder="Type Customer Number">
+                                        <button style="max-width: 22%" type="submit"><img src="./amado-master/img/core-img/search.png" alt=""></button>
+                                    </form>
+                                </div>
+                            </div><br>
+                            <div class="checkout_details_area clearfix col-12" style="padding: 0px">
+                                    <form style="border: none">
+                                        <div class="form-control" id="addressArea" style="padding: 15px 20px 10px"></div>
+                                            <script>
+                                                var customer = <?php echo $jsonCustomer ?>;
+                                                showCustomerAddress(customer);
+                                            </script>
+                                        <div class="confirm-control">
+                                            <!-- Add Address Button -->
+                                            <a href="#" onclick="document.getElementById('id01').style.display='block'" class="btn amado-btn w-100">
+                                                Add Address
+                                            </a>
+                                        </div>
+                                    </form>
+                            </div>
                             <div class="cart-btn">
                                 <a href="/checkout" class="btn amado-btn w-100">Checkout</a>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-8">
-                        <div class="cart-summary mt-30">
-                            <h5>Select Shipping Address</h5>
-                            <ul class="summary-table">
-                                <div class="col-12">
-                                    <div class="search-content">
-                                        <form action="#" method="get" style="border: none">
-                                            <input class="w-75" type="text" name="search" id="search" placeholder="Type your keyword...">
-                                            <button style="max-width: 10%" type="submit"><img src="./amado-master/img/core-img/search.png" alt=""></button>
-                                        </form>
-                                    </div>
-                                </div><br>
-                                <div class="col-12">
-                                    <div class="checkout_details_area clearfix">
-                                        <form style="border: none">
-                                            <div class="form-control" id="addressArea" style="padding: 15px 20px 10px"></div>
-                                                <script>
-                                                    var customer = <?php echo $jsonCustomer ?>;
-                                                    showCustomerAddress(customer);
-                                                </script>
-                                            <div class="confirm-control">
-                                                <!-- Add Address Button -->
-                                                <a href="#" onclick="document.getElementById('id01').style.display='block'" class="btn amado-btn w-100">
-                                                    Add Address
-                                                </a>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </ul>
                         </div>
                     </div>
 
