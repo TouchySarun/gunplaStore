@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use App\Data;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use Illuminate\Http\Request;
 
 class DataController extends Controller

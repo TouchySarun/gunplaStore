@@ -786,14 +786,17 @@ function order_calculator(){
     var tr = body.getElementsByTagName("tr");
     console.log(tr);
     var sum = 0;
+    var mempoint = 0;
     for(var i=0; i<tr.length; i++){
         var price = tr[i].getElementsByTagName("td")[2].innerText;
         console.log(price);
         var num = document.getElementById(`qty${i}`).value;
         console.log(num);
         sum += price*num;
+        mempoint = Math.floor(sum/100)*3;
     }
-    document.getElementById("sumprice").innerHTML = sum;
+    document.getElementById("sumprice").innerHTML = '$' + sum;
+    document.getElementById("mempoint").innerHTML = mempoint + ' Points';
 }
 
 function ShowShipping(input){
@@ -816,3 +819,23 @@ function ShowShipping(input){
 
 }
 
+//--------------------- Search ---------------------//
+// function customerNumberSearch(){
+//     var key = {"key": document.getElementById("search").value.toString()};
+    
+//     $.ajaxSetup({
+//         headers: {
+//             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//         }
+//     });
+//     $.ajax({
+//         type: 'get',
+//         url: '/cnumsearch/'+key,
+//         data: key,
+//         dataType: 'json',
+//         success: function (data) {
+//             showCustomerAddress(data);
+//         }
+//     });
+// }
+//------------------ Search End --------------------//
