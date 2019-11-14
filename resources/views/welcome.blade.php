@@ -283,10 +283,10 @@
             Order & Stock
         </a>
         <!-- order-status.blade.php -->
-        <a href="/shipping" class="btn amado-big-btn">
+        <a href="/mnpd" class="btn amado-big-btn">
             <br><br><br>
             <img src="./amado-master/img/core-img/shipping_details.png"><br><br>
-            Shipping Detail
+            Product Management
         </a>
         <a href="/mnem" class="btn amado-big-btn">
             <br><br><br>
