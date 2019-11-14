@@ -57,7 +57,10 @@
             <!-- Navbar Brand -->
             <div class="amado-navbar-brand">
                 <a  href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
+<<<<<<< HEAD
+=======
 
+>>>>>>> 4471b21efff154c635463391bde7275d8417da9f
             </div>
             <!-- Navbar Toggler -->
             <div class="amado-navbar-toggler">
@@ -73,9 +76,13 @@
             </div>
             <!-- Logo -->
             <div class="logo">
+<<<<<<< HEAD
+                <a  href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
+=======
 
                 <a  href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
 
+>>>>>>> 4471b21efff154c635463391bde7275d8417da9f
             </div>
             <!-- Amado Nav -->
             <nav class="amado-nav">
@@ -169,8 +176,60 @@
                                 </div>
                             </form>
 
+<<<<<<< HEAD
+
+
+                            <!-- PopUp Modal -->
+                            <div id="id01" class="modal">
+                                <span onclick="document.getElementById('id01').style.display='none'"
+                                    class="close" title="Close Modal">&times;
+                                </span>
+                                <!-- Form inside popup -->
+                                <form class="modal-content animate" action="/action_page.php">
+                                    <div class="container">
+                                        <h4>Adding Address</h4><br>
+                                        <label for="contactFirstName"><b>First Name</b></label>
+                                            <input type="text" placeholder="" name="contactFirstName" required>
+                                        <label for="contactLastName"><b>Last Name</b></label>
+                                            <input type="text" placeholder="" name="contactLastName" required>
+                                        <label for="customerName"><b>Company Name</b></label>
+                                            <input type="text" placeholder="" name="customerName" required>
+                                        <label for="country"><b>Country</b></label>
+                                            <input type="text" placeholder="" name="country" required>
+                                            <!-- <select class="w-100" id="country">
+                                                <option value="usa">United States</option>
+                                                <option value="uk">United Kingdom</option>
+                                                <option value="ger">Germany</option>
+                                                <option value="fra">France</option>
+                                                <option value="ind">India</option>
+                                                <option value="aus">Australia</option>
+                                                <option value="bra">Brazil</option>
+                                                <option value="cana">Canada</option>
+                                            </select> -->
+                                        <label for="addressLine1"><b>Address Line 1</b></label>
+                                            <input type="text" placeholder="" name="addressLine1" required>
+                                        <label for="addressLine2"><b>Address Line 2</b></label>
+                                            <input type="text" placeholder="" name="addressLine2" required>
+                                        <label for="city"><b>City</b></label>
+                                            <input type="text" placeholder="" name="city" required>
+                                        <label for="state"><b>State</b></label>
+                                            <input type="text" placeholder="" name="state" required>
+                                        <label for="postalCode"><b>Postal Code</b></label>
+                                            <input type="text" placeholder="" name="postalCode" required>
+                                        <button type="submit">Confirm</button>
+                                    </div>
+                                    <div class="container" style="background-color:#f1f1f1">
+                                        <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                                            class="cancelbtn">Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                                <!-- Remark Area -->
+                                <!-- <div class="col-12 mb-3">
+=======
                             <!-- Remark Area -->
                             <!-- <div class="col-12 mb-3">
+>>>>>>> 4471b21efff154c635463391bde7275d8417da9f
                                     <b>Remark</b>
                                     <textarea name="comment" class="form-control w-100" id="comment" cols="30" rows="10" placeholder="Leave a comment about your order"></textarea>
                                 </div> -->
@@ -193,8 +252,13 @@
                                     <option value="paypal">Paypal</option>
                                 </select><br>
                                 <label></label>
+<<<<<<< HEAD
+                                    <img class="ml-15" src="./amado-master/img/core-img/paypal.png" alt="">
+                                    <img class="ml-15" src="./amado-master/img/core-img/paypal2.png" alt="" height="21" width="30">
+=======
                                 <img class="ml-15" src="./amado-master/img/core-img/paypal.png" alt="">
                                 <img class="ml-15" src="./amado-master/img/core-img/paypal2.png" alt="" height="21" width="30">
+>>>>>>> 4471b21efff154c635463391bde7275d8417da9f
 
 
 
@@ -259,8 +323,12 @@
     <footer class="footer_area">
         <div >
         <!-- Logo -->
+<<<<<<< HEAD
+        <a href="/welcome" style="padding:0px 0px 0px 50px"><img src="./amado-master/img/core-img/logoDarkBG.png" alt=""></a>
+=======
         <a href="/welcome" style="padding:0px 0px 0px 50px"><img src="./amado-master/img/core-img/logoDarkBG.png" alt=""></a>  
 
+>>>>>>> 4471b21efff154c635463391bde7275d8417da9f
         </div>
     </footer>
     <!-- ##### Footer Area End ##### -->

@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="./amado-master/css/core-style.css">
     <link rel="stylesheet" href="./style.css">
     <script src="./amado-master/js/app.js"></script>
+    <script src="./amado-master/js/order.js"></script>
 </head>
 
 <body>
@@ -51,7 +52,7 @@
 
     <!-- ##### Main Content Wrapper Start ##### -->
     <div class="main-content-wrapper d-flex clearfix">
-    
+
         <!-- Mobile Nav (max width 767px)-->
         <div class="mobile-nav">
             <!-- Navbar Brand -->
@@ -75,10 +76,8 @@
 
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-30">
-
-                <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
-                <a href="/order" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Order <span>(0)</span></a>
-                <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
+                <a href="/order" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span id="NumberCart">(0)</span></a>
+                <a href="#" onclick="console.log(GetOrder())" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
             </div>
 
             <!-- Amado Nav -->
@@ -163,31 +162,34 @@
                 </div>
         </header>
         <!-- Header Area End -->
-        
+
+
         <!-- Product Catagories Area Start -->
         <div class="products-catagories-area clearfix" id="productArea" >
-        
+
         </div>
         <script>
             var json = <?php echo $jsonProduct?>;
             var Vendor = <?php echo $jsonVendor?>;
             var Scale = <?php echo $jsonScale?>;
-            updateProductOrderList(json);
+            showProduct(json,false,true);
             dropdownVender(Vendor);
             dropdownScale(Scale);
+
         </script>
         <!-- Product Catagories Area End -->
 
     </div>
     <br>
     <!-- ##### Main Content Wrapper End ##### -->
-    
+
     <footer class="footer_area">
         <div >
         <!-- Logo -->
-        <a href="/welcome" style="padding:0px 0px 0px 50px"><img src="./amado-master/img/core-img/logoDarkBG.png" alt=""></a>  
+        <a href="/welcome" style="padding:0px 0px 0px 50px"><img src="./amado-master/img/core-img/logoDarkBG.png" alt=""></a>
         </div>
     </footer>
+
 
     <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
     <script src="./amado-master/js/jquery/jquery-2.2.4.min.js"></script>

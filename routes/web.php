@@ -13,6 +13,7 @@
 Route::get('/cart', function () {
     return view('cart');
 });
+
 Route::get('/shop', function () {
     return view('shop');
 });
@@ -28,18 +29,18 @@ Route::get('/test', function () {
 //### normal page ####
 Route::get('/','DataController@index');
 Route::get('/mnpd','DataController@mnproduct');
-Route::get('/editproduct/{code}','DataController@editProduct');
 Route::get('/mnod','DataController@mnorder');
 Route::get('/mnem','DataController@mnemployee');
 Route::get('/order','DataController@order');
-// Route::get('/checkout','DataController@checkout');
+Route::get('/checkout','DataController@checkout');
 Route::get('/shipping','DataController@shipping');
 Route::get('/promotion','DataController@promotion');
-
-//### Login ###
+//### function ###
+Route::get('/editproduct/{code}','DataController@editProduct');
+Route::post('/insertProduct','DataController@insertProduct');
+Route::post('/updateProduct/{code}','DataController@updateProduct');
 Route::post('/login', 'DataController@login');
-
-//### Insert and Update Function ###
+Route::post('/stock', 'DataController@stock');
 Route::post('/insertProduct','DataController@insertProduct');
 Route::post('/insertEm','DataController@insertEm');
 Route::post('/updateProduct/{code}','DataController@updateProduct');

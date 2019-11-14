@@ -32,10 +32,10 @@
                     <div class="search-content">
                         <form action="" method="get">
                             <!-- <input type="search" name="search" id="search" placeholder="Type your keyword..."> -->
-                            <input type="text" id="myInput" onkeyup="filterByProductName()" placeholder="Search for names..">
+                            <input type="text" id="myInput" onkeyup="filter(this.value,5)" placeholder="Search for names..">
                             <button type="submit"><img src="./amado-master/img/core-img/search.png" alt=""></button>
                         </form>
-                    </div>  
+                    </div>
                 </div>
             </div>
         </div>
@@ -61,7 +61,10 @@
 
         <!-- Header Area Start -->
         <header class="header-area clearfix">
+<<<<<<< HEAD
+=======
 
+>>>>>>> 4471b21efff154c635463391bde7275d8417da9f
             <!-- Logo -->
             <div class="logo">
                 <a href="/"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
@@ -124,19 +127,35 @@
                     Login
                 </a>
                 <br>
-                <a href="#" onclick = "categorizeVendor(Vendor)" class="btn amado-btn">
+                <a href="#" onclick = "categorize(Vendor,'Vendor')" class="btn amado-btn">
                     Catagorize by Vendor
                 </a>
                 <br>
-                <a href="#" onclick = "categorizeScale(Scale)" class="btn amado-btn">
+                <a href="#" onclick = "categorize(Scale,'Scale')" class="btn amado-btn">
                     Catagorize by Scale
                 </a>
                 <br>
-                <a href="#" onclick = "showProductList(json)" class="btn amado-btn">
+                <a href="#" onclick = "showProduct(json,false,false)" class="btn amado-btn">
                     No Catagorize
                 </a>
             </div>
 
+        </header>
+        <!-- Header Area End -->
+        <!-- Product Catagories Area Start -->
+        <div class="products-catagories-area clearfix" id="productArea"></div>
+        <script>
+            var json = <?php echo $jsonProduct?>;
+            var Vendor = <?php echo $jsonVendor?>;
+            var Scale = <?php echo $jsonScale?>;
+            showProduct(json,false,false);
+            dropdownVender(Vendor);
+            dropdownScale(Scale);
+        </script>
+        <!-- Product Catagories Area End -->
+
+    </div>
+    <!-- ##### Main Content Wrapper End ##### -->
         <!-- Pop up -->
                 <!--Login pop up-->
                 <div id="id01" class="modal">
@@ -166,7 +185,7 @@
                     <form class="modal-content animate" id="loginError">
                         <div class="container" style="background-color:#f1f1f1">
                         <button type="button" onclick="document.getElementById('loginError').style.display='none'"
-                            class="cancelbtn">{{ session('alert') }}</button>
+                            class="cancelbtn" id="aleartsession">{{ session('alert') }}</button>
                         </div>
                     </form>
                 </div>
@@ -175,10 +194,10 @@
                 <div id="id02" class="modal" style="display:none" >
                     <!-- showProductDetail() -->
                 </div>
-    
+
         </header>
         <!-- Header Area End -->
-        
+
         <!-- Product Catagories Area Start -->
         <div class="products-catagories-area clearfix" id="productArea" >
         </div>
@@ -187,7 +206,7 @@
             var json = <?php echo $jsonProduct?>;
             var Vendor = <?php echo $jsonVendor?>;
             var Scale = <?php echo $jsonScale?>;
-            showProductList(json);
+            showProduct(json, false, false);
             dropdownVender(Vendor);
             dropdownScale(Scale);
         </script>
@@ -200,10 +219,10 @@
     <footer class="footer_area">
         <div >
         <!-- Logo -->
-        <a href="/welcome" style="padding:0px 0px 0px 50px"><img src="./amado-master/img/core-img/logoDarkBG.png" alt=""></a>  
+        <a href="/welcome" style="padding:0px 0px 0px 50px"><img src="./amado-master/img/core-img/logoDarkBG.png" alt=""></a>
         </div>
     </footer>
-        
+
 
     <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
     <script src="./amado-master/js/jquery/jquery-2.2.4.min.js"></script>
