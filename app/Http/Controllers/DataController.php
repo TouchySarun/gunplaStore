@@ -48,21 +48,21 @@ class DataController extends Controller
 
         return view('manage-employee',['jsonEmployee'=>$jsonEmployee]);
     }
-    public function insertToCart(Request $request){
-        DB::insert("
-            insert into cart
-            values ('$request->orderNumber','$request->productCode','$request->qty')
-        ");
-        $data = DB::select('select * from cart');
-        $jsonProduct = json_encode($data);
-        return $jsonProduct;
-    }
-    public function order(Request $request){
-        $product = DB::select('select * from cart');
-        $customer = DB::select("select * from customers where customerNumber like '$request->search'");
+    // public function insertToCart(Request $request){
+    //     DB::insert("
+    //         insert into cart
+    //         values ('$request->orderNumber','$request->productCode','$request->qty')
+    //     ");
+    //     $data = DB::select('select * from cart');
+    //     $jsonProduct = json_encode($data);
+    //     return $jsonProduct;
+    // }
+    // public function order(Request $request){
+    //     $product = DB::select('select * from cart');
+    //     $customer = DB::select("select * from customers where customerNumber like '$request->search'");
 
-        return view('cart',['jsonCustomer'=>json_encode($customer),'product'=>json_encode($product)]);
-    }
+    //     return view('cart',['jsonCustomer'=>json_encode($customer),'product'=>json_encode($product)]);
+    // }
     public function getAddress(Request $request){
         $address = DB::select("select * from addresses where customerNumber like '$request->search'");
         return json_encode($address);

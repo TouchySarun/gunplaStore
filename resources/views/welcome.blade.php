@@ -25,11 +25,7 @@
     <!-- Search Wrapper Area Start -->
     <!-- @if(session()->has('success')) -->
     <!-- @endif -->
-    <script>
-        var user = <?php echo $userDetail?>;
-        sessionStorage.setItem('employeeNumber',user[0].employeeNumber);
-        sessionStorage.setItem('title',user[0].jobTitle);
-    </script>
+   
     <div class="search-wrapper section-padding-50">
         <div class="search-close">
             <i class="fa fa-close" aria-hidden="true"></i>

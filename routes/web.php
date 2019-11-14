@@ -35,6 +35,7 @@ Route::get('/order','DataController@order');
 Route::get('/checkout','DataController@checkout');
 Route::get('/shipping','DataController@shipping');
 Route::get('/promotion','DataController@promotion');
+
 //### function ###
 Route::get('/editproduct/{code}','DataController@editProduct');
 Route::post('/insertProduct','DataController@insertProduct');
