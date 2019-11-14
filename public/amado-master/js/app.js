@@ -1,7 +1,58 @@
-var tableproduct = "";
-var tableemployee = "";
-var jasonproduct = "";
+//require('./bootstrap');
+//product = code, name, line, scale, vendor, descrip, instock, price, msrp
+var tableproduct = "<br><br><br>";//All product List in JSON
+var tableemployee = "<br><br><br>";
 var tableaddress = "";
+//--------------Show script------------------//
+function showCustomerAddress(json) {
+    var n = 0;
+    json.forEach( function(a) {
+        if(n == json.length - 1) {
+            tableaddress += `
+            <!-- class="radio-container" -->
+                <table style="width: 100%">
+                    <tbody>
+                        <tr>
+                            <td style="text-align: left; margin-right: 10px; max-width: 10%; border-bottom: none;">
+                                <label class="radio-container"> 
+                                    <input type="radio" name="addressSelect" value="${n}">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </td>
+                            <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%; border-bottom: none">
+                                <h5>${a.contactFirstName} ${a.contactLastName}</h5>
+                                <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>                    
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+            } else {
+                n++;
+                tableaddress += `
+                <table style="width: 100%">
+                    <tbody>
+                        <tr>
+                            <td style="text-align: left; margin-right: 10px; max-width: 10%; border-bottom: none">
+                                <label class="radio-container">
+                                    <input type="radio" name="addressSelect" value="${n}">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </td>
+                            <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%;">
+                                <h5>${a.contactFirstName} ${a.contactLastName}</h5>
+                                <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>                    
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+            }
+        });
+    document.getElementById("addressArea").innerHTML = tableaddress;
+}
+
+var jasonproduct = "";
 //--------------Show script------------------//
 function showProduct(json,editable,orderable){
     //updateProductList = showProduct(json,true,false)
@@ -54,53 +105,7 @@ function showProduct(json,editable,orderable){
     });
     document.getElementById("productArea").innerHTML = tableproduct;
 }
-function showCustomerAddress(json) {
-    var n = 0;
-    json.forEach( function(a) {
-        if(n == json.length - 1) {
-            tableaddress += `
-            <!-- class="radio-container" -->
-            <table style="width: 100%">
-                <tbody>
-                    <tr>
-                        <td style="text-align: left; max-width: 10%; border-bottom: none">
-                            <label class="radio-container">
-                                <input type="radio" name="addressSelect" value="${n}">
-                                <span class="checkmark"></span>
-                            </label>
-                        </td>
-                        <td style="border-bottom: none">
-                            <h5>${a.contactFirstName} ${a.contactLastName}</h5>
-                            <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        `
-        } else {
-            n++;
-            tableaddress += `
-            <table style="width: 100%">
-                <tbody>
-                    <tr>
-                        <td style="text-align: left; max-width: 10%; border-bottom: none">
-                            <label class="radio-container">
-                                <input type="radio" name="addressSelect" value="${n}">
-                                <span class="checkmark"></span>
-                            </label>
-                        </td>
-                        <td>
-                            <h5>${a.contactFirstName} ${a.contactLastName}</h5>
-                            <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        `
-        }
-    });
-    document.getElementById("addressArea").innerHTML = tableaddress;
-}
+
 function showEmployee(employee){
     tableemployee="<br><br><br>";
     jsonemployee = employee;
@@ -513,14 +518,17 @@ function order_calculator(){
     var body = document.getElementById("order_table_body");
     var tr = body.getElementsByTagName("tr");
     var sum = 0;
+    var mempoint = 0;
     for(var i=0; i<tr.length; i++){
         var price = tr[i].getElementsByTagName("td")[2].innerText;
 
         var num = document.getElementById(`qty${i}`).value;
 
         sum += price*num;
+        mempoint = Math.floor(sum/100)*3;
     }
-    document.getElementById("sumprice").innerHTML = sum;
+    document.getElementById("sumprice").innerHTML = '$' + sum;
+    document.getElementById("mempoint").innerHTML = mempoint + ' Points';
 }
 function ShowShipping(input){
     var shipping_table="";
