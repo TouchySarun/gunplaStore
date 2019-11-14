@@ -10,45 +10,45 @@ function showCustomerAddress(json) {
         if(n == json.length - 1) {
             tableaddress += `
             <!-- class="radio-container" -->
-            <table style="width: 100%">
-                <tbody>
-                    <tr>
-                        <td style="text-align: left; max-width: 10%; border-bottom: none">
-                            <label class="radio-container"> 
-                                <input type="radio" name="addressSelect" value="${n}">
-                                <span class="checkmark"></span>
-                            </label>
-                        </td>
-                        <td style="border-bottom: none">
-                            <h5>${a.contactFirstName} ${a.contactLastName}</h5>
-                            <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>                    
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        `
-        } else {
-            n++;
-            tableaddress += `
-            <table style="width: 100%">
-                <tbody>
-                    <tr>
-                        <td style="text-align: left; max-width: 10%; border-bottom: none">
-                            <label class="radio-container">
-                                <input type="radio" name="addressSelect" value="${n}">
-                                <span class="checkmark"></span>
-                            </label>
-                        </td>
-                        <td>
-                            <h5>${a.contactFirstName} ${a.contactLastName}</h5>
-                            <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>                    
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        `
-        }
-    });
+                <table style="width: 100%">
+                    <tbody>
+                        <tr>
+                            <td style="text-align: left; max-width: 10%; border-bottom: none">
+                                <label class="radio-container"> 
+                                    <input type="radio" name="addressSelect" value="${n}">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </td>
+                            <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%; border-bottom: none">
+                                <h5>${a.contactFirstName} ${a.contactLastName}</h5>
+                                <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>                    
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+            } else {
+                n++;
+                tableaddress += `
+                <table style="width: 100%">
+                    <tbody>
+                        <tr>
+                            <td style="text-align: left; max-width: 10%; border-bottom: none">
+                                <label class="radio-container">
+                                    <input type="radio" name="addressSelect" value="${n}">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </td>
+                            <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%;">
+                                <h5>${a.contactFirstName} ${a.contactLastName}</h5>
+                                <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>                    
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+            }
+        });
     document.getElementById("addressArea").innerHTML = tableaddress;
 }
 
