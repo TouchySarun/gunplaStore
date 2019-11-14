@@ -22,6 +22,16 @@
 </head>
 
 <body>
+    <script>
+        var userTitle = sessionStorage.getItem('title');
+        if (userTitle != null){
+            if(userTitle != "Sales"){
+                // redurect ti welcome
+            }
+        }else {
+            // redirect to index
+        }
+    </script>
     <div style="display:none" id="Key">
         <p>username</p>
         <p>jobTitle</p>
