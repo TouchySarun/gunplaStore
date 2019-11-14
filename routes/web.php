@@ -10,9 +10,10 @@
 |
 */
 
-Route::get('/product', function () {
+Route::get('/cart', function () {
     return view('cart');
 });
+
 Route::get('/shop', function () {
     return view('shop');
 });
@@ -34,7 +35,17 @@ Route::get('/order','DataController@order');
 Route::get('/checkout','DataController@checkout');
 Route::get('/shipping','DataController@shipping');
 Route::get('/promotion','DataController@promotion');
-
 //### function ###
+Route::get('/editproduct/{code}','DataController@editProduct');
+Route::post('/insertProduct','DataController@insertProduct');
+Route::post('/updateProduct/{code}','DataController@updateProduct');
 Route::post('/login', 'DataController@login');
+Route::post('/stock', 'DataController@stock');
+Route::post('/insertProduct','DataController@insertProduct');
+Route::post('/insertEm','DataController@insertEm');
+Route::post('/updateProduct/{code}','DataController@updateProduct');
+Route::post('/updateEm/{code}','DataController@updateEm');
+
+//### Delete Function ###
 Route::delete('/deleteProduct/{code}','DataController@deleteProduct');
+Route::delete('/deleteEm/{code}','DataController@deleteEm');
