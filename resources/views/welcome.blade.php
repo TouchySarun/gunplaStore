@@ -26,7 +26,7 @@
     <!-- @if(session()->has('success')) -->
     <!-- @endif -->
     <!-- <script>
-        var user = <?php echo $userDetail?>;
+        var user = <php echo $userDetail?>;
         sessionStorage.setItem('employeeNumber', user[0].employeeNumber);
         sessionStorage.setItem('title', user[0].jobTitle);
     </script> -->
@@ -134,7 +134,7 @@
         <!-- Hyperlink Navigation Area -->
         <!-- <div class="amado-big-button-group clearfix"> -->
         <div class="welcome-area clearfix mt-70">
-            <a class="btn amado-big-btn" onclick="stock()">
+            <a href="/mnod" class="btn amado-big-btn">
                 <br><br><br>
                 <img src="./amado-master/img/core-img/shopping_cart.png"><br><br>
                 Order & Stock
@@ -192,125 +192,6 @@
                 </form>
             </div>
 
-            <div id="id04" class="modal">
-                <span onclick="document.getElementById('id04').style.display='none'" class="close" title="Close Modal">&times;
-                </span>
-                <!-- order-status -->
-                <form class="modal-content animate" action="/action_page.php">
-                    <div class="cart-table-area section-padding-60">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-12 col-lg-8">
-                                    <div class="cart-title mt-50">
-                                        <h2>New Order Status</h2>
-                                    </div>
-                                    <div class="product-meta-data">
-                                        <form>
-                                            <p>Firstname: <input type="text" name="text"></p>
-                                            <p>Lastname: <input type="text" name="text"></p>
-                                            <p>Order ID: <input type="text" name="number"></p>
-                                            <div class="dropdown">
-                                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="order_status">STATUS
-                                                    <span class="caret"></span></button>
-                                                <ul class="dropdown-menu">
-                                                    <li><a class="btn btn-primary" href="#" onclick="document.getElementById('order_status').innerHTML='Cancelled'">Cancelled</a></li>
-                                                    <li><a class="btn btn-primary" href="#" onclick="document.getElementById('order_status').innerHTML='Disputed'">Disputed</a></li>
-                                                    <li><a class="btn btn-primary" href="#" onclick="document.getElementById('order_status').innerHTML='In process'">In process</a></li>
-                                                    <li><a class="btn btn-primary" href="#" onclick="document.getElementById('order_status').innerHTML='On hold'">On hold</a></li>
-                                                    <li><a class="btn btn-primary" href="#" onclick="document.getElementById('order_status').innerHTML='Resolved'">Resolved</a></li>
-                                                    <li><a class="btn btn-primary" href="#" onclick="document.getElementById('order_status').innerHTML='Shipped'">Shipped</a></li>
-                                                </ul>
-                                            </div>
-                                        </form>
-                                        <br>
-                                        <a href="#" class="btn amado-btn">SAVE</a>
-                                        <br><br>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-            <!-- pop up shipping -->
-            <div id="id05" class="modal">
-                <span onclick="document.getElementById('id05').style.display='none'" class="close" title="Close Modal">&times;
-                </span>
-                <!-- product-order -->
-                <form class="modal-content animate" action="/action_page.php">
-                    <div class="cart-table-area section-padding-60">
-                        <div class="row">
-                            <div class="col-12 col-lg-8">
-                                <div class="cart-head mt-50">
-                                    <h2>Promotion Management</h2>
-                                </div>
-                                <div class="table tbody">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>Code</th>
-                                                <th>ProductName</th>
-                                                <th>Number</th>
-                                                <th>Detail</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <h5>55555</h5>
-                                                </td>
-                                                <td class="cart_product_desc">
-                                                    <h5>setrabus</h5>
-                                                </td>
-                                                <td>
-                                                    <h5>100</h5>
-                                                </td>
-                                                <td>
-                                                    <h5>-</h5>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <br><br>
-                                    <a href="#" onclick="document.getElementById('id06').style.display='block'" class="btn amado-btn">Add +</a>
-                                    <br><br>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <!-- pop-up add order to shipping -->
-            <div id="id06" class="modal">
-                <span onclick="document.getElementById('id06').style.display='none'" class="close" title="Close Modal">&times;
-                </span>
-                <!-- product-order -->
-                <form class="modal-content animate" action="/action_page.php">
-                    <div class="cart-table-area section-padding-60">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-12 col-lg-8">
-                                    <div class="cart-title mt-50">
-                                        <h2>Promotion Management</h2>
-                                    </div>
-                                    <div class="product-meta-data">
-                                        <form>
-                                            <p>Code: <input type="text" name="number"></p>
-                                            <p>Product Name: <input type="text" name="text"></p>
-                                            <p>Number: <input type="text" name="number"></p>
-                                            <p>Detail: <input type="text" name="text"></p>
-                                        </form>
-                                        <br>
-                                        <a href="#" class="btn amado-btn">SAVE</a>
-                                        <br><br>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
     </header>
     <!-- Header Area End -->
 
