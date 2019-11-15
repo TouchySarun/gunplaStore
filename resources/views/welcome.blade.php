@@ -21,6 +21,14 @@
 </head>
 
 <body>
+    <!-- <script>
+        
+        sessionStorage.getItem("empNum", user[0].employeeNumber);
+        sessionStorage.getItem("empFname", user[0].firstName);
+        sessionStorage.getItem("empLname", user[0].lastName);
+        sessionStorage.getItem("empTitle", user[0].jobTitle);
+
+    </script> -->
     <!-- Search Wrapper Area Start -->
     <div class="search-wrapper section-padding-50">
         <div class="search-close">
@@ -70,56 +78,25 @@
             </div> -->
             <!-- Logo -->
             <div class="logo">
-
                 <a href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
-
             </div>
-
-            <!-- Cart Menu -->
-            <div class="cart-fav-search mb-30">
-
-                <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
-                <a href="#" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
-
-                <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
-            </div>
-
+            
             <!-- Amado Nav -->
             <nav class="amado-nav">
                 <ul>
                     <div class="amado-nav">
-                        <!--Scale bar-->
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#footerNavContent" aria-controls="footerNavContent" aria-expanded="false">SCALE
-                            <i class="fa fa-caret-down"></i>
-                        </button>
-                        <div class="collapse navbar-collapse" id="footerNavContent">
-                            <ul>
-                                <li class="nav-item" id="Scale">
-                                </li>
-                            </ul>
-                        </div>
-                        <!--Vendor bar-->
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#footer" aria-controls="footerNavContent" aria-expanded="false">VENDOR
-                            <i class="fa fa-caret-down"></i>
-                        </button>
-                        <div class="collapse navbar-collapse" id="footer">
-                            <ul class="navbar-nav ml-auto">
-                                <li class="nav-item" id="Vendor">
-                                </li>
-                            </ul>
+                        <img src="./amado-master/img/core-img/employeeM.png">
+                        <div id="employeeInfo"></div>
+                        <!-- <script>
+                            var employeeTitle = sessionStorage.getItem("")
+                        </script> -->
+                        <!-- Button Group -->
+                        <div class="amado-btn-group mt-30 mb-100">
+                            <a href="/" class="btn amado-btn">Logout</a>
                         </div>
                     </div>
                 </ul>
             </nav>
-
-            <!-- Button Group -->
-            <div class="amado-btn-group mt-30 mb-100">
-                <a href="#" class="btn amado-btn">Discount</a>
-                <br>
-                <a href="/" class="btn amado-btn">
-                    Logout
-                </a>
-            </div>
 
             <!-- PopUp Modal -->
             <div id="id01" class="modal">

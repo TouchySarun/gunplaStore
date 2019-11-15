@@ -51,12 +51,14 @@ class DataController extends Controller
     public function order(Request $request){
         $data = DB::select('select * from products');
         $data2 = DB::select("select * from customers where customerNumber like '$request->search'");
-        $distinctvendor = DB::select('select distinct productVendor from products');
-        $distinctscale = DB::select('select distinct productScale from products');
+        // $employee = DB::select("select * from employees where employeeNumber = '$request->empSession'");
+        // $distinctvendor = DB::select('select distinct productVendor from products');
+        // $distinctscale = DB::select('select distinct productScale from products');
         $jsonProduct = json_encode($data);
         $jsonCustomer = json_encode($data2);
-        $jsonVendor = json_encode($distinctvendor);
-        $jsonScale = json_encode($distinctscale);
+        // $jsonEmployee = json_encode($employee);
+        // $jsonVendor = json_encode($distinctvendor);
+        // $jsonScale = json_encode($distinctscale);
 
         return view('cart',['jsonProduct'=>$jsonProduct, 'jsonCustomer'=>$jsonCustomer]);
     }

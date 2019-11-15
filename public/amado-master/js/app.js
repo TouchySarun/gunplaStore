@@ -3,7 +3,19 @@
 var tableproduct = "<br><br><br>";//All product List in JSON
 var tableemployee = "<br><br><br>";
 var tableaddress = "";
+var employeeInfo = "";
 //--------------Show script------------------//
+function navEmployee(json){
+    json.forEach( function(a) {
+        employeeInfo += `
+            <h5 class="mt-30">${a.firstName} ${a.lastName}</h5>
+            <p>${a.jobTitle}</p>
+            <p><span>Customer ID: </span><span>${a.employeeNumber}</span></p>
+        `;
+    });
+    document.getElementById("employeeInfo").innerHTML = employeeInfo;
+}
+
 function showCustomerAddress(json) {
     var n = 0;
     json.forEach( function(a) {
@@ -96,7 +108,7 @@ function showProductList(json){
         <!-- Hover Content -->
         <div class="hover-content">
             <div class="line"></div>
-            <p>EmployeeNumber ${a.quantityInStock}</p>
+            <p>In Stock ${a.quantityInStock}</p>
             <p>$${a.buyPrice}</p>
             <p>${a.productScale}</p>
             <p>${a.productVendor}</p>
