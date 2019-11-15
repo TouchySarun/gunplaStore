@@ -94,7 +94,6 @@
                     <div class="amado-nav">
                         <img src="./amado-master/img/core-img/employeeM.png">
                         <div id="employeeInfo"></div>
-                            <p id="showUser">xxxxxxx</p>
                             <script>
                                 document.getElementById('showUser').innerHTML = sessionStorage.getItem('employeeNumber');
                             </script>
