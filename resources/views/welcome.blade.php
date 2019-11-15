@@ -126,41 +126,6 @@
 
             </div>
 
-        </header>
-        <!-- Header Area End -->
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-        <!-- Hyperlink Navigation Area -->
-        <!-- <div class="amado-big-button-group clearfix"> -->
-        <div class="welcome-area clearfix mt-70">
-            <a href="/mnod" class="btn amado-big-btn">
-                <br><br><br>
-                <img src="./amado-master/img/core-img/shopping_cart.png"><br><br>
-                Order & Stock
-            </a>
-            <!-- order-status.blade.php -->
-            <a href="/shipping" class="btn amado-big-btn">
-                <br><br><br>
-                <img src="./amado-master/img/core-img/shipping_details.png"><br><br>
-                Shipping Detail
-            </a>
-            <a href="/mnem" class="btn amado-big-btn">
-                <br><br><br>
-                <img src="./amado-master/img/core-img/employee.png"><br><br>
-                Employee
-            </a>
-            <a href="#" onclick="document.getElementById('id01').style.display='block'" class="btn amado-big-btn">
-                <br><br><br>
-                <img src="./amado-master/img/core-img/customers.png"><br><br>
-                Customers
-            </a>
-            <a href="/promotion" class="btn amado-big-btn">
-                <br><br><br>
-                <img src="./amado-master/img/core-img/promotion.png"><br><br>
-                Promotion
-            </a>
-
             <!-- PopUp Modal -->
             <div id="id01" class="modal">
                 <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;
@@ -192,8 +157,10 @@
                 </form>
             </div>
 
-    </header>
-    <!-- Header Area End -->
+        </header>
+        <!-- Header Area End -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <!-- Hyperlink Navigation Area -->
     <!-- <div class="amado-big-button-group clearfix"> -->
