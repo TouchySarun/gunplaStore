@@ -1,31 +1,8 @@
-//require('./bootstrap');
-//product = code, name, line, scale, vendor, descrip, instock, price, msrp
-var tableproduct = "";//All product List in JSON
+var tableproduct = "";
 var tableemployee = "";
 var jasonproduct = "";
 var tableaddress = "";
 //--------------Show script------------------//
-function filter(input, type){
-    //name 5 / id 4 / scale 7 / vendor 8
-    var filter, product_area, single, value, i, txtValue, a, returnValue="";
-    filter = input.toUpperCase();
-    product_area = document.getElementById("productArea");
-    single = product_area.getElementsByClassName("single-products-catagory");
-    for (i=0; i<single.length; i++){
-        a = single[i].getElementsByTagName("a")[0];
-        value = a.getElementsByTagName("p")[type];
-        if(value){
-            txtValue = value.textContent || value.innerText;
-            if(txtValue.toUpperCase().indexOf(filter) > -1){
-                returnValue += `<div class="single-products-catagory">${single[i].innerHTML}</div>`;
-                single[i].style.display = '';
-            }else{
-                single[i].style.display = 'none';
-            }
-        }
-    }
-    return returnValue;
-}
 function showProduct(json,editable,orderable){
     //updateProductList = showProduct(json,true,false)
     //updateProductOrderList = showProduct(json,false,true)
@@ -130,8 +107,8 @@ function showEmployee(employee){
     employee.forEach( function(a) {
     tableemployee += `
         <div class="single-products-catagory">
-                <a href="#" onclick="showEmployeeDetail('${a.employeeNumber}', '${a.lastName}', '${a.firstName}', '${a.email}', '${a.officeCode}', '${a.reportsTo}',
-                '${a.jobTitle}', '${a.extension}')">
+                <a href="#" onclick="PopUpEmployee('${a.employeeNumber}', '${a.lastName}', '${a.firstName}', '${a.email}', '${a.officeCode}', '${a.reportsTo}',
+                '${a.jobTitle}', '${a.extension}', true)">
                 <img src="./amado-master/img/core-img/employeeM.png" alt="">
                 <!-- Hover Content -->
                 <div class="hover-content">
@@ -341,8 +318,8 @@ function categorize(input,type){
             textBox += filter(a.productScale,7);
         }
         if(type == 'Name'){
-            textBox += `<h1>${a.productScale}</h1>`;
-            textBox += filter(a.productScale,5);
+            textBox += `<h1>${a.productCode}</h1>`;
+            textBox += filter(a.productCode,5);
         }
 
     });
@@ -350,6 +327,27 @@ function categorize(input,type){
 }
 //---------------end categorize -----------------------//
 //------------------------------filter----------------------------- //
+function filter(input, type){
+    //name 5 / id 4 / scale 7 / vendor 8
+    var filter, product_area, single, value, i, txtValue, a, returnValue="";
+    filter = input.toUpperCase();
+    product_area = document.getElementById("productArea");
+    single = product_area.getElementsByClassName("single-products-catagory");
+    for (i=0; i<single.length; i++){
+        a = single[i].getElementsByTagName("a")[0];
+        value = a.getElementsByTagName("p")[type];
+        if(value){
+            txtValue = value.textContent || value.innerText;
+            if(txtValue.toUpperCase().indexOf(filter) > -1){
+                returnValue += `<div class="single-products-catagory">${single[i].innerHTML}</div>`;
+                single[i].style.display = '';
+            }else{
+                single[i].style.display = 'none';
+            }
+        }
+    }
+    return returnValue;
+}
 function findProductCode(input) {
     var slot, single_products_catagory, pdName, i, txtValue, a;
     slot = document.getElementById("productArea");
@@ -378,7 +376,7 @@ function insertitem(){
                     "pnumber": document.getElementById("number").value.toString(),
                     "pprice": document.getElementById("price").value.toString(),
                     "pmsrp": document.getElementById("msrp").value.toString(),
-                    "pdes": document.getElementById("d").value.toString()};
+                    "pdes": document.getElementById("des").value.toString()};
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
