@@ -218,7 +218,7 @@
                                         <p>ShippedDate: <input type="text" name="shipdate"></p>
                                         <p>Status: <input type="text" name="status"></p>
                                         <p>Comments: <input type="text" name="comments"></p>
-                                        <div class="dropdown">
+                                        <!-- <div class="dropdown">
                                             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="order_status">STATUS
                                             <span class="caret"></span></button>
                                             <ul class="dropdown-menu">
@@ -229,7 +229,18 @@
                                                 <li><a class="btn btn-primary" href="#" onclick="document.getElementById('order_status').innerHTML='Resolved'">Resolved</a></li>
                                                 <li><a class="btn btn-primary" href="#" onclick="document.getElementById('order_status').innerHTML='Shipped'">Shipped</a></li>
                                             </ul>
+                                        </div> -->
+                                        <div>
+                                            <select class="w-100" id="order_status">
+                                                <option value="Cancelled">Cancelled</option>
+                                                <option value="Disputed">Disputed</option>
+                                                <option value="In process">In process</option>
+                                                <option value="On hold">On hold</option>
+                                                <option value="Resolved">Resolved</option>
+                                                <option value="Shipped">Shipped</option>
+                                            </select>
                                         </div>
+                                        <br><br>
                                     </form>
                                     <br>
                                     <a href="#" class="btn amado-btn">SAVE</a>

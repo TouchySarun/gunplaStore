@@ -18,6 +18,13 @@ class DataController extends Controller
         $jsonScale = json_encode($distinctscale);
         return view('index',['jsonProduct'=>$jsonProduct, 'jsonVendor'=>$jsonVendor, 'jsonScale'=>$jsonScale]);
     }
+    
+    public function employeeInfo(Request $request){
+        $data = DB::select("select * from employees where employeeNumber = '$request->showUser'");
+        $jsonEmployee = json_encode($data);
+        return view('welcome',['jsonEmployee'=>$jsonEmployee]);
+    }
+    
     public function mnproduct(){
         $data = DB::select('select * from products');
         $distinctvendor = DB::select('select distinct productVendor from products');
@@ -48,9 +55,9 @@ class DataController extends Controller
     public function order(Request $request){
         $data = DB::select('select * from products');
         $product = DB::select('select * from cart');
-        //$customer = DB::select("select * from customers where customerNumber like '$request->search'");
+        $jsonCustomer = DB::select("select * from customers where customerNumber like '$request->search'");
         $jsonProduct = json_encode($data);
-        return view('cart',['jsonProduct'=>$jsonProduct, 'product'=>json_encode($product)]);
+        return view('cart',['jsonProduct'=>$jsonProduct, 'product'=>json_encode($product), 'jsonCustomer'=>json_encode($jsonCustomer)]);
     }
 
     public function insertToCart(Request $request){
@@ -60,15 +67,25 @@ class DataController extends Controller
         ");
         $data = DB::select('select * from cart');
         $jsonProduct = json_encode($data);
-        return $jsonProduct;
+        return view('cart');
     }
     
     public function getAddress(Request $request){
         $address = DB::select("select * from addresses where customerNumber like '$request->search'");
         return json_encode($address);
     }
+    // public function order(Request $request){
+    //     $product = DB::select('select * from orders');
+    //     //$customer = DB::select("select * from addresses where customerNumber like '$request->search'");
+    //     $jsonCustomer = DB::select("select * from customers where customerNumber like '$request->search'");
+    //     return view('cart',['product'=>json_encode($product), ]);
+    // }
+    // public function getAddress(Request $request){
+        
+    //     return 
+    // }
     public function successOrder(Request $request){
-        DB::delete('delete from cart');
+        DB::delete('delete from orders');
         DB::insert("
             insert into orders(orderNumber, orderDate, status, customerNumber, addressNumber)
             value ($request->orderNumber, $request->orderDate, 'default',$request->customerNumber, $request->addressNumber )
@@ -99,6 +116,14 @@ class DataController extends Controller
         {
             return redirect ('/')-> with('alert', 'wrong username or password');
         }
+        // $data = DB::select("select employeeNumber from employees");
+        // $ans= '';
+        // foreach($data as $a){
+        //     $x = sha1($a->employeeNumber);
+        //     DB::insert("insert into passwords values ($a->employeeNumber, '$x')");
+        //     $ans ++;
+        // }
+        // return redirect ('/')-> with('alert', success);
 
     }
     
@@ -137,12 +162,6 @@ class DataController extends Controller
     //     return $jsonProduct;
     // }
 
-    public function editProduct($code){
-        $jdata = DB::select("select * from products where productCode = '$code'");
-        $jsoneditProduct = json_encode($jdata);
-        return $jsoneditProduct;
-    }
-
     public function shipping(){
         $Order = DB::select('select * from orders');
         $jsonOrder = json_encode($Order);
@@ -159,38 +178,6 @@ class DataController extends Controller
         $employeejob = DB::select("select employeeNumber from employees where jobTitle like '%Sales%'");
         $jsonem = json_encode($employeejob);
         return $jsonem;
-    }
-
-    public function insertProduct(Request $request){
-        DB::insert("insert into products(productName,productCode,productLine,productScale,productVendor,productDescription,quantityInstock,buyPrice,MSRP) 
-        values ('$request->pname','$request->pcode','$request->pline','$request->pscale','$request->pvendor','$request->pnumber','$request->pprice','$request->pmsrp','$request->pdes')");
-        $data = DB::select('select * from products');
-        $jsonProduct = json_encode($data);
-        return $jsonProduct;
-    }
-
-    public function insertEm(Request $request){
-        DB::insert("insert into employees(employeeNumber,lastName,firstName,extension,email,officeCode,reportsTo,jobTitle)
-        values ('$request->enumber','$request->elname','$request->efname','$request->eex','$request->eemail','$request->ecode','$request->ere','$request->ejob')");
-        $data = DB::select('select * from employees');
-        $jsonProduct = json_encode($data);
-        return $jsonProduct;
-    }
-
-    public function updateProduct(Request $request,$code){
-        DB::update("update products set productName = ?,productScale = ?,productVendor = ?,productDescription = ?,quantityInstock = ?,buyPrice = ? where productCode = ?",
-        [$request->pname,$request->pscale,$request->pvendor,$request->pdes,$request->pnumber,$request->pprice,$code]);
-        $data = DB::select('select * from products');
-        $jsonProduct = json_encode($data);
-        return $jsonProduct;
-    }
-
-    public function updateEm(Request $request,$code){
-        DB::update("update employees set lastName = ?,firstName = ?,extension = ?,email = ?,officeCode = ?,reportsTo = ?,jobTitle = ? where employeeNumber = ?",
-        [$request->eln,$request->efn,$request->ee,$request->eem,$request->eof,$request->er,$request->ej,$code]);
-        $data = DB::select('select * from employees');
-        $jsonProduct = json_encode($data);
-        return $jsonProduct;
     }
 
     public function deleteProduct($code){

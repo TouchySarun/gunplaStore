@@ -83,11 +83,11 @@
             <div class="logo">
                 <a  href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
             </div>
-
+            <input type="text" name="OrderID" id="orderId" placeholder="Order ID ...">
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-30">
-                <a href="/order" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span id="NumberCart">(0)</span></a>
-                <a href="#" onclick="console.log(GetOrder())" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
+                <a href="/order" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Order ( <span id="NumberCart">0</span> )</a>
+                <!-- <a href="#" onclick="console.log(GetOrder())" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a> -->
             </div>
 
             <!-- Amado Nav -->
@@ -134,8 +134,6 @@
 
             <!-- Button Group -->
             <div class="amado-btn-group mt-30 mb-100">
-                <a href="shipping" class="btn amado-btn">Shipping Detail</a>
-                <br>
                 <a href="/welcome" class="btn amado-btn">Back</a>
                 <br>
                 <a href="/" class="btn amado-btn">Logout</a>

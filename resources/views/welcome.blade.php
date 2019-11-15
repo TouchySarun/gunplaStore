@@ -88,21 +88,16 @@
                 <a href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
             </div>
 
-            <!-- Cart Menu -->
-            <div class="cart-fav-search mb-30">
-                <p id="showUser">xxxxxxx</p>
-                <script>document.getElementById('showUser').innerHTML=sessionStorage.getItem('employeeNumber')</script>
-            </div>
-
             <!-- Amado Nav -->
             <nav class="amado-nav">
                 <ul>
                     <div class="amado-nav">
                         <img src="./amado-master/img/core-img/employeeM.png">
                         <div id="employeeInfo"></div>
-                        <!-- <script>
-                            var employeeTitle = sessionStorage.getItem("")
-                        </script> -->
+                            <p id="showUser">xxxxxxx</p>
+                            <script>
+                                document.getElementById('showUser').innerHTML = sessionStorage.getItem('employeeNumber');
+                            </script>
                         <!-- Button Group -->
                         <div class="amado-btn-group mt-30 mb-100">
                             <a href="/" class="btn amado-btn">Logout</a>
@@ -121,7 +116,7 @@
                         <h4>New Customer</h4>
                         <br>
                         <label for="customerName"><b>Customer Name</b></label>
-                        <input type="text" placeholder="Your Company" name="customerName" required>
+                        <input type="text" placeholder="Customer's Company" name="customerName" required>
                         <label for="firstName"><b>First Name</b></label>
                         <input type="text" placeholder="" name="firstName" required>
                         <label for="lastName"><b>Last Name</b></label>
@@ -142,127 +137,44 @@
                 </form>
             </div>
 
+            <!-- pop-up add order to shipping -->
             <div id="id04" class="modal">
-                <span onclick="document.getElementById('id04').style.display='none'" class="close" title="Close Modal">&times;
-                </span>
-                <!-- order-status -->
-                <form class="modal-content animate" action="/action_page.php">
+                    <span onclick="document.getElementById('id04').style.display='none'"
+                        class="close" title="Close Modal">&times;
+                    </span>
+                    <!-- order-status -->
+                    <form class="modal-content animate" action="/action_page.php">
                     <div class="cart-table-area section-padding-60">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-12 col-lg-8">
-                                    <div class="cart-title mt-50">
-                                        <h2>New Order Status</h2>
-                                    </div>
-                                    <div class="product-meta-data">
-                                        <form>
-                                            <p>Firstname: <input type="text" name="text"></p>
-                                            <p>Lastname: <input type="text" name="text"></p>
-                                            <p>Order ID: <input type="text" name="number"></p>
-                                            <div class="dropdown">
-                                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="order_status">STATUS
-                                                    <span class="caret"></span></button>
-                                                <ul class="dropdown-menu">
-                                                    <li><a class="btn btn-primary" href="#" onclick="document.getElementById('order_status').innerHTML='Cancelled'">Cancelled</a></li>
-                                                    <li><a class="btn btn-primary" href="#" onclick="document.getElementById('order_status').innerHTML='Disputed'">Disputed</a></li>
-                                                    <li><a class="btn btn-primary" href="#" onclick="document.getElementById('order_status').innerHTML='In process'">In process</a></li>
-                                                    <li><a class="btn btn-primary" href="#" onclick="document.getElementById('order_status').innerHTML='On hold'">On hold</a></li>
-                                                    <li><a class="btn btn-primary" href="#" onclick="document.getElementById('order_status').innerHTML='Resolved'">Resolved</a></li>
-                                                    <li><a class="btn btn-primary" href="#" onclick="document.getElementById('order_status').innerHTML='Shipped'">Shipped</a></li>
-                                                </ul>
-                                            </div>
-                                        </form>
-                                        <br>
-                                        <a href="#" class="btn amado-btn">SAVE</a>
-                                        <br><br>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-            <!-- pop up shipping -->
-            <div id="id05" class="modal">
-                <span onclick="document.getElementById('id05').style.display='none'" class="close" title="Close Modal">&times;
-                </span>
-                <!-- product-order -->
-                <form class="modal-content animate" action="/action_page.php">
-                    <div class="cart-table-area section-padding-60">
+                    <div class="container-fluid">
                         <div class="row">
                             <div class="col-12 col-lg-8">
-                                <div class="cart-head mt-50">
-                                    <h2>Promotion Management</h2>
+                                <div class="cart-title mt-50">
+                                    <h2>New Promotion</h2>
                                 </div>
-                                <div class="table tbody">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>Code</th>
-                                                <th>ProductName</th>
-                                                <th>Number</th>
-                                                <th>Detail</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <h5>55555</h5>
-                                                </td>
-                                                <td class="cart_product_desc">
-                                                    <h5>setrabus</h5>
-                                                </td>
-                                                <td>
-                                                    <h5>100</h5>
-                                                </td>
-                                                <td>
-                                                    <h5>-</h5>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <br><br>
-                                    <a href="#" onclick="document.getElementById('id06').style.display='block'" class="btn amado-btn">Add +</a>
+                                <div class="product-meta-data">
+                                    <form>
+                                        <p>Promotion ID : <input type="text" name="promotionID"></p>
+                                        <p>Code : <input type="text" name="code"></p>
+                                        <p>Number : <br><input type="number" style="width:100%"  name="number"></p>
+                                        <p>Details : <input type="text" name="details"></p>
+                                        <p>Expair Date : <input type="date" style="width:100%" name="expairDate"></p>
+                                    
+                                    </form>
+                                    <br>
+                                    <a href="#" class="btn amado-btn">SAVE</a>
                                     <br><br>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </form>
-            </div>
-            <!-- pop-up add order to shipping -->
-            <div id="id06" class="modal">
-                <span onclick="document.getElementById('id06').style.display='none'" class="close" title="Close Modal">&times;
-                </span>
-                <!-- product-order -->
-                <form class="modal-content animate" action="/action_page.php">
-                    <div class="cart-table-area section-padding-60">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-12 col-lg-8">
-                                    <div class="cart-title mt-50">
-                                        <h2>Promotion Management</h2>
-                                    </div>
-                                    <div class="product-meta-data">
-                                        <form>
-                                            <p>Code: <input type="text" name="number"></p>
-                                            <p>Product Name: <input type="text" name="text"></p>
-                                            <p>Number: <input type="text" name="number"></p>
-                                            <p>Detail: <input type="text" name="text"></p>
-                                        </form>
-                                        <br>
-                                        <a href="#" class="btn amado-btn">SAVE</a>
-                                        <br><br>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                </form>
-            </div>
-    </header>
-    <!-- Header Area End -->
+                    </form>
+                </div>
+
+        </header>
+        <!-- Header Area End -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <!-- Hyperlink Navigation Area -->
     <!-- <div class="amado-big-button-group clearfix"> -->
@@ -270,13 +182,18 @@
         <a href="/mnod" class="btn amado-big-btn">
             <br><br><br>
             <img src="./amado-master/img/core-img/shopping_cart.png"><br><br>
-            Order & Stock
+            Order
         </a>
         <!-- order-status.blade.php -->
         <a href="/mnpd" class="btn amado-big-btn">
             <br><br><br>
+            <img src="./amado-master/img/core-img/stock.png"><br><br>
+            Product & Stock
+        </a>
+        <a href="/shipping" class="btn amado-big-btn">
+            <br><br><br>
             <img src="./amado-master/img/core-img/shipping_details.png"><br><br>
-            Product Management
+            Shipping Details
         </a>
         <a href="/mnem" class="btn amado-big-btn">
             <br><br><br>
@@ -288,7 +205,7 @@
             <img src="./amado-master/img/core-img/customers.png"><br><br>
             Customers
         </a>
-        <a href="/promotion" class="btn amado-big-btn">
+        <a href="#" onclick="document.getElementById('id04').style.display='block'" class="btn amado-big-btn">
             <br><br><br>
             <img src="./amado-master/img/core-img/promotion.png"><br><br>
             Promotion
