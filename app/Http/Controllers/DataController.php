@@ -77,13 +77,17 @@ class DataController extends Controller
         ");
     }
 
+    // public function checkout(){
+    //     $data = DB::select("select * from customers");
+    //     $jsonCustomer = json_encode($data);
+    //     return view('checkout', ['jsonCustomer' => $jsonCustomer]);
+    // }
     public function viewTest(){
         $data = DB::select('select * from products where productCode = "S10_1768"');
         $jsonProduct = json_encode($data);
 
         return $jsonProduct;
     }
-
     public function login(Request $request)
     {
         $x = sha1($request->psw);
