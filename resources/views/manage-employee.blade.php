@@ -95,13 +95,7 @@
 
             <!-- Button Group -->
             <div class="amado-btn-group mt-30 mb-100">
-<<<<<<< HEAD
                 <a href="#" onclick="document.getElementById('id04').style.display='block'"  class="btn amado-btn" >AddEmployee +</a>
-=======
-
-                <a href="#" onclick="document.getElementById('id04').style.display='block'"  class="btn amado-btn" >AddEmployee +</a>
-
->>>>>>> 4471b21efff154c635463391bde7275d8417da9f
                 <br>
                 <a href="welcome" class="btn amado-btn">Back</a>
                 <br>
@@ -174,10 +168,6 @@
                     </div>
                     </form>
                 </div>
-<<<<<<< HEAD
-=======
-
->>>>>>> 4471b21efff154c635463391bde7275d8417da9f
         </header>
         <!-- Header Area End -->
 

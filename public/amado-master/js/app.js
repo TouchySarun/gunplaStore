@@ -34,7 +34,7 @@ function showProduct(json,editable,orderable){
     json.forEach( function(a) {
     tableproduct += `
         <div class="single-products-catagory">
-            <a href="#" onclick="PopUpProduct('${a.productCode}, editable')">
+            <a href="#" onclick="PopUpProduct('${a.productCode}', '${editable}')">
                 <img src="./amado-master/img/bg-img/1.jpg" alt="">
                 <!-- Hover Content -->
                 <div class="hover-content">

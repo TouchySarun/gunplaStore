@@ -48,14 +48,6 @@ class DataController extends Controller
 
         return view('manage-employee',['jsonEmployee'=>$jsonEmployee]);
     }
-<<<<<<< HEAD
-
-    public function order(){
-        $data = DB::select('select * from products');
-        $jsonProduct = json_encode($data);
-
-        return view('cart',['jsonProduct'=>$jsonProduct]);
-=======
     public function insertToCart(Request $request){
         DB::insert("
             insert into cart
@@ -64,7 +56,11 @@ class DataController extends Controller
         $data = DB::select('select * from cart');
         $jsonProduct = json_encode($data);
         return $jsonProduct;
->>>>>>> 5dfd29e79c95e1342c400fab52d506b1774d8688
+    }
+    public function editProduct($code){
+        $jdata = DB::select("select * from products where productCode = '$code'");
+        $jsoneditProduct = json_encode($jdata);
+        return $jsoneditProduct;
     }
     public function order(Request $request){
         $product = DB::select('select * from cart');
@@ -94,19 +90,6 @@ class DataController extends Controller
     //     $data = DB::select("select * from customers");
     //     $jsonCustomer = json_encode($data);
 
-<<<<<<< HEAD
-=======
-    //     return view('checkout', ['jsonCustomer' => $jsonCustomer]);
-    // }
-
-    public function viewTest(){
-        $data = DB::select('select * from products where productCode = "S10_1768"');
-        $jsonProduct = json_encode($data);
-
-        return $jsonProduct;
-    }
-
->>>>>>> 5dfd29e79c95e1342c400fab52d506b1774d8688
     public function login(Request $request)
     {
         $x = sha1($request->psw);
