@@ -79,44 +79,14 @@
             </div>
 
             <!-- Cart Menu -->
-            <div class="cart-fav-search mb-30">
+            <!-- <div class="cart-fav-search mb-30">
                 <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
                 <a href="cart.html" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
                 <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
-            </div>
-
-            <!-- Amado Nav -->
-            <nav class="amado-nav">
-                <ul>
-                    <div class="amado-nav">
-                        <!--Scale bar-->
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#footerNavContent" aria-controls="footerNavContent" aria-expanded="false">SCALE
-                            <i class="fa fa-caret-down"></i>
-                        </button>
-                        <div class="collapse navbar-collapse" id="footerNavContent">
-                            <ul>
-                                <li class="nav-item" id="Scale">
-                                </li>
-                            </ul>
-                        </div>
-                        <!--Vendor bar-->
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#footer" aria-controls="footerNavContent" aria-expanded="false">VENDOR
-                            <i class="fa fa-caret-down"></i>
-                        </button>
-                        <div class="collapse navbar-collapse" id="footer">
-                            <ul class="navbar-nav ml-auto">
-                                <li class="nav-item" id="Vendor">
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </ul>
-            </nav>
+            </div> -->
 
             <!-- Button Group -->
             <div class="amado-btn-group mt-30 mb-100">
-                <a href="/checkout" class="btn amado-btn">Checkout</a>
-                <br>
                 <a href="/mnod" class="btn amado-btn">Back</a>
                 <br>
                 <a href="/" class="btn amado-btn">Logout</a>

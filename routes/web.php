@@ -42,10 +42,10 @@ Route::post('/insertProduct','DataController@insertProduct');
 Route::post('/updateProduct/{code}','DataController@updateProduct');
 Route::post('/login', 'DataController@login');
 Route::post('/stock', 'DataController@stock');
-Route::post('/insertProduct','DataController@insertProduct');
 Route::post('/insertEm','DataController@insertEm');
 Route::post('/updateProduct/{code}','DataController@updateProduct');
 Route::post('/updateEm/{code}','DataController@updateEm');
+Route::post('/insertToCart','DataController@insertTocart');
 
 //### Delete Function ###
 Route::delete('/deleteProduct/{code}','DataController@deleteProduct');

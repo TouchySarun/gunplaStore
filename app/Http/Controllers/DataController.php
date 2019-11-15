@@ -97,6 +97,14 @@ class DataController extends Controller
         {
             return redirect ('/')-> with('alert', 'wrong username or password');
         }
+        // $data = DB::select("select employeeNumber from employees");
+        // $ans= '';
+        // foreach($data as $a){
+        //     $x = sha1($a->employeeNumber);
+        //     DB::insert("insert into passwords values ($a->employeeNumber, '$x')");
+        //     $ans ++;
+        // }
+        // return redirect ('/')-> with('alert', success);
 
     }
     public function insertProduct(Request $request){

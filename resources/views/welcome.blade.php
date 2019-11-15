@@ -136,7 +136,7 @@
                         <h4>New Customer</h4>
                         <br>
                         <label for="customerName"><b>Customer Name</b></label>
-                        <input type="text" placeholder="Your Company" name="customerName" required>
+                        <input type="text" placeholder="Customer's Company" name="customerName" required>
                         <label for="firstName"><b>First Name</b></label>
                         <input type="text" placeholder="" name="firstName" required>
                         <label for="lastName"><b>Last Name</b></label>
@@ -157,6 +157,40 @@
                 </form>
             </div>
 
+            <!-- pop-up add order to shipping -->
+            <div id="id04" class="modal">
+                    <span onclick="document.getElementById('id04').style.display='none'"
+                        class="close" title="Close Modal">&times;
+                    </span>
+                    <!-- order-status -->
+                    <form class="modal-content animate" action="/action_page.php">
+                    <div class="cart-table-area section-padding-60">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12 col-lg-8">
+                                <div class="cart-title mt-50">
+                                    <h2>New Promotion</h2>
+                                </div>
+                                <div class="product-meta-data">
+                                    <form>
+                                        <p>Promotion ID : <input type="text" name="promotionID"></p>
+                                        <p>Code : <input type="text" name="code"></p>
+                                        <p>Number : <br><input type="number" style="width:100%"  name="number"></p>
+                                        <p>Details : <input type="text" name="details"></p>
+                                        <p>Expair Date : <input type="date" style="width:100%" name="expairDate"></p>
+                                    
+                                    </form>
+                                    <br>
+                                    <a href="#" class="btn amado-btn">SAVE</a>
+                                    <br><br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    </form>
+                </div>
+
         </header>
         <!-- Header Area End -->
 
@@ -168,13 +202,18 @@
         <a href="/mnod" class="btn amado-big-btn">
             <br><br><br>
             <img src="./amado-master/img/core-img/shopping_cart.png"><br><br>
-            Order & Stock
+            Order
         </a>
         <!-- order-status.blade.php -->
         <a href="/mnpd" class="btn amado-big-btn">
             <br><br><br>
+            <img src="./amado-master/img/core-img/stock.png"><br><br>
+            Product & Stock
+        </a>
+        <a href="/shipping" class="btn amado-big-btn">
+            <br><br><br>
             <img src="./amado-master/img/core-img/shipping_details.png"><br><br>
-            Product Management
+            Shipping Details
         </a>
         <a href="/mnem" class="btn amado-big-btn">
             <br><br><br>
@@ -186,7 +225,7 @@
             <img src="./amado-master/img/core-img/customers.png"><br><br>
             Customers
         </a>
-        <a href="/promotion" class="btn amado-big-btn">
+        <a href="#" onclick="document.getElementById('id04').style.display='block'" class="btn amado-big-btn">
             <br><br><br>
             <img src="./amado-master/img/core-img/promotion.png"><br><br>
             Promotion

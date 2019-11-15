@@ -97,7 +97,7 @@ function showProduct(json,editable,orderable){
                 <input style="width:20%" id="qty${i}" step="1" min="0" max="300" name="quantity" value="0">
                 <span class="qty-plus" onclick="var effect = document.getElementById('qty${i}'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
             </div>
-            <button href="#" onclick="AddToOrder('${a.productCode}', '${a.price}', document.getElementById('qty${i}').value)" class="btn amado-btn" style="margin:0px">Buy</button>
+            <button href="#" onclick="AddToOrder(document.getElementById('orderId').value, '${a.productCode}', document.getElementById('qty${i}').value)" class="btn amado-btn" style="margin:0px">Buy</button>
         </div>`;
         i++;
     }

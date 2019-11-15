@@ -75,8 +75,8 @@
 
             <!-- Button Group -->
             <div class="amado-btn-group mt-30 mb-100">
-                <a href="#" onclick="document.getElementById('id01').style.display='block'" class="btn amado-btn">Product-Order</a>
-                <br>
+                <a href="#" onclick="document.getElementById('id01').style.display='block'" class="btn amado-btn-plus">Stock</a>
+                <br><br>
                 <a href="welcome" class="btn amado-btn">Back</a>
                 <br>
                 <a href="/" class="btn amado-btn">Logout</a>
@@ -116,7 +116,7 @@
                             <div class="row">
                                 <div class="col-12 col-lg-8">
                                     <div class="cart-head mt-50">
-                                        <h2>Product-Order</h2>
+                                        <h2>Stock</h2>
                                     </div>
                                     <div class="table tbody">
                                         <table>
@@ -170,7 +170,7 @@
                         <div class="row">
                             <div class="col-12 col-lg-8">
                                 <div class="cart-title mt-50">
-                                    <h2>New Product-Order</h2>
+                                    <h2>Add Stock</h2>
                                 </div>
                                 <div class="product-meta-data">
                                     <form>
