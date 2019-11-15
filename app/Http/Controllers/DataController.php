@@ -60,8 +60,8 @@ class DataController extends Controller
         return view('cart',['product'=>json_encode($product), 'jsonCustomer'=>json_encode($jsonCustomer)]);
     }
     // public function getAddress(Request $request){
-        
-    //     return 
+
+    //     return
     // }
     public function successOrder(Request $request){
         DB::delete('delete from orders');
@@ -86,17 +86,27 @@ class DataController extends Controller
 
     public function login(Request $request)
     {
-        $x = sha1($request->psw);
-        $employeekey = DB::select("select * from passwords where employeeNumber like '$request->uname' and password like '$x'");
-        if($employeekey != null)
-        {
-            $employeeDetail = DB::select("select * from employees where employeeNumber = '$request->uname' ");
-            return view('/welcome',['userDetail'=>json_encode($employeeDetail)]);
+        //create password
+        $data = DB::select("select customerNumber from customers");
+        $jdata = json_encode($data);
+        $ans= '';
+        foreach($data as $a){
+            $x = sha1($a->customerNumber);
+            DB::insert("insert into passwords values ($a->customerNumber, '$x')");
         }
-        else
-        {
-            return redirect ('/')-> with('alert', 'wrong username or password');
-        }
+        return redirect ('/')-> with('alert', success);
+        // normal function
+        // $x = sha1($request->psw);
+        // $employeekey = DB::select("select * from passwords where employeeNumber like '$request->uname' and password like '$x'");
+        // if($employeekey != null)
+        // {
+        //     $employeeDetail = DB::select("select * from employees where employeeNumber = '$request->uname' ");
+        //     return view('/welcome',['userDetail'=>json_encode($employeeDetail)]);
+        // }
+        // else
+        // {
+        //     return redirect ('/')-> with('alert', 'wrong username or password');
+        // }
 
     }
     public function insertProduct(Request $request){
