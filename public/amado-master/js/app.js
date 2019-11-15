@@ -2,7 +2,9 @@ var tableproduct = "";
 var tableemployee = "";
 var jasonproduct = "";
 var tableaddress = "";
+var tablestock = "";
 //--------------Show script------------------//
+//Product
 function showProduct(json,editable,orderable){
     //updateProductList = showProduct(json,true,false)
     //updateProductOrderList = showProduct(json,false,true)
@@ -54,6 +56,8 @@ function showProduct(json,editable,orderable){
     });
     document.getElementById("productArea").innerHTML = tableproduct;
 }
+
+//Customer Address
 function showCustomerAddress(json) {
     var n = 0;
     json.forEach( function(a) {
@@ -101,6 +105,8 @@ function showCustomerAddress(json) {
     });
     document.getElementById("addressArea").innerHTML = tableaddress;
 }
+
+//Employee
 function showEmployee(employee){
     tableemployee="<br><br><br>";
     jsonemployee = employee;
@@ -135,7 +141,26 @@ function showEmployee(employee){
     });
     document.getElementById("employeeArea").innerHTML = tableemployee;
 }
+
+//
+function stockin(stock){
+    tablestock = "";
+    stock.forEach( function(a) {
+    tablestock += `
+        <tr>
+            <td><h5>${a.stockNumber}</h5></td>
+            <td><h5>${a.productCode}</h5></td>
+            <td class="cart_product_desc">
+                <h5>${a.qty}</h5>
+            </td>
+            <td><h5>${a.stockDate}</h5></td>
+        </tr>
+        `
+    });
+    document.getElementById("stock").innerHTML = tablestock;
+}
 //---------------Pop Up ----------------//
+//Employee
 function PopUpEmployee(number, lname, fname, email, office, report, job, exetension, editAble){
 
     //showEmployeeDetail(a) = PopUpProduct(a, false)
@@ -183,6 +208,8 @@ function PopUpEmployee(number, lname, fname, email, office, report, job, exetens
     document.getElementById("id03").style.display = 'block';
 
 }
+
+//Product
 function PopUpProduct(a, editAble){
     //showProductDetail(a) = PopUpProduct(a, false)
     //EditProductDetail(a) = PopUpProduct(a, true)
@@ -281,7 +308,8 @@ function PopUpProduct(a, editAble){
 }
 //------------end show script------------//
 
-//drop-down
+//------------drop-down------------//
+//Vendor
 function dropdownVender(Vendor){
     var mostvendor = "";
     Vendor.forEach(function(b) {
@@ -293,6 +321,8 @@ function dropdownVender(Vendor){
     });
     document.getElementById('Vendor').innerHTML = mostvendor;
 }
+
+//Scale
 function dropdownScale(Scale){
     var mostscale = "";
     Scale.forEach(function(b) {
@@ -305,6 +335,7 @@ function dropdownScale(Scale){
     document.getElementById('Scale').innerHTML = mostscale;
 
 }
+
 //-----------------------------categorize --------------------------------//
 function categorize(input,type){
     var textBox = "";
@@ -326,6 +357,7 @@ function categorize(input,type){
     document.getElementById("productArea").innerHTML = textBox;
 }
 //---------------end categorize -----------------------//
+
 //------------------------------filter----------------------------- //
 function filter(input, type){
     //name 5 / id 4 / scale 7 / vendor 8
@@ -348,6 +380,7 @@ function filter(input, type){
     }
     return returnValue;
 }
+
 function findProductCode(input) {
     var slot, single_products_catagory, pdName, i, txtValue, a;
     slot = document.getElementById("productArea");
@@ -368,7 +401,8 @@ function findProductCode(input) {
 // ---------------------Insert-------------------------------//
 //Product
 function insertitem(){
-    var product = { "pname": document.getElementById("name").value.toString(),
+    var product = { "snum": document.getElementById("snumber").value.toString(),
+                    "pname": document.getElementById("name").value.toString(),
                     "pcode": document.getElementById("code").value.toString(),
                     "pline": document.getElementById("line").value.toString(),
                     "pscale": document.getElementById("scale").value.toString(),
@@ -376,7 +410,7 @@ function insertitem(){
                     "pnumber": document.getElementById("number").value.toString(),
                     "pprice": document.getElementById("price").value.toString(),
                     "pmsrp": document.getElementById("msrp").value.toString(),
-                    "pdes": document.getElementById("des").value.toString()};
+                    "pdes": document.getElementById("pdes").value.toString()};
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -389,10 +423,12 @@ function insertitem(){
         dataType: "json",
         success: function (data) {
             document.getElementById('id04').style.display='none';
-            showProduct(data,true,false);
+            showProduct(data[0],true,false);
+            stockin(data[1]);
         }
     });
 }
+//Employee
 function insertem(){
     var product = { "enumber": document.getElementById("enumber").value.toString(),
                     "efname": document.getElementById("efname").value.toString(),

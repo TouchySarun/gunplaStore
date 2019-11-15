@@ -297,7 +297,7 @@
                                         <form style="border: none">
                                             <div class="form-control" id="addressArea" style="padding: 15px 20px 10px"></div>
                                                 <script>
-                                                    var customer = <?php echo $jsonCustomer ?>;
+                                                    var customer = <?php echo $product?>;
                                                     showCustomerAddress(customer);
                                                 </script>
                                             <div class="confirm-control">

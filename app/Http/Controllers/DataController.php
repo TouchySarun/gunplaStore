@@ -19,13 +19,10 @@ class DataController extends Controller
     }
     public function mnproduct(){
         $data = DB::select('select * from products');
-        $distinctvendor = DB::select('select distinct productVendor from products');
-        $distinctscale = DB::select('select distinct productScale from products');
+        $datastock = DB::select('select * from stock');
         $jsonProduct = json_encode($data);
-        $jsonVendor = json_encode($distinctvendor);
-        $jsonScale = json_encode($distinctscale);
-
-        return view('manage-product',['jsonProduct'=>$jsonProduct, 'jsonVendor'=>$jsonVendor, 'jsonScale'=>$jsonScale]);
+        $jsonstock = json_encode($datastock);
+        return view('manage-product',['jsonProduct'=>$jsonProduct, 'jsonstock'=>$jsonstock]);
     }
     public function mnorder(){
         $data = DB::select('select * from products');
@@ -102,9 +99,12 @@ class DataController extends Controller
     }
     public function insertProduct(Request $request){
         DB::insert("insert into products(productName,productCode,productLine,productScale,productVendor,productDescription,quantityInstock,buyPrice,MSRP)
-        values ('$request->pname','$request->pcode','$request->pline','$request->pscale','$request->pvendor','$request->pnumber','$request->pprice','$request->pmsrp','$request->pdes')");
+        values ('$request->pname','$request->pcode','$request->pline','$request->pscale','$request->pvendor','$request->pdes','$request->pnumber','$request->pprice','$request->pmsrp')");
+        DB::insert("insert into stock(stockNumber,stockDate,productCode,qty)
+        values ('$request->snum',strftime('%Y-%m-%d',date('now')),'$request->pcode','$request->pnumber')");
         $data = DB::select('select * from products');
-        $jsonProduct = json_encode($data);
+        $datastock = DB::select('select * from stock');
+        $jsonProduct = json_encode(array($data,$datastock));
         return $jsonProduct;
     }
 
@@ -114,11 +114,6 @@ class DataController extends Controller
         $data = DB::select('select * from employees');
         $jsonProduct = json_encode($data);
         return $jsonProduct;
-    }
-    public function editProduct($code){
-        $jdata = DB::select("select * from products where productCode = '$code'");
-        $jsoneditProduct = json_encode($jdata);
-        return $jsoneditProduct;
     }
     public function updateProduct(Request $request,$code){
         DB::update("update products set productName = ?,productScale = ?,productVendor = ?,productDescription = ?,quantityInstock = ?,buyPrice = ? where productCode = ?",

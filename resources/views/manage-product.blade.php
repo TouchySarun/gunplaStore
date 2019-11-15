@@ -122,23 +122,14 @@
                                         <table>
                                             <thead>
                                                 <tr>
-                                                    <th>OrderNumber</th>
+                                                    <th>StockNumber</th>
                                                     <th>ProductCode</th>
-                                                    <th>Name</th>
                                                     <th>Number</th>
-                                                    <th>Date</th>
+                                                    <th>StockDate</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><h5>55555</h5></td>
-                                                    <td><h5>11111</h5></td>
-                                                    <td class="cart_product_desc">
-                                                        <h5>White Modern Chair</h5>
-                                                    </td>
-                                                    <td><h5>20</h5></td>
-                                                    <td><h5>10/05/52</h5></td>
-                                                </tr>
+                                            <tbody id="stock">
+
                                             </tbody>
                                         </table>
                                         <br><br>
@@ -174,7 +165,7 @@
                                 </div>
                                 <div class="product-meta-data">
                                     <form>
-                                        <p>OrderNumber: <input type="text" id="onumber" name="onumber" placeholder="10100"></p>
+                                        <p>StockNumber: <input type="text" id="snumber" name="snumber" placeholder="10100"></p>
                                         <p>ProductCode: <input type="text" id="code" name="code" placeholder="S10_1678"></p>
                                         <p>Name: <input type="text" id="name" name="name" placeholder="1972 Alfa Romeo GTA"></p>
                                         <p>Line: <input type="text" id="line" name="line" placeholder="Motocycles"></p>
@@ -183,7 +174,7 @@
                                         <p>Number: <input type="text" id="number" name="number" placeholder="7933"></p>
                                         <p>buyPrice: <input type="text" id="price" name="price" placeholder="48.81"></p>
                                         <p>MSRP: <input type="text" id="msrp" name="msrp" placeholder="95.70"></p>
-                                        <p>Description: <br><textarea id="d" name="description" style="width:600px; height:250px;"></textarea></p>
+                                        <p>Description: <br><textarea id="pdes" name="description" style="width:600px; height:250px;"></textarea></p>
                                         <!-- <button>OK</button> -->
                                         <a href="#" onclick="insertitem()" class="btn amado-btn" type="submit">OK</a>
                                         <br><br>
@@ -203,7 +194,9 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script type="text/javascript">
             var json = <?php echo $jsonProduct?>;
+            var stock = <?php echo $jsonstock?>;
             showProduct(json,true,false);
+            stockin(stock);
 
         </script>
         <!-- Product Catagories Area End -->
