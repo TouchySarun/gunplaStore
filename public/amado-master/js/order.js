@@ -6,7 +6,6 @@ function AddToOrder(orderNumber, pdCode, num){
     var product = {
         "orderNumber": orderNumber,
         "productCode": pdCode,
-        "price": price,
         "qty": num
     };
     $.ajaxSetup({

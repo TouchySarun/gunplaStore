@@ -79,44 +79,14 @@
             </div>
 
             <!-- Cart Menu -->
-            <div class="cart-fav-search mb-30">
+            <!-- <div class="cart-fav-search mb-30">
                 <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
                 <a href="cart.html" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
                 <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
-            </div>
-
-            <!-- Amado Nav -->
-            <nav class="amado-nav">
-                <ul>
-                    <div class="amado-nav">
-                        <!--Scale bar-->
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#footerNavContent" aria-controls="footerNavContent" aria-expanded="false">SCALE
-                            <i class="fa fa-caret-down"></i>
-                        </button>
-                        <div class="collapse navbar-collapse" id="footerNavContent">
-                            <ul>
-                                <li class="nav-item" id="Scale">
-                                </li>
-                            </ul>
-                        </div>
-                        <!--Vendor bar-->
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#footer" aria-controls="footerNavContent" aria-expanded="false">VENDOR
-                            <i class="fa fa-caret-down"></i>
-                        </button>
-                        <div class="collapse navbar-collapse" id="footer">
-                            <ul class="navbar-nav ml-auto">
-                                <li class="nav-item" id="Vendor">
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </ul>
-            </nav>
+            </div> -->
 
             <!-- Button Group -->
             <div class="amado-btn-group mt-30 mb-100">
-                <a href="/checkout" class="btn amado-btn">Checkout</a>
-                <br>
                 <a href="/mnod" class="btn amado-btn">Back</a>
                 <br>
                 <a href="/" class="btn amado-btn">Logout</a>
@@ -249,18 +219,19 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                         <div class="cart-summary">
                             <h5>Cart Total</h5>
                             <ul class="summary-table">
-                                <li><span>Subtotal:</span> <span id="sumprice">$ 0.00</span></li>
+                                <li><span>Subtotal:</span><span id="sumprice"></span></li>
                                 <li><span>Promotion Code:</span>
                                     <div class="col-10">
                                         <input type="text" class="form-control" style="padding: 5px 10px" id="code" placeholder="Code">
                                     </div>
                                 </li>
                                 <li><span>Discount:</span> <span>-</span></li>
-                                <li><span>Total:</span> <span id="sumprice">$ 0.00</span></li>
+                                <li><span>Total:</span> <span id="sumprice"></span></li>
+                                <li><span>Member Points:</span> <span id="mempoint"></span></li>
                             </ul>
                             <div class="payment-method">
                                 <label for="payment">Select payment type</label>
@@ -274,14 +245,6 @@
                                         </select>
                                     </div>
                             </div>
-                            <div class="cart-btn">
-                                <a href="/checkout" class="btn amado-btn w-100">Checkout</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-8">
-                        <div class="cart-summary mt-30">
                             <h5>Select Shipping Address</h5>
                             <ul class="summary-table">
                                 <div class="col-12">
@@ -309,7 +272,23 @@
                                         </form>
                                     </div>
                                 </div>
-                            </ul>
+                            </div><br>
+                            <div class="checkout_details_area clearfix col-12" style="padding: 0px">
+                                    <form style="border: none">
+                                        <div class="form-control" id="addressArea" style="padding: 15px 20px"></div>
+                                            <script>
+                                                var customer = <?php echo $jsonCustomer ?>;
+                                                showCustomerAddress(customer);
+                                            </script>
+                                        <div class="confirm-control">
+                                            <!-- Add Address Button -->
+                                            <a href="#" onclick="document.getElementById('id01').style.display='block'" class="btn amado-btn" style="width: 48%">
+                                                Add Address
+                                            </a>
+                                            <a href="/welcome" class="btn amado-btn" style="width: 48%">Checkout</a>
+                                        </div>
+                                    </form>
+                            </div>
                         </div>
                     </div>
 

@@ -17,9 +17,9 @@ Route::get('/cart', function () {
 Route::get('/shop', function () {
     return view('shop');
 });
-Route::get('/welcome', function () {
-    return view('welcome');
-});
+// Route::get('/welcome', function () {
+//     return view('welcome');
+// });
 
 use Illuminate\Support\Facades\DB;
 Route::get('/test', function () {
@@ -28,23 +28,26 @@ Route::get('/test', function () {
 });
 //### normal page ####
 Route::get('/','DataController@index');
+Route::get('/welcome','DataController@promotion');
 Route::get('/mnpd','DataController@mnproduct');
 Route::get('/mnod','DataController@mnorder');
 Route::get('/mnem','DataController@mnemployee');
 Route::get('/order','DataController@order');
 Route::get('/checkout','DataController@checkout');
 Route::get('/shipping','DataController@shipping');
-Route::get('/promotion','DataController@promotion');
+// Route::get('/promotion','DataController@');
+
 //### function ###
 Route::get('/editproduct/{code}','DataController@editProduct');
 Route::post('/insertProduct','DataController@insertProduct');
 Route::post('/updateProduct/{code}','DataController@updateProduct');
 Route::post('/login', 'DataController@login');
 Route::post('/stock', 'DataController@stock');
-Route::post('/insertProduct','DataController@insertProduct');
 Route::post('/insertEm','DataController@insertEm');
 Route::post('/updateProduct/{code}','DataController@updateProduct');
 Route::post('/updateEm/{code}','DataController@updateEm');
+Route::post('/insertToCart','DataController@insertTocart');
+Route::post('/insertpromotion','DataController@insertpromotion');
 
 //### Delete Function ###
 Route::delete('/deleteProduct/{code}','DataController@deleteProduct');

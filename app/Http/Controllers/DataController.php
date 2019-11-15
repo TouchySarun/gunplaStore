@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use App\Data;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use Illuminate\Http\Request;
 
 class DataController extends Controller
@@ -42,10 +43,10 @@ class DataController extends Controller
     }
     public function insertToCart(Request $request){
         DB::insert("
-            insert into cart
+            insert into orders
             values ('$request->orderNumber','$request->productCode','$request->qty')
         ");
-        $data = DB::select('select * from cart');
+        $data = DB::select('select * from orders');
         $jsonProduct = json_encode($data);
         return $jsonProduct;
     }
@@ -55,17 +56,17 @@ class DataController extends Controller
         return $jsoneditProduct;
     }
     public function order(Request $request){
-        $product = DB::select('select * from cart');
-        //$customer = DB::select("select * from customers where customerNumber like '$request->search'");
-
-        return view('cart',['product'=>json_encode($product)]);
+        $product = DB::select('select * from orders');
+        //$customer = DB::select("select * from addresses where customerNumber like '$request->search'");
+        $jsonCustomer = DB::select("select * from customers where customerNumber like '$request->search'");
+        return view('cart',['product'=>json_encode($product), 'jsonCustomer'=>json_encode($jsonCustomer)]);
     }
-    public function getAddress(Request $request){
-        $address = DB::select("select * from addresses where customerNumber like '$request->search'");
-        return json_encode($address);
-    }
+    // public function getAddress(Request $request){
+        
+    //     return 
+    // }
     public function successOrder(Request $request){
-        DB::delete('delete from cart');
+        DB::delete('delete from orders');
         DB::insert("
             insert into orders(orderNumber, orderDate, status, customerNumber, addressNumber)
             value ($request->orderNumber, $request->orderDate, 'default',$request->customerNumber, $request->addressNumber )
@@ -95,6 +96,14 @@ class DataController extends Controller
         {
             return redirect ('/')-> with('alert', 'wrong username or password');
         }
+        // $data = DB::select("select employeeNumber from employees");
+        // $ans= '';
+        // foreach($data as $a){
+        //     $x = sha1($a->employeeNumber);
+        //     DB::insert("insert into passwords values ($a->employeeNumber, '$x')");
+        //     $ans ++;
+        // }
+        // return redirect ('/')-> with('alert', success);
 
     }
     public function insertProduct(Request $request){
@@ -115,6 +124,15 @@ class DataController extends Controller
         $jsonProduct = json_encode($data);
         return $jsonProduct;
     }
+
+    public function insertpromotion(Request $request){
+        DB::insert("insert into promotion(promotionId,promotionCode,qty,detail,expairDate)
+        values ('$request->promid','$request->promcode','$request->promnum','$request->promdetail','$request->promdate')");
+        $data = DB::select('select * from promotion');
+        $jsonProduct = json_encode($data);
+        return $jsonProduct;
+    }
+
     public function updateProduct(Request $request,$code){
         DB::update("update products set productName = ?,productScale = ?,productVendor = ?,productDescription = ?,quantityInstock = ?,buyPrice = ? where productCode = ?",
         [$request->pname,$request->pscale,$request->pvendor,$request->pdes,$request->pnumber,$request->pprice,$code]);
@@ -130,10 +148,6 @@ class DataController extends Controller
         return $jsonProduct;
     }
 
-    public function deleteProduct($code){
-        $data = DB::select("delete from products where productCode = '$code'");
-    }
-
     public function shipping(){
         $Order = DB::select('select * from orders');
         $jsonOrder = json_encode($Order);
@@ -141,9 +155,21 @@ class DataController extends Controller
     }
 
     public function promotion(){
-        $Order = DB::select('select * from orders');
-        $jsonOrder = json_encode($Order);
-        return view('promotion',['jsonOrder'=>$jsonOrder]);
+        $pro = DB::select('select * from promotion');
+        $jsonpro = json_encode($pro);
+        return view('welcome',['jsonpro'=>$jsonpro]);
+    }
+
+    public function deleteProduct($code){
+        $data = DB::select("delete from products where productCode = '$code'");
+        $data2 = DB::select('select * from products');
+        return $data2;
+    }
+
+    public function deleteEm($code){
+        $data = DB::select("delete from employees where employeeNumber = '$code'");
+        $data2 = DB::select('select * from employees');
+        return $data2;
     }
 }
 

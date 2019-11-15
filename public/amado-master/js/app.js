@@ -1,8 +1,10 @@
-var tableproduct = "";
-var tableemployee = "";
-var jasonproduct = "";
+//require('./bootstrap');
+//product = code, name, line, scale, vendor, descrip, instock, price, msrp
+var tableproduct = "<br><br><br>";//All product List in JSON
+var tableemployee = "<br><br><br>";
 var tableaddress = "";
 var tablestock = "";
+var tablepromotion = "";
 //--------------Show script------------------//
 //Product
 function showProduct(json,editable,orderable){
@@ -48,7 +50,7 @@ function showProduct(json,editable,orderable){
                 <input style="width:20%" id="qty${i}" step="1" min="0" max="300" name="quantity" value="0">
                 <span class="qty-plus" onclick="var effect = document.getElementById('qty${i}'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
             </div>
-            <button href="#" onclick="AddToOrder('${a.productCode}', '${a.price}', document.getElementById('qty${i}').value)" class="btn amado-btn" style="margin:0px">Buy</button>
+            <button href="#" onclick="AddToOrder(document.getElementById('orderId').value, '${a.productCode}', document.getElementById('qty${i}').value)" class="btn amado-btn" style="margin:0px">Buy</button>
         </div>`;
         i++;
     }
@@ -142,7 +144,7 @@ function showEmployee(employee){
     document.getElementById("employeeArea").innerHTML = tableemployee;
 }
 
-//
+//stockin
 function stockin(stock){
     tablestock = "";
     stock.forEach( function(a) {
@@ -158,6 +160,26 @@ function stockin(stock){
         `
     });
     document.getElementById("stock").innerHTML = tablestock;
+}
+
+//promotion
+function promotion(promo){
+    tablepromotion = "";
+    console.log(promo);
+    promo.forEach( function(a) {
+    tablepromotion += `
+        <tr>
+            <td><h5>${a.promotionId}</h5></td>
+            <td><h5>${a.promotionCode}</h5></td>
+            <td class="cart_product_desc">
+                <h5>${a.qty}</h5>
+            </td>
+            <td><h5>${a.stockDate}</h5></td>
+            <td><h5>${a.expairDate}</h5></td>
+        </tr>
+        `
+    });
+    document.getElementById("promotion").innerHTML = tablepromotion;
 }
 //---------------Pop Up ----------------//
 //Employee
@@ -428,6 +450,7 @@ function insertitem(){
         }
     });
 }
+
 //Employee
 function insertem(){
     var product = { "enumber": document.getElementById("enumber").value.toString(),
@@ -451,6 +474,30 @@ function insertem(){
         success: function (data) {
             document.getElementById('id04').style.display='none';
             showEmployee(data);
+        }
+    });
+}
+
+//Promotion
+function insertpromotion(){
+    var pro = {"promid": document.getElementById("promid").value.toString(),
+                     "promcode": document.getElementById("promcode").value.toString(),
+                     "promnum": document.getElementById("promnum").value.toString(),
+                     "promdetail": document.getElementById("promdetail").value.toString(),
+                     "promdate": document.getElementById("promdate").value.toString()};
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/insertpromotion',
+        data: pro,
+        dataType: "json",
+        success: function (data) {
+            document.getElementById('id05').style.display='none';
+            promotion(data);
         }
     });
 }
@@ -485,6 +532,8 @@ function updateitem(a){
         }
     });
 }
+
+//Employee
 function updateem(a){
     var product = { "efn": document.getElementById("efn").value.toString(),
                     "eln": document.getElementById("eln").value.toString(),
@@ -528,6 +577,8 @@ function deleteitem(a){
         }
     });
 }
+
+//Employee
 function deleteem(a){
     $.ajaxSetup({
         headers: {
@@ -544,20 +595,27 @@ function deleteem(a){
     });
 }
 // ----------------------End Delete-----------------------------//
+
+// ----------------------Calculate-----------------------------//
 function order_calculator(){
     //var table = document.getElementById("order_table");
     var body = document.getElementById("order_table_body");
     var tr = body.getElementsByTagName("tr");
     var sum = 0;
+    var mempoint = 0;
     for(var i=0; i<tr.length; i++){
         var price = tr[i].getElementsByTagName("td")[2].innerText;
 
         var num = document.getElementById(`qty${i}`).value;
 
         sum += price*num;
+        mempoint = Math.floor(sum/100)*3;
     }
-    document.getElementById("sumprice").innerHTML = sum;
+    document.getElementById("sumprice").innerHTML = '$' + sum;
+    document.getElementById("mempoint").innerHTML = mempoint + ' Points';
 }
+
+
 function ShowShipping(input){
     var shipping_table="";
     input.forEach(function(a){
@@ -577,6 +635,7 @@ function ShowShipping(input){
     document.getElementById('order_table_body').innerHTML = shipping_table;
 
 }
+
 function stock(){
     $.ajaxSetup({
         headers: {

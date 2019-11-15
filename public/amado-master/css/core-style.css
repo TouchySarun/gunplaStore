@@ -585,13 +585,31 @@ img {
     background-color: #fb8210;
 }
 
+.amado-btn-plus {
+  display: inline-block;
+  min-width: 160px;
+  height: 55px;
+  color: #ffffff;
+  border: none;
+  border-radius: 0;
+  padding: 0 7px;
+  font-size: 18px;
+  line-height: 56px;
+  background-color: #fa9004;
+  font-weight: 400; }
+  .amado-btn-plus.active, .amado-btn-plus:hover, .amado-btn-plus:focus {
+    font-size: 18px;
+    color: #ffffff;
+    background-color: #a19283;
+}
+
 /* Essence  Button */
 .amado-big-btn {
   position: relative;
   top: 0;
   display: inline-block;
   /* min-width: 150px; */
-  width: 19.7%;
+  width: 16.25%;
   height: 550px;
   color: #ffffff;
   border: none;
@@ -2096,6 +2114,7 @@ img {
   font-size: 14px;
   color: #6b6b6b; }
 .checkout_details_area form .confirm-control {
+  text-align: center;
   padding: 0px;
   font-size: 14px;
   color: #6b6b6b; }
