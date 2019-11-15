@@ -83,10 +83,10 @@
             <div class="logo">
                 <a  href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
             </div>
-            <input type="text" name="OrderID" id="orderId">
+            <input type="text" name="OrderID" id="orderId" placeholder="Order ID ...">
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-30">
-                <a href="/order" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Order <span id="NumberCart">(0)</span></a>
+                <a href="/order" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Order ( <span id="NumberCart">0</span> )</a>
                 <!-- <a href="#" onclick="console.log(GetOrder())" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a> -->
             </div>
 

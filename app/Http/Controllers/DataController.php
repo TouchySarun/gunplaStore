@@ -46,12 +46,12 @@ class DataController extends Controller
     }
     public function insertToCart(Request $request){
         DB::insert("
-            insert into orders
+            insert into cart
             values ('$request->orderNumber','$request->productCode','$request->qty')
         ");
-        $data = DB::select('select * from orders');
+        $data = DB::select('select * from cart');
         $jsonProduct = json_encode($data);
-        return $jsonProduct;
+        return view('cart');
     }
     public function order(Request $request){
         $product = DB::select('select * from orders');

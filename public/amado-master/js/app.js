@@ -6,8 +6,8 @@ var tableaddress = "";
 //--------------Show script------------------//
 function showCustomerAddress(json) {
     var n = 0;
-    json.forEach( function(a) {
-        if(n == json.length - 1) {
+    json.forEach(function (a) {
+        if (n == json.length - 1) {
             tableaddress += `
             <!-- class="radio-container" -->
                 <table style="width: 100%">
@@ -27,9 +27,9 @@ function showCustomerAddress(json) {
                     </tbody>
                 </table>
             `;
-            } else {
-                n++;
-                tableaddress += `
+        } else {
+            n++;
+            tableaddress += `
                 <table style="width: 100%">
                     <tbody>
                         <tr>
@@ -47,27 +47,27 @@ function showCustomerAddress(json) {
                     </tbody>
                 </table>
             `;
-            }
-        });
+        }
+    });
     document.getElementById("addressArea").innerHTML = tableaddress;
 }
 
 var jasonproduct = "";
 //--------------Show script------------------//
-function showProduct(json,editable,orderable){
+function showProduct(json, editable, orderable) {
     //updateProductList = showProduct(json,true,false)
     //updateProductOrderList = showProduct(json,false,true)
     var i = 0;
     tableproduct = '<br><br><br>';
-    json.forEach( function(a) {
-    tableproduct += `
+    json.forEach(function (a) {
+        tableproduct += `
         <div class="single-products-catagory">
             <a href="#" onclick="PopUpProduct('${a.productCode}', ${editable})">
                 <img src="./amado-master/img/bg-img/1.jpg" alt="">
                 <!-- Hover Content -->
                 <div class="hover-content">
                     <div class="line"></div>
-                    <p>EmployeeNumber ${a.quantityInStock}</p>
+                    <p>Stock ${a.quantityInStock}</p>
                     <p>$${a.buyPrice}</p>
                     <p>${a.productScale}</p>
                     <p>${a.productVendor}</p>
@@ -85,32 +85,32 @@ function showProduct(json,editable,orderable){
                     <p>${a.MSRP}</p>
                 </div>
             </a>`;
-    if(editable === true){
-        tableproduct += `<button href="#" onclick="PopUpProduct('${a.productCode}',true)" class="btn amado-btn qty-btn">Edit</button>`;
-    }
-    if(orderable === true){
+        if (editable === true) {
+            tableproduct += `<button href="#" onclick="PopUpProduct('${a.productCode}',true)" class="btn amado-btn qty-btn">Edit</button>`;
+        }
+        if (orderable === true) {
 
-        tableproduct += `
+            tableproduct += `
         <div class="d-flex" class="btn amado-btn">
             <div style="width:20%;margin:15px 0px">
                 <span class="qty-minus" onclick="var effect = document.getElementById('qty${i}'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 0 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                <input style="width:20%" id="qty${i}" step="1" min="0" max="300" name="quantity" value="0">
+                <input class="setZero" style="width:20%" id="qty${i}" step="1" min="0" max="300" name="quantity" value="0">
                 <span class="qty-plus" onclick="var effect = document.getElementById('qty${i}'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
             </div>
-            <button href="#" onclick="AddToOrder(document.getElementById('orderId').value, '${a.productCode}', document.getElementById('qty${i}').value)" class="btn amado-btn" style="margin:0px">Buy</button>
+            <button href="#" onclick="AddToOrder(document.getElementById('orderId').value, '${a.productCode}', document.getElementById('qty${i}').value,'qty${i}')" class="btn amado-btn" style="margin:0px">Buy</button>
         </div>`;
-        i++;
-    }
-    tableproduct += `</div>`;
+            i++;
+        }
+        tableproduct += `</div>`;
     });
     document.getElementById("productArea").innerHTML = tableproduct;
 }
 
-function showEmployee(employee){
-    tableemployee="<br><br><br>";
+function showEmployee(employee) {
+    tableemployee = "<br><br><br>";
     jsonemployee = employee;
-    employee.forEach( function(a) {
-    tableemployee += `
+    employee.forEach(function (a) {
+        tableemployee += `
         <div class="single-products-catagory">
                 <a href="#" onclick="PopUpEmployee('${a.employeeNumber}', '${a.lastName}', '${a.firstName}', '${a.email}', '${a.officeCode}', '${a.reportsTo}',
                 '${a.jobTitle}', '${a.extension}', true)">
@@ -141,7 +141,7 @@ function showEmployee(employee){
     document.getElementById("employeeArea").innerHTML = tableemployee;
 }
 //---------------Pop Up ----------------//
-function PopUpEmployee(number, lname, fname, email, office, report, job, exetension, editAble){
+function PopUpEmployee(number, lname, fname, email, office, report, job, exetension, editAble) {
 
     //showEmployeeDetail(a) = PopUpProduct(a, false)
     //EditEmployeeDetail(a) = PopUpProduct(a, true)
@@ -179,7 +179,7 @@ function PopUpEmployee(number, lname, fname, email, office, report, job, exetens
                                                     <p>Extension: <input type="text" id="ee" name="text" value="${exetension}"></p>
                                                 </form>
                                             </div>`;
-    if(editAble===true){
+    if (editAble === true) {
         box += `<a href="#" class="btn amado-btn" onclick="deleteem('${number}')">Delete</a>
                 <a href="#" class="btn amado-btn" onclick="updateem('${number}')">Save</a>`;
     }
@@ -188,7 +188,7 @@ function PopUpEmployee(number, lname, fname, email, office, report, job, exetens
     document.getElementById("id03").style.display = 'block';
 
 }
-function PopUpProduct(a, editAble){
+function PopUpProduct(a, editAble) {
     //showProductDetail(a) = PopUpProduct(a, false)
     //EditProductDetail(a) = PopUpProduct(a, true)
     $.ajaxSetup({
@@ -198,10 +198,10 @@ function PopUpProduct(a, editAble){
     });
     $.ajax({
         type: 'get',
-        url: '/editproduct/'+a,
+        url: '/editproduct/' + a,
         success: function (data) {
             var b = JSON.parse(data)[0];
-    var box = `
+            var box = `
     <span onclick="document.getElementById('id02').style.display='none'"
         class="close" title="Close Modal">&times;
     </span>
@@ -246,8 +246,8 @@ function PopUpProduct(a, editAble){
                         </div>
                         <div class="col-12 col-lg-5">
                             <div class="single_product_desc">`;
-    if(editAble === true){
-        box += `<div class="product-meta-data">
+            if (editAble === true) {
+                box += `<div class="product-meta-data">
                 <div class="line"></div>
                 <form>
                     <p>Price: <input type="text" id="price" name="number" value="${b.buyPrice}"></p>
@@ -264,8 +264,8 @@ function PopUpProduct(a, editAble){
             <a href="#" class="btn amado-btn" onclick="updateitem('${b.productCode}')">Save</a>
 
             </div></div></div></div></div></div></form>`;
-    }else{
-        box += `
+            } else {
+                box += `
         <div class="product-meta-data">
             <div class="line"></div>
             <p class="product-price">$${b.buyPrice}</p>
@@ -278,19 +278,19 @@ function PopUpProduct(a, editAble){
             <p>${b.productDescription}</p>
         </div>
         </div></div></div></div></div></div></form>`
-    }
-    document.getElementById("id02").innerHTML = box;
-    document.getElementById("id02").style.display = 'block';
-    }
+            }
+            document.getElementById("id02").innerHTML = box;
+            document.getElementById("id02").style.display = 'block';
+        }
     });
 }
 //------------end show script------------//
 
 //drop-down
-function dropdownVender(Vendor){
+function dropdownVender(Vendor) {
     var mostvendor = "";
-    Vendor.forEach(function(b) {
-    mostvendor += `
+    Vendor.forEach(function (b) {
+        mostvendor += `
         <a href="#" class="avaibility" onclick="filter('${b.productVendor}',8)">
             ${b.productVendor}
         </a>
@@ -298,10 +298,10 @@ function dropdownVender(Vendor){
     });
     document.getElementById('Vendor').innerHTML = mostvendor;
 }
-function dropdownScale(Scale){
+function dropdownScale(Scale) {
     var mostscale = "";
-    Scale.forEach(function(b) {
-    mostscale += `
+    Scale.forEach(function (b) {
+        mostscale += `
         <a href="#"  class="avaibility" onclick="filter('${b.productScale}',7)">
             ${b.productScale}
         </a>
@@ -311,20 +311,20 @@ function dropdownScale(Scale){
 
 }
 //-----------------------------categorize --------------------------------//
-function categorize(input,type){
+function categorize(input, type) {
     var textBox = "";
-    input.forEach(function(a) {
-        if(type == 'Vendor'){
+    input.forEach(function (a) {
+        if (type == 'Vendor') {
             textBox += `<h1>${a.productVendor}</h1>`;
-            textBox += filter(a.productVendor,8);
+            textBox += filter(a.productVendor, 8);
         }
-        if(type == 'Scale'){
+        if (type == 'Scale') {
             textBox += `<h1>${a.productScale}</h1>`;
-            textBox += filter(a.productScale,7);
+            textBox += filter(a.productScale, 7);
         }
-        if(type == 'Name'){
+        if (type == 'Name') {
             textBox += `<h1>${a.productCode}</h1>`;
-            textBox += filter(a.productCode,5);
+            textBox += filter(a.productCode, 5);
         }
 
     });
@@ -332,21 +332,21 @@ function categorize(input,type){
 }
 //---------------end categorize -----------------------//
 //------------------------------filter----------------------------- //
-function filter(input, type){
+function filter(input, type) {
     //name 5 / id 4 / scale 7 / vendor 8
-    var filter, product_area, single, value, i, txtValue, a, returnValue="";
+    var filter, product_area, single, value, i, txtValue, a, returnValue = "";
     filter = input.toUpperCase();
     product_area = document.getElementById("productArea");
     single = product_area.getElementsByClassName("single-products-catagory");
-    for (i=0; i<single.length; i++){
+    for (i = 0; i < single.length; i++) {
         a = single[i].getElementsByTagName("a")[0];
         value = a.getElementsByTagName("p")[type];
-        if(value){
+        if (value) {
             txtValue = value.textContent || value.innerText;
-            if(txtValue.toUpperCase().indexOf(filter) > -1){
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 returnValue += `<div class="single-products-catagory">${single[i].innerHTML}</div>`;
                 single[i].style.display = '';
-            }else{
+            } else {
                 single[i].style.display = 'none';
             }
         }
@@ -372,16 +372,18 @@ function findProductCode(input) {
 
 // ---------------------Insert-------------------------------//
 //Product
-function insertitem(){
-    var product = { "pname": document.getElementById("name").value.toString(),
-                    "pcode": document.getElementById("code").value.toString(),
-                    "pline": document.getElementById("line").value.toString(),
-                    "pscale": document.getElementById("scale").value.toString(),
-                    "pvendor": document.getElementById("vendor").value.toString(),
-                    "pnumber": document.getElementById("number").value.toString(),
-                    "pprice": document.getElementById("price").value.toString(),
-                    "pmsrp": document.getElementById("msrp").value.toString(),
-                    "pdes": document.getElementById("des").value.toString()};
+function insertitem() {
+    var product = {
+        "pname": document.getElementById("name").value.toString(),
+        "pcode": document.getElementById("code").value.toString(),
+        "pline": document.getElementById("line").value.toString(),
+        "pscale": document.getElementById("scale").value.toString(),
+        "pvendor": document.getElementById("vendor").value.toString(),
+        "pnumber": document.getElementById("number").value.toString(),
+        "pprice": document.getElementById("price").value.toString(),
+        "pmsrp": document.getElementById("msrp").value.toString(),
+        "pdes": document.getElementById("des").value.toString()
+    };
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -393,20 +395,22 @@ function insertitem(){
         data: product,
         dataType: "json",
         success: function (data) {
-            document.getElementById('id04').style.display='none';
-            showProduct(data,true,false);
+            document.getElementById('id04').style.display = 'none';
+            showProduct(data, true, false);
         }
     });
 }
-function insertem(){
-    var product = { "enumber": document.getElementById("enumber").value.toString(),
-                    "efname": document.getElementById("efname").value.toString(),
-                    "elname": document.getElementById("elname").value.toString(),
-                    "eex": document.getElementById("eex").value.toString(),
-                    "eemail": document.getElementById("eemail").value.toString(),
-                    "ecode": document.getElementById("ecode").value.toString(),
-                    "ere": document.getElementById("ere").value.toString(),
-                    "ejob": document.getElementById("ejob").value.toString()};
+function insertem() {
+    var product = {
+        "enumber": document.getElementById("enumber").value.toString(),
+        "efname": document.getElementById("efname").value.toString(),
+        "elname": document.getElementById("elname").value.toString(),
+        "eex": document.getElementById("eex").value.toString(),
+        "eemail": document.getElementById("eemail").value.toString(),
+        "ecode": document.getElementById("ecode").value.toString(),
+        "ere": document.getElementById("ere").value.toString(),
+        "ejob": document.getElementById("ejob").value.toString()
+    };
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -418,7 +422,7 @@ function insertem(){
         data: product,
         dataType: "json",
         success: function (data) {
-            document.getElementById('id04').style.display='none';
+            document.getElementById('id04').style.display = 'none';
             showEmployee(data);
         }
     });
@@ -427,16 +431,18 @@ function insertem(){
 
 // ----------------------Update-------------------------------//
 // Product
-function updateitem(a){
-    var product = { "pname": document.getElementById("name").value.toString(),
-                    // "pcode": document.getElementById("code").value.toString(),
-                    // "pline": document.getElementById("line").value.toString(),
-                    "pscale": document.getElementById("scale").value.toString(),
-                    "pvendor": document.getElementById("vendor").value.toString(),
-                    "pnumber": document.getElementById("stock").value.toString(),
-                    "pprice": document.getElementById("price").value.toString(),
-                    // "pmsrp": document.getElementById("msrp").value.toString(),
-                    "pdes": document.getElementById("des").value.toString()};
+function updateitem(a) {
+    var product = {
+        "pname": document.getElementById("name").value.toString(),
+        // "pcode": document.getElementById("code").value.toString(),
+        // "pline": document.getElementById("line").value.toString(),
+        "pscale": document.getElementById("scale").value.toString(),
+        "pvendor": document.getElementById("vendor").value.toString(),
+        "pnumber": document.getElementById("stock").value.toString(),
+        "pprice": document.getElementById("price").value.toString(),
+        // "pmsrp": document.getElementById("msrp").value.toString(),
+        "pdes": document.getElementById("des").value.toString()
+    };
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -444,24 +450,26 @@ function updateitem(a){
     });
     $.ajax({
         type: 'post',
-        url: '/updateProduct/'+a,
+        url: '/updateProduct/' + a,
         data: product,
         dataType: "json",
         success: function (data) {
-            document.getElementById('id03').style.display='none';
-            document.getElementById('id02').style.display='none';
+            document.getElementById('id03').style.display = 'none';
+            document.getElementById('id02').style.display = 'none';
             showProduct(data, true, false);
         }
     });
 }
-function updateem(a){
-    var product = { "efn": document.getElementById("efn").value.toString(),
-                    "eln": document.getElementById("eln").value.toString(),
-                    "ee": document.getElementById("ee").value.toString(),
-                    "eem": document.getElementById("eem").value.toString(),
-                    "eof": document.getElementById("eof").value.toString(),
-                    "er": document.getElementById("er").value.toString(),
-                    "ej": document.getElementById("ej").value.toString()};
+function updateem(a) {
+    var product = {
+        "efn": document.getElementById("efn").value.toString(),
+        "eln": document.getElementById("eln").value.toString(),
+        "ee": document.getElementById("ee").value.toString(),
+        "eem": document.getElementById("eem").value.toString(),
+        "eof": document.getElementById("eof").value.toString(),
+        "er": document.getElementById("er").value.toString(),
+        "ej": document.getElementById("ej").value.toString()
+    };
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -469,11 +477,11 @@ function updateem(a){
     });
     $.ajax({
         type: 'post',
-        url: '/updateEm/'+a,
+        url: '/updateEm/' + a,
         data: product,
         dataType: "json",
         success: function (data) {
-            document.getElementById('id03').style.display='none';
+            document.getElementById('id03').style.display = 'none';
             showEmployee(data);
         }
     });
@@ -482,7 +490,7 @@ function updateem(a){
 
 // -----------------------Delete-----------------------------//
 //Product
-function deleteitem(a){
+function deleteitem(a) {
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -490,14 +498,14 @@ function deleteitem(a){
     });
     $.ajax({
         type: 'delete',
-        url: '/deleteProduct/'+a,
+        url: '/deleteProduct/' + a,
         success: function (data) {
-            document.getElementById('id03').style.display='none';
+            document.getElementById('id03').style.display = 'none';
             showProduct(data, true, false);
         }
     });
 }
-function deleteem(a){
+function deleteem(a) {
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -505,35 +513,35 @@ function deleteem(a){
     });
     $.ajax({
         type: 'delete',
-        url: '/deleteEm/'+a,
+        url: '/deleteEm/' + a,
         success: function (data) {
-            document.getElementById('id03').style.display='none';
+            document.getElementById('id03').style.display = 'none';
             showEmployee(data);
         }
     });
 }
 // ----------------------End Delete-----------------------------//
-function order_calculator(){
+function order_calculator() {
     //var table = document.getElementById("order_table");
     var body = document.getElementById("order_table_body");
     var tr = body.getElementsByTagName("tr");
     var sum = 0;
     var mempoint = 0;
-    for(var i=0; i<tr.length; i++){
+    for (var i = 0; i < tr.length; i++) {
         var price = tr[i].getElementsByTagName("td")[2].innerText;
 
         var num = document.getElementById(`qty${i}`).value;
 
-        sum += price*num;
-        mempoint = Math.floor(sum/100)*3;
+        sum += price * num;
+        mempoint = Math.floor(sum / 100) * 3;
     }
     document.getElementById("sumprice").innerHTML = '$' + sum;
     document.getElementById("mempoint").innerHTML = mempoint + ' Points';
 }
-function ShowShipping(input){
-    var shipping_table="";
-    input.forEach(function(a){
-        shipping_table+=`
+function ShowShipping(input) {
+    var shipping_table = "";
+    input.forEach(function (a) {
+        shipping_table += `
         <tr>
             <td><h5>${a.orderNumber}</h5></td>
             <td><h5>${a.orderDate}</h5></td>
@@ -549,7 +557,7 @@ function ShowShipping(input){
     document.getElementById('order_table_body').innerHTML = shipping_table;
 
 }
-function stock(){
+function stock() {
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
