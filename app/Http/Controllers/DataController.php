@@ -46,29 +46,28 @@ class DataController extends Controller
     }
     public function insertToCart(Request $request){
         DB::insert("
-            insert into cart
-            values ('$request->orderNumber','$request->productCode','$request->qty')
+            insert into cart(orderNumber,orderLineNumber,productCode,priceEach,qty)
+            values ('$request->orderNumber','$request->Name','$request->productCode','$request->price','$request->qty')
         ");
         $data = DB::select('select * from cart');
         $jsonProduct = json_encode($data);
-        return view('cart');
+        return $jsonProduct;
     }
     public function order(Request $request){
-        $product = DB::select('select * from orders');
-        //$customer = DB::select("select * from addresses where customerNumber like '$request->search'");
-        $jsonCustomer = DB::select("select * from customers where customerNumber like '$request->search'");
-        return view('cart',['product'=>json_encode($product), 'jsonCustomer'=>json_encode($jsonCustomer)]);
+        $product = DB::select('select * from cart');
+        return view('cart',['product'=>json_encode($product),'jsonCustomer'=> '']);
     }
-    // public function getAddress(Request $request){
-        
-    //     return 
-    // }
-    public function successOrder(Request $request){
-        DB::delete('delete from orders');
-        DB::insert("
-            insert into orders(orderNumber, orderDate, status, customerNumber, addressNumber)
-            value ($request->orderNumber, $request->orderDate, 'default',$request->customerNumber, $request->addressNumber )
-        ");
+    public function getAddress($code){
+        $address = DB::select("select * from addresses where customerNumber like '$code'");
+        return json_encode($address);
+    }
+    public function successOrder(){
+        DB::delete('delete from cart');
+        // DB::insert("
+        //     insert into orders(orderNumber, orderDate, status, customerNumber, addressNumber)
+        //     value ($request->orderNumber, $request->orderDate, 'default',$request->customerNumber, $request->addressNumber )
+        // ");
+        return view('welcome');
     }
     public function addOrderDetail(Request $request){
         DB:: insert("

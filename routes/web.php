@@ -37,7 +37,9 @@ Route::get('/shipping','DataController@shipping');
 Route::get('/promotion','DataController@promotion');
 
 //### function ###
+Route::get('/getAddress/{code}','DataController@getAddress');
 Route::get('/editproduct/{code}','DataController@editProduct');
+Route::get('/successOrder','DataController@successOrder');
 Route::post('/insertProduct','DataController@insertProduct');
 Route::post('/updateProduct/{code}','DataController@updateProduct');
 Route::post('/login', 'DataController@login');
@@ -45,7 +47,8 @@ Route::post('/stock', 'DataController@stock');
 Route::post('/insertEm','DataController@insertEm');
 Route::post('/updateProduct/{code}','DataController@updateProduct');
 Route::post('/updateEm/{code}','DataController@updateEm');
-Route::post('/insertToCart','DataController@insertTocart');
+Route::post('/insertToCart','DataController@insertToCart');
+
 
 //### Delete Function ###
 Route::delete('/deleteProduct/{code}','DataController@deleteProduct');

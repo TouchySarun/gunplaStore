@@ -2,12 +2,13 @@
 //product = code, name, line, scale, vendor, descrip, instock, price, msrp
 var tableproduct = "<br><br><br>";//All product List in JSON
 var tableemployee = "<br><br><br>";
-var tableaddress = "";
 //--------------Show script------------------//
-function showCustomerAddress(json) {
+function showCustomerAddress(input) {
+    x = JSON.parse(input);
+    var tableaddress = "";
     var n = 0;
-    json.forEach(function (a) {
-        if (n == json.length - 1) {
+    x.forEach( function (a) {
+        if (n == input.length - 1) {
             tableaddress += `
             <!-- class="radio-container" -->
                 <table style="width: 100%">
@@ -20,7 +21,6 @@ function showCustomerAddress(json) {
                                 </label>
                             </td>
                             <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%; border-bottom: none">
-                                <h5>${a.contactFirstName} ${a.contactLastName}</h5>
                                 <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>                    
                             </td>
                         </tr>
@@ -40,7 +40,6 @@ function showCustomerAddress(json) {
                                 </label>
                             </td>
                             <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%;">
-                                <h5>${a.contactFirstName} ${a.contactLastName}</h5>
                                 <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>                    
                             </td>
                         </tr>
@@ -50,6 +49,26 @@ function showCustomerAddress(json) {
         }
     });
     document.getElementById("addressArea").innerHTML = tableaddress;
+}
+
+function getAddress(customerNumber){
+    //console.log(customerNumber);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'get',
+        url: '/getAddress/' + customerNumber,
+        success: function (data) {
+            console.log(data);
+            showCustomerAddress(data);
+            //var x = JSON.parse(data);
+            //console.log(x[0].customerNumber);
+            // return x[0];
+        }
+    });
 }
 
 var jasonproduct = "";
@@ -97,13 +116,41 @@ function showProduct(json, editable, orderable) {
                 <input class="setZero" style="width:20%" id="qty${i}" step="1" min="0" max="300" name="quantity" value="0">
                 <span class="qty-plus" onclick="var effect = document.getElementById('qty${i}'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
             </div>
-            <button href="#" onclick="AddToOrder(document.getElementById('orderId').value, '${a.productCode}', document.getElementById('qty${i}').value,'qty${i}')" class="btn amado-btn" style="margin:0px">Buy</button>
+            <button href="#" onclick="AddToOrder(document.getElementById('orderId').value,'${a.productName}','${a.buyPrice}', '${a.productCode}', document.getElementById('qty${i}').value,'qty${i}')" class="btn amado-btn" style="margin:0px">Buy</button>
         </div>`;
             i++;
         }
         tableproduct += `</div>`;
     });
     document.getElementById("productArea").innerHTML = tableproduct;
+}
+
+function showCart(product){
+    tableCart = '';
+    product.forEach(function (a){
+        tableCart += `<tr>
+        <td class="cart_product_img">
+            <a href="#"><img src="./amado-master/img/bg-img/cart1.jpg" alt="Product"></a>
+        </td>
+        <td class="cart_product_desc">
+            <h5>${a.orderLineNumber}</h5>
+        </td>
+        <td class="price">
+            <span>${a.priceEach}</span>
+        </td>
+        <td class="qty">
+            <div class="qty-btn d-flex">
+                <p>Qty</p>
+                <div class="quantity">
+                    <span class="qty-minus" onclick="var effect = document.getElementById('qty0'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 0 ) effect.value--;order_calculator();return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                    <input type="number" class="qty-text" id="qty0" step="1" min="0" max="300" name="quantity" value="${a.qty}">
+                    <span class="qty-plus" onclick="var effect = document.getElementById('qty0'); var qty = effect.value; if( !isNaN( qty )) effect.value++;order_calculator();return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                </div>
+            </div>
+        </td>
+    </tr>`
+    });
+    document.getElementById('order_table_body').innerHTML = tableCart;
 }
 
 function showEmployee(employee) {
@@ -567,6 +614,34 @@ function stock() {
         type: 'post',
         url: '/stock',
         success: function (data) {
+            console.log(data);
+        }
+    });
+}
+function AddToOrder(orderNumber,Name,price, pdCode, num ,n){
+
+    var i = Number(document.getElementById('NumberCart').innerText)
+    i = i+Number(num);
+    document.getElementById(n).value = 0;
+
+    document.getElementById('NumberCart').innerText = (i);
+    var product = {
+        "orderNumber": orderNumber,
+        "Name" : Name,
+        "price" : price,
+        "productCode": pdCode,
+        "qty": num
+    };
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/insertToCart',
+        data: product,
+        success: function (data){
             console.log(data);
         }
     });
