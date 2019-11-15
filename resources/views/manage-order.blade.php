@@ -135,6 +135,7 @@
             <!-- Button Group -->
             <div class="amado-btn-group mt-30 mb-100">
                 <a href="/order" class="btn amado-btn" >Order</a>
+                <a href="shipping" class="btn amado-btn">Shipping Detail</a>
                 <br>
                 <a href="/welcome" class="btn amado-btn">Back</a>
                 <br>
