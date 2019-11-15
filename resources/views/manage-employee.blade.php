@@ -52,7 +52,7 @@
 
     <!-- ##### Main Content Wrapper Start ##### -->
     <div class="main-content-wrapper d-flex clearfix">
-    
+
         <!-- Mobile Nav (max width 767px)-->
         <div class="mobile-nav">
             <!-- Navbar Brand -->
@@ -78,7 +78,7 @@
 
         <!-- Header Area Start -->
         <header class="header-area clearfix">
-            
+
             <!-- Close Icon -->
             <!-- <div class="nav-close">
                 <i class="fa fa-close" aria-hidden="true"></i>
@@ -95,9 +95,7 @@
 
             <!-- Button Group -->
             <div class="amado-btn-group mt-30 mb-100">
-
                 <a href="#" onclick="document.getElementById('id04').style.display='block'"  class="btn amado-btn" >AddEmployee +</a>
-
                 <br>
                 <a href="welcome" class="btn amado-btn">Back</a>
                 <br>
@@ -170,16 +168,19 @@
                     </div>
                     </form>
                 </div>
+<<<<<<< HEAD
+=======
 
+>>>>>>> 4471b21efff154c635463391bde7275d8417da9f
         </header>
         <!-- Header Area End -->
-        
+
         <!-- Product Catagories Area Start -->
         <div class="products-catagories-area clearfix" id="employeeArea"></div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script type="text/javascript">
             var Employee = <?php echo $jsonEmployee?>;
-            showEmployeeList(Employee);
+            showEmployee(Employee);
         </script>
         <!-- Product Catagories Area End -->
 
@@ -191,7 +192,7 @@
     <footer class="footer_area">
         <div >
         <!-- Logo -->
-        <a href="/welcome" style="padding:0px 0px 0px 50px"><img src="./amado-master/img/core-img/logoDarkBG.png" alt=""></a>  
+        <a href="/welcome" style="padding:0px 0px 0px 50px"><img src="./amado-master/img/core-img/logoDarkBG.png" alt=""></a>
         </div>
     </footer>
     <!-- ##### Footer Area End ##### -->
