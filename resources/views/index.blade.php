@@ -61,10 +61,6 @@
 
         <!-- Header Area Start -->
         <header class="header-area clearfix">
-<<<<<<< HEAD
-=======
-
->>>>>>> 4471b21efff154c635463391bde7275d8417da9f
             <!-- Logo -->
             <div class="logo">
                 <a href="/"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
