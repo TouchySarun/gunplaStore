@@ -69,6 +69,19 @@ class DataController extends Controller
         $address = DB::select("select * from addresses where customerNumber like '$code'");
         return json_encode($address);
     }
+    public function addAddress(Request $request){
+        DB::insert("insert into addresses 
+            values ('$request->addrline1',
+                    '$request->addrline2',
+                    '$request->city',
+                    '$request->state',
+                    '$request->postalcode',
+                    '$request->country',
+                    '$request->custnum',
+                    '$request->addrnum'
+            )"
+        );
+    }
     public function successOrder(){
         DB::delete('delete from cart');
         // DB::insert("

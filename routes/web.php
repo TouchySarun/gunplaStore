@@ -38,6 +38,7 @@ Route::get('/welcome','DataController@employeeInfo');
 Route::get('/getAddress/{code}','DataController@getAddress');
 Route::get('/editproduct/{code}','DataController@editProduct');
 Route::get('/successOrder','DataController@successOrder');
+Route::post('/addAddress','DataController@addAddress');
 Route::post('/insertProduct','DataController@insertProduct');
 Route::post('/updateProduct/{code}','DataController@updateProduct');
 Route::post('/login', 'DataController@login');

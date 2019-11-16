@@ -100,28 +100,26 @@
                 <form class="modal-content animate" action="/action_page.php">
                     <div class="container">
                         <h4>Adding Address</h4><br>
-                        <label for="contactFirstName"><b>First Name</b></label>
-                            <input type="text" placeholder="" name="contactFirstName" required>
-                        <label for="contactLastName"><b>Last Name</b></label>
-                            <input type="text" placeholder="" name="contactLastName" required>
-                        <label for="customerName"><b>Company Name</b></label>
-                            <input type="text" placeholder="" name="customerName" required>
-                        <label for="country"><b>Country</b></label>
-                            <input type="text" placeholder="" name="country" required>
                         <label for="addressLine1"><b>Address Line 1</b></label>
-                            <input type="text" placeholder="" name="addressLine1" required>
+                            <input type="text" placeholder="" id="addressLine1" name="addressLine1" required>
                         <label for="addressLine2"><b>Address Line 2</b></label>
-                            <input type="text" placeholder="" name="addressLine2" required>
+                            <input type="text" placeholder="" id="addressLine2" name="addressLine2" required>
                         <label for="city"><b>City</b></label>
-                            <input type="text" placeholder="" name="city" required>
+                            <input type="text" placeholder="" id="city" name="city" required>
                         <label for="state"><b>State</b></label>
-                            <input type="text" placeholder="" name="state" required>
+                            <input type="text" placeholder="" id="state" name="state" required>
+                        <label for="country"><b>Country</b></label>
+                            <input type="text" placeholder="" id="country" name="country" required>
                         <label for="postalCode"><b>Postal Code</b></label>
-                            <input type="text" placeholder="" name="postalCode" required>
-                        <button type="submit">Confirm</button>
+                            <input type="text" placeholder="" id="postalCode" name="postalCode" required>
+                        <label for="addrnum"><b>Address ID</b></label>
+                            <input type="text" placeholder="" id="addrnum" name="addrnum" required>
+                        <label for="custnum"><b>Customer ID</b></label>
+                            <input type="text" placeholder="" id="custnum" name="custnum" required>
+                        <a class="btn amado-btn w-100 mt-30" style="color: #ffffff" onclick="insertAddress()">Confirm</a>
                     </div>
                     <div class="container" style="background-color:#f1f1f1">
-                        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                        <a class="btn amado-btn-cancel" style="color: #ffffff" onclick="document.getElementById('id01').style.display='none'">Cancel</a>
                     </div>
                 </form>
             </div>

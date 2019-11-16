@@ -755,3 +755,32 @@ function AddToOrder(orderNumber,Name,price, pdCode, num ,n){
         }
     });
 }
+
+function insertAddress(){
+    var address = {
+        "addrline1": document.getElementById("addressLine1").value.toString(),
+        "addrline2": document.getElementById("addressLine2").value.toString(),
+        "city": document.getElementById("city").value.toString(),
+        "state": document.getElementById("state").value.toString(),
+        "postalcode": document.getElementById("postalCode").value.toString(),
+        "country": document.getElementById("country").value.toString(),
+        "custnum": document.getElementById("custnum").value.toString(),
+        "addrnum": document.getElementById("addrnum").value.toString()
+    };
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/addAddress',
+        data: address,
+        dataType: "json",
+        success: function (data) {
+            console.log(data);
+            document.getElementById('id01').style.display = 'none';
+            showCustomerAddress(data);
+        }
+    });
+}
