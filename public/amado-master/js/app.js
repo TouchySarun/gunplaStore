@@ -65,7 +65,7 @@ function getAddress(customerNumber){
             console.log(data);
             showCustomerAddress(data);
             //var x = JSON.parse(data);
-            //console.log(x[0].customerNumber);
+            // console.log(x[0].customerNumber);
             // return x[0];
         }
     });
@@ -116,7 +116,7 @@ function showProduct(json, editable, orderable) {
                 <input class="setZero" style="width:20%" id="qty${i}" step="1" min="0" max="300" name="quantity" value="0">
                 <span class="qty-plus" onclick="var effect = document.getElementById('qty${i}'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
             </div>
-            <button href="#" onclick="AddToOrder(document.getElementById('orderId').value,'${a.productName}','${a.buyPrice}', '${a.productCode}', document.getElementById('qty${i}').value,'qty${i}')" class="btn amado-btn" style="margin:0px">Buy</button>
+            <button href="#" onclick="AddToCart(document.getElementById('orderId').value,'${a.productName}','${a.buyPrice}', '${a.productCode}', document.getElementById('qty${i}').value,'qty${i}')" class="btn amado-btn" style="margin:0px">Buy</button>
         </div>`;
             i++;
         }
@@ -584,7 +584,11 @@ function order_calculator() {
     }
     document.getElementById("sumprice").innerHTML = '$' + sum;
     document.getElementById("mempoint").innerHTML = mempoint + ' Points';
+
+    
+
 }
+
 function ShowShipping(input) {
     var shipping_table = "";
     input.forEach(function (a) {
@@ -618,7 +622,29 @@ function stock() {
         }
     });
 }
-function AddToOrder(orderNumber,Name,price, pdCode, num ,n){
+function AddToOrder(){
+
+    var CustomerNumber = {
+        'customerNumber' : document.getElementById("searchID").value.toString()
+    };
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/successOrder',
+        data: CustomerNumber,
+        dataType:'Text',
+        success: function (data){
+            console.log(data);
+        }
+    });
+    console.log('sucees Hurey');
+}
+
+function AddToCart(orderNumber,Name,price, pdCode, num ,n){
 
     var i = Number(document.getElementById('NumberCart').innerText)
     i = i+Number(num);
@@ -646,3 +672,7 @@ function AddToOrder(orderNumber,Name,price, pdCode, num ,n){
         }
     });
 }
+
+
+
+

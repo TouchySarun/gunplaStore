@@ -61,19 +61,48 @@ class DataController extends Controller
         $address = DB::select("select * from addresses where customerNumber like '$code'");
         return json_encode($address);
     }
-    public function successOrder(){
+    public function successOrder(Request $request){
+        $OrderNumber = DB::select('select distinct orderNumber from cart ');
+        $ProductCode = DB :: select('select distinct productCode from cart ');
+        $x = $OrderNumber[0];
+        $date = date('Y-m-d',time());
+        // $reqdate = $date;
+        // date_add(date_interval_create_from_date_string("7 days"),$reqdate);
+        // date_modify("+7 days",$reqdate);
+        // date_add($redate,date_interval_create_from_date_string("7 days"));
+        // $date->modify('+7 day');
+         
+        DB::insert("
+            insert into orders(orderNumber,orderDate,requiredDate, status, customerNumber)
+            values ('$x->orderNumber','$date','','default','$request->customerNumber')
+        ");
+
+        $i = 1;
+        $j = 1;
+        foreach($ProductCode as $P){
+            $p = $P->productCode ;
+            $Qty = DB::select("select sum(qty) as QTY from cart where productCode like '$p' Group by productCode");
+            $pricEach = DB::select("select buyPrice from products where productCode like '$p'");
+            // echo $i . " ";   
+            // echo $P->productCode . " ";
+            $qty = $Qty[0];
+            $price = $pricEach[0];
+            DB:: insert("
+                insert into orderdetails(orderNumber,productCode,quantityOrdered,priceEach,orderLineNumber)
+                values ('$x->orderNumber','$P->productCode', '$qty->QTY', '$price->buyPrice', '$i')
+            ");
+            $i = $i + $j;
+        }
         DB::delete('delete from cart');
-        // DB::insert("
-        //     insert into orders(orderNumber, orderDate, status, customerNumber, addressNumber)
-        //     value ($request->orderNumber, $request->orderDate, 'default',$request->customerNumber, $request->addressNumber )
-        // ");
+        
+        // return $jsonProduct;
         return view('welcome');
+        // return $ProductCode;
+        // return null;
     }
     public function addOrderDetail(Request $request){
-        DB:: insert("
-            insert into orderdetails
-            value ($request->orderNumber, $request->productCode, $request->qty, $request->price, $request->orderLineNumber)
-        ");
+        
+        
     }
 
     public function viewTest(){
@@ -169,6 +198,10 @@ class DataController extends Controller
         $data = DB::select("delete from employees where employeeNumber = '$code'");
         $data2 = DB::select('select * from employees');
         return $data2;
+    }
+
+    public function Subtotal(){
+        
     }
 }
 
