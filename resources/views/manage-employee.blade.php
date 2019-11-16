@@ -168,10 +168,6 @@
                     </div>
                     </form>
                 </div>
-<<<<<<< HEAD
-=======
-
->>>>>>> 4471b21efff154c635463391bde7275d8417da9f
         </header>
         <!-- Header Area End -->
 

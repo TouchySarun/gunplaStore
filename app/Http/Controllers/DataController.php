@@ -90,27 +90,18 @@ class DataController extends Controller
     }
     public function login(Request $request)
     {
-        //create password
-        $data = DB::select("select customerNumber from customers");
-        $jdata = json_encode($data);
-        $ans= '';
-        foreach($data as $a){
-            $x = sha1($a->customerNumber);
-            DB::insert("insert into passwords values ($a->customerNumber, '$x')");
-        }
-        return redirect ('/')-> with('alert', success);
         // normal function
-        // $x = sha1($request->psw);
-        // $employeekey = DB::select("select * from passwords where employeeNumber like '$request->uname' and password like '$x'");
-        // if($employeekey != null)
-        // {
-        //     $employeeDetail = DB::select("select * from employees where employeeNumber = '$request->uname' ");
-        //     return view('/welcome',['userDetail'=>json_encode($employeeDetail)]);
-        // }
-        // else
-        // {
-        //     return redirect ('/')-> with('alert', 'wrong username or password');
-        // }
+        $x = sha1($request->psw);
+        $employeekey = DB::select("select * from passwords where employeeNumber like '$request->uname' and password like '$x'");
+        if($employeekey != null)
+        {
+            $employeeDetail = DB::select("select * from employees where employeeNumber = '$request->uname' ");
+            return view('/welcome',['userDetail'=>json_encode($employeeDetail)]);
+        }
+        else
+        {
+            return redirect ('/')-> with('alert', 'wrong username or password');
+        }
 
     }
     public function insertProduct(Request $request){
