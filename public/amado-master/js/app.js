@@ -22,8 +22,7 @@ function showCustomerAddress(input) {
     var tableaddress = "";
     var n = 0;
     x.forEach( function (a) {
-        if (n == input.length - 1) {
-            tableaddress += `
+        tableaddress += `
             <!-- class="radio-container" -->
                 <table style="width: 100%">
                     <tbody>
@@ -35,32 +34,16 @@ function showCustomerAddress(input) {
                                 </label>
                             </td>
                             <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%; border-bottom: none">
-                                <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>                    
+                                <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>                   
+                            </td>
+                            <td>
+                                <a href="#" onclick="PopUpAddress('${a.addressNumber}')" class="btn amado-btn">Edit</a>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-            `;
-        } else {
-            n++;
-            tableaddress += `
-                <table style="width: 100%">
-                    <tbody>
-                        <tr>
-                            <td style="text-align: left; margin-right: 10px; max-width: 10%; border-bottom: none">
-                                <label class="radio-container">
-                                    <input type="radio" name="addressSelect" value="${n}">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </td>
-                            <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%;">
-                                <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>                    
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            `;
-        }
+        `;
+        n++;
     });
     document.getElementById("addressArea").innerHTML = tableaddress;
 }
@@ -87,39 +70,39 @@ function getAddress(customerNumber){
 
 var jasonproduct = "";
 //--------------Show script------------------//
-function showProductList(json){
-    tableproduct="";
-    json.forEach( function(a) {
-    tableproduct += `
-        <div class="single-products-catagory">
-        <a href="#" onclick="showProductDetail('${a.productCode}')">
-        <img src="./amado-master/img/bg-img/1.jpg" alt="">
-        <!-- Hover Content -->
-        <div class="hover-content">
-            <div class="line"></div>
-            <p>In Stock ${a.quantityInStock}</p>
-            <p>$${a.buyPrice}</p>
-            <p>${a.productScale}</p>
-            <p>${a.productVendor}</p>
-            <h4>${a.productName}</h4>
-        </div>
-        <div class="pdDetail" style= "display:none">
-            <p>${a.productCode}</p>
-            <p>${a.productName}</p>
-            <p>${a.productLine}</p>
-            <p>${a.productScale}</p>
-            <p>${a.productVendor}</p>
-            <p>${a.productDescription}</p>
-            <p>${a.quantityInStock}</p>
-            <p>${a.buyPrice}</p>
-            <p>${a.MSRP}</p>
-        </div>
-    </a>
-    </div>
-        `
-    });
-    document.getElementById("productArea").innerHTML = tableproduct;
-}
+// function showProductList(json){
+//     tableproduct="";
+//     json.forEach( function(a) {
+//     tableproduct += `
+//         <div class="single-products-catagory">
+//         <a href="#" onclick="showProductDetail('${a.productCode}')">
+//         <img src="./amado-master/img/bg-img/1.jpg" alt="">
+//         <!-- Hover Content -->
+//         <div class="hover-content">
+//             <div class="line"></div>
+//             <p>In Stock ${a.quantityInStock}</p>
+//             <p>$${a.buyPrice}</p>
+//             <p>${a.productScale}</p>
+//             <p>${a.productVendor}</p>
+//             <h4>${a.productName}</h4>
+//         </div>
+//         <div class="pdDetail" style= "display:none">
+//             <p>${a.productCode}</p>
+//             <p>${a.productName}</p>
+//             <p>${a.productLine}</p>
+//             <p>${a.productScale}</p>
+//             <p>${a.productVendor}</p>
+//             <p>${a.productDescription}</p>
+//             <p>${a.quantityInStock}</p>
+//             <p>${a.buyPrice}</p>
+//             <p>${a.MSRP}</p>
+//         </div>
+//     </a>
+//     </div>
+//         `
+//     });
+//     document.getElementById("productArea").innerHTML = tableproduct;
+// }
 //------------end show script------------//
 
 //----------edit product ----------//
@@ -693,26 +676,6 @@ function ShowShipping(input) {
 
 }
 
-//--------------------- Search ---------------------//
-// function customerNumberSearch(){
-//     var key = {"key": document.getElementById("search").value.toString()};
-    
-//     $.ajaxSetup({
-//         headers: {
-//             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-//         }
-//     });
-//     $.ajax({
-//         type: 'get',
-//         url: '/cnumsearch/'+key,
-//         data: key,
-//         dataType: 'json',
-//         success: function (data) {
-//             showCustomerAddress(data);
-//         }
-//     });
-// }
-//------------------ Search End --------------------//
 function stock(){
     $.ajaxSetup({
         headers: {
@@ -781,6 +744,44 @@ function insertAddress(){
             console.log(data);
             document.getElementById('id01').style.display = 'none';
             showCustomerAddress(data);
+        }
+    });
+}
+
+function PopUpAddress(a) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'get',
+        url: '/editAddress/' + a,
+        success: function (data) {
+            var b = JSON.parse(data)[0];
+            console.log(b);
+            var box = `
+            <span onclick="document.getElementById('id03').style.display='none'" class="close" title="Close Modal">&times;
+            </span>
+                <!-- Form inside popup -->
+                <form class="modal-content animate" action="/action_page.php">
+                    <div class="container">
+                        <h4>Edit Customer Address</h4><br>
+                        <p><b>Address Line 1</b> <input type="text" placeholder="" id="addressLine1" name="addressLine1" value="${b.addressLine1}"></p>
+                        <p><b>Address Line 2</b> <input type="text" placeholder="" id="addressLine2" name="addressLine2" value="${b.addressLine2}"></p>
+                        <p><b>City</b> <input type="text" placeholder="" id="city" name="city" value="${b.city}"></p>
+                        <p><b>State</b> <input type="text" placeholder="" id="state" name="state" value="${b.state}"></p>
+                        <p><b>Country</b> <input type="text" placeholder="" id="country" name="country" value="${b.country}"></p>
+                        <p><b>Postal Code</b> <input type="text" placeholder="" id="postalCode" name="postalCode" value="${b.postalCode}"></p>
+                        <p><b>Address ID</b> <input type="text" placeholder="" id="addrnum" name="addrnum" value="${b.addressNumber}" readonly></p>
+                        <p><b>Customer ID</b> <input type="text" placeholder="" id="custnum" name="custnum" value="${b.customerNumber}" readonly></p>
+                        <a href="#" class="btn amado-btn" onclick="deleteAddress('${b.addressNumber}')">Delete</a>
+                        <a href="#" class="btn amado-btn" onclick="updateAddress('${b.addressNumber}')">Save</a>
+                    </div>
+                </form>
+            `;
+            document.getElementById("id03").innerHTML = box;
+            document.getElementById("id03").style.display = 'block';
         }
     });
 }

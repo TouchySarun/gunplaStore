@@ -177,9 +177,9 @@
             var json = <?php echo $jsonProduct?>;
             var Vendor = <?php echo $jsonVendor?>;
             var Scale = <?php echo $jsonScale?>;
-            showProduct(json,false,true);
             dropdownVender(Vendor);
             dropdownScale(Scale);
+            showProduct(json,false,true);
 
         </script>
         <!-- Product Catagories Area End -->

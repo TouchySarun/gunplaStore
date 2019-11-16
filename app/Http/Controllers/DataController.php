@@ -65,6 +65,7 @@ class DataController extends Controller
         $product = DB::select('select * from cart');
         return view('cart',['product'=>json_encode($product),'jsonCustomer'=> '']);
     }
+
     public function getAddress($code){
         $address = DB::select("select * from addresses where customerNumber like '$code'");
         return json_encode($address);
@@ -78,10 +79,23 @@ class DataController extends Controller
                     '$request->postalcode',
                     '$request->country',
                     '$request->custnum',
-                    '$request->addrnum'
-            )"
+                    '$request->addrnum')"
         );
     }
+    public function editAddress($code){
+        $data = DB::select("select * from addresses where addressNumber = '$code'");
+        return json_encode($data);
+    }
+    public function updateAddress(Request $request, $code){
+        DB::update("update addresses set addressLine1 = ?,addressLine2 = ?,city = ?,state = ?,postalCode = ?,country = ?,customerNumber = ?,addressNumber = ? where customerNumber = ?",
+        [$request->addrline1,$request->addrline2,$request->city,$request->state,$request->postalcode,$request->country,$request->custnum,$request->addrnum,$code]);
+        $data = DB::select('select * from addresses');
+        return json_encode($data);
+    }
+    public function deleteAddress($code){      //Soft-delete -> still be available on order history
+
+    }
+
     public function successOrder(){
         DB::delete('delete from cart');
         // DB::insert("
@@ -126,40 +140,40 @@ class DataController extends Controller
 
     }
     
-    // public function insertProduct(Request $request){
-    //     DB::insert("insert into products(productName,productCode,productLine,productScale,productVendor,productDescription,quantityInstock,buyPrice,MSRP)
-    //     values ('$request->pname','$request->pcode','$request->pline','$request->pscale','$request->pvendor','$request->pnumber','$request->pprice','$request->pmsrp','$request->pdes')");
-    //     $data = DB::select('select * from products');
-    //     $jsonProduct = json_encode($data);
-    //     return $jsonProduct;
-    // }
+    public function insertProduct(Request $request){
+        DB::insert("insert into products(productName,productCode,productLine,productScale,productVendor,productDescription,quantityInstock,buyPrice,MSRP)
+        values ('$request->pname','$request->pcode','$request->pline','$request->pscale','$request->pvendor','$request->pnumber','$request->pprice','$request->pmsrp','$request->pdes')");
+        $data = DB::select('select * from products');
+        $jsonProduct = json_encode($data);
+        return $jsonProduct;
+    }
 
-    // public function insertEm(Request $request){
-    //     DB::insert("insert into employees(employeeNumber,lastName,firstName,extension,email,officeCode,reportsTo,jobTitle)
-    //     values ('$request->enumber','$request->elname','$request->efname','$request->eex','$request->eemail','$request->ecode','$request->ere','$request->ejob')");
-    //     $data = DB::select('select * from employees');
-    //     $jsonProduct = json_encode($data);
-    //     return $jsonProduct;
-    // }
-    // public function editProduct($code){
-    //     $jdata = DB::select("select * from products where productCode = '$code'");
-    //     $jsoneditProduct = json_encode($jdata);
-    //     return $jsoneditProduct;
-    // }
-    // public function updateProduct(Request $request,$code){
-    //     DB::update("update products set productName = ?,productScale = ?,productVendor = ?,productDescription = ?,quantityInstock = ?,buyPrice = ? where productCode = ?",
-    //     [$request->pname,$request->pscale,$request->pvendor,$request->pdes,$request->pnumber,$request->pprice,$code]);
-    //     $data = DB::select('select * from products');
-    //     $jsonProduct = json_encode($data);
-    //     return $jsonProduct;
-    // }
-    // public function updateEm(Request $request,$code){
-    //     DB::update("update employees set lastName = ?,firstName = ?,extension = ?,email = ?,officeCode = ?,reportsTo = ?,jobTitle = ? where employeeNumber = ?",
-    //     [$request->eln,$request->efn,$request->ee,$request->eem,$request->eof,$request->er,$request->ej,$code]);
-    //     $data = DB::select('select * from employees');
-    //     $jsonProduct = json_encode($data);
-    //     return $jsonProduct;
-    // }
+    public function insertEm(Request $request){
+        DB::insert("insert into employees(employeeNumber,lastName,firstName,extension,email,officeCode,reportsTo,jobTitle)
+        values ('$request->enumber','$request->elname','$request->efname','$request->eex','$request->eemail','$request->ecode','$request->ere','$request->ejob')");
+        $data = DB::select('select * from employees');
+        $jsonProduct = json_encode($data);
+        return $jsonProduct;
+    }
+    public function editProduct($code){
+        $jdata = DB::select("select * from products where productCode = '$code'");
+        $jsoneditProduct = json_encode($jdata);
+        return $jsoneditProduct;
+    }
+    public function updateProduct(Request $request,$code){
+        DB::update("update products set productName = ?,productScale = ?,productVendor = ?,productDescription = ?,quantityInstock = ?,buyPrice = ? where productCode = ?",
+        [$request->pname,$request->pscale,$request->pvendor,$request->pdes,$request->pnumber,$request->pprice,$code]);
+        $data = DB::select('select * from products');
+        $jsonProduct = json_encode($data);
+        return $jsonProduct;
+    }
+    public function updateEm(Request $request,$code){
+        DB::update("update employees set lastName = ?,firstName = ?,extension = ?,email = ?,officeCode = ?,reportsTo = ?,jobTitle = ? where employeeNumber = ?",
+        [$request->eln,$request->efn,$request->ee,$request->eem,$request->eof,$request->er,$request->ej,$code]);
+        $data = DB::select('select * from employees');
+        $jsonProduct = json_encode($data);
+        return $jsonProduct;
+    }
 
     public function shipping(){
         $Order = DB::select('select * from orders');

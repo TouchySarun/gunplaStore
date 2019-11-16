@@ -38,7 +38,9 @@ Route::get('/welcome','DataController@employeeInfo');
 Route::get('/getAddress/{code}','DataController@getAddress');
 Route::get('/editproduct/{code}','DataController@editProduct');
 Route::get('/successOrder','DataController@successOrder');
+Route::get('/editAddress/{code}','DataController@editAddress');
 Route::post('/addAddress','DataController@addAddress');
+Route::post('/updateAddress/{code}','DataController@updateAddress');
 Route::post('/insertProduct','DataController@insertProduct');
 Route::post('/updateProduct/{code}','DataController@updateProduct');
 Route::post('/login', 'DataController@login');
@@ -52,3 +54,4 @@ Route::post('/insertToCart','DataController@insertToCart');
 //### Delete Function ###
 Route::delete('/deleteProduct/{code}','DataController@deleteProduct');
 Route::delete('/deleteEm/{code}','DataController@deleteEm');
+Route::delete('/deleteAddress/{code}','DataController@deleteAddress');

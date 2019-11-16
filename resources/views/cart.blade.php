@@ -127,6 +127,9 @@
             <div id="id02" class="modal" style="display:none">
                 <!-- showProductDetail() -->
             </div>
+            <div id="id03" class="modal" style="display:none">
+                
+            </div>
         </header>
         <!-- Header Area End -->
 
