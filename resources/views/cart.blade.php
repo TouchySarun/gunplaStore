@@ -6,6 +6,7 @@
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
@@ -18,6 +19,7 @@
     <link rel="stylesheet" href="./amado-master/css/core-style.css">
     <link rel="stylesheet" href="style.css">
     <script src="./amado-master/js/app.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 </head>
 
@@ -139,7 +141,6 @@
                         <div class="cart-title mt-50">
                             <h2>Order</h2>
                         </div>
-
                         <div class="cart-table clearfix">
                             <table class="table table-responsive" id="order_table">
                                 <thead>
@@ -151,73 +152,15 @@
                                     </tr>
                                 </thead>
                                 <tbody id="order_table_body">
-                                    <tr>
-                                        <td class="cart_product_img">
-                                            <a href="#"><img src="./amado-master/img/bg-img/cart1.jpg" alt="Product"></a>
-                                        </td>
-                                        <td class="cart_product_desc">
-                                            <h5>White Modern Chair</h5>
-                                        </td>
-                                        <td class="price">
-                                            <span>130</span>
-                                        </td>
-                                        <td class="qty">
-                                            <div class="qty-btn d-flex">
-                                                <p>Qty</p>
-                                                <div class="quantity">
-                                                    <span class="qty-minus" onclick="var effect = document.getElementById('qty0'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 0 ) effect.value--;order_calculator();return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                                    <input type="number" class="qty-text" id="qty0" step="1" min="0" max="300" name="quantity" value="0">
-                                                    <span class="qty-plus" onclick="var effect = document.getElementById('qty0'); var qty = effect.value; if( !isNaN( qty )) effect.value++;order_calculator();return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="cart_product_img">
-                                            <a href="#"><img src="./amado-master/img/bg-img/cart2.jpg" alt="Product"></a>
-                                        </td>
-                                        <td class="cart_product_desc">
-                                            <h5>Minimal Plant Pot</h5>
-                                        </td>
-                                        <td class="price">
-                                            <span>10</span>
-                                        </td>
-                                        <td class="qty">
-                                            <div class="qty-btn d-flex">
-                                                <p>Qty</p>
-                                                <div class="quantity">
-                                                    <span class="qty-minus" onclick="var effect = document.getElementById('qty1'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                                    <input vbtype="number" class="qty-text" id="qty1" step="1" min="1" max="300" name="quantity" value="1">
-                                                    <span class="qty-plus" onclick="var effect = document.getElementById('qty1'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="cart_product_img">
-                                            <a href="#"><img src="./amado-master/img/bg-img/cart3.jpg" alt="Product"></a>
-                                        </td>
-                                        <td class="cart_product_desc">
-                                            <h5>Minimal Plant Pot</h5>
-                                        </td>
-                                        <td class="price">
-                                            <span>10</span>
-                                        </td>
-                                        <td class="qty">
-                                            <div class="qty-btn d-flex">
-                                                <p>Qty</p>
-                                                <div class="quantity">
-                                                    <span class="qty-minus" onclick="var effect = document.getElementById('qty2'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                                    <input type="number" class="qty-text" id="qty2" step="1" min="1" max="300" name="quantity" value="1">
-                                                    <span class="qty-plus" onclick="var effect = document.getElementById('qty2'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    
                                 </tbody>
                             </table>
                         </div>
                     </div>
+                    <script>
+                        var json = <?php echo $product?>;
+                        showCart(json);
+                    </script>
 
                     <div class="col-lg-4">
                         <div class="cart-summary">
@@ -246,46 +189,24 @@
                                     </div>
                             </div>
                             <h5>Select Shipping Address</h5>
-                            <ul class="summary-table">
-                                <div class="col-12">
-                                    <div class="search-content">
-                                        <form action="#" method="get" style="border: none">
-                                            <input class="w-75" type="text" name="search" id="search" placeholder="Type your keyword...">
-                                            <button style="max-width: 10%" type="submit"><img src="./amado-master/img/core-img/search.png" alt=""></button>
-                                        </form>
-                                    </div>
-                                </div><br>
-                                <div class="col-12">
-                                    <div class="checkout_details_area clearfix">
-                                        <form style="border: none">
-                                            <div class="form-control" id="addressArea" style="padding: 15px 20px 10px"></div>
-                                                <script>
-                                                    var customer = <?php echo $product?>;
-                                                    showCustomerAddress(customer);
-                                                </script>
-                                            <div class="confirm-control">
-                                                <!-- Add Address Button -->
-                                                <a href="#" onclick="document.getElementById('id01').style.display='block'" class="btn amado-btn w-100">
-                                                    Add Address
-                                                </a>
-                                            </div>
-                                        </form>
-                                    </div>
+                            <div class="col-12" style="padding: 0px">
+                                <div>
+                                    <form style="border: none">
+                                        <input type="text" name="searchID" id="searchID" placeholder="Type Customer Number...">
+                                        <a class="btn amado-btn" style="max-width: 22%" onclick="getAddress(document.getElementById('searchID').value)"><img src="./amado-master/img/core-img/search.png" alt=""></a>
+                                    </form>
                                 </div>
                             </div><br>
                             <div class="checkout_details_area clearfix col-12" style="padding: 0px">
                                     <form style="border: none">
                                         <div class="form-control" id="addressArea" style="padding: 15px 20px"></div>
-                                            <script>
-                                                var customer = <?php echo $jsonCustomer ?>;
-                                                showCustomerAddress(customer);
-                                            </script>
+                                            
                                         <div class="confirm-control">
                                             <!-- Add Address Button -->
                                             <a href="#" onclick="document.getElementById('id01').style.display='block'" class="btn amado-btn" style="width: 48%">
                                                 Add Address
                                             </a>
-                                            <a href="/welcome" class="btn amado-btn" style="width: 48%">Checkout</a>
+                                            <a href="/successOrder" class="btn amado-btn" style="width: 48%">Checkout</a>
                                         </div>
                                     </form>
                             </div>

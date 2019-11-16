@@ -25,7 +25,6 @@
         <p>jobTitle</p>
         <p>employeeNumber</p>
     </div>
-
     <!-- Search Wrapper Area Start -->
     <div class="search-wrapper section-padding-50">
         <div class="search-close">
@@ -116,7 +115,7 @@
                             <div class="row">
                                 <div class="col-12 col-lg-8">
                                     <div class="cart-head mt-50">
-                                        <h2>Stock</h2>
+                                        <h2>Stock-In</h2>
                                     </div>
                                     <div class="table tbody">
                                         <table>
@@ -168,7 +167,19 @@
                                         <p>StockNumber: <input type="text" id="snumber" name="snumber" placeholder="10100"></p>
                                         <p>ProductCode: <input type="text" id="code" name="code" placeholder="S10_1678"></p>
                                         <p>Name: <input type="text" id="name" name="name" placeholder="1972 Alfa Romeo GTA"></p>
-                                        <p>Line: <input type="text" id="line" name="line" placeholder="Motocycles"></p>
+                                        <p>Line: 
+                                        <div>
+                                            <select class="w-100" id="line">
+                                                <option value="Classic Cars">Classic Cars</option>
+                                                <option value="Motorcycles">Motorcycles</option>
+                                                <option value="Planes">Planes</option>
+                                                <option value="Ships">Ships</option>
+                                                <option value="Trains">Trains</option>
+                                                <option value="Trucks and Buses">Trucks and Buses</option>
+                                                <option value="Vintage Cars">Vintage Cars</option>
+                                            </select>
+                                        </div>
+                                        </p>
                                         <p>Scale: <input type="text" id="scale" name="scale" placeholder="1:10"></p>
                                         <p>Vendor: <input type="text" id="vendor" name="vendor" placeholder="Highway 66 Mini Classics"></p>
                                         <p>Number: <input type="text" id="number" name="number" placeholder="7933"></p>

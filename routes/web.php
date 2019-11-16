@@ -38,7 +38,10 @@ Route::get('/shipping','DataController@shipping');
 // Route::get('/promotion','DataController@');
 
 //### function ###
+Route::get('/getAddress/{code}','DataController@getAddress');
 Route::get('/editproduct/{code}','DataController@editProduct');
+Route::get('/editstatus/{code}','DataController@editstatus');
+Route::get('/successOrder','DataController@successOrder');
 Route::post('/insertProduct','DataController@insertProduct');
 Route::post('/updateProduct/{code}','DataController@updateProduct');
 Route::post('/login', 'DataController@login');
@@ -46,6 +49,7 @@ Route::post('/stock', 'DataController@stock');
 Route::post('/insertEm','DataController@insertEm');
 Route::post('/updateProduct/{code}','DataController@updateProduct');
 Route::post('/updateEm/{code}','DataController@updateEm');
+Route::post('/updateship/{code}','DataController@updateship');
 Route::post('/insertToCart','DataController@insertTocart');
 Route::post('/insertpromotion','DataController@insertpromotion');
 

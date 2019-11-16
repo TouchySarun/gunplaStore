@@ -6,6 +6,7 @@
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
@@ -19,24 +20,10 @@
     <link rel="stylesheet" href="./style.css">
     <script src="./amado-master/js/app.js"></script>
     <script src="./amado-master/js/order.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
 <body>
-    <script>
-        var userTitle = sessionStorage.getItem('title');
-        if (userTitle != null){
-            if(userTitle != "Sales"){
-                // redurect ti welcome
-            }
-        }else {
-            // redirect to index
-        }
-    </script>
-    <div style="display:none" id="Key">
-        <p>username</p>
-        <p>jobTitle</p>
-        <p>employeeNumber</p>
-    </div>
     <!-- Search Wrapper Area Start -->
     <div class="search-wrapper section-padding-50">
         <div class="search-close">
@@ -83,10 +70,10 @@
             <div class="logo">
                 <a  href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
             </div>
-            <input type="text" name="OrderID" id="orderId">
+            <input type="text" name="OrderID" id="orderId" placeholder="Order ID ...">
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-30">
-                <a href="/order" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Order <span id="NumberCart">(0)</span></a>
+                <a href="/order" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Order ( <span id="NumberCart">0</span> )</a>
                 <!-- <a href="#" onclick="console.log(GetOrder())" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a> -->
             </div>
 
@@ -176,7 +163,7 @@
         <div class="products-catagories-area clearfix" id="productArea" >
 
         </div>
-        <script>
+        <script type="text/javascript">
             var json = <?php echo $jsonProduct?>;
             var Vendor = <?php echo $jsonVendor?>;
             var Scale = <?php echo $jsonScale?>;
@@ -211,6 +198,8 @@
     <script src="./amado-master/js/active.js"></script>
     <!-- DB function -->
     <script src="./amado-master/js/app.js"></script>
+
+    
 
 </body>
 

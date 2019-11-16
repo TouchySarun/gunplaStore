@@ -25,11 +25,12 @@
     <!-- Search Wrapper Area Start -->
     <!-- @if(session()->has('success')) -->
     <!-- @endif -->
-    <!-- <script>
-        var user = <php echo $userDetail?>;
+    <script>
+        var user = <?php echo $userDetail?>;
         sessionStorage.setItem('employeeNumber',user[0].employeeNumber);
         sessionStorage.setItem('title',user[0].jobTitle);
-    </script> -->
+    </script>
+    
     <div class="search-wrapper section-padding-50">
         <div class="search-close">
             <i class="fa fa-close" aria-hidden="true"></i>
@@ -81,7 +82,8 @@
 
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-30">
-                <p id="showUser">xxxxxxx</p>
+                <p>EmployeeID:</p>
+                <p id="showUser"></p>
                 <script>document.getElementById('showUser').innerHTML=sessionStorage.getItem('employeeNumber')</script>
                 <a href="cart.html" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
                 <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
@@ -264,7 +266,7 @@
     </div>
 
     <script>
-        $data = <?php echo $jsonpro?>; 
+        $data = <?php echo $jsonpro ?? ''?>; 
         promotion($data);
     </script>
     <!-- Mobile Nav (max width 767px)-->

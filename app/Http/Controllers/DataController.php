@@ -43,10 +43,10 @@ class DataController extends Controller
     }
     public function insertToCart(Request $request){
         DB::insert("
-            insert into orders
-            values ('$request->orderNumber','$request->productCode','$request->qty')
+            insert into cart(orderNumber,orderLineNumber,productCode,priceEach,qty)
+            values ('$request->orderNumber','$request->Name','$request->productCode','$request->price','$request->qty')
         ");
-        $data = DB::select('select * from orders');
+        $data = DB::select('select * from cart');
         $jsonProduct = json_encode($data);
         return $jsonProduct;
     }
@@ -55,22 +55,26 @@ class DataController extends Controller
         $jsoneditProduct = json_encode($jdata);
         return $jsoneditProduct;
     }
-    public function order(Request $request){
-        $product = DB::select('select * from orders');
-        //$customer = DB::select("select * from addresses where customerNumber like '$request->search'");
-        $jsonCustomer = DB::select("select * from customers where customerNumber like '$request->search'");
-        return view('cart',['product'=>json_encode($product), 'jsonCustomer'=>json_encode($jsonCustomer)]);
+    public function editstatus($code){
+        $jdata = DB::select("select * from orders where orderNumber = '$code'");
+        $jsoneditstatus = json_encode($jdata);
+        return $jsoneditstatus;
     }
-    // public function getAddress(Request $request){
-        
-    //     return 
-    // }
-    public function successOrder(Request $request){
-        DB::delete('delete from orders');
-        DB::insert("
-            insert into orders(orderNumber, orderDate, status, customerNumber, addressNumber)
-            value ($request->orderNumber, $request->orderDate, 'default',$request->customerNumber, $request->addressNumber )
-        ");
+    public function order(Request $request){
+        $product = DB::select('select * from cart');
+        return view('cart',['product'=>json_encode($product),'jsonCustomer'=> '']);
+    }
+    public function getAddress($code){
+        $address = DB::select("select * from addresses where customerNumber like '$code'");
+        return json_encode($address);
+    }
+    public function successOrder(){
+        DB::delete('delete from cart');
+        // DB::insert("
+        //     insert into orders(orderNumber, orderDate, status, customerNumber, addressNumber)
+        //     value ($request->orderNumber, $request->orderDate, 'default',$request->customerNumber, $request->addressNumber )
+        // ");
+        return view('welcome');
     }
     public function addOrderDetail(Request $request){
         DB:: insert("
@@ -90,7 +94,10 @@ class DataController extends Controller
         if($employeekey != null)
         {
             $employeeDetail = DB::select("select * from employees where employeeNumber = '$request->uname' ");
-            return view('/welcome',['userDetail'=>json_encode($employeeDetail)]);
+            $pro = DB::select('select * from promotion');
+            $jsonpro = json_encode($pro);
+            // $sale = DB::select("select * from employees ");
+            return view('/welcome',['userDetail'=>json_encode($employeeDetail),'jsonpro'=>$jsonpro]);
         }
         else
         {
@@ -104,13 +111,13 @@ class DataController extends Controller
         //     $ans ++;
         // }
         // return redirect ('/')-> with('alert', success);
-
     }
     public function insertProduct(Request $request){
         DB::insert("insert into products(productName,productCode,productLine,productScale,productVendor,productDescription,quantityInstock,buyPrice,MSRP)
         values ('$request->pname','$request->pcode','$request->pline','$request->pscale','$request->pvendor','$request->pdes','$request->pnumber','$request->pprice','$request->pmsrp')");
         DB::insert("insert into stock(stockNumber,stockDate,productCode,qty)
         values ('$request->snum',strftime('%Y-%m-%d',date('now')),'$request->pcode','$request->pnumber')");
+        $productl = DB::select("select * from productlines where productLine = $request->pline");
         $data = DB::select('select * from products');
         $datastock = DB::select('select * from stock');
         $jsonProduct = json_encode(array($data,$datastock));
@@ -144,6 +151,13 @@ class DataController extends Controller
         DB::update("update employees set lastName = ?,firstName = ?,extension = ?,email = ?,officeCode = ?,reportsTo = ?,jobTitle = ? where employeeNumber = ?",
         [$request->eln,$request->efn,$request->ee,$request->eem,$request->eof,$request->er,$request->ej,$code]);
         $data = DB::select('select * from employees');
+        $jsonProduct = json_encode($data);
+        return $jsonProduct;
+    }
+    public function updateship(Request $request,$code){
+        DB::update("update orders set shippedDate = ?,status = ?,comments = ? where orderNumber = ?",
+        [$request->shipdate,$request->odstatus,$request->shipcom,$code]);
+        $data = DB::select('select * from orders');
         $jsonProduct = json_encode($data);
         return $jsonProduct;
     }
