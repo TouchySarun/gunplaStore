@@ -61,7 +61,8 @@ function showCustomerAddress(input, editAble) {
         x.forEach( function (a) {
             if (n == input.length - 1) {
                 tableaddress += `
-                    
+                    <!-- class="radio-container" -->
+                    <table style="width: 100%">
                         <tbody>
                             <tr>
                                 <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%; border-bottom: none">
@@ -69,10 +70,12 @@ function showCustomerAddress(input, editAble) {
                                 </td>
                             </tr>
                         </tbody>
+                    </table>
                 `;
             } else {
                 n++;
                 tableaddress += `
+                    <table style="width: 100%">
                         <tbody>
                             <tr>
                                 <td>
@@ -81,9 +84,10 @@ function showCustomerAddress(input, editAble) {
                                     <a href="#" class="btn amado-btn" >Delete</a>
                                     <a href="#" class="btn amado-btn" >Save</a>                      
                                     </div>
-                                </td>
+                                    </td>
                             </tr>
                         </tbody>
+                    </table>
                 `;
             }
         });
