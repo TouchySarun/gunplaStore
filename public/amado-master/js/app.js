@@ -160,7 +160,7 @@ function showEmployee(employee) {
         tableemployee += `
         <div class="single-products-catagory">
                 <a href="#" onclick="PopUpEmployee('${a.employeeNumber}', '${a.lastName}', '${a.firstName}', '${a.email}', '${a.officeCode}', '${a.reportsTo}',
-                '${a.jobTitle}', '${a.extension}', true)">
+                '${a.jobTitle}', '${a.extension}', false)">
                 <img src="./amado-master/img/core-img/employeeM.png" alt="">
                 <!-- Hover Content -->
                 <div class="hover-content">
@@ -179,9 +179,9 @@ function showEmployee(employee) {
                     <p>${a.reportsTo}</p>
                     <p>${a.jobTitle}</p>
                 </div>
-                <a href="#" onclick="PopUpEmployee('${a.employeeNumber}', '${a.lastName}', '${a.firstName}', '${a.email}', '${a.officeCode}', '${a.reportsTo}',
-                '${a.jobTitle}', '${a.extension}', true)" class="btn amado-btn">Edit</a>
-            </a>
+                </a>
+                <button onclick="PopUpEmployee('${a.employeeNumber}', '${a.lastName}', '${a.firstName}', '${a.email}', '${a.officeCode}', '${a.reportsTo}',
+                '${a.jobTitle}', '${a.extension}', true)" class="btn amado-btn">Edit</button>
         </div>
         `
     });
@@ -216,19 +216,33 @@ function PopUpEmployee(number, lname, fname, email, office, report, job, exetens
                                     <div class="single_product_desc">
                                         <div class="product-meta-data">
                                             <div class="line"></div>
-                                                <form>
-                                                    <p>FirstName: <input type="text" id="efn" name="text" value="${fname}"></p>
-                                                    <p>LastName: <input type="text" id="eln" name="text" value="${lname}"></p>
-                                                    <p>Email: <input type="text" id="eem" name="text" value="${email}"></p>
-                                                    <p>JobTitle: <input type="text" id="ej" name="text" value="${job}"></p>
-                                                    <p>OfficeCode: <input type="text" id="eof" name="text" value="${office}"></p>
-                                                    <p>ReportTo: <input type="text" id="er" name="text" value="${report}"></p>
-                                                    <p>Extension: <input type="text" id="ee" name="text" value="${exetension}"></p>
-                                                </form>
-                                            </div>`;
+                                            `;
     if (editAble === true) {
-        box += `<a href="#" class="btn amado-btn" onclick="deleteem('${number}')">Delete</a>
-                <a href="#" class="btn amado-btn" onclick="updateem('${number}')">Save</a>`;
+        box += `
+            <form>
+                <p>FirstName: <input type="text" id="efn" name="text" value="${fname}"></p>
+                <p>LastName: <input type="text" id="eln" name="text" value="${lname}"></p>
+                <p>Email: <input type="text" id="eem" name="text" value="${email}"></p>
+                <p>JobTitle: <input type="text" id="ej" name="text" value="${job}"></p>
+                <p>OfficeCode: <input type="text" id="eof" name="text" value="${office}"></p>
+                <p>ReportTo: <input type="text" id="er" name="text" value="${report}"></p>
+                <p>Extension: <input type="text" id="ee" name="text" value="${exetension}"></p>
+            </form>
+        </div>
+            <a href="#" class="btn amado-btn" onclick="deleteem('${number}')">Delete</a>
+            <a href="#" class="btn amado-btn" onclick="updateem('${number}')">Save</a>`;
+    }else{
+        box += `
+            <form>
+                <p>FirstName: ${fname}</p>
+                <p>LastName: ${lname}</p>
+                <p>Email: ${email}</p>
+                <p>JobTitle: ${job}</p>
+                <p>OfficeCode: ${office}</p>
+                <p>ReportTo: ${report}</p>
+                <p>Extension: ${exetension}</p>
+            </form>
+        </div>`
     }
     box += `</div></div></div></div></div></div></div></form>`;
     document.getElementById("id03").innerHTML = box;
