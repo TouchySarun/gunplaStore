@@ -45,37 +45,36 @@ function showCustomerAddress(input) {
                             <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%;">
                             <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>                    
                             </td>
-                            </tr>
-                            </tbody>
-                            </table>
-                            `;
-                        }
-                    });
-                    document.getElementById("addressArea").innerHTML = tableaddress;
-                }
-                
-                function getAddress(customerNumber){
-                    //console.log(customerNumber);
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
-                    $.ajax({
-                        type: 'get',
-                        url: '/getAddress/' + customerNumber,
-                        success: function (data) {
-                            console.log(data);
-                            showCustomerAddress(data);
-                            //var x = JSON.parse(data);
-                            //console.log(x[0].customerNumber);
-                            // return x[0];
-                        }
-                    });
-                }
-                
-                var jasonproduct = "";
-                //--------------Show script------------------//
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+        }
+    });
+    document.getElementById("addressArea").innerHTML = tableaddress;
+}
+
+function getAddress(customerNumber){
+    //console.log(customerNumber);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'get',
+        url: '/getAddress/' + customerNumber,
+        success: function (data) {
+            console.log(data);
+            showCustomerAddress(data);
+            //var x = JSON.parse(data);
+            // console.log(x[0].customerNumber);
+            // return x[0];
+        }
+    });
+}
+
+var jasonproduct = "";
 function showProduct(json, editable, orderable) {
 //updateProductList = showProduct(json,true,false)
                 //updateProductOrderList = showProduct(json,false,true)
@@ -119,7 +118,7 @@ function showProduct(json, editable, orderable) {
                 <input class="setZero" style="width:20%" id="qty${i}" step="1" min="0" max="300" name="quantity" value="0">
                 <span class="qty-plus" onclick="var effect = document.getElementById('qty${i}'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
             </div>
-            <button href="#" onclick="AddToOrder(document.getElementById('orderId').value,'${a.productName}','${a.buyPrice}', '${a.productCode}', document.getElementById('qty${i}').value,'qty${i}')" class="btn amado-btn" style="margin:0px">Buy</button>
+            <button href="#" onclick="AddToCart(document.getElementById('orderId').value,'${a.productName}','${a.buyPrice}', '${a.productCode}', document.getElementById('qty${i}').value,'qty${i}')" class="btn amado-btn" style="margin:0px">Buy</button>
         </div>`;
             i++;
         }
@@ -212,7 +211,7 @@ function showEmployee(employee) {
         tableemployee += `
         <div class="single-products-catagory">
                 <a href="#" onclick="PopUpEmployee('${a.employeeNumber}', '${a.lastName}', '${a.firstName}', '${a.email}', '${a.officeCode}', '${a.reportsTo}',
-                '${a.jobTitle}', '${a.extension}', true)">
+                '${a.jobTitle}', '${a.extension}', false)">
                 <img src="./amado-master/img/core-img/employeeM.png" alt="">
                 <!-- Hover Content -->
                 <div class="hover-content">
@@ -231,9 +230,9 @@ function showEmployee(employee) {
                     <p>${a.reportsTo}</p>
                     <p>${a.jobTitle}</p>
                 </div>
-                <a href="#" onclick="PopUpEmployee('${a.employeeNumber}', '${a.lastName}', '${a.firstName}', '${a.email}', '${a.officeCode}', '${a.reportsTo}',
-                '${a.jobTitle}', '${a.extension}', true)" class="btn amado-btn">Edit</a>
-            </a>
+                </a>
+                <button onclick="PopUpEmployee('${a.employeeNumber}', '${a.lastName}', '${a.firstName}', '${a.email}', '${a.officeCode}', '${a.reportsTo}',
+                '${a.jobTitle}', '${a.extension}', true)" class="btn amado-btn">Edit</button>
         </div>
         `
     });
@@ -307,19 +306,33 @@ function PopUpEmployee(number, lname, fname, email, office, report, job, exetens
                                     <div class="single_product_desc">
                                         <div class="product-meta-data">
                                             <div class="line"></div>
-                                                <form>
-                                                    <p>FirstName: <input type="text" id="efn" name="text" value="${fname}"></p>
-                                                    <p>LastName: <input type="text" id="eln" name="text" value="${lname}"></p>
-                                                    <p>Email: <input type="text" id="eem" name="text" value="${email}"></p>
-                                                    <p>JobTitle: <input type="text" id="ej" name="text" value="${job}"></p>
-                                                    <p>OfficeCode: <input type="text" id="eof" name="text" value="${office}"></p>
-                                                    <p>ReportTo: <input type="text" id="er" name="text" value="${report}"></p>
-                                                    <p>Extension: <input type="text" id="ee" name="text" value="${exetension}"></p>
-                                                </form>
-                                            </div>`;
+                                            `;
     if (editAble === true) {
-        box += `<a href="#" class="btn amado-btn" onclick="deleteem('${number}')">Delete</a>
-                <a href="#" class="btn amado-btn" onclick="updateem('${number}')">Save</a>`;
+        box += `
+            <form>
+                <p>FirstName: <input type="text" id="efn" name="text" value="${fname}"></p>
+                <p>LastName: <input type="text" id="eln" name="text" value="${lname}"></p>
+                <p>Email: <input type="text" id="eem" name="text" value="${email}"></p>
+                <p>JobTitle: <input type="text" id="ej" name="text" value="${job}"></p>
+                <p>OfficeCode: <input type="text" id="eof" name="text" value="${office}"></p>
+                <p>ReportTo: <input type="text" id="er" name="text" value="${report}"></p>
+                <p>Extension: <input type="text" id="ee" name="text" value="${exetension}"></p>
+            </form>
+        </div>
+            <a href="#" class="btn amado-btn" onclick="deleteem('${number}')">Delete</a>
+            <a href="#" class="btn amado-btn" onclick="updateem('${number}')">Save</a>`;
+    }else{
+        box += `
+            <form>
+                <p>FirstName: ${fname}</p>
+                <p>LastName: ${lname}</p>
+                <p>Email: ${email}</p>
+                <p>JobTitle: ${job}</p>
+                <p>OfficeCode: ${office}</p>
+                <p>ReportTo: ${report}</p>
+                <p>Extension: ${exetension}</p>
+            </form>
+        </div>`
     }
     box += `</div></div></div></div></div></div></div></form>`;
     document.getElementById("id03").innerHTML = box;
@@ -792,13 +805,15 @@ function order_calculator(){
     }
     document.getElementById("sumprice").innerHTML = '$' + sum;
     document.getElementById("mempoint").innerHTML = mempoint + ' Points';
+
+    
+
 }
 
-
-function ShowShipping(input){
-    var shipping_table="";
-    input.forEach(function(a){
-        shipping_table+=`
+function ShowShipping(input) {
+    var shipping_table = "";
+    input.forEach(function (a) {
+        shipping_table += `
         <tr>
             <td><h5>${a.orderNumber}</h5></td>
             <td><h5>${a.orderDate}</h5></td>
@@ -829,7 +844,29 @@ function stock(){
         }
     });
 }
-function AddToOrder(orderNumber,Name,price, pdCode, num ,n){
+function AddToOrder(){
+
+    var CustomerNumber = {
+        'customerNumber' : document.getElementById("searchID").value.toString()
+    };
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/successOrder',
+        data: CustomerNumber,
+        dataType:'Text',
+        success: function (data){
+            console.log(data);
+        }
+    });
+    console.log('sucees Hurey');
+}
+
+function AddToCart(orderNumber,Name,price, pdCode, num ,n){
 
     var i = Number(document.getElementById('NumberCart').innerText)
     i = i+Number(num);
@@ -857,3 +894,7 @@ function AddToOrder(orderNumber,Name,price, pdCode, num ,n){
         }
     });
 }
+
+
+
+
