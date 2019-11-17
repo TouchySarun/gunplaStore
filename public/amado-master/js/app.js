@@ -61,35 +61,29 @@ function showCustomerAddress(input, editAble) {
         x.forEach( function (a) {
             if (n == input.length - 1) {
                 tableaddress += `
-                    <!-- class="radio-container" -->
-                    <table style="width: 100%">
+                    
                         <tbody>
                             <tr>
-                                <td style="text-align: left; margin-right: 10px; max-width: 10%; border-bottom: none;">
-                                    <label class="radio-container"> 
-                                        <input type="radio" name="addressSelect" value="${n}">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </td>
                                 <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%; border-bottom: none">
                                     <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>                    
                                 </td>
                             </tr>
                         </tbody>
-                    </table>
                 `;
             } else {
                 n++;
                 tableaddress += `
-                    <table style="width: 100%">
                         <tbody>
                             <tr>
                                 <td>
-                                    <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>                    
+                                    <div>
+                                    <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>
+                                    <a href="#" class="btn amado-btn" >Delete</a>
+                                    <a href="#" class="btn amado-btn" >Save</a>                      
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>
-                    </table>
                 `;
             }
         });
