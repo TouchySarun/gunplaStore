@@ -24,16 +24,6 @@
 </head>
 
 <body>
-    <script>
-        var userTitle = sessionStorage.getItem('title');
-        if (userTitle != null){
-            if(userTitle != "Sales"){
-                // redurect ti welcome
-            }
-        }else {
-            // redirect to index
-        }
-    </script>
     <!-- Search Wrapper Area Start -->
     <div class="search-wrapper section-padding-50">
         <div class="search-close">

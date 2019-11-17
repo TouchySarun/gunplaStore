@@ -25,12 +25,12 @@
     <!-- Search Wrapper Area Start -->
     <!-- @if(session()->has('success')) -->
     <!-- @endif -->
-    <!-- <script>
-        var user = <php echo $userDetail?>;
-        sessionStorage.setItem('employeeNumber', user[0].employeeNumber);
-        sessionStorage.setItem('title', user[0].jobTitle);
-    </script> -->
-
+    <script>
+        var user = <?php echo $userDetail?>;
+        sessionStorage.setItem('employeeNumber',user[0].employeeNumber);
+        sessionStorage.setItem('title',user[0].jobTitle);
+    </script>
+    
     <div class="search-wrapper section-padding-50">
         <div class="search-close">
             <i class="fa fa-close" aria-hidden="true"></i>
@@ -82,7 +82,8 @@
 
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-30">
-                <p id="showUser">xxxxxxx</p>
+                <p>EmployeeID:</p>
+                <p id="showUser"></p>
                 <script>document.getElementById('showUser').innerHTML=sessionStorage.getItem('employeeNumber')</script>
                 <a href="cart.html" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
                 <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
@@ -167,21 +168,54 @@
                     <div class="cart-table-area section-padding-60">
                     <div class="container-fluid">
                         <div class="row">
+                            <div>
+                                <div class="cart-head mt-50 mb-10">
+                                    <h2>Promotion Management</h2>
+                                </div>
+                                <div class="table">
+                                    <table>
+                                        <thead>
+                                            <tr style="background-color:#fbb710">
+                                                <th style="width:20%">Promotion ID</th>
+                                                <th style="width:20%">Code</th>
+                                                <th>Number</th>
+                                                <th style="width:20%">Details</th>
+                                                <th >Expair Date</th>
+                                            </tr>                                            
+                                        </thead>
+                                        <tbody id="promotion"></tbody>
+                                    </table>
+                                </div>
+                                <a href="#" onclick="document.getElementById('id05').style.display='block'" class="btn amado-btn">Add +</a>
+                            </div>
+                    </div>
+                    </div>
+                    </form>
+            </div>
+
+            <div id="id05" class="modal">
+                    <span onclick="document.getElementById('id05').style.display='none'"
+                        class="close" title="Close Modal">&times;
+                    </span>
+                    <!-- order-status -->
+                    <form class="modal-content animate" action="/action_page.php">
+                    <div class="cart-table-area section-padding-60">
+                    <div class="container-fluid">
+                        <div class="row">
                             <div class="col-12 col-lg-8">
                                 <div class="cart-title mt-50">
                                     <h2>New Promotion</h2>
                                 </div>
                                 <div class="product-meta-data">
                                     <form>
-                                        <p>Promotion ID : <input type="text" name="promotionID"></p>
-                                        <p>Code : <input type="text" name="code"></p>
-                                        <p>Number : <br><input type="number" style="width:100%"  name="number"></p>
-                                        <p>Details : <input type="text" name="details"></p>
-                                        <p>Expair Date : <input type="date" style="width:100%" name="expairDate"></p>
-                                    
+                                        <p>Promotion ID : <input id="promid" type="text" name="promotionID"></p>
+                                        <p>Code : <input id="promcode" type="text" name="code"></p>
+                                        <p>Number : <br><input id="promnum" type="number" style="width:100%"  name="number"></p>
+                                        <p>Details : <input id="promdetail" type="text" name="details"></p>
+                                        <p>Expair Date : <input id="promdate" type="date" style="width:100%" name="expairDate"></p>
                                     </form>
                                     <br>
-                                    <a href="#" class="btn amado-btn">SAVE</a>
+                                    <a href="#" onclick="insertpromotion()" class="btn amado-btn">SAVE</a>
                                     <br><br>
                                 </div>
                             </div>
@@ -190,7 +224,6 @@
                     </div>
                     </form>
                 </div>
-
         </header>
         <!-- Header Area End -->
 
@@ -232,6 +265,10 @@
         </a>
     </div>
 
+    <script>
+        $data = <?php echo $jsonpro ?? ''?>; 
+        promotion($data);
+    </script>
     <!-- Mobile Nav (max width 767px)-->
     <div class="mobile-nav">
         <!-- Navbar Brand -->
