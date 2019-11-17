@@ -120,7 +120,7 @@
                             <input type="text" placeholder="" name="state" required>
                         <label for="postalCode"><b>Postal Code</b></label>
                             <input type="text" placeholder="" name="postalCode" required>
-                        <button type="submit">Confirm</button>
+                        <button type="submit" onclick="AddAddress()" name="Confirm">Confirm</button>
                     </div>
                     <div class="container" style="background-color:#f1f1f1">
                         <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
@@ -166,15 +166,16 @@
                         <div class="cart-summary">
                             <h5>Cart Total</h5>
                             <ul class="summary-table">
-                                <li><span>Subtotal:</span><span id="sumprice"></span></li>
-                                <li><span>Promotion Code:</span>
+                                <li><span>Subtotal :</span><span id="sumprice"></span></li>
+                                <li><span>Promotion Code :</span>
                                     <div class="col-10">
                                         <input type="text" class="form-control" style="padding: 5px 10px" id="code" placeholder="Code">
                                     </div>
                                 </li>
-                                <li><span>Discount:</span> <span>-</span></li>
-                                <li><span>Total:</span> <span id="sumprice"></span></li>
-                                <li><span>Member Points:</span> <span id="mempoint"></span></li>
+                                <li><span>Discount :</span> <span>-</span></li>
+                                <li><span>Total :</span> <span id="sumprice"></span></li>
+                                <li><span>Member Points :</span> <span id="mempoint"></span></li>
+                                <li><span>Money Cheque :</span> <span id="checkNumber"></span></li>
                             </ul>
                             <div class="payment-method">
                                 <label for="payment">Select payment type</label>
@@ -206,7 +207,7 @@
                                             <a href="#" onclick="document.getElementById('id01').style.display='block'" class="btn amado-btn" style="width: 48%">
                                                 Add Address
                                             </a>
-                                            <a href="/successOrder" class="btn amado-btn" style="width: 48%">Checkout</a>
+                                            <a href="/welcome" onclick="AddToOrder()" class="btn amado-btn" style="width: 48%">Checkout</a>
                                         </div>
                                     </form>
                             </div>

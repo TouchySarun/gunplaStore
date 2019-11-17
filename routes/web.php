@@ -49,6 +49,7 @@ Route::post('/stock', 'DataController@stock');
 Route::post('/insertEm','DataController@insertEm');
 Route::post('/updateProduct/{code}','DataController@updateProduct');
 Route::post('/updateEm/{code}','DataController@updateEm');
+Route::get('/Subtotal', 'Datacontroller@Subtotal');
 Route::post('/updateship/{code}','DataController@updateship');
 Route::post('/insertToCart','DataController@insertTocart');
 Route::post('/insertpromotion','DataController@insertpromotion');
