@@ -280,7 +280,6 @@ function promotion(promo){
 //---------------Pop Up ----------------//
 //Employee
 function PopUpEmployee(number, lname, fname, email, office, report, job, exetension, editAble){
-
     //showEmployeeDetail(a) = PopUpProduct(a, false)
     //EditEmployeeDetail(a) = PopUpProduct(a, true)
     var box = `
@@ -325,6 +324,7 @@ function PopUpEmployee(number, lname, fname, email, office, report, job, exetens
     document.getElementById("id03").innerHTML = box;
     document.getElementById("id03").style.display = 'block';
 }
+
 
 function PopUpodstatus(a){
     $.ajaxSetup({
