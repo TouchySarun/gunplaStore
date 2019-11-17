@@ -36,13 +36,23 @@ class DataController extends Controller
         return view('manage-order',['jsonProduct'=>$jsonProduct, 'jsonVendor'=>$jsonVendor, 'jsonScale'=>$jsonScale]);
     }
     public function insertToCart(Request $request){
-        DB::insert("
-            insert into cart(orderNumber,orderLineNumber,productCode,priceEach,qty)
-            values ('$request->orderNumber','$request->Name','$request->productCode','$request->price','$request->qty')
-        ");
+        $x = DB::select("select qty from cart where productCode ='$request->productCode'");
+        if($x != null){
+            $y = $x[0]->qty+$request->qty;
+            DB::update("update cart set qty = $y where productCode = '$request->productCode'");
+            // return json_encode($y);
+        }else{
+            DB::insert("
+                insert into cart(orderNumber,orderLineNumber,productCode,priceEach,qty)
+                values ('$request->orderNumber','$request->Name','$request->productCode','$request->price','$request->qty')
+            ");
+        }
         $data = DB::select('select * from cart');
         $jsonProduct = json_encode($data);
         return $jsonProduct;
+    }
+    public function deleteCart(){
+        DB::delete('delete from cart');
     }
     public function editProduct($code){
         $jdata = DB::select("select * from products where productCode = '$code'");
@@ -58,23 +68,63 @@ class DataController extends Controller
         $product = DB::select('select * from cart');
         return view('cart',['product'=>json_encode($product),'jsonCustomer'=> '']);
     }
+
     public function getAddress($code){
         $address = DB::select("select * from addresses where customerNumber like '$code'");
-        return json_encode($address);
+        $point = DB::select("select point from customers where customerNumber like '$code'");
+        return [json_encode($address),json_encode($point)];
     }
-    public function successOrder(){
+    public function successOrder(Request $request){
+        $OrderNumber = DB::select('select distinct orderNumber from cart ');
+        $ProductCode = DB :: select('select distinct productCode from cart ');
+        $x = $OrderNumber[0];
+        $date = date('Y-m-d',time());
+        // $reqdate = $date;
+        // date_add(date_interval_create_from_date_string("7 days"),$reqdate);
+        // date_modify("+7 days",$reqdate);
+        // date_add($redate,date_interval_create_from_date_string("7 days"));
+        // $date->modify('+7 day');
+         
+        DB::insert("
+            insert into orders(orderNumber,orderDate,requiredDate, status, customerNumber)
+            values ('$x->orderNumber','$date','$request->shippingDate','in progress','$request->customerNumber')
+        ");
+
+        $i = 1;
+        $j = 1;
+        foreach($ProductCode as $P){
+            $p = $P->productCode ;
+            $Qty = DB::select("select sum(qty) as QTY from cart where productCode like '$p' Group by productCode");
+            $pricEach = DB::select("select buyPrice from products where productCode like '$p'");
+            // echo $i . " ";   
+            // echo $P->productCode . " ";
+            $qty = $Qty[0];
+            $price = $pricEach[0];
+            DB:: insert("
+                insert into orderdetails(orderNumber,productCode,quantityOrdered,priceEach,orderLineNumber)
+                values ('$x->orderNumber','$P->productCode', '$qty->QTY', '$price->buyPrice', '$i')
+            ");
+            $i = $i + $j;
+        }        
+        $z = (int)$request->Point;
+        
+        $Point = DB::select("select point from customers where customerNumber like '$request->customerNumber'");
+        $x = $Point[0];
+        $y = $x->point;
+        $x = $z+$y;
+
+        DB::update("update customers set point =$x where customerNumber like '$request->customerNumber'");
+        return $z;
         DB::delete('delete from cart');
-        // DB::insert("
-        //     insert into orders(orderNumber, orderDate, status, customerNumber, addressNumber)
-        //     value ($request->orderNumber, $request->orderDate, 'default',$request->customerNumber, $request->addressNumber )
-        // ");
+        
+        // return $jsonProduct;
         return view('welcome');
+        // return $ProductCode;
+        // return null;
     }
     public function addOrderDetail(Request $request){
-        DB:: insert("
-            insert into orderdetails
-            value ($request->orderNumber, $request->productCode, $request->qty, $request->price, $request->orderLineNumber)
-        ");
+        
+        
     }
     public function login(Request $request)
     {
@@ -136,6 +186,15 @@ class DataController extends Controller
         return $jsonProduct;
     }
 
+    
+    public function updatePayment(Request $request){
+        DB::insert("
+                insert into payments(customerNumber,checkNumber,paymentDate,amount)
+                values ('$request->customerNumber','$request->checkNumber','$request->paymentDate','$request->amount')
+        ");
+        return $request ; 
+    }
+    
     public function insertpromotion(Request $request){
         DB::insert("insert into promotion(promotionId,promotionCode,qty,detail,expairDate)
         values ('$request->promid','$request->promcode','$request->promnum','$request->promdetail','$request->promdate')");
@@ -174,6 +233,12 @@ class DataController extends Controller
         return view('shipping',['jsonOrder'=>$jsonOrder]);
     }
 
+    public function payment(){
+        $Payment = DB::select('select * from payments');
+        $jsonPayment = json_encode($Payment);
+        return view('payment',['jsonPayment'=>$jsonPayment]);
+    }
+
     public function promotion(){
         $pro = DB::select('select * from promotion');
         $jsonpro = json_encode($pro);
@@ -191,6 +256,10 @@ class DataController extends Controller
         DB::select("delete from employees where employeeNumber = '$code'");
         $data2 = DB::select("select * from employees where reportsTo = '$data'");
         return $data2;
+    }
+
+    public function Subtotal(){
+        
     }
 }
 

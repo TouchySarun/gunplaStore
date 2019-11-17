@@ -267,7 +267,7 @@
         <a href="/shipping" class="btn amado-big-btn">
             <br><br><br>
             <img src="./amado-master/img/core-img/shipping_details.png"><br><br>
-            Shipping Details
+            Shipping Details<br>& Paymants
         </a>
         <!-- sale only -->
         <button onclick="reqTomnem(sessionStorage.getItem('employeeNumber'))" class="btn amado-big-btn">
