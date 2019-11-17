@@ -35,12 +35,6 @@ class DataController extends Controller
 
         return view('manage-order',['jsonProduct'=>$jsonProduct, 'jsonVendor'=>$jsonVendor, 'jsonScale'=>$jsonScale]);
     }
-    public function mnemployee(){
-        $employee = DB::select('select * from employees');
-        $jsonEmployee = json_encode($employee);
-
-        return view('manage-employee',['jsonEmployee'=>$jsonEmployee]);
-    }
     public function insertToCart(Request $request){
         DB::insert("
             insert into cart(orderNumber,orderLineNumber,productCode,priceEach,qty)
@@ -110,28 +104,17 @@ class DataController extends Controller
         // }
         // return redirect ('/')-> with('alert', success);
     }
-    public function reqTomnem(Request $request){
+    public function reqSell(Request $request){
         $x = DB::select("select * from employees where employeeNumber = '$request->employeeNumber' and jobTitle like '%'||'Sale'||'%'");
         if($x != null){
-            $employee = DB::select("select * from employees where reportsTo = '$request->employeeNumber'");
-            $jsonEmployee = json_encode($employee);
             return json_encode($x);
-            return view('manage-employee',['jsonEmployee'=>$jsonEmployee]);
         }else{
-            return $request;
+            return json_encode('error');
         }
     }
-    public function reqTomnpd(Request $request){
-        $x = DB::select("select * from employees where employeeNumber = '$request->employeeNumber' and jobTitle like '%'||'Sale'||'%'");
-        if($x != null){
-            $data = DB::select('select * from products');
-            $datastock = DB::select('select * from stock');
-            $jsonProduct = json_encode($data);
-            $jsonstock = json_encode($datastock);
-            return view('manage-product',['jsonProduct'=>$jsonProduct, 'jsonstock'=>$jsonstock]);
-        }else{
-            return json_encode($x);
-        }
+    public function getMyEmployee(Request $request){
+        $x = DB::select("select * from employees where reportsTo = '$request->employeeNumber'");
+        return json_encode($x);
     }
     public function insertProduct(Request $request){
         DB::insert("insert into products(productName,productCode,productLine,productScale,productVendor,productDescription,quantityInstock,buyPrice,MSRP)
@@ -148,7 +131,7 @@ class DataController extends Controller
     public function insertEm(Request $request){
         DB::insert("insert into employees(employeeNumber,lastName,firstName,extension,email,officeCode,reportsTo,jobTitle)
         values ('$request->enumber','$request->elname','$request->efname','$request->eex','$request->eemail','$request->ecode','$request->ere','$request->ejob')");
-        $data = DB::select('select * from employees');
+        $data = DB::select("select * from employees where reportsTo = '$request->er'");
         $jsonProduct = json_encode($data);
         return $jsonProduct;
     }
@@ -169,9 +152,11 @@ class DataController extends Controller
         return $jsonProduct;
     }
     public function updateEm(Request $request,$code){
+        $x = DB::select("select reportsTo from employees where employeeNumber = '$code'");
+        $x = $x[0]->reportsTo;
         DB::update("update employees set lastName = ?,firstName = ?,extension = ?,email = ?,officeCode = ?,reportsTo = ?,jobTitle = ? where employeeNumber = ?",
         [$request->eln,$request->efn,$request->ee,$request->eem,$request->eof,$request->er,$request->ej,$code]);
-        $data = DB::select('select * from employees');
+        $data = DB::select("select * from employees where reportsTo = '$x'");
         $jsonProduct = json_encode($data);
         return $jsonProduct;
     }
@@ -202,8 +187,9 @@ class DataController extends Controller
     }
 
     public function deleteEm($code){
-        $data = DB::select("delete from employees where employeeNumber = '$code'");
-        $data2 = DB::select('select * from employees');
+        $data = DB::select("select reportsTo from employees where employeeNumber = '$code' ");
+        DB::select("delete from employees where employeeNumber = '$code'");
+        $data2 = DB::select("select * from employees where reportsTo = '$data'");
         return $data2;
     }
 }

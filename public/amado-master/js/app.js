@@ -128,55 +128,6 @@ function showProduct(json, editable, orderable) {
     document.getElementById("productArea").innerHTML = tableproduct;
 }
 
-//Customer Address
-function showCustomerAddress(json) {
-    var n = 0;
-    json.forEach( function(a) {
-        if(n == json.length - 1) {
-            tableaddress += `
-            <!-- class="radio-container" -->
-            <table style="width: 100%">
-                <tbody>
-                    <tr>
-                        <td style="text-align: left; max-width: 10%; border-bottom: none">
-                            <label class="radio-container">
-                                <input type="radio" name="addressSelect" value="${n}">
-                                <span class="checkmark"></span>
-                            </label>
-                        </td>
-                        <td style="border-bottom: none">
-                            <h5>${a.contactFirstName} ${a.contactLastName}</h5>
-                            <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        `
-        } else {
-            n++;
-            tableaddress += `
-            <table style="width: 100%">
-                <tbody>
-                    <tr>
-                        <td style="text-align: left; max-width: 10%; border-bottom: none">
-                            <label class="radio-container">
-                                <input type="radio" name="addressSelect" value="${n}">
-                                <span class="checkmark"></span>
-                            </label>
-                        </td>
-                        <td>
-                            <h5>${a.contactFirstName} ${a.contactLastName}</h5>
-                            <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        `
-        }
-    });
-    document.getElementById("addressArea").innerHTML = tableaddress;
-}
-
 function showCart(product){
     tableCart = '';
     product.forEach(function (a){
@@ -261,7 +212,6 @@ function stockin(stock){
 //promotion
 function promotion(promo){
     tablepromotion = "";
-    console.log(promo);
     promo.forEach( function(a) {
     tablepromotion += `
         <tr>
@@ -307,16 +257,16 @@ function PopUpEmployee(number, lname, fname, email, office, report, job, exetens
                                     <div class="single_product_desc">
                                         <div class="product-meta-data">
                                             <div class="line"></div>
-                                                <form>
-                                                    <p>FirstName: <input type="text" id="efn" name="text" value="${fname}"></p>
-                                                    <p>LastName: <input type="text" id="eln" name="text" value="${lname}"></p>
-                                                    <p>Email: <input type="text" id="eem" name="text" value="${email}"></p>
-                                                    <p>JobTitle: <input type="text" id="ej" name="text" value="${job}"></p>
-                                                    <p>OfficeCode: <input type="text" id="eof" name="text" value="${office}"></p>
-                                                    <p>ReportTo: <input type="text" id="er" name="text" value="${report}"></p>
-                                                    <p>Extension: <input type="text" id="ee" name="text" value="${exetension}"></p>
-                                                </form>
-                                            </div>`;
+                                            <form>
+                                                <p>FirstName: <input type="text" id="efn" name="text" value="${fname}"></p>
+                                                <p>LastName: <input type="text" id="eln" name="text" value="${lname}"></p>
+                                                <p>Email: <input type="text" id="eem" name="text" value="${email}"></p>
+                                                <p>JobTitle: <input type="text" id="ej" name="text" value="${job}"></p>
+                                                <p>OfficeCode: <input type="text" id="eof" name="text" value="${office}"></p>
+                                                <p>ReportTo: <input type="text" id="er" name="text" value="${report}"></p>
+                                                <p>Extension: <input type="text" id="ee" name="text" value="${exetension}"></p>
+                                            </form>
+                                        </div>`;
     if (editAble === true) {
         box += `<a href="#" class="btn amado-btn" onclick="deleteem('${number}')">Delete</a>
                 <a href="#" class="btn amado-btn" onclick="updateem('${number}')">Save</a>`;
@@ -867,11 +817,15 @@ function reqTomnpd(employeeNumber){
     });
     $.ajax({
         type: 'post',
-        url: '/reqTomnpd',
+        url: '/reqSell',
         data: a,
         dataType:"json",
         success : (function(data){
-            console.log(data);
+            if(data != 'error'){
+                window.location.replace('/mnpd');
+            }else{
+                document.getElementById('typeError').style.display = 'block';
+            }
         })
     });
 
@@ -886,12 +840,32 @@ function reqTomnem(employeeNumber){
     });
     $.ajax({
         type: 'post',
-        url: '/reqTomnem',
+        url: '/reqSell',
         data: a,
         dataType:"json",
         success : (function(data){
-            console.log(data);
+            if(data != 'error'){
+                window.location.replace('/mnem');
+            }else{
+                document.getElementById('typeError').style.display = 'block';
+            }
         })
     });
-
+}
+function getMyEmployee(employeeNumber){
+    var a = {"employeeNumber":employeeNumber};
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/getMyEmployee',
+        data: a,
+        dataType:"json",
+        success : (function(data){
+            showEmployee(data);
+        })
+    });
 }

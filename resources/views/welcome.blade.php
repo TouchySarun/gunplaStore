@@ -36,16 +36,14 @@
         </script>
     @endif
 
-    @if(session()->has('alert'))
-        <div id = "loginError" class= "modal" style = "display:block">
+        <div id = "typeError" class= "modal" style = "display:none">
             <form class="modal-content animate" >
                 <div class="container" style="background-color:#f1f1f1">
-                <button type="button" onclick="document.getElementById('loginError').style.display='none'"
-                    class="cancelbtn">{{ session('alert') }}</button>
+                <button type="button" onclick="document.getElementById('typeError').style.display='none'"
+                    class="cancelbtn">Can't go to this page.</button>
                 </div>
             </form>
         </div>
-    @endif
 
     <div class="search-wrapper section-padding-50">
         <div class="search-close">
@@ -262,7 +260,7 @@
         </a>
         <!-- order-status.blade.php -->
         <!-- sale only href="/mnpd" -->
-        <button onclick="reqTomnpd( sessionStorage.getItem('employeeNumber'))" class="btn amado-big-btn">
+        <button onclick="reqTomnpd(sessionStorage.getItem('employeeNumber'))" class="btn amado-big-btn">
             <img src="./amado-master/img/core-img/stock.png"><br><br>
             Product & Stock
         </button>

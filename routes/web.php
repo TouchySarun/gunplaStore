@@ -31,7 +31,7 @@ Route::get('/','DataController@index');
 Route::get('/welcome','DataController@promotion');
 Route::get('/mnpd','DataController@mnproduct');
 Route::get('/mnod','DataController@mnorder');
-Route::get('/mnem','DataController@mnemployee');
+Route::get('/mnem', function () {return view('manage-employee');});
 Route::get('/order','DataController@order');
 Route::get('/checkout','DataController@checkout');
 Route::get('/shipping','DataController@shipping');
@@ -52,8 +52,8 @@ Route::post('/updateEm/{code}','DataController@updateEm');
 Route::post('/updateship/{code}','DataController@updateship');
 Route::post('/insertToCart','DataController@insertTocart');
 Route::post('/insertpromotion','DataController@insertpromotion');
-Route::post('/reqTomnpd','DataController@reqTomnpd');
-Route::post('/reqTomnem','DataController@reqTomnem');
+Route::post('/reqSell','DataController@reqSell');
+Route::post('/getMyEmployee','DataController@getMyEmployee');
 
 //### Delete Function ###
 Route::delete('/deleteProduct/{code}','DataController@deleteProduct');
