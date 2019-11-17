@@ -17,9 +17,9 @@ Route::get('/cart', function () {
 Route::get('/shop', function () {
     return view('shop');
 });
-Route::get('/welcome', function () {
-    return view('welcome');
-});
+// Route::get('/welcome', function () {
+//     return view('welcome');
+// });
 
 use Illuminate\Support\Facades\DB;
 Route::get('/test', function () {
@@ -28,6 +28,7 @@ Route::get('/test', function () {
 });
 //### normal page ####
 Route::get('/','DataController@index');
+Route::get('/welcome','DataController@promotion');
 Route::get('/mnpd','DataController@mnproduct');
 Route::get('/mnod','DataController@mnorder');
 Route::get('/mnem','DataController@mnemployee');
@@ -40,7 +41,8 @@ Route::get('/payment','DataController@payment');
 //### function ###
 Route::get('/getAddress/{code}','DataController@getAddress');
 Route::get('/editproduct/{code}','DataController@editProduct');
-Route::post('/successOrder','DataController@successOrder');
+Route::get('/editstatus/{code}','DataController@editstatus');
+Route::get('/successOrder','DataController@successOrder');
 Route::post('/insertProduct','DataController@insertProduct');
 Route::post('/updateProduct/{code}','DataController@updateProduct');
 Route::post('/login', 'DataController@login');
@@ -53,6 +55,9 @@ Route::post('/insertToCart','DataController@insertToCart');
 Route::get('/UpdatePayment','DataController@UpdatePayment');
 
 Route::get('/Subtotal', 'Datacontroller@Subtotal');
+Route::post('/updateship/{code}','DataController@updateship');
+Route::post('/insertToCart','DataController@insertTocart');
+Route::post('/insertpromotion','DataController@insertpromotion');
 
 //### Delete Function ###
 Route::delete('/deleteProduct/{code}','DataController@deleteProduct');

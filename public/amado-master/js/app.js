@@ -2,6 +2,9 @@
 //product = code, name, line, scale, vendor, descrip, instock, price, msrp
 var tableproduct = "<br><br><br>";//All product List in JSON
 var tableemployee = "<br><br><br>";
+var tableaddress = "";
+var tablestock = "";
+var tablepromotion = "";
 //--------------Show script------------------//
 function showCustomerAddress(input) {
     x = JSON.parse(input);
@@ -11,36 +14,36 @@ function showCustomerAddress(input) {
         if (n == input.length - 1) {
             tableaddress += `
             <!-- class="radio-container" -->
-                <table style="width: 100%">
-                    <tbody>
-                        <tr>
-                            <td style="text-align: left; margin-right: 10px; max-width: 10%; border-bottom: none;">
-                                <label class="radio-container"> 
-                                    <input type="radio" name="addressSelect" value="${n}">
-                                    <span class="checkmark"></span>
-                                </label>
+            <table style="width: 100%">
+            <tbody>
+            <tr>
+            <td style="text-align: left; margin-right: 10px; max-width: 10%; border-bottom: none;">
+            <label class="radio-container"> 
+            <input type="radio" name="addressSelect" value="${n}">
+            <span class="checkmark"></span>
+            </label>
+            </td>
+            <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%; border-bottom: none">
+            <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>                    
                             </td>
-                            <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%; border-bottom: none">
-                                <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>                    
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            `;
-        } else {
-            n++;
-            tableaddress += `
-                <table style="width: 100%">
-                    <tbody>
-                        <tr>
+                            </tr>
+                            </tbody>
+                            </table>
+                            `;
+                        } else {
+                            n++;
+                            tableaddress += `
+                            <table style="width: 100%">
+                            <tbody>
+                            <tr>
                             <td style="text-align: left; margin-right: 10px; max-width: 10%; border-bottom: none">
-                                <label class="radio-container">
-                                    <input type="radio" name="addressSelect" value="${n}">
-                                    <span class="checkmark"></span>
-                                </label>
+                            <label class="radio-container">
+                            <input type="radio" name="addressSelect" value="${n}">
+                            <span class="checkmark"></span>
+                            </label>
                             </td>
                             <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%;">
-                                <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>                    
+                            <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>                    
                             </td>
                         </tr>
                     </tbody>
@@ -75,26 +78,25 @@ function getAddress(customerNumber){
 
 
 var jasonproduct = "";
-//--------------Show script------------------//
 function showProduct(json, editable, orderable) {
-    //updateProductList = showProduct(json,true,false)
-    //updateProductOrderList = showProduct(json,false,true)
-    var i = 0;
-    tableproduct = '<br><br><br>';
-    json.forEach(function (a) {
+//updateProductList = showProduct(json,true,false)
+                //updateProductOrderList = showProduct(json,false,true)
+                    var i = 0;
+                    tableproduct = '<br><br><br>';
+                    json.forEach(function (a) {
         tableproduct += `
         <div class="single-products-catagory">
-            <a href="#" onclick="PopUpProduct('${a.productCode}', ${editable})">
-                <img src="./amado-master/img/bg-img/1.jpg" alt="">
-                <!-- Hover Content -->
+        <a href="#" onclick="PopUpProduct('${a.productCode}', '${editable}')">
+        <img src="./amado-master/img/bg-img/1.jpg" alt="">
+        <!-- Hover Content -->
                 <div class="hover-content">
-                    <div class="line"></div>
-                    <p>Stock ${a.quantityInStock}</p>
+                <div class="line"></div>
+                <p>Stock ${a.quantityInStock}</p>
                     <p>$${a.buyPrice}</p>
                     <p>${a.productScale}</p>
                     <p>${a.productVendor}</p>
                     <h4>${a.productName}</h4>
-                </div>
+                    </div>
                 <div class="pdDetail" style= "display:none">
                     <p>${a.productCode}</p>
                     <p>${a.productName}</p>
@@ -126,6 +128,55 @@ function showProduct(json, editable, orderable) {
         tableproduct += `</div>`;
     });
     document.getElementById("productArea").innerHTML = tableproduct;
+}
+
+//Customer Address
+function showCustomerAddress(json) {
+    var n = 0;
+    json.forEach( function(a) {
+        if(n == json.length - 1) {
+            tableaddress += `
+            <!-- class="radio-container" -->
+            <table style="width: 100%">
+                <tbody>
+                    <tr>
+                        <td style="text-align: left; max-width: 10%; border-bottom: none">
+                            <label class="radio-container">
+                                <input type="radio" name="addressSelect" value="${n}">
+                                <span class="checkmark"></span>
+                            </label>
+                        </td>
+                        <td style="border-bottom: none">
+                            <h5>${a.contactFirstName} ${a.contactLastName}</h5>
+                            <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        `
+        } else {
+            n++;
+            tableaddress += `
+            <table style="width: 100%">
+                <tbody>
+                    <tr>
+                        <td style="text-align: left; max-width: 10%; border-bottom: none">
+                            <label class="radio-container">
+                                <input type="radio" name="addressSelect" value="${n}">
+                                <span class="checkmark"></span>
+                            </label>
+                        </td>
+                        <td>
+                            <h5>${a.contactFirstName} ${a.contactLastName}</h5>
+                            <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        `
+        }
+    });
+    document.getElementById("addressArea").innerHTML = tableaddress;
 }
 
 function showCart(product){
@@ -193,8 +244,47 @@ function showEmployee(employee) {
     });
     document.getElementById("employeeArea").innerHTML = tableemployee;
 }
+
+//stockin
+function stockin(stock){
+    tablestock = "";
+    stock.forEach( function(a) {
+    tablestock += `
+        <tr>
+            <td><h5>${a.stockNumber}</h5></td>
+            <td><h5>${a.productCode}</h5></td>
+            <td class="cart_product_desc">
+                <h5>${a.qty}</h5>
+            </td>
+            <td><h5>${a.stockDate}</h5></td>
+        </tr>
+        `
+    });
+    document.getElementById("stock").innerHTML = tablestock;
+}
+
+//promotion
+function promotion(promo){
+    tablepromotion = "";
+    console.log(promo);
+    promo.forEach( function(a) {
+    tablepromotion += `
+        <tr>
+            <td><h5>${a.promotionId}</h5></td>
+            <td><h5>${a.promotionCode}</h5></td>
+            <td class="cart_product_desc">
+                <h5>${a.qty}</h5>
+            </td>
+            <td><h5>${a.stockDate}</h5></td>
+            <td><h5>${a.expairDate}</h5></td>
+        </tr>
+        `
+    });
+    document.getElementById("promotion").innerHTML = tablepromotion;
+}
 //---------------Pop Up ----------------//
-function PopUpEmployee(number, lname, fname, email, office, report, job, exetension, editAble) {
+//Employee
+function PopUpEmployee(number, lname, fname, email, office, report, job, exetension, editAble){
 
     //showEmployeeDetail(a) = PopUpProduct(a, false)
     //EditEmployeeDetail(a) = PopUpProduct(a, true)
@@ -253,9 +343,66 @@ function PopUpEmployee(number, lname, fname, email, office, report, job, exetens
     box += `</div></div></div></div></div></div></div></form>`;
     document.getElementById("id03").innerHTML = box;
     document.getElementById("id03").style.display = 'block';
-
 }
-function PopUpProduct(a, editAble) {
+
+function PopUpodstatus(a){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'get',
+        url: '/editstatus/' + a,
+        success: function (data) {
+            var b = JSON.parse(data)[0];
+            console.log(b);
+    var status = `
+        <span onclick="document.getElementById('id08').style.display='none'"
+            class="close" title="Close Modal">&times;
+        </span>
+        <form class="modal-content animate" action="/action_page.php">
+        <div class="cart-table-area section-padding-60">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 col-lg-8">
+                    <div class="cart-title mt-50">
+                        <h2>New Order Status</h2>
+                    </div>
+                    <div class="product-meta-data">
+                        <form>
+                            <p>ShippedDate: 
+                            <br><input id="shipdate" type="date" name="shipdate" value="${b.shippedDate}"></p>
+                            <p>Status: 
+                            <div>
+                                <select class="w-100" id="order_status" value="${b.status}">
+                                    <option value="Cancelled">Cancelled</option>
+                                    <option value="Disputed">Disputed</option>
+                                    <option value="In process">In process</option>
+                                    <option value="On hold">On hold</option>
+                                    <option value="Resolved">Resolved</option>
+                                    <option value="Shipped">Shipped</option>
+                                </select>
+                            </div></p>
+                            <p>Comments: <br><textarea id="shipcom" name="message" style="width:400px; height:150px;">${b.comments}</textarea></p>
+                            <br>
+                        </form>
+                        <br>
+                        <a href="#" onclick="updateship(${b.orderNumber})" class="btn amado-btn">SAVE</a>
+                        <br><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        </form>`;
+    document.getElementById("id08").innerHTML = status;
+    document.getElementById("id08").style.display = 'block';
+    }
+    });
+}
+//Product
+function PopUpProduct(a, editAble){
     //showProductDetail(a) = PopUpProduct(a, false)
     //EditProductDetail(a) = PopUpProduct(a, true)
     $.ajaxSetup({
@@ -351,10 +498,12 @@ function PopUpProduct(a, editAble) {
         }
     });
 }
+
 //------------end show script------------//
 
-//drop-down
-function dropdownVender(Vendor) {
+//------------drop-down------------//
+//Vendor
+function dropdownVender(Vendor){
     var mostvendor = "";
     Vendor.forEach(function (b) {
         mostvendor += `
@@ -365,7 +514,9 @@ function dropdownVender(Vendor) {
     });
     document.getElementById('Vendor').innerHTML = mostvendor;
 }
-function dropdownScale(Scale) {
+
+//Scale
+function dropdownScale(Scale){
     var mostscale = "";
     Scale.forEach(function (b) {
         mostscale += `
@@ -377,6 +528,7 @@ function dropdownScale(Scale) {
     document.getElementById('Scale').innerHTML = mostscale;
 
 }
+
 //-----------------------------categorize --------------------------------//
 function categorize(input, type) {
     var textBox = "";
@@ -398,6 +550,7 @@ function categorize(input, type) {
     document.getElementById("productArea").innerHTML = textBox;
 }
 //---------------end categorize -----------------------//
+
 //------------------------------filter----------------------------- //
 function filter(input, type) {
     //name 5 / id 4 / scale 7 / vendor 8
@@ -420,6 +573,7 @@ function filter(input, type) {
     }
     return returnValue;
 }
+
 function findProductCode(input) {
     var slot, single_products_catagory, pdName, i, txtValue, a;
     slot = document.getElementById("productArea");
@@ -439,18 +593,17 @@ function findProductCode(input) {
 
 // ---------------------Insert-------------------------------//
 //Product
-function insertitem() {
-    var product = {
-        "pname": document.getElementById("name").value.toString(),
-        "pcode": document.getElementById("code").value.toString(),
-        "pline": document.getElementById("line").value.toString(),
-        "pscale": document.getElementById("scale").value.toString(),
-        "pvendor": document.getElementById("vendor").value.toString(),
-        "pnumber": document.getElementById("number").value.toString(),
-        "pprice": document.getElementById("price").value.toString(),
-        "pmsrp": document.getElementById("msrp").value.toString(),
-        "pdes": document.getElementById("des").value.toString()
-    };
+function insertitem(){
+    var product = { "snum": document.getElementById("snumber").value.toString(),
+                    "pname": document.getElementById("name").value.toString(),
+                    "pcode": document.getElementById("code").value.toString(),
+                    "pline": document.getElementById("line").value.toString(),
+                    "pscale": document.getElementById("scale").value.toString(),
+                    "pvendor": document.getElementById("vendor").value.toString(),
+                    "pnumber": document.getElementById("number").value.toString(),
+                    "pprice": document.getElementById("price").value.toString(),
+                    "pmsrp": document.getElementById("msrp").value.toString(),
+                    "pdes": document.getElementById("pdes").value.toString()};
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -462,22 +615,23 @@ function insertitem() {
         data: product,
         dataType: "json",
         success: function (data) {
-            document.getElementById('id04').style.display = 'none';
-            showProduct(data, true, false);
+            document.getElementById('id04').style.display='none';
+            showProduct(data[0],true,false);
+            stockin(data[1]);
         }
     });
 }
-function insertem() {
-    var product = {
-        "enumber": document.getElementById("enumber").value.toString(),
-        "efname": document.getElementById("efname").value.toString(),
-        "elname": document.getElementById("elname").value.toString(),
-        "eex": document.getElementById("eex").value.toString(),
-        "eemail": document.getElementById("eemail").value.toString(),
-        "ecode": document.getElementById("ecode").value.toString(),
-        "ere": document.getElementById("ere").value.toString(),
-        "ejob": document.getElementById("ejob").value.toString()
-    };
+
+//Employee
+function insertem(){
+    var product = { "enumber": document.getElementById("enumber").value.toString(),
+                    "efname": document.getElementById("efname").value.toString(),
+                    "elname": document.getElementById("elname").value.toString(),
+                    "eex": document.getElementById("eex").value.toString(),
+                    "eemail": document.getElementById("eemail").value.toString(),
+                    "ecode": document.getElementById("ecode").value.toString(),
+                    "ere": document.getElementById("ere").value.toString(),
+                    "ejob": document.getElementById("ejob").value.toString()};
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -491,6 +645,30 @@ function insertem() {
         success: function (data) {
             document.getElementById('id04').style.display = 'none';
             showEmployee(data);
+        }
+    });
+}
+
+//Promotion
+function insertpromotion(){
+    var pro = {"promid": document.getElementById("promid").value.toString(),
+                     "promcode": document.getElementById("promcode").value.toString(),
+                     "promnum": document.getElementById("promnum").value.toString(),
+                     "promdetail": document.getElementById("promdetail").value.toString(),
+                     "promdate": document.getElementById("promdate").value.toString()};
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/insertpromotion',
+        data: pro,
+        dataType: "json",
+        success: function (data) {
+            document.getElementById('id05').style.display='none';
+            promotion(data);
         }
     });
 }
@@ -527,16 +705,16 @@ function updateitem(a) {
         }
     });
 }
-function updateem(a) {
-    var product = {
-        "efn": document.getElementById("efn").value.toString(),
-        "eln": document.getElementById("eln").value.toString(),
-        "ee": document.getElementById("ee").value.toString(),
-        "eem": document.getElementById("eem").value.toString(),
-        "eof": document.getElementById("eof").value.toString(),
-        "er": document.getElementById("er").value.toString(),
-        "ej": document.getElementById("ej").value.toString()
-    };
+
+//Employee
+function updateem(a){
+    var product = { "efn": document.getElementById("efn").value.toString(),
+                    "eln": document.getElementById("eln").value.toString(),
+                    "ee": document.getElementById("ee").value.toString(),
+                    "eem": document.getElementById("eem").value.toString(),
+                    "eof": document.getElementById("eof").value.toString(),
+                    "er": document.getElementById("er").value.toString(),
+                    "ej": document.getElementById("ej").value.toString()};
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -553,6 +731,31 @@ function updateem(a) {
         }
     });
 }
+
+//Shipping
+function updateship(a){
+    var product = { "shipdate": document.getElementById("shipdate").value.toString(),
+                    "odstatus": document.getElementById("order_status").value.toString(),
+                    "shipcom": document.getElementById("shipcom").value.toString(),};
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/updateship/' + a,
+        data: product,
+        dataType: "json",
+        success: function (data) {
+            console.log(data);
+            document.getElementById('id08').style.display = 'none';
+            ShowShipping(data);
+        }
+    });
+}
+
+
 // ---------------------End Update---------------------------//
 
 // -----------------------Delete-----------------------------//
@@ -572,7 +775,9 @@ function deleteitem(a) {
         }
     });
 }
-function deleteem(a) {
+
+//Employee
+function deleteem(a){
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -588,7 +793,9 @@ function deleteem(a) {
     });
 }
 // ----------------------End Delete-----------------------------//
-function order_calculator() {
+
+// ----------------------Calculate-----------------------------//
+function order_calculator(){
     //var table = document.getElementById("order_table");
     var body = document.getElementById("order_table_body");
     var tr = body.getElementsByTagName("tr");
@@ -620,17 +827,14 @@ function ShowShipping(input) {
             <td><h5>${a.status}</h5></td>
             <td><h5>${a.comments}</h5></td>
             <td><h5>${a.customerNumber}</h5></td>
-            <td><a href="#" onclick="document.getElementById('id04').style.display='block'" class="btn amado-btn" style="min-width:50px">Edit</a></td>
+            <td><a href="#" onclick="PopUpodstatus(${a.orderNumber})" class="btn amado-btn" style="min-width:50px">Edit</a></td>
         </tr>
         `;
     });
     document.getElementById('order_table_body').innerHTML = shipping_table;
 }
 
-
-
-
-function stock() {
+function stock(){
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

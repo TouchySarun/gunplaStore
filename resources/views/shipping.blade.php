@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="UTF-8">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -166,7 +167,8 @@
         <!-- Header Area End -->
 
         <!-- pop up shipping details -->
-                
+        <div id="id08" class="modal" style="display:none"></div>
+
                     <!-- product-order -->
                     <form class="modal-content animate" style="padding-top:5%">
                     <!-- cart-table-area  -->
@@ -202,64 +204,15 @@
                         </div>
                     </form>
                 
+    
             <!-- pop-up add order to shipping -->
-            <div id="id04" class="modal">
-                    <span onclick="document.getElementById('id04').style.display='none'"
-                        class="close" title="Close Modal">&times;
-                    </span>
-                    <!-- order-status -->
-                    <form class="modal-content animate" action="/action_page.php">
-                    <div class="cart-table-area section-padding-60">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-12 col-lg-8">
-                                <div class="cart-title mt-50">
-                                    <h2>New Order Status</h2>
-                                </div>
-                                <div class="product-meta-data">
-                                    <form>
-                                        <p>ShippedDate: <input type="text" name="shipdate"></p>
-                                        <p>Status: <input type="text" name="status"></p>
-                                        <p>Comments: <input type="text" name="comments"></p>
-                                        <!-- <div class="dropdown">
-                                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="order_status">STATUS
-                                            <span class="caret"></span></button>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="btn btn-primary" href="#" onclick="document.getElementById('order_status').innerHTML='Cancelled'">Cancelled</a></li>
-                                                <li><a class="btn btn-primary" href="#" onclick="document.getElementById('order_status').innerHTML='Disputed'">Disputed</a></li>
-                                                <li><a class="btn btn-primary" href="#" onclick="document.getElementById('order_status').innerHTML='In process'">In process</a></li>
-                                                <li><a class="btn btn-primary" href="#" onclick="document.getElementById('order_status').innerHTML='On hold'">On hold</a></li>
-                                                <li><a class="btn btn-primary" href="#" onclick="document.getElementById('order_status').innerHTML='Resolved'">Resolved</a></li>
-                                                <li><a class="btn btn-primary" href="#" onclick="document.getElementById('order_status').innerHTML='Shipped'">Shipped</a></li>
-                                            </ul>
-                                        </div> -->
-                                        <div>
-                                            <select class="w-100" id="order_status">
-                                                <option value="Cancelled">Cancelled</option>
-                                                <option value="Disputed">Disputed</option>
-                                                <option value="In process">In process</option>
-                                                <option value="On hold">On hold</option>
-                                                <option value="Resolved">Resolved</option>
-                                                <option value="Shipped">Shipped</option>
-                                            </select>
-                                        </div>
-                                        <br><br>
-                                    </form>
-                                    <br>
-                                    <a href="#" class="btn amado-btn">SAVE</a>
-                                    <br><br>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                    </form>
-                </div>
+            
 
     </div>
     <!-- ##### Main Content Wrapper End ##### -->
-
     <br>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <footer class="footer_area">
         <div >
         <!-- Logo -->
