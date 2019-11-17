@@ -32,14 +32,17 @@ class DataController extends Controller
         $jsonProduct = json_encode($data);
         $jsonVendor = json_encode($distinctvendor);
         $jsonScale = json_encode($distinctscale);
-
         return view('manage-order',['jsonProduct'=>$jsonProduct, 'jsonVendor'=>$jsonVendor, 'jsonScale'=>$jsonScale]);
     }
     public function mnemployee(){
         $employee = DB::select('select * from employees');
         $jsonEmployee = json_encode($employee);
-
         return view('manage-employee',['jsonEmployee'=>$jsonEmployee]);
+    }
+    public function mncus(){
+        $customer = DB::select('select * from customers');
+        $jsoncustomer = json_encode($customer);
+        return view('manage-customer',['jsoncustomer'=>$jsoncustomer]);
     }
     public function insertToCart(Request $request){
         DB::insert("
@@ -55,6 +58,13 @@ class DataController extends Controller
         $jsoneditProduct = json_encode($jdata);
         return $jsoneditProduct;
     }
+
+    public function editcus($code){
+        $customer = DB::select("select * from customers where customerNumber = '$code'");
+        $jsoneditcus = json_encode($customer);
+        return $jsoneditcus;
+    }
+
     public function editstatus($code){
         $jdata = DB::select("select * from orders where orderNumber = '$code'");
         $jsoneditstatus = json_encode($jdata);
@@ -107,10 +117,6 @@ class DataController extends Controller
         // return $ProductCode;
         // return null;
     }
-    public function addOrderDetail(Request $request){
-        
-        
-    }
 
     // public function checkout(){
     //     $data = DB::select("select * from customers");
@@ -161,6 +167,14 @@ class DataController extends Controller
         return $jsonProduct;
     }
 
+    public function insertcus(Request $request){
+        DB::insert("insert into customers(customerNumber,customerName,contactLastName,contactFirstName,phone,city,state,postalCode,country,salesRepEmployeeNumber,creditLimit)
+        values ('$request->wcusnum','$request->wcompany','$request->wlname','$request->wfname','$request->wphone','$request->wcity','$request->wstate','$request->wpos','$request->wcoun','$request->wsale','$request->wcredit')");
+        $data = DB::select('select * from customers');
+        $jsonProduct = json_encode($data);
+        return $jsonProduct;
+    }
+
     public function insertpromotion(Request $request){
         DB::insert("insert into promotion(promotionId,promotionCode,qty,detail,expairDate)
         values ('$request->promid','$request->promcode','$request->promnum','$request->promdetail','$request->promdate')");
@@ -180,6 +194,13 @@ class DataController extends Controller
         DB::update("update employees set lastName = ?,firstName = ?,extension = ?,email = ?,officeCode = ?,reportsTo = ?,jobTitle = ? where employeeNumber = ?",
         [$request->eln,$request->efn,$request->ee,$request->eem,$request->eof,$request->er,$request->ej,$code]);
         $data = DB::select('select * from employees');
+        $jsonProduct = json_encode($data);
+        return $jsonProduct;
+    }
+    public function updatecus(Request $request,$code){
+        DB::update("update customers set customerNumber = ?,customerName = ?,contactLastName = ?,contactFirstName = ?,phone = ?,salesRepEmployeeNumber = ?,creditLimit = ?,point = ? where customerNumber = ?",
+        [$request->cusnum,$request->cusname,$request->cusfname,$request->cuslname,$request->cusphone,$request->salerep,$request->cuslimit,$request->cuspoint,$code]);
+        $data = DB::select('select * from customers');
         $jsonProduct = json_encode($data);
         return $jsonProduct;
     }
@@ -215,8 +236,10 @@ class DataController extends Controller
         return $data2;
     }
 
-    public function Subtotal(){
-        
+    public function deletecus($code){
+        $data = DB::select("delete from customers where customerNumber = '$code'");
+        $data2 = DB::select('select * from customers');
+        return $data2;
     }
 }
 
