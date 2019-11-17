@@ -134,6 +134,8 @@
                 <a href="/welcome" class="btn amado-btn">Back</a>
                 <br>
                 <a href="/" class="btn amado-btn">Logout</a>
+                <br>
+                <button onclick="deleteCart()">delete cart</button>
             </div>
             <!-- Pop up -->
                 <!--Login pop up-->

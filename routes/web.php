@@ -35,6 +35,7 @@ Route::get('/order','DataController@order');
 Route::get('/checkout','DataController@checkout');
 Route::get('/shipping','DataController@shipping');
 Route::get('/promotion','DataController@promotion');
+Route::get('/payment','DataController@payment');
 
 //### function ###
 Route::get('/getAddress/{code}','DataController@getAddress');
@@ -49,8 +50,11 @@ Route::post('/updateProduct/{code}','DataController@updateProduct');
 Route::post('/updateEm/{code}','DataController@updateEm');
 Route::post('/insertToCart','DataController@insertToCart');
 
+Route::get('/UpdatePayment','DataController@UpdatePayment');
+
 Route::get('/Subtotal', 'Datacontroller@Subtotal');
 
 //### Delete Function ###
 Route::delete('/deleteProduct/{code}','DataController@deleteProduct');
 Route::delete('/deleteEm/{code}','DataController@deleteEm');
+Route::delete('/deleteCart','DataController@deleteCart');

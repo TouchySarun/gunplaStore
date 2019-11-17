@@ -76,7 +76,7 @@
             <!-- Button Group -->
             <div class="amado-btn-group mt-30 mb-100">
                 <a href="#" onclick="document.getElementById('id01').style.display='block'" class="btn amado-btn-plus">Stock</a>
-                <br>
+                <br><br>
                 <a href="welcome" class="btn amado-btn">Back</a>
                 <br>
                 <a href="/" class="btn amado-btn">Logout</a>

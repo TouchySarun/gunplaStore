@@ -62,14 +62,17 @@ function getAddress(customerNumber){
         type: 'get',
         url: '/getAddress/' + customerNumber,
         success: function (data) {
-            console.log(data);
-            showCustomerAddress(data);
+            console.log(data[1]);
+            showCustomerAddress(data[0]);
+            var d = JSON.parse(data[1]);
+            document.getElementById("points").innerHTML = d[0].point;
             //var x = JSON.parse(data);
             // console.log(x[0].customerNumber);
             // return x[0];
         }
     });
 }
+
 
 var jasonproduct = "";
 //--------------Show script------------------//
@@ -127,6 +130,7 @@ function showProduct(json, editable, orderable) {
 
 function showCart(product){
     tableCart = '';
+    i = 0;
     product.forEach(function (a){
         tableCart += `<tr>
         <td class="cart_product_img">
@@ -142,15 +146,17 @@ function showCart(product){
             <div class="qty-btn d-flex">
                 <p>Qty</p>
                 <div class="quantity">
-                    <span class="qty-minus" onclick="var effect = document.getElementById('qty0'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 0 ) effect.value--;order_calculator();return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                    <input type="number" class="qty-text" id="qty0" step="1" min="0" max="300" name="quantity" value="${a.qty}">
-                    <span class="qty-plus" onclick="var effect = document.getElementById('qty0'); var qty = effect.value; if( !isNaN( qty )) effect.value++;order_calculator();return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                    <span class="qty-minus" onclick="var effect = document.getElementById('qty${i}'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 0 ) effect.value--;order_calculator();return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                    <input type="number" class="qty-text" id="qty${i}" step="1" min="0" max="300" name="quantity" value="${a.qty}">
+                    <span class="qty-plus" onclick="var effect = document.getElementById('qty${i}'); var qty = effect.value; if( !isNaN( qty )) effect.value++;order_calculator();return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
                 </div>
             </div>
         </td>
-    </tr>`
+    </tr>`;
+    i++;
     });
     document.getElementById('order_table_body').innerHTML = tableCart;
+
 }
 
 function showEmployee(employee) {
@@ -590,14 +596,13 @@ function order_calculator() {
     var mempoint = 0;
     for (var i = 0; i < tr.length; i++) {
         var price = tr[i].getElementsByTagName("td")[2].innerText;
-
         var num = document.getElementById(`qty${i}`).value;
-
+        console.log(num);
         sum += price * num;
         mempoint = Math.floor(sum / 100) * 3;
     }
     document.getElementById("sumprice").innerHTML = '$' + sum;
-    document.getElementById("mempoint").innerHTML = mempoint + ' Points';
+    document.getElementById("mempoint").innerHTML = mempoint;
 
     
 
@@ -620,8 +625,11 @@ function ShowShipping(input) {
         `;
     });
     document.getElementById('order_table_body').innerHTML = shipping_table;
-
 }
+
+
+
+
 function stock() {
     $.ajaxSetup({
         headers: {
@@ -638,9 +646,12 @@ function stock() {
 }
 function AddToOrder(){
 
-    var CustomerNumber = {
-        'customerNumber' : document.getElementById("searchID").value.toString()
+    var Billing = {
+        'customerNumber' : document.getElementById("searchID").value.toString(),
+        'Point' : document.getElementById("mempoint").innerText,
+        'shippingDate' : document.getElementById("shipDate").value.toString()
     };
+    console.log(Billing);
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -649,7 +660,7 @@ function AddToOrder(){
     $.ajax({
         type: 'post',
         url: '/successOrder',
-        data: CustomerNumber,
+        data: Billing,
         dataType:'Text',
         success: function (data){
             console.log(data);
@@ -657,7 +668,18 @@ function AddToOrder(){
     });
     console.log('sucees Hurey');
 }
-
+function deleteCart(){
+    
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'delete',
+        url: '/deleteCart'
+    });
+}
 function AddToCart(orderNumber,Name,price, pdCode, num ,n){
 
     var i = Number(document.getElementById('NumberCart').innerText)
@@ -685,7 +707,51 @@ function AddToCart(orderNumber,Name,price, pdCode, num ,n){
             console.log(data);
         }
     });
+
+    
 }
+
+function AddToPayment(){
+
+    var Payment = {
+        'customerNumber' : document.getElementById("customerNumber").value,
+        'checkNumber' : document.getElementById("checkNumber").value,
+        'paymentDate' : document.getElementById("paymentDate").value,
+        'amount' : document.getElementById("amount").value    
+    };
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'get',
+        url: '/UpdatePayment',
+        data: Payment,
+        dataType:'json',
+        success: function (data){
+            console.log(data);
+        }
+    });
+    console.log('sucees Hurey');
+}
+
+function ShowPayment(input) {
+    var payment_table = "";
+    input.forEach(function (a) {
+        payment_table += `
+        <tr>
+            <td><h5>${a.customerNumber}</h5></td>
+            <td><h5>${a.checkNumber}</h5></td>
+            <td><h5>${a.paymentDate}</h5></td>
+            <td><h5>${a.amount}</h5></td>
+        </tr>
+        `;
+    });
+document.getElementById('payment_table_body').innerHTML = payment_table;
+}
+
 
 
 

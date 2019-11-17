@@ -213,7 +213,7 @@
         <a href="/shipping" class="btn amado-big-btn">
             <br><br><br>
             <img src="./amado-master/img/core-img/shipping_details.png"><br><br>
-            Shipping Details
+            Shipping Details<br>& Paymants
         </a>
         <a href="/mnem" class="btn amado-big-btn">
             <br><br><br>

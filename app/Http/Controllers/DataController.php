@@ -45,21 +45,33 @@ class DataController extends Controller
         return view('manage-employee',['jsonEmployee'=>$jsonEmployee]);
     }
     public function insertToCart(Request $request){
-        DB::insert("
-            insert into cart(orderNumber,orderLineNumber,productCode,priceEach,qty)
-            values ('$request->orderNumber','$request->Name','$request->productCode','$request->price','$request->qty')
-        ");
+        $x = DB::select("select qty from cart where productCode ='$request->productCode'");
+        if($x != null){
+            $y = $x[0]->qty+$request->qty;
+            DB::update("update cart set qty = $y where productCode = '$request->productCode'");
+            // return json_encode($y);
+        }else{
+            DB::insert("
+                insert into cart(orderNumber,orderLineNumber,productCode,priceEach,qty)
+                values ('$request->orderNumber','$request->Name','$request->productCode','$request->price','$request->qty')
+            ");
+        }
         $data = DB::select('select * from cart');
         $jsonProduct = json_encode($data);
         return $jsonProduct;
+    }
+    public function deleteCart(){
+        DB::delete('delete from cart');
     }
     public function order(Request $request){
         $product = DB::select('select * from cart');
         return view('cart',['product'=>json_encode($product),'jsonCustomer'=> '']);
     }
+
     public function getAddress($code){
         $address = DB::select("select * from addresses where customerNumber like '$code'");
-        return json_encode($address);
+        $point = DB::select("select point from customers where customerNumber like '$code'");
+        return [json_encode($address),json_encode($point)];
     }
     public function successOrder(Request $request){
         $OrderNumber = DB::select('select distinct orderNumber from cart ');
@@ -74,7 +86,7 @@ class DataController extends Controller
          
         DB::insert("
             insert into orders(orderNumber,orderDate,requiredDate, status, customerNumber)
-            values ('$x->orderNumber','$date','','default','$request->customerNumber')
+            values ('$x->orderNumber','$date','$request->shippingDate','in progress','$request->customerNumber')
         ");
 
         $i = 1;
@@ -92,7 +104,16 @@ class DataController extends Controller
                 values ('$x->orderNumber','$P->productCode', '$qty->QTY', '$price->buyPrice', '$i')
             ");
             $i = $i + $j;
-        }
+        }        
+        $z = (int)$request->Point;
+        
+        $Point = DB::select("select point from customers where customerNumber like '$request->customerNumber'");
+        $x = $Point[0];
+        $y = $x->point;
+        $x = $z+$y;
+
+        DB::update("update customers set point =$x where customerNumber like '$request->customerNumber'");
+        return $z;
         DB::delete('delete from cart');
         
         // return $jsonProduct;
@@ -150,6 +171,16 @@ class DataController extends Controller
         $jsonProduct = json_encode($data);
         return $jsonProduct;
     }
+
+    
+    public function updatePayment(Request $request){
+        DB::insert("
+                insert into payments(customerNumber,checkNumber,paymentDate,amount)
+                values ('$request->customerNumber','$request->checkNumber','$request->paymentDate','$request->amount')
+        ");
+        return $request ; 
+    }
+
     public function editProduct($code){
         $jdata = DB::select("select * from products where productCode = '$code'");
         $jsoneditProduct = json_encode($jdata);
@@ -174,6 +205,12 @@ class DataController extends Controller
         $Order = DB::select('select * from orders');
         $jsonOrder = json_encode($Order);
         return view('shipping',['jsonOrder'=>$jsonOrder]);
+    }
+
+    public function payment(){
+        $Payment = DB::select('select * from payments');
+        $jsonPayment = json_encode($Payment);
+        return view('payment',['jsonPayment'=>$jsonPayment]);
     }
 
     public function promotion(){

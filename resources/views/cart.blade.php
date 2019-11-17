@@ -157,10 +157,6 @@
                             </table>
                         </div>
                     </div>
-                    <script>
-                        var json = <?php echo $product?>;
-                        showCart(json);
-                    </script>
 
                     <div class="col-lg-4">
                         <div class="cart-summary">
@@ -174,20 +170,18 @@
                                 </li>
                                 <li><span>Discount :</span> <span>-</span></li>
                                 <li><span>Total :</span> <span id="sumprice"></span></li>
-                                <li><span>Member Points :</span> <span id="mempoint"></span></li>
-                                <li><span>Money Cheque :</span> <span id="checkNumber"></span></li>
+                                <li><span>Points :</span> <span id="mempoint"></span><span>Points</span></li>
+                                <li><span>Member Points :</span> <span id="points"></span><span>Points</span></li>
+                                <li><span>Shipping Date :</span>
+                                    <div class="col-10">
+                                        <input type="text" class="form-control" style="padding: 5px 10px" id="shipDate" placeholder="Shipping Date">
+                                    </div>
+                                </li>
                             </ul>
                             <div class="payment-method">
-                                <label for="payment">Select payment type</label>
+                                <label for="payment">Money Cheque :</label>
                                     <img class="ml-30" src="./amado-master/img/core-img/paypal.png" alt="">
                                     <img class="ml-5" src="./amado-master/img/core-img/paypal2.png" alt="" height="50" width="50">
-                                    <div>
-                                        <select class="mb-30 w-100" id="payment">
-                                            <option value="cod">Cash On Delivery</option>
-                                            <option value="creditcard">Credit Card</option>
-                                            <option value="paypal">Paypal</option>
-                                        </select>
-                                    </div>
                             </div>
                             <h5>Select Shipping Address</h5>
                             <div class="col-12" style="padding: 0px">
@@ -207,12 +201,17 @@
                                             <a href="#" onclick="document.getElementById('id01').style.display='block'" class="btn amado-btn" style="width: 48%">
                                                 Add Address
                                             </a>
-                                            <a href="/welcome" onclick="AddToOrder()" class="btn amado-btn" style="width: 48%">Checkout</a>
+                                            <a href="/order" onclick="AddToOrder()" class="btn amado-btn" style="width: 48%">Checkout</a>
                                         </div>
                                     </form>
                             </div>
                         </div>
                     </div>
+                    <script>
+                        var json = <?php echo $product?>;
+                        showCart(json);
+                        order_calculator() ;
+                    </script>
 
                 </div>
             </div>

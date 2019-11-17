@@ -9,7 +9,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>Amado - Furniture Ecommerce Template | Shipping</title>
+    <title>Amado - Furniture Ecommerce Template | Payments</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="./amado-master/img/core-img/favicon.ico">
@@ -125,7 +125,7 @@
 
           <!-- Button Group -->
           <div class="amado-btn-group mt-30 mb-100">
-                <a href="/payment" class="btn amado-btn-plus">Payments</a>
+                <a href="#" onclick="document.getElementById('id04').style.display='block'" class="btn amado-btn-plus">Add Payment+</a>
                 <br><br>
                 <a href="/welcome" class="btn amado-btn">Back</a>
                 <br>
@@ -174,27 +174,23 @@
                             <div class="row">
                                 <div>
                                     <div class="cart-head mt-50 mb-10">
-                                        <h2>Order Status Of Customer</h2>
+                                        <h2>Payments</h2>
                                     </div>
                                     <div class="table">
                                         <table>
                                             <thead>
                                                 <tr style="background-color:#fbb710">
-                                                    <th >OrderNumber</th>
-                                                    <th style="width:20%">OrderDate</th>
-                                                    <th style="width:20%">RequiredDate</th>
-                                                    <th style="width:20%">ShippedDate</th>
-                                                    <th >Status</th>
-                                                    <th style="width:25%">Comments</th>
-                                                    <th >CustomerNumber</th>
-                                                    <th > </th>
+                                                    <th style="width:25%">CustomerNumber</th>
+                                                    <th style="width:25%">CheckNumber</th>
+                                                    <th style="width:25%">Payment Date</th>
+                                                    <th style="width:25%">Amount</th>
                                                 </tr>
-                                                
                                             </thead>
-                                            <tbody id="order_table_body">
+                                            <tbody id="payment_table_body">
                                             </tbody>
-                                            
-                                            <script>$data = <?php echo $jsonOrder?>; ShowShipping($data);</script>
+                                            <script>$data = <?php echo $jsonPayment?>; 
+                                            ShowPayment($data);
+                                            </script>
                                         </table>
                                     </div>
                                 </div>
@@ -202,7 +198,7 @@
                         </div>
                     </form>
                 
-            <!-- pop-up add order to shipping -->
+            <!-- pop-up add payment -->
             <div id="id04" class="modal">
                     <span onclick="document.getElementById('id04').style.display='none'"
                         class="close" title="Close Modal">&times;
@@ -214,13 +210,14 @@
                         <div class="row">
                             <div class="col-12 col-lg-8">
                                 <div class="cart-title mt-50">
-                                    <h2>New Order Status</h2>
+                                    <h2>New Payment</h2>
                                 </div>
                                 <div class="product-meta-data">
                                     <form>
-                                        <p>ShippedDate: <input type="text" name="shipdate"></p>
-                                        <p>Status: <input type="text" name="status"></p>
-                                        <p>Comments: <input type="text" name="comments"></p>
+                                        <p>Customer Number: <input type="text" id="customerNumber"></p>
+                                        <p>Check Number: <input type="text" id="checkNumber"></p>
+                                        <p>Payment Date: <input type="text" id="paymentDate"></p>
+                                        <p>Amount: <input type="text" id="amount"></p>
                                         <!-- <div class="dropdown">
                                             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="order_status">STATUS
                                             <span class="caret"></span></button>
@@ -233,20 +230,9 @@
                                                 <li><a class="btn btn-primary" href="#" onclick="document.getElementById('order_status').innerHTML='Shipped'">Shipped</a></li>
                                             </ul>
                                         </div> -->
-                                        <div>
-                                            <select class="w-100" id="order_status">
-                                                <option value="Cancelled">Cancelled</option>
-                                                <option value="Disputed">Disputed</option>
-                                                <option value="In process">In process</option>
-                                                <option value="On hold">On hold</option>
-                                                <option value="Resolved">Resolved</option>
-                                                <option value="Shipped">Shipped</option>
-                                            </select>
-                                        </div>
-                                        <br><br>
                                     </form>
                                     <br>
-                                    <a href="#" class="btn amado-btn">SAVE</a>
+                                    <a href="#" onclick="AddToPayment()" class="btn amado-btn">SAVE</a>
                                     <br><br>
                                 </div>
                             </div>
