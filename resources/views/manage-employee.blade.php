@@ -146,18 +146,18 @@
                         <div class="row">
                             <div class="col-12 col-lg-8">
                                 <div class="cart-title mt-50">
-                                    <h2>New Product-Order</h2>
+                                    <h2>New Employee</h2>
                                 </div>
                                 <div class="product-meta-data">
                                     <form>
-                                        <p>EmployeeNumber: <input type="text" id="enumber" name="enumber" placeholder="1002"></p>
-                                        <p>FirstName: <input type="text" id="efname" name="efname" placeholder="Diane"></p>
-                                        <p>LastName: <input type="text" id="elname" name="elname" placeholder="Murphy"></p>
-                                        <p>Extension: <input type="text" id="eex" name="eex" placeholder="x5800"></p>
+                                        <p>EmployeeNumber: <input type="text" id="enumber" name="enumber" placeholder="xxxx"></p>
+                                        <p>FirstName: <input type="text" id="efname" name="efname" placeholder=""></p>
+                                        <p>LastName: <input type="text" id="elname" name="elname" placeholder=""></p>
+                                        <p>Extension: <input type="text" id="eex" name="eex" placeholder="x..."></p>
                                         <p>Email: <input type="text" id="eemail" name="eemail" placeholder=".....@classicmodelcars.com"></p>
-                                        <p>OfficeCode: <input type="text" id="ecode" name="ecode" placeholder="1"></p>
-                                        <p>ReportsTo: <input type="text" id="ere" name="ere" placeholder="1002"></p>
-                                        <p>JobTitle: <input type="text" id="ejob" name="ejob" placeholder="VP Sales"></p>
+                                        <p>OfficeCode: <input type="text" id="ecode" name="ecode" placeholder=""></p>
+                                        <p>ReportsTo: <input type="text" id="ere" name="ere" placeholder="4-digit code"></p>
+                                        <p>JobTitle: <input type="text" id="ejob" name="ejob" placeholder=" "></p>
                                         <a href="#" onclick="insertem()" class="btn amado-btn" type="submit">OK</a>
                                         <br><br>
                                     </form>

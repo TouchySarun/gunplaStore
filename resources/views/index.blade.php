@@ -137,18 +137,7 @@
             </div>
 
         </header>
-        <!-- Header Area End -->
-        <!-- Product Catagories Area Start -->
-        <div class="products-catagories-area clearfix" id="productArea"></div>
-        <script>
-            var json = <?php echo $jsonProduct?>;
-            var Vendor = <?php echo $jsonVendor?>;
-            var Scale = <?php echo $jsonScale?>;
-            showProduct(json,false,false);
-            dropdownVender(Vendor);
-            dropdownScale(Scale);
-        </script>
-        <!-- Product Catagories Area End -->
+
 
     </div>
     <!-- ##### Main Content Wrapper End ##### -->
@@ -205,6 +194,7 @@
             showProduct(json, false, false);
             dropdownVender(Vendor);
             dropdownScale(Scale);
+            sessionStorage.clear();
         </script>
         <!-- Product Catagories Area End -->
 
