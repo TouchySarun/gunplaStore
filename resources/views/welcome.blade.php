@@ -127,40 +127,9 @@
 
             </div>
 
-            <!-- PopUp Modal -->
-            <div id="id01" class="modal">
-                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;
-                </span>
-                <!-- Form inside popup -->
-                <form class="modal-content animate" action="/action_page.php">
-                    <div class="container">
-                        <h4>New Customer</h4>
-                        <br>
-                        <label for="customerName"><b>Customer Name</b></label>
-                        <input type="text" placeholder="Customer's Company" name="customerName" required>
-                        <label for="firstName"><b>First Name</b></label>
-                        <input type="text" placeholder="" name="firstName" required>
-                        <label for="lastName"><b>Last Name</b></label>
-                        <input type="text" placeholder="" name="lastName" required>
-                        <label for="phoneNum"><b>Phone number</b></label>
-                        <input type="text" placeholder="Ex. 088xxxxxx" name="phoneNum" required>
-                        <label for="addrline1"><b>Address Line 1</b></label>
-                        <input type="text" placeholder="" name="addrline1" required>
-                        <label for="addrline2"><b>Address Line 2</b></label>
-                        <input type="text" placeholder="" name="addrline2">
-                        <label for="saleRepEmNum"><b>SaleRepEmployeeNumber</b></label>
-                        <input type="text" placeholder="4-digit code" name="saleRepEmNum" required>
-                        <button type="submit">Confirm</button>
-                    </div>
-                    <div class="container" style="background-color:#f1f1f1">
-                        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-                    </div>
-                </form>
-            </div>
-
             <!-- pop-up add order to shipping -->
-            <div id="id04" class="modal">
-                    <span onclick="document.getElementById('id04').style.display='none'"
+            <div id="id01" class="modal">
+                    <span onclick="document.getElementById('id01').style.display='none'"
                         class="close" title="Close Modal">&times;
                     </span>
                     <!-- order-status -->
@@ -168,7 +137,6 @@
                     <div class="cart-table-area section-padding-60">
                     <div class="container-fluid">
                         <div class="row">
-                            <div>
                                 <div class="cart-head mt-50 mb-10">
                                     <h2>Promotion Management</h2>
                                 </div>
@@ -180,14 +148,14 @@
                                                 <th style="width:20%">Code</th>
                                                 <th>Number</th>
                                                 <th style="width:20%">Details</th>
-                                                <th >Expair Date</th>
+                                                <th >Expired Date</th>
                                             </tr>                                            
                                         </thead>
                                         <tbody id="promotion"></tbody>
                                     </table>
                                 </div>
                                 <a href="#" onclick="document.getElementById('id05').style.display='block'" class="btn amado-btn">Add +</a>
-                            </div>
+                        </div>
                     </div>
                     </div>
                     </form>
@@ -226,7 +194,7 @@
                 </div>
         </header>
         <!-- Header Area End -->
-
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <!-- Hyperlink Navigation Area -->
@@ -253,12 +221,12 @@
             <img src="./amado-master/img/core-img/employee.png"><br><br>
             Employee
         </a>
-        <a href="#" onclick="document.getElementById('id01').style.display='block'" class="btn amado-big-btn">
+        <a href="/mncus" class="btn amado-big-btn">
             <br><br><br>
             <img src="./amado-master/img/core-img/customers.png"><br><br>
             Customers
         </a>
-        <a href="#" onclick="document.getElementById('id04').style.display='block'" class="btn amado-big-btn">
+        <a href="#" onclick="document.getElementById('id01').style.display='block'" class="btn amado-big-btn">
             <br><br><br>
             <img src="./amado-master/img/core-img/promotion.png"><br><br>
             Promotion

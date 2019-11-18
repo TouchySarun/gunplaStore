@@ -194,7 +194,7 @@
                                 <div>
                                     <form style="border: none">
                                         <input type="text" name="searchID" id="searchID" placeholder="Type Customer Number...">
-                                        <a class="btn amado-btn" style="max-width: 22%" onclick="getAddress(document.getElementById('searchID').value)"><img src="./amado-master/img/core-img/search.png" alt=""></a>
+                                        <a class="btn amado-btn" style="max-width: 22%" onclick="getAddress(document.getElementById('searchID').value, true)"><img src="./amado-master/img/core-img/search.png" alt=""></a>
                                     </form>
                                 </div>
                             </div><br>

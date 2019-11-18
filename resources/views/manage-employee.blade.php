@@ -153,7 +153,7 @@
                                         <p>EmployeeNumber: <input type="text" id="enumber" name="enumber" placeholder="xxxx"></p>
                                         <p>FirstName: <input type="text" id="efname" name="efname" placeholder=""></p>
                                         <p>LastName: <input type="text" id="elname" name="elname" placeholder=""></p>
-                                        <p>Extension: <input type="text" id="eex" name="eex" placeholder="x..."></p>
+                                        <p>Extension: <input type="text" id="eex" name="eex" placeholder="x5800"></p>
                                         <p>Email: <input type="text" id="eemail" name="eemail" placeholder=".....@classicmodelcars.com"></p>
                                         <p>OfficeCode: <input type="text" id="ecode" name="ecode" placeholder=""></p>
                                         <p>ReportsTo: <input type="text" id="ere" name="ere" placeholder="4-digit code"></p>
