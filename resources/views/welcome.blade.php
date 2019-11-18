@@ -242,8 +242,6 @@
             <img src="./amado-master/img/core-img/employee.png"><br><br>
             Employee
         </button>
-        <a href="#" onclick="document.getElementById('id01').style.display='block'" class="btn amado-big-btn">
-        </a>
         <a href="/mncus" class="btn amado-big-btn">
             <br><br><br>
             <img src="./amado-master/img/core-img/customers.png"><br><br>

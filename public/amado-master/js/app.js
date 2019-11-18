@@ -1122,6 +1122,24 @@ function reqTomnpd(employeeNumber){
 
 function reqTomnem(employeeNumber){
     var a = {"employeeNumber":employeeNumber};
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/reqSell',
+        data: a,
+        dataType:"json",
+        success : (function(data){
+            if(data != 'error'){
+                window.location.replace('/mnem');
+            }else{
+                document.getElementById('typeError').style.display = 'block';
+            }
+        })
+    });
 
 
 }
