@@ -33,12 +33,12 @@
     <!-- Search Wrapper Area Start -->
     <!-- @if(session()->has('success')) -->
     <!-- @endif -->
-    <!-- <script>
-        var user = <php echo $userDetail?>;
-        sessionStorage.setItem('employeeNumber', user[0].employeeNumber);
-        sessionStorage.setItem('title', user[0].jobTitle);
-    </script> -->
-
+    <script>
+        var user = <?php echo $userDetail?>;
+        sessionStorage.setItem('employeeNumber',user[0].employeeNumber);
+        sessionStorage.setItem('title',user[0].jobTitle);
+    </script>
+    
     <div class="search-wrapper section-padding-50">
         <div class="search-close">
             <i class="fa fa-close" aria-hidden="true"></i>
@@ -88,6 +88,15 @@
                 <a href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
             </div>
 
+            <!-- Cart Menu -->
+            <div class="cart-fav-search mb-30">
+                <p>EmployeeID:</p>
+                <p id="showUser"></p>
+                <script>document.getElementById('showUser').innerHTML=sessionStorage.getItem('employeeNumber')</script>
+                <a href="cart.html" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
+                <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
+            </div>
+
             <!-- Amado Nav -->
             <nav class="amado-nav">
                 <ul>
@@ -107,38 +116,40 @@
 
             <!-- PopUp Modal -->
             <div id="id01" class="modal">
-                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;
-                </span>
-                <!-- Form inside popup -->
-                <form class="modal-content animate" action="/action_page.php">
-                    <div class="container">
-                        <h4>New Customer</h4>
-                        <br>
-                        <label for="customerName"><b>Customer Name</b></label>
-                        <input type="text" placeholder="Customer's Company" name="customerName" required>
-                        <label for="firstName"><b>First Name</b></label>
-                        <input type="text" placeholder="" name="firstName" required>
-                        <label for="lastName"><b>Last Name</b></label>
-                        <input type="text" placeholder="" name="lastName" required>
-                        <label for="phoneNum"><b>Phone number</b></label>
-                        <input type="text" placeholder="Ex. 088xxxxxx" name="phoneNum" required>
-                        <label for="addrline1"><b>Address Line 1</b></label>
-                        <input type="text" placeholder="" name="addrline1" required>
-                        <label for="addrline2"><b>Address Line 2</b></label>
-                        <input type="text" placeholder="" name="addrline2">
-                        <label for="saleRepEmNum"><b>SaleRepEmployeeNumber</b></label>
-                        <input type="text" placeholder="4-digit code" name="saleRepEmNum" required>
-                        <button type="submit">Confirm</button>
+                    <span onclick="document.getElementById('id01').style.display='none'"
+                        class="close" title="Close Modal">&times;
+                    </span>
+                    <!-- order-status -->
+                    <form class="modal-content animate" action="/action_page.php">
+                    <div class="cart-table-area section-padding-60">
+                    <div class="container-fluid">
+                        <div class="row">
+                                <div class="cart-head mt-50 mb-10">
+                                    <h2>Promotion Management</h2>
+                                </div>
+                                <div class="table">
+                                    <table>
+                                        <thead>
+                                            <tr style="background-color:#fbb710">
+                                                <th style="width:20%">Promotion ID</th>
+                                                <th style="width:20%">Code</th>
+                                                <th>Number</th>
+                                                <th style="width:20%">Details</th>
+                                                <th >Expired Date</th>
+                                            </tr>                                            
+                                        </thead>
+                                        <tbody id="promotion"></tbody>
+                                    </table>
+                                </div>
+                                <a href="#" onclick="document.getElementById('id05').style.display='block'" class="btn amado-btn">Add +</a>
+                        </div>
                     </div>
-                    <div class="container" style="background-color:#f1f1f1">
-                        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
                     </div>
-                </form>
+                    </form>
             </div>
 
-            <!-- pop-up add order to shipping -->
-            <div id="id04" class="modal">
-                    <span onclick="document.getElementById('id04').style.display='none'"
+            <div id="id05" class="modal">
+                    <span onclick="document.getElementById('id05').style.display='none'"
                         class="close" title="Close Modal">&times;
                     </span>
                     <!-- order-status -->
@@ -152,15 +163,14 @@
                                 </div>
                                 <div class="product-meta-data">
                                     <form>
-                                        <p>Promotion ID : <input type="text" name="promotionID"></p>
-                                        <p>Code : <input type="text" name="code"></p>
-                                        <p>Number : <br><input type="number" style="width:100%"  name="number"></p>
-                                        <p>Details : <input type="text" name="details"></p>
-                                        <p>Expair Date : <input type="date" style="width:100%" name="expairDate"></p>
-                                    
+                                        <p>Promotion ID : <input id="promid" type="text" name="promotionID"></p>
+                                        <p>Code : <input id="promcode" type="text" name="code"></p>
+                                        <p>Number : <br><input id="promnum" type="number" style="width:100%"  name="number"></p>
+                                        <p>Details : <input id="promdetail" type="text" name="details"></p>
+                                        <p>Expair Date : <input id="promdate" type="date" style="width:100%" name="expairDate"></p>
                                     </form>
                                     <br>
-                                    <a href="#" class="btn amado-btn">SAVE</a>
+                                    <a href="#" onclick="insertpromotion()" class="btn amado-btn">SAVE</a>
                                     <br><br>
                                 </div>
                             </div>
@@ -169,10 +179,9 @@
                     </div>
                     </form>
                 </div>
-
         </header>
         <!-- Header Area End -->
-
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <!-- Hyperlink Navigation Area -->
@@ -199,18 +208,22 @@
             <img src="./amado-master/img/core-img/employee.png"><br><br>
             Employee
         </a>
-        <a href="#" onclick="document.getElementById('id01').style.display='block'" class="btn amado-big-btn">
+        <a href="/mncus" class="btn amado-big-btn">
             <br><br><br>
             <img src="./amado-master/img/core-img/customers.png"><br><br>
             Customers
         </a>
-        <a href="#" onclick="document.getElementById('id04').style.display='block'" class="btn amado-big-btn">
+        <a href="#" onclick="document.getElementById('id01').style.display='block'" class="btn amado-big-btn">
             <br><br><br>
             <img src="./amado-master/img/core-img/promotion.png"><br><br>
             Promotion
         </a>
     </div>
 
+    <script>
+        $data = <?php echo $jsonpro ?? ''?>; 
+        promotion($data);
+    </script>
     <!-- Mobile Nav (max width 767px)-->
     <div class="mobile-nav">
         <!-- Navbar Brand -->

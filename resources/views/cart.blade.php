@@ -165,15 +165,16 @@
                         <div class="cart-summary">
                             <h5>Cart Total</h5>
                             <ul class="summary-table">
-                                <li><span>Subtotal:</span><span id="sumprice"></span></li>
-                                <li><span>Promotion Code:</span>
+                                <li><span>Subtotal :</span><span id="sumprice"></span></li>
+                                <li><span>Promotion Code :</span>
                                     <div class="col-10">
                                         <input type="text" class="form-control" style="padding: 5px 10px" id="code" placeholder="Code">
                                     </div>
                                 </li>
-                                <li><span>Discount:</span> <span>-</span></li>
-                                <li><span>Total:</span> <span id="sumprice"></span></li>
-                                <li><span>Member Points:</span> <span id="mempoint"></span></li>
+                                <li><span>Discount :</span> <span>-</span></li>
+                                <li><span>Total :</span> <span id="sumprice"></span></li>
+                                <li><span>Member Points :</span> <span id="mempoint"></span></li>
+                                <li><span>Money Cheque :</span> <span id="checkNumber"></span></li>
                             </ul>
                             <div class="payment-method">
                                 <label for="payment">Select payment type</label>
@@ -192,7 +193,7 @@
                                 <div>
                                     <form style="border: none">
                                         <input type="text" name="searchID" id="searchID" placeholder="Type Customer Number...">
-                                        <a class="btn amado-btn" style="max-width: 22%" onclick="getAddress(document.getElementById('searchID').value)"><img src="./amado-master/img/core-img/search.png" alt=""></a>
+                                        <a class="btn amado-btn" style="max-width: 22%" onclick="getAddress(document.getElementById('searchID').value, true)"><img src="./amado-master/img/core-img/search.png" alt=""></a>
                                     </form>
                                 </div>
                             </div><br>
@@ -205,7 +206,7 @@
                                             <a href="#" onclick="document.getElementById('id01').style.display='block'" class="btn amado-btn" style="width: 48%">
                                                 Add Address
                                             </a>
-                                            <a href="/successOrder" class="btn amado-btn" style="width: 48%">Checkout</a>
+                                            <a href="/welcome" onclick="AddToOrder()" class="btn amado-btn" style="width: 48%">Checkout</a>
                                         </div>
                                     </form>
                             </div>

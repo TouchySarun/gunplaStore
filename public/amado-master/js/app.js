@@ -3,52 +3,101 @@
 var tableproduct = "<br><br><br>";//All product List in JSON
 var tableemployee = "<br><br><br>";
 var tableaddress = "";
-var employeeInfo = "";
+var tablestock = "";
+var tablepromotion = "";
+var tablecustomer = "";
 //--------------Show script------------------//
-function navEmployee(json){
-    json.forEach( function(a) {
-        employeeInfo += `
-            <h5 class="mt-30">${a.firstName} ${a.lastName}</h5>
-            <p>${a.jobTitle}</p>
-            <p><span>Customer ID: </span><span>${a.employeeNumber}</span></p>
-        `;
-    });
-    document.getElementById("employeeInfo").innerHTML = employeeInfo;
-}
-
-//--------------Show script------------------//
-function showCustomerAddress(input) {
-    x = JSON.parse(input);
-    var tableaddress = "";
-    var n = 0;
-    x.forEach( function (a) {
-        tableaddress += `
-            <!-- class="radio-container" -->
-                <table style="width: 100%">
-                    <tbody>
-                        <tr>
-                            <td style="text-align: left; margin-right: 10px; max-width: 10%; border-bottom: none;">
-                                <label class="radio-container"> 
-                                    <input type="radio" name="addressSelect" value="${n}">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </td>
-                            <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%; border-bottom: none">
-                                <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>                   
-                            </td>
-                            <td>
-                                <a href="#" onclick="PopUpAddress('${a.addressNumber}')" class="btn amado-btn">Edit</a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-        `;
-        n++;
-    });
+function showCustomerAddress(input, editAble) {
+    console.log(editAble);
+    if (editAble === true) {
+        x = JSON.parse(input);
+        var tableaddress = "";
+        var n = 0;
+        x.forEach( function (a) {
+            if (n == input.length - 1) {
+                tableaddress += `
+                    <!-- class="radio-container" -->
+                    <table style="width: 100%">
+                        <tbody>
+                            <tr>
+                                <td style="text-align: left; margin-right: 10px; max-width: 10%; border-bottom: none;">
+                                    <label class="radio-container"> 
+                                        <input type="radio" name="addressSelect" value="${n}">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </td>
+                                <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%; border-bottom: none">
+                                    <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>                    
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                `;
+            } else {
+                n++;
+                tableaddress += `
+                    <table style="width: 100%">
+                        <tbody>
+                            <tr>
+                                <td style="text-align: left; margin-right: 10px; max-width: 10%; border-bottom: none">
+                                    <label class="radio-container">
+                                        <input type="radio" name="addressSelect" value="${n}">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </td>
+                                <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%;">
+                                    <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>                    
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                `;
+            }
+        });
+    }else{
+        x = JSON.parse(input);
+        var tableaddress = "";
+        var n = 0;
+        x.forEach( function (a) {
+            if (n == input.length - 1) {
+                tableaddress += `
+                    <!-- class="radio-container" -->
+                    <table style="width: 100%">
+                        <tbody>
+                            <tr>
+                                <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%; border-bottom: none">
+                                    <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>                    
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                `;
+            } else {
+                n++;
+                tableaddress += `
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div>
+                                    <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>
+                                                       
+                                    </div>
+                                    </td>
+                                    <td><a href="#" class="btn amado-btn" >Delete</a>
+                                    <a href="#" class="btn amado-btn" >Edit</a>   
+                                    </td>                             
+                                    </tr>
+                        </tbody>
+                    </table>
+                `;
+            }
+        });
+    }
     document.getElementById("addressArea").innerHTML = tableaddress;
 }
 
-function getAddress(customerNumber){
+function getAddress(customerNumber,editAble){
     //console.log(customerNumber);
     $.ajaxSetup({
         headers: {
@@ -59,110 +108,34 @@ function getAddress(customerNumber){
         type: 'get',
         url: '/getAddress/' + customerNumber,
         success: function (data) {
-            console.log(data);
-            showCustomerAddress(data);
+            showCustomerAddress(data, editAble);
             //var x = JSON.parse(data);
-            //console.log(x[0].customerNumber);
+            // console.log(x[0].customerNumber);
             // return x[0];
         }
     });
 }
 
 var jasonproduct = "";
-//--------------Show script------------------//
-// function showProductList(json){
-//     tableproduct="";
-//     json.forEach( function(a) {
-//     tableproduct += `
-//         <div class="single-products-catagory">
-//         <a href="#" onclick="showProductDetail('${a.productCode}')">
-//         <img src="./amado-master/img/bg-img/1.jpg" alt="">
-//         <!-- Hover Content -->
-//         <div class="hover-content">
-//             <div class="line"></div>
-//             <p>In Stock ${a.quantityInStock}</p>
-//             <p>$${a.buyPrice}</p>
-//             <p>${a.productScale}</p>
-//             <p>${a.productVendor}</p>
-//             <h4>${a.productName}</h4>
-//         </div>
-//         <div class="pdDetail" style= "display:none">
-//             <p>${a.productCode}</p>
-//             <p>${a.productName}</p>
-//             <p>${a.productLine}</p>
-//             <p>${a.productScale}</p>
-//             <p>${a.productVendor}</p>
-//             <p>${a.productDescription}</p>
-//             <p>${a.quantityInStock}</p>
-//             <p>${a.buyPrice}</p>
-//             <p>${a.MSRP}</p>
-//         </div>
-//     </a>
-//     </div>
-//         `
-//     });
-//     document.getElementById("productArea").innerHTML = tableproduct;
-// }
-//------------end show script------------//
-
-//----------edit product ----------//
-function updateProductList(json){
-    tableproduct="";
-    jsonproduct = json;
-    json.forEach( function(a) {
-    tableproduct += `
-        <div class="single-products-catagory">
-                <a href="#" onclick="showProductDetail('${a.productCode}')">
-                    <img src="./amado-master/img/bg-img/1.jpg" alt="">
-                    <!-- Hover Content -->
-                    <div class="hover-content">
-                        <div class="line"></div>
-                        <p>EmployeeNumber ${a.quantityInStock}</p>
-                        <p>$${a.buyPrice}</p>
-                        <p>${a.productScale}</p>
-                        <p>${a.productVendor}</p>
-                        <h4>${a.productName}</h4>
-                    </div>
-                    <div style="display:none">
-                        <p>${a.productCode}</p>
-                        <p>${a.productName}</p>
-                        <p>${a.productLine}</p>
-                        <p>${a.productScale}</p>
-                        <p>${a.productVendor}</p>
-                        <p>${a.productDescription}</p>
-                        <p>${a.quantityInStock}</p>
-                        <p>${a.buyPrice}</p>
-                        <p>${a.MSRP}</p>
-                    </div>
-                    <a href="#" onclick="EditProductDetail('${a.productCode}')" class="btn amado-btn">Edit</a>
-                </a>
-        </div>
-        `
-    });
-    document.getElementById("productArea").innerHTML = tableproduct;
-}
-//----------end edit product----------//
-
-//add order product
-function showProduct(json,editable,orderable){
-    //updateProductList = showProduct(json,true,false)
-    //updateProductOrderList = showProduct(json,false,true)
-    var i = 0;
-    tableproduct = '<br><br><br>';
-    json.forEach(function (a) {
+function showProduct(json, editable, orderable) {
+//updateProductList = showProduct(json,true,false)
+                //updateProductOrderList = showProduct(json,false,true)
+                    var i = 0;
+                    tableproduct = '<br><br><br>';
+                    json.forEach(function (a) {
         tableproduct += `
         <div class="single-products-catagory">
-            <a href="#" onclick="PopUpProduct('${a.productCode}', ${editable})">
-                <img src="./amado-master/img/bg-img/1.jpg" alt="">
-                <!-- Hover Content -->
+        <a href="#" onclick="PopUpProduct('${a.productCode}', '${editable}')">
+        <img src="./amado-master/img/bg-img/1.jpg" alt="">
+        <!-- Hover Content -->
                 <div class="hover-content">
-                    <div class="line"></div>
-                    <p>Stock ${a.quantityInStock}</p>
+                <div class="line"></div>
+                <p>Stock ${a.quantityInStock}</p>
                     <p>$${a.buyPrice}</p>
                     <p>${a.productScale}</p>
                     <p>${a.productVendor}</p>
                     <h4>${a.productName}</h4>
-                </div>
+                    </div>
                 <div class="pdDetail" style= "display:none">
                     <p>${a.productCode}</p>
                     <p>${a.productName}</p>
@@ -187,7 +160,7 @@ function showProduct(json,editable,orderable){
                 <input class="setZero" style="width:20%" id="qty${i}" step="1" min="0" max="300" name="quantity" value="0">
                 <span class="qty-plus" onclick="var effect = document.getElementById('qty${i}'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
             </div>
-            <button href="#" onclick="AddToOrder(document.getElementById('orderId').value,'${a.productName}','${a.buyPrice}', '${a.productCode}', document.getElementById('qty${i}').value,'qty${i}')" class="btn amado-btn" style="margin:0px">Buy</button>
+            <button href="#" onclick="AddToCart(document.getElementById('orderId').value,'${a.productName}','${a.buyPrice}', '${a.productCode}', document.getElementById('qty${i}').value,'qty${i}')" class="btn amado-btn" style="margin:0px">Buy</button>
         </div>`;
             i++;
         }
@@ -231,7 +204,7 @@ function showEmployee(employee) {
         tableemployee += `
         <div class="single-products-catagory">
                 <a href="#" onclick="PopUpEmployee('${a.employeeNumber}', '${a.lastName}', '${a.firstName}', '${a.email}', '${a.officeCode}', '${a.reportsTo}',
-                '${a.jobTitle}', '${a.extension}', true)">
+                '${a.jobTitle}', '${a.extension}', false)">
                 <img src="./amado-master/img/core-img/employeeM.png" alt="">
                 <!-- Hover Content -->
                 <div class="hover-content">
@@ -250,17 +223,167 @@ function showEmployee(employee) {
                     <p>${a.reportsTo}</p>
                     <p>${a.jobTitle}</p>
                 </div>
-                <a href="#" onclick="PopUpEmployee('${a.employeeNumber}', '${a.lastName}', '${a.firstName}', '${a.email}', '${a.officeCode}', '${a.reportsTo}',
-                '${a.jobTitle}', '${a.extension}', true)" class="btn amado-btn">Edit</a>
-            </a>
+                </a>
+                <button onclick="PopUpEmployee('${a.employeeNumber}', '${a.lastName}', '${a.firstName}', '${a.email}', '${a.officeCode}', '${a.reportsTo}',
+                '${a.jobTitle}', '${a.extension}', true)" class="btn amado-btn">Edit</button>
         </div>
         `
     });
     document.getElementById("employeeArea").innerHTML = tableemployee;
 }
-//---------------Pop Up ----------------//
-function PopUpEmployee(number, lname, fname, email, office, report, job, exetension, editAble) {
 
+function showCustomer(customer) {
+    tablecustomer = "<br><br><br>";
+    jsoncustomer = customer;
+    customer.forEach(function (a) {
+        tablecustomer += `
+        <div class="single-products-catagory">
+                <a href="#" onclick="PopUpCustomer('${a.customerNumber}', false),getAddress(${a.customerNumber}, false)">
+                <img src="./amado-master/img/core-img/employeeM.png" alt="">
+                <!-- Hover Content -->
+                <div class="hover-content">
+                    <div class="line"></div>
+                    <p>Number ${a.customerNumber}</p>
+                    <h5>${a.customerName}</h5>
+                    <h4>${a.contactFirstName} ${a.contactFirstName}</h4>
+                </div>
+                <div class="cusDetail" style= "display:none">
+                    <p>${a.customerNumber}</p>
+                    <p>${a.customerName}</p>
+                    <p>${a.contactLastName}</p>
+                    <p>${a.contactFirstName}</p>
+                    <p>${a.phone}</p>
+                    <p>${a.salesRepEmployeeNumber}</p>
+                    <p>${a.creditLimit}</p>
+                    <p>${a.point}</p>
+                </div>
+                </a>
+                <button onclick="PopUpCustomer('${a.customerNumber}', true),getAddress(${a.customerNumber}, false)" class="btn amado-btn">Edit</button>
+        </div>
+        `
+    });
+    document.getElementById("customerArea").innerHTML = tablecustomer;
+}
+
+//stockin
+function stockin(stock){
+    tablestock = "";
+    stock.forEach( function(a) {
+    tablestock += `
+        <tr>
+            <td><h5>${a.stockNumber}</h5></td>
+            <td><h5>${a.productCode}</h5></td>
+            <td class="cart_product_desc">
+                <h5>${a.qty}</h5>
+            </td>
+            <td><h5>${a.stockDate}</h5></td>
+        </tr>
+        `
+    });
+    document.getElementById("stock").innerHTML = tablestock;
+}
+
+//promotion
+function promotion(promo){
+    tablepromotion = "";
+    console.log(promo);
+    promo.forEach( function(a) {
+    tablepromotion += `
+        <tr>
+            <td><h5>${a.promotionId}</h5></td>
+            <td><h5>${a.promotionCode}</h5></td>
+            <td class="cart_product_desc">
+                <h5>${a.qty}</h5>
+            </td>
+            <td><h5>${a.stockDate}</h5></td>
+            <td><h5>${a.expairDate}</h5></td>
+        </tr>
+        `
+    });
+    document.getElementById("promotion").innerHTML = tablepromotion;
+}
+//---------------Pop Up ----------------//
+//Customer
+function PopUpCustomer(a, editAble){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'get',
+        url: '/editcus/' + a,
+        success: function (data) {
+            var b = JSON.parse(data)[0];
+            var box = `
+            <span onclick="document.getElementById('id03').style.display='none'"
+                class="close" title="Close Modal">&times;
+            </span>
+            <form class="modal-content animate" action="/action_page.php">
+                <div class="container">
+                    <div class="single-product-area section-padding-100 clearfix" >
+                        <div class="container-fluid" >
+                            <div class="row">
+                                <div class="col-lg-7">
+                                    <div class="single_product_thumb">
+                                        <div id="product_details_slider" class="carousel slide" data-ride="carousel">
+                                            <div class="carousel-inner">
+                                                    <a class="gallery_img" href="./amado-master/img/core-img/employeeM.png">
+                                                        <img class="d-block w-100" src="./amado-master/img/core-img/employeeM.png" alt="First slide">
+                                                    </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-5">
+                                    <div class="single_product_desc">
+                                        <div class="product-meta-data">
+                                            <div class="line"></div>`;
+            if (editAble === true) {
+            box += `
+                <form>
+                    <p>Number: <input type="text" id="cusnum" name="text" value="${b.customerNumber}"></p>
+                    <p>Name: <input type="text" id="cusname" name="text" value="${b.customerName}"></p>
+                    <p>ContactFirstName: <input type="text" id="cusfname" name="text" value="${b.contactFirstName}"></p>
+                    <p>ContactLastName: <input type="text" id="cuslname" name="text" value="${b.contactLastName}"></p>
+                    <p>Phone: <input type="text" id="cusphone" name="text" value="${b.phone}"></p>
+                    <p>SalesRep: <input type="text" id="salerep" name="text" value="${b.salesRepEmployeeNumber}"></p>
+                    <p>CreditLimit: <input type="text" id="cuslimit" name="text" value="${b.creditLimit}"></p>
+                    <p>Point: <input type="text" id="cuspoint" name="text" value="${b.point}"></p>
+                    <br>
+                    <h5>Address:</h5> 
+                    </div>
+                    <div class="product-meta-data" id="addressArea"><div>
+                    </div>
+                </form>
+                </div>
+                    <br>
+                    <a href="#" class="btn amado-btn" onclick="deletecus('${b.customerNumber}')">Delete</a>
+                    <a href="#" class="btn amado-btn" onclick="updatecus('${b.customerNumber}')">Save</a>`
+            }else{
+            box += `                                   
+            <div class="product-meta-data">
+                <h3>Number: ${b.customerNumber}</h3>
+                <h3>${b.customerName}</h3>
+                <h4>${b.contactFirstName} ${b.contactLastName}</h4>
+                <h6>Phone: ${b.phone}</h6>
+                <h6>SalesRep: ${b.salesRepEmployeeNumber}</h6>
+                <h6>CreditLimit: ${b.creditLimit}</h6>
+                <p class="avaibility"><i class="fa fa-circle"></i>Point: ${b.point}</p>
+                <br>
+                <h5>Address:</h5> 
+            </div>
+            <div class="product-meta-data" id="addressArea"><div>
+            </div>`
+            }
+        box += `</div></div></div></div></div></div></div></form>`;
+        document.getElementById("id03").innerHTML = box;
+        document.getElementById("id03").style.display = 'block';
+        }
+    });
+}
+//Employee
+function PopUpEmployee(number, lname, fname, email, office, report, job, exetension, editAble){
     //showEmployeeDetail(a) = PopUpProduct(a, false)
     //EditEmployeeDetail(a) = PopUpProduct(a, true)
     var box = `
@@ -287,26 +410,105 @@ function PopUpEmployee(number, lname, fname, email, office, report, job, exetens
                                     <div class="single_product_desc">
                                         <div class="product-meta-data">
                                             <div class="line"></div>
-                                                <form>
-                                                    <p>FirstName: <input type="text" id="efn" name="text" value="${fname}"></p>
-                                                    <p>LastName: <input type="text" id="eln" name="text" value="${lname}"></p>
-                                                    <p>Email: <input type="text" id="eem" name="text" value="${email}"></p>
-                                                    <p>JobTitle: <input type="text" id="ej" name="text" value="${job}"></p>
-                                                    <p>OfficeCode: <input type="text" id="eof" name="text" value="${office}"></p>
-                                                    <p>ReportTo: <input type="text" id="er" name="text" value="${report}"></p>
-                                                    <p>Extension: <input type="text" id="ee" name="text" value="${exetension}"></p>
-                                                </form>
-                                            </div>`;
+                                            `;
     if (editAble === true) {
-        box += `<a href="#" class="btn amado-btn" onclick="deleteem('${number}')">Delete</a>
-                <a href="#" class="btn amado-btn" onclick="updateem('${number}')">Save</a>`;
+        box += `
+            <form>
+                <p>FirstName: <input type="text" id="efn" name="text" value="${fname}"></p>
+                <p>LastName: <input type="text" id="eln" name="text" value="${lname}"></p>
+                <p>Email: <input type="text" id="eem" name="text" value="${email}"></p>
+                <p>JobTitle: ${job}</p>
+                <p>Promote and Demote:</p>
+                <div>
+                        <select class="w-100" id="ej" value="${job}">
+                        <option value="VP Sales">VP Sales</option>
+                        <option value="Sales Manager (APAC)">Sales Manager (APAC)</option>
+                        <option value="Sale Manager (EMEA)">Sale Manager (EMEA)</option>
+                        <option value="Sales Manager (NA)">Sales Manager (NA)</option>
+                        <option value="Sales Rep">Sales Rep</option>
+                        </select>
+                </div>    
+                <p>OfficeCode: <input type="text" id="eof" name="text" value="${office}"></p>
+                <p>ReportTo: <input type="text" id="er" name="text" value="${report}"></p>
+                <p>Extension: <input type="text" id="ee" name="text" value="${exetension}"></p>
+            </form>
+        </div>
+            <a href="#" class="btn amado-btn" onclick="deleteem('${number}')">Delete</a>
+            <a href="#" class="btn amado-btn" onclick="updateem('${number}')">Save</a>`;
+    }else{
+        box += `
+        <div class="product-meta-data">
+            <h3>${fname} ${lname}</h3>
+            <h4>Job: ${job}</h4>
+            <h5>ReportTo: ${report}</h5>
+            <h5>OfficeCode: ${office}</h5>
+            <h5>Extension: ${exetension}</h5>
+            <p class="avaibility"><i class="fa fa-circle"></i>Email: ${email}</p>
+        </div>
+        </div>`
     }
     box += `</div></div></div></div></div></div></div></form>`;
     document.getElementById("id03").innerHTML = box;
     document.getElementById("id03").style.display = 'block';
-
 }
-function PopUpProduct(a, editAble) {
+
+function PopUpodstatus(a){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'get',
+        url: '/editstatus/' + a,
+        success: function (data) {
+            var b = JSON.parse(data)[0];
+    var status = `
+        <span onclick="document.getElementById('id08').style.display='none'"
+            class="close" title="Close Modal">&times;
+        </span>
+        <form class="modal-content animate" action="/action_page.php">
+        <div class="cart-table-area section-padding-60">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 col-lg-8">
+                    <div class="cart-title mt-50">
+                        <h2>New Order Status</h2>
+                    </div>
+                    <div class="product-meta-data">
+                        <form>
+                            <p>ShippedDate: 
+                            <br><input id="shipdate" type="date" name="shipdate" value="${b.shippedDate}"></p>
+                            <p>Status: 
+                            <div>
+                                <select class="w-100" id="order_status" value="${b.status}">
+                                    <option value="Cancelled">Cancelled</option>
+                                    <option value="Disputed">Disputed</option>
+                                    <option value="In process">In process</option>
+                                    <option value="On hold">On hold</option>
+                                    <option value="Resolved">Resolved</option>
+                                    <option value="Shipped">Shipped</option>
+                                </select>
+                            </div></p>
+                            <p>Comments: <br><textarea id="shipcom" name="message" style="width:400px; height:150px;">${b.comments}</textarea></p>
+                            <br>
+                        </form>
+                        <br>
+                        <a href="#" onclick="updateship(${b.orderNumber})" class="btn amado-btn">SAVE</a>
+                        <br><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        </form>`;
+    document.getElementById("id08").innerHTML = status;
+    document.getElementById("id08").style.display = 'block';
+    }
+    });
+}
+//Product
+function PopUpProduct(a, editAble){
     //showProductDetail(a) = PopUpProduct(a, false)
     //EditProductDetail(a) = PopUpProduct(a, true)
     $.ajaxSetup({
@@ -402,10 +604,12 @@ function PopUpProduct(a, editAble) {
         }
     });
 }
+
 //------------end show script------------//
 
-//drop-down
-function dropdownVender(Vendor) {
+//------------drop-down------------//
+//Vendor
+function dropdownVender(Vendor){
     var mostvendor = "";
     Vendor.forEach(function (b) {
         mostvendor += `
@@ -416,7 +620,9 @@ function dropdownVender(Vendor) {
     });
     document.getElementById('Vendor').innerHTML = mostvendor;
 }
-function dropdownScale(Scale) {
+
+//Scale
+function dropdownScale(Scale){
     var mostscale = "";
     Scale.forEach(function (b) {
         mostscale += `
@@ -428,6 +634,7 @@ function dropdownScale(Scale) {
     document.getElementById('Scale').innerHTML = mostscale;
 
 }
+
 //-----------------------------categorize --------------------------------//
 function categorize(input, type) {
     var textBox = "";
@@ -449,6 +656,7 @@ function categorize(input, type) {
     document.getElementById("productArea").innerHTML = textBox;
 }
 //---------------end categorize -----------------------//
+
 //------------------------------filter----------------------------- //
 function filter(input, type) {
     //name 5 / id 4 / scale 7 / vendor 8
@@ -471,6 +679,7 @@ function filter(input, type) {
     }
     return returnValue;
 }
+
 function findProductCode(input) {
     var slot, single_products_catagory, pdName, i, txtValue, a;
     slot = document.getElementById("productArea");
@@ -490,18 +699,17 @@ function findProductCode(input) {
 
 // ---------------------Insert-------------------------------//
 //Product
-function insertitem() {
-    var product = {
-        "pname": document.getElementById("name").value.toString(),
-        "pcode": document.getElementById("code").value.toString(),
-        "pline": document.getElementById("line").value.toString(),
-        "pscale": document.getElementById("scale").value.toString(),
-        "pvendor": document.getElementById("vendor").value.toString(),
-        "pnumber": document.getElementById("number").value.toString(),
-        "pprice": document.getElementById("price").value.toString(),
-        "pmsrp": document.getElementById("msrp").value.toString(),
-        "pdes": document.getElementById("des").value.toString()
-    };
+function insertitem(){
+    var product = { "snum": document.getElementById("snumber").value.toString(),
+                    "pname": document.getElementById("name").value.toString(),
+                    "pcode": document.getElementById("code").value.toString(),
+                    "pline": document.getElementById("line").value.toString(),
+                    "pscale": document.getElementById("scale").value.toString(),
+                    "pvendor": document.getElementById("vendor").value.toString(),
+                    "pnumber": document.getElementById("number").value.toString(),
+                    "pprice": document.getElementById("price").value.toString(),
+                    "pmsrp": document.getElementById("msrp").value.toString(),
+                    "pdes": document.getElementById("pdes").value.toString()};
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -513,22 +721,23 @@ function insertitem() {
         data: product,
         dataType: "json",
         success: function (data) {
-            document.getElementById('id04').style.display = 'none';
-            showProduct(data, true, false);
+            document.getElementById('id04').style.display='none';
+            showProduct(data[0],true,false);
+            stockin(data[1]);
         }
     });
 }
-function insertem() {
-    var product = {
-        "enumber": document.getElementById("enumber").value.toString(),
-        "efname": document.getElementById("efname").value.toString(),
-        "elname": document.getElementById("elname").value.toString(),
-        "eex": document.getElementById("eex").value.toString(),
-        "eemail": document.getElementById("eemail").value.toString(),
-        "ecode": document.getElementById("ecode").value.toString(),
-        "ere": document.getElementById("ere").value.toString(),
-        "ejob": document.getElementById("ejob").value.toString()
-    };
+
+//Employee
+function insertem(){
+    var product = { "enumber": document.getElementById("enumber").value.toString(),
+                    "efname": document.getElementById("efname").value.toString(),
+                    "elname": document.getElementById("elname").value.toString(),
+                    "eex": document.getElementById("eex").value.toString(),
+                    "eemail": document.getElementById("eemail").value.toString(),
+                    "ecode": document.getElementById("ecode").value.toString(),
+                    "ere": document.getElementById("ere").value.toString(),
+                    "ejob": document.getElementById("ejob").value.toString()};
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -542,6 +751,60 @@ function insertem() {
         success: function (data) {
             document.getElementById('id04').style.display = 'none';
             showEmployee(data);
+        }
+    });
+}
+
+//Promotion
+function insertpromotion(){
+    var pro = {"promid": document.getElementById("promid").value.toString(),
+                     "promcode": document.getElementById("promcode").value.toString(),
+                     "promnum": document.getElementById("promnum").value.toString(),
+                     "promdetail": document.getElementById("promdetail").value.toString(),
+                     "promdate": document.getElementById("promdate").value.toString()};
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/insertpromotion',
+        data: pro,
+        dataType: "json",
+        success: function (data) {
+            document.getElementById('id05').style.display='none';
+            promotion(data);
+        }
+    });
+}
+
+//Customer
+function insertcus(){
+    var customer = {"wcusnum": document.getElementById("wcusnum").value.toString(),
+                    "wcompany": document.getElementById("wcompany").value.toString(),
+                    "wfname": document.getElementById("wfname").value.toString(),
+                    "wlname": document.getElementById("wlname").value.toString(),
+                    "wphone": document.getElementById("wphone").value.toString(),
+                    "wcity": document.getElementById("wcity").value.toString(),
+                    "wstate": document.getElementById("wstate").value.toString(),
+                    "wpos": document.getElementById("wpos").value.toString(),
+                    "wcoun": document.getElementById("wcoun").value.toString(),
+                    "wsale": document.getElementById("wsale").value.toString(),
+                    "wcredit": document.getElementById("wcredit").value.toString()};
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/insertcus',
+        data: customer,
+        dataType: "json",
+        success: function (data) {
+            document.getElementById('id04').style.display='none';
+            showCustomer(data);
         }
     });
 }
@@ -578,16 +841,16 @@ function updateitem(a) {
         }
     });
 }
-function updateem(a) {
-    var product = {
-        "efn": document.getElementById("efn").value.toString(),
-        "eln": document.getElementById("eln").value.toString(),
-        "ee": document.getElementById("ee").value.toString(),
-        "eem": document.getElementById("eem").value.toString(),
-        "eof": document.getElementById("eof").value.toString(),
-        "er": document.getElementById("er").value.toString(),
-        "ej": document.getElementById("ej").value.toString()
-    };
+
+//Employee
+function updateem(a){
+    var product = { "efn": document.getElementById("efn").value.toString(),
+                    "eln": document.getElementById("eln").value.toString(),
+                    "ee": document.getElementById("ee").value.toString(),
+                    "eem": document.getElementById("eem").value.toString(),
+                    "eof": document.getElementById("eof").value.toString(),
+                    "er": document.getElementById("er").value.toString(),
+                    "ej": document.getElementById("ej").value.toString()};
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -604,6 +867,57 @@ function updateem(a) {
         }
     });
 }
+
+//Customer
+function updatecus(a){
+    var product = { "cusnum": document.getElementById("cusnum").value.toString(),
+                    "cusname": document.getElementById("cusname").value.toString(),
+                    "cusfname": document.getElementById("cusfname").value.toString(),
+                    "cuslname": document.getElementById("cuslname").value.toString(),
+                    "cusphone": document.getElementById("cusphone").value.toString(),
+                    "salerep": document.getElementById("salerep").value.toString(),
+                    "cuslimit": document.getElementById("cuslimit").value.toString(),
+                    "cuspoint": document.getElementById("cuspoint").value.toString()};
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/updatecus/' + a,
+        data: product,
+        dataType: "json",
+        success: function (data) {
+            document.getElementById('id03').style.display = 'none';
+            showCustomer(data);
+        }
+    });
+}
+
+//Shipping
+function updateship(a){
+    var product = { "shipdate": document.getElementById("shipdate").value.toString(),
+                    "odstatus": document.getElementById("order_status").value.toString(),
+                    "shipcom": document.getElementById("shipcom").value.toString(),};
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/updateship/' + a,
+        data: product,
+        dataType: "json",
+        success: function (data) {
+            document.getElementById('id08').style.display = 'none';
+            ShowShipping(data);
+        }
+    });
+}
+
+
 // ---------------------End Update---------------------------//
 
 // -----------------------Delete-----------------------------//
@@ -623,7 +937,9 @@ function deleteitem(a) {
         }
     });
 }
-function deleteem(a) {
+
+//Employee
+function deleteem(a){
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -638,8 +954,27 @@ function deleteem(a) {
         }
     });
 }
+
+//Customer
+function deletecus(a){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'delete',
+        url: '/deletecus/' + a,
+        success: function (data) {
+            document.getElementById('id03').style.display = 'none';
+            showCustomer(data);
+        }
+    });
+}
 // ----------------------End Delete-----------------------------//
-function order_calculator() {
+
+// ----------------------Calculate-----------------------------//
+function order_calculator(){
     //var table = document.getElementById("order_table");
     var body = document.getElementById("order_table_body");
     var tr = body.getElementsByTagName("tr");
@@ -655,7 +990,11 @@ function order_calculator() {
     }
     document.getElementById("sumprice").innerHTML = '$' + sum;
     document.getElementById("mempoint").innerHTML = mempoint + ' Points';
+
+    
+
 }
+
 function ShowShipping(input) {
     var shipping_table = "";
     input.forEach(function (a) {
@@ -668,7 +1007,7 @@ function ShowShipping(input) {
             <td><h5>${a.status}</h5></td>
             <td><h5>${a.comments}</h5></td>
             <td><h5>${a.customerNumber}</h5></td>
-            <td><a href="#" onclick="document.getElementById('id04').style.display='block'" class="btn amado-btn" style="min-width:50px">Edit</a></td>
+            <td><a href="#" onclick="PopUpodstatus(${a.orderNumber})" class="btn amado-btn" style="min-width:50px">Edit</a></td>
         </tr>
         `;
     });
@@ -690,7 +1029,29 @@ function stock(){
         }
     });
 }
-function AddToOrder(orderNumber,Name,price, pdCode, num ,n){
+function AddToOrder(){
+
+    var CustomerNumber = {
+        'customerNumber' : document.getElementById("searchID").value.toString()
+    };
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/successOrder',
+        data: CustomerNumber,
+        dataType:'Text',
+        success: function (data){
+            console.log(data);
+        }
+    });
+    console.log('sucees Hurey');
+}
+
+function AddToCart(orderNumber,Name,price, pdCode, num ,n){
 
     var i = Number(document.getElementById('NumberCart').innerText)
     i = i+Number(num);
