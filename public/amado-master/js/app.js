@@ -73,17 +73,17 @@ function showCustomerAddress(input, editAble) {
             } else {
                 n++;
                 tableaddress += `
-                    <table>
+                    <table style="width:100%">
                         <tbody>
                             <tr>
-                                <td>
+                                <td style="width:80%">
                                     <div>
                                         <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>           
                                     </div>
                                 </td>
-                                <td>
-                                    <a href="#" class="btn amado-btn" >Delete</a>
-                                    <a href="#" class="btn amado-btn" >Edit</a>   
+                                <td style="width:20%">
+                                    <a href="#" class="btn amado-btn" style="min-width:20%; width=100%">Delete</a>
+                                    <a href="#" class="btn amado-btn" style="min-width:20%; width=100%">Edit</a>   
                                 </td>                             
                             </tr>
                         </tbody>
@@ -244,7 +244,7 @@ function showCustomer(customer) {
                     <div class="line"></div>
                     <p>Number ${a.customerNumber}</p>
                     <h5>${a.customerName}</h5>
-                    <h4>${a.contactFirstName} ${a.contactFirstName}</h4>
+                    <h4>${a.contactFirstName} ${a.contactLastName}</h4>
                 </div>
                 <div class="cusDetail" style= "display:none">
                     <p>${a.customerNumber}</p>
