@@ -84,9 +84,9 @@ class DataController extends Controller
         $product = DB::select('select * from cart');
         return view('cart',['product'=>json_encode($product),'jsonCustomer'=> '']);
     }
-
+    //and deleteFlag = 'flase'
     public function getAddress($code){
-        $address = DB::select("select * from addresses where customerNumber like '$code'");
+        $address = DB::select("select * from addresses where customerNumber like '$code' ");
         $point = DB::select("select point from customers where customerNumber like '$code'");
         return [json_encode($address),json_encode($point)];
     }
@@ -95,15 +95,9 @@ class DataController extends Controller
         $ProductCode = DB :: select('select distinct productCode from cart ');
         $x = $OrderNumber[0];
         $date = date('Y-m-d',time());
-        // $reqdate = $date;
-        // date_add(date_interval_create_from_date_string("7 days"),$reqdate);
-        // date_modify("+7 days",$reqdate);
-        // date_add($redate,date_interval_create_from_date_string("7 days"));
-        // $date->modify('+7 day');
-
         DB::insert("
-            insert into orders(orderNumber,orderDate,requiredDate, status, customerNumber)
-            values ('$x->orderNumber','$date','$request->shippingDate','in progress','$request->customerNumber')
+            insert into orders(orderNumber,orderDate,requiredDate, status, customerNumber,shippingAddr, billingAddr)
+            values ('$x->orderNumber','$date','$request->shippingDate','in progress','$request->customerNumber','$request->shippingAddr', '$request->billingAddr')
         ");
 
         $i = 1;
@@ -130,7 +124,6 @@ class DataController extends Controller
         $x = $z+$y;
 
         DB::update("update customers set point =$x where customerNumber like '$request->customerNumber'");
-        return $z;
         DB::delete('delete from cart');
 
         // return $jsonProduct;

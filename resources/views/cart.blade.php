@@ -152,7 +152,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id="order_table_body">
-                                    
+
                                 </tbody>
                             </table>
                         </div>
@@ -188,20 +188,19 @@
                                 <div>
                                     <form style="border: none">
                                         <input type="text" name="searchID" id="searchID" placeholder="Type Customer Number...">
-                                        <a class="btn amado-btn" style="max-width: 22%" onclick="getAddress(document.getElementById('searchID').value, true)"><img src="./amado-master/img/core-img/search.png" alt=""></a>
+                                        <a class="btn amado-btn" style="max-width: 22%" onclick=" getAddress(document.getElementById('searchID').value, false, 'addressArea', 'shippingAddr'); getAddress(document.getElementById('searchID').value, false, 'addressArea2', 'billingAddr');"><img src="./amado-master/img/core-img/search.png" alt=""></a>
                                     </form>
                                 </div>
                             </div><br>
                             <div class="checkout_details_area clearfix col-12" style="padding: 0px">
                                     <form style="border: none">
-                                        <div class="form-control" id="addressArea" style="padding: 15px 20px"></div>
-                                            
+                                        <h5>Shipping Address</h5>
+                                        <div class="form-control" id="shippingAddr" style="padding: 15px 20px"></div>
+                                        <h5>Billing Address</h5>
+                                        <div class="form-control" id="billingAddr" style="padding: 15px 20px"></div>
                                         <div class="confirm-control">
-                                            <!-- Add Address Button -->
-                                            <a href="#" onclick="document.getElementById('id01').style.display='block'" class="btn amado-btn" style="width: 48%">
-                                                Add Address
-                                            </a>
-                                            <a href="/order" onclick="AddToOrder()" class="btn amado-btn" style="width: 48%">Checkout</a>
+                                            <button onclick="document.getElementById('id01').style.display='block'" class="btn amado-btn" style="width: 48%">Add Address</button>
+                                            <button onclick="AddToOrder()" class="btn amado-btn" style="width: 48%">Checkout</button>
                                         </div>
                                     </form>
                             </div>

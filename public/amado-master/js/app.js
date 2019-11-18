@@ -7,97 +7,34 @@ var tablestock = "";
 var tablepromotion = "";
 var tablecustomer = "";
 //--------------Show script------------------//
-function showCustomerAddress(input, editAble) {
-    console.log(editAble);
-    if (editAble === true) {
+function showCustomerAddress(input, editAble,redioname,id) {
+    console.log(id);
         x = JSON.parse(input);
-        var tableaddress = "";
         var n = 0;
+        var tableaddress = `<table style="width: 100%"><tbody>`;
         x.forEach( function (a) {
-            if (n == input.length - 1) {
-                tableaddress += `
-                    <!-- class="radio-container" -->
-                    <table style="width: 100%">
-                        <tbody>
-                            <tr>
-                                <td style="text-align: left; margin-right: 10px; max-width: 10%; border-bottom: none;">
-                                    <label class="radio-container">
-                                        <input type="radio" name="addressSelect" value="${n}">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </td>
-                                <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%; border-bottom: none">
-                                    <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                `;
-            } else {
-                n++;
-                tableaddress += `
-                    <table style="width: 100%">
-                        <tbody>
-                            <tr>
-                                <td style="text-align: left; margin-right: 10px; max-width: 10%; border-bottom: none">
-                                    <label class="radio-container">
-                                        <input type="radio" name="addressSelect" value="${n}">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </td>
-                                <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%;">
-                                    <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                `;
-            }
+            tableaddress += `
+                <tr>
+                    <td style="text-align: left; margin-right: 10px; max-width: 10%; border-bottom: none;">
+                        <label class="radio-container">
+                            <input type="radio" name="${redioname}" value="${n}">
+                            <span class="checkmark"></span>
+                        </label>
+                    </td>
+                    <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%; border-bottom: none">
+                        <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>
+                        `;
+            if(n != x.length-1) tableaddress+= `<a class="line"></a>`;n++;
+            tableaddress += `</td></tr>`;
         });
-    }else{
-        x = JSON.parse(input);
-        var tableaddress = "";
-        var n = 0;
-        x.forEach( function (a) {
-            if (n == input.length - 1) {
-                tableaddress += `
-                    <!-- class="radio-container" -->
-                    <table style="width: 100%">
-                        <tbody>
-                            <tr>
-                                <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%; border-bottom: none">
-                                    <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                `;
-            } else {
-                n++;
-                tableaddress += `
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div>
-                                    <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>
-
-                                    </div>
-                                    </td>
-                                    <td><a href="#" class="btn amado-btn" >Delete</a>
-                                    <a href="#" class="btn amado-btn" >Edit</a>
-                                    </td>
-                                    </tr>
-                        </tbody>
-                    </table>
-                `;
-            }
-        });
-    }
-    document.getElementById("addressArea").innerHTML = tableaddress;
+        tableaddress += '</tbody></table>';
+        if(editAble === true){
+            tableaddress += '<a href="#" class="btn amado-btn" >Delete</a><a href="#" class="btn amado-btn" >Edit</a> ';
+        }
+    document.getElementById(`${id}`).innerHTML = tableaddress;
 }
 
-function getAddress(customerNumber,editAble){
+function getAddress(customerNumber,editAble,redioname,id){
     //console.log(customerNumber);
     $.ajaxSetup({
         headers: {
@@ -108,8 +45,8 @@ function getAddress(customerNumber,editAble){
         type: 'get',
         url: '/getAddress/' + customerNumber,
         success: function (data) {
-            console.log(data[1]);
-            showCustomerAddress(data[0], editAble);
+            // console.log(data[0]);
+            showCustomerAddress(data[0], editAble,redioname,id);
             var d = JSON.parse(data[1]);
             document.getElementById("points").innerHTML = d[0].point;
             // console.log(x[0].customerNumber);
@@ -200,7 +137,6 @@ function showCart(product){
     i++;
     });
     document.getElementById('order_table_body').innerHTML = tableCart;
-
 }
 
 function showEmployee(employee) {
@@ -988,7 +924,7 @@ function order_calculator(){
     for (var i = 0; i < tr.length; i++) {
         var price = tr[i].getElementsByTagName("td")[2].innerText;
         var num = document.getElementById(`qty${i}`).value;
-        console.log(num);
+        //console.log(num);
         sum += price * num;
         mempoint = Math.floor(sum / 100) * 3;
     }
@@ -1028,18 +964,32 @@ function stock(){
         type: 'post',
         url: '/stock',
         success: function (data) {
-            console.log(data);
+            //console.log(data);
         }
     });
 }
 function AddToOrder(){
-
+    var radios = document.getElementsByName('addressSelect');
+    var shippingAddr, billingAddr;
+        for (var i = 0, length = radios.length; i < length; i++){
+            if (radios[i].checked){
+                shippingAddr = radios[i].value;
+            }
+        }
+    radios = document.getElementsByName('addressSelect2');
+        for (var i = 0, length = radios.length; i < length; i++){
+            if (radios[i].checked){
+                billingAddr = radios[i].value;
+            }
+        }
     var Billing = {
         'customerNumber' : document.getElementById("searchID").value.toString(),
         'Point' : document.getElementById("mempoint").innerText,
-        'shippingDate' : document.getElementById("shipDate").value.toString()
+        'shippingDate' : document.getElementById("shipDate").value.toString(),
+        'shippingAddr' : shippingAddr,
+        'billingAddr' : billingAddr
     };
-    console.log(Billing);
+    //console.log(Billing);
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -1054,7 +1004,6 @@ function AddToOrder(){
             console.log(data);
         }
     });
-    console.log('sucees Hurey');
 }
 function deleteCart(){
 
