@@ -32,8 +32,17 @@ class DataController extends Controller
         $jsonProduct = json_encode($data);
         $jsonVendor = json_encode($distinctvendor);
         $jsonScale = json_encode($distinctscale);
-
         return view('manage-order',['jsonProduct'=>$jsonProduct, 'jsonVendor'=>$jsonVendor, 'jsonScale'=>$jsonScale]);
+    }
+    // public function mnemployee(){
+    //     $employee = DB::select('select * from employees');
+    //     $jsonEmployee = json_encode($employee);
+    //     return view('manage-employee',['jsonEmployee'=>$jsonEmployee]);
+    // }
+    public function mncus(){
+        $customer = DB::select('select * from customers');
+        $jsoncustomer = json_encode($customer);
+        return view('manage-customer',['jsoncustomer'=>$jsoncustomer]);
     }
     public function insertToCart(Request $request){
         $x = DB::select("select qty from cart where productCode ='$request->productCode'");
@@ -59,6 +68,13 @@ class DataController extends Controller
         $jsoneditProduct = json_encode($jdata);
         return $jsoneditProduct;
     }
+
+    public function editcus($code){
+        $customer = DB::select("select * from customers where customerNumber = '$code'");
+        $jsoneditcus = json_encode($customer);
+        return $jsoneditcus;
+    }
+
     public function editstatus($code){
         $jdata = DB::select("select * from orders where orderNumber = '$code'");
         $jsoneditstatus = json_encode($jdata);
@@ -84,7 +100,7 @@ class DataController extends Controller
         // date_modify("+7 days",$reqdate);
         // date_add($redate,date_interval_create_from_date_string("7 days"));
         // $date->modify('+7 day');
-         
+
         DB::insert("
             insert into orders(orderNumber,orderDate,requiredDate, status, customerNumber)
             values ('$x->orderNumber','$date','$request->shippingDate','in progress','$request->customerNumber')
@@ -96,7 +112,7 @@ class DataController extends Controller
             $p = $P->productCode ;
             $Qty = DB::select("select sum(qty) as QTY from cart where productCode like '$p' Group by productCode");
             $pricEach = DB::select("select buyPrice from products where productCode like '$p'");
-            // echo $i . " ";   
+            // echo $i . " ";
             // echo $P->productCode . " ";
             $qty = $Qty[0];
             $price = $pricEach[0];
@@ -105,9 +121,9 @@ class DataController extends Controller
                 values ('$x->orderNumber','$P->productCode', '$qty->QTY', '$price->buyPrice', '$i')
             ");
             $i = $i + $j;
-        }        
+        }
         $z = (int)$request->Point;
-        
+
         $Point = DB::select("select point from customers where customerNumber like '$request->customerNumber'");
         $x = $Point[0];
         $y = $x->point;
@@ -116,16 +132,17 @@ class DataController extends Controller
         DB::update("update customers set point =$x where customerNumber like '$request->customerNumber'");
         return $z;
         DB::delete('delete from cart');
-        
+
         // return $jsonProduct;
         return view('welcome');
         // return $ProductCode;
         // return null;
     }
-    public function addOrderDetail(Request $request){
-        
-        
-    }
+
+    // public function checkout(){
+    //     $data = DB::select("select * from customers");
+    //     $jsonCustomer = json_encode($data);
+
     public function login(Request $request)
     {
         // normal function
@@ -185,16 +202,22 @@ class DataController extends Controller
         $jsonProduct = json_encode($data);
         return $jsonProduct;
     }
-
-    
     public function updatePayment(Request $request){
         DB::insert("
                 insert into payments(customerNumber,checkNumber,paymentDate,amount)
                 values ('$request->customerNumber','$request->checkNumber','$request->paymentDate','$request->amount')
         ");
-        return $request ; 
+        return $request ;
     }
-    
+
+    public function insertcus(Request $request){
+        DB::insert("insert into customers(customerNumber,customerName,contactLastName,contactFirstName,phone,city,state,postalCode,country,salesRepEmployeeNumber,creditLimit)
+        values ('$request->wcusnum','$request->wcompany','$request->wlname','$request->wfname','$request->wphone','$request->wcity','$request->wstate','$request->wpos','$request->wcoun','$request->wsale','$request->wcredit')");
+        $data = DB::select('select * from customers');
+        $jsonProduct = json_encode($data);
+        return $jsonProduct;
+    }
+
     public function insertpromotion(Request $request){
         DB::insert("insert into promotion(promotionId,promotionCode,qty,detail,expairDate)
         values ('$request->promid','$request->promcode','$request->promnum','$request->promdetail','$request->promdate')");
@@ -216,6 +239,13 @@ class DataController extends Controller
         DB::update("update employees set lastName = ?,firstName = ?,extension = ?,email = ?,officeCode = ?,reportsTo = ?,jobTitle = ? where employeeNumber = ?",
         [$request->eln,$request->efn,$request->ee,$request->eem,$request->eof,$request->er,$request->ej,$code]);
         $data = DB::select("select * from employees where reportsTo = '$x'");
+        $jsonProduct = json_encode($data);
+        return $jsonProduct;
+    }
+    public function updatecus(Request $request,$code){
+        DB::update("update customers set customerNumber = ?,customerName = ?,contactLastName = ?,contactFirstName = ?,phone = ?,salesRepEmployeeNumber = ?,creditLimit = ?,point = ? where customerNumber = ?",
+        [$request->cusnum,$request->cusname,$request->cusfname,$request->cuslname,$request->cusphone,$request->salerep,$request->cuslimit,$request->cuspoint,$code]);
+        $data = DB::select('select * from customers');
         $jsonProduct = json_encode($data);
         return $jsonProduct;
     }
@@ -258,8 +288,10 @@ class DataController extends Controller
         return $data2;
     }
 
-    public function Subtotal(){
-        
+    public function deletecus($code){
+        $data = DB::select("delete from customers where customerNumber = '$code'");
+        $data2 = DB::select('select * from customers');
+        return $data2;
     }
 }
 

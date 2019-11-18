@@ -30,6 +30,7 @@ Route::get('/test', function () {
 Route::get('/','DataController@index');
 Route::get('/welcome','DataController@promotion');
 Route::get('/mnpd','DataController@mnproduct');
+Route::get('/mncus','DataController@mncus');
 Route::get('/mnod','DataController@mnorder');
 Route::get('/mnem', function () {return view('manage-employee');});
 Route::get('/order','DataController@order');
@@ -41,6 +42,7 @@ Route::get('/payment','DataController@payment');
 //### function ###
 Route::get('/getAddress/{code}','DataController@getAddress');
 Route::get('/editproduct/{code}','DataController@editProduct');
+Route::get('/editcus/{code}','DataController@editcus');
 Route::get('/editstatus/{code}','DataController@editstatus');
 Route::get('/successOrder','DataController@successOrder');
 Route::post('/insertProduct','DataController@insertProduct');
@@ -54,14 +56,17 @@ Route::post('/insertToCart','DataController@insertToCart');
 
 Route::get('/UpdatePayment','DataController@UpdatePayment');
 
+Route::post('/updatecus/{code}','DataController@updatecus');
 Route::get('/Subtotal', 'Datacontroller@Subtotal');
 Route::post('/updateship/{code}','DataController@updateship');
 Route::post('/insertToCart','DataController@insertTocart');
 Route::post('/insertpromotion','DataController@insertpromotion');
 Route::post('/reqSell','DataController@reqSell');
 Route::post('/getMyEmployee','DataController@getMyEmployee');
+Route::post('/insertcus','DataController@insertcus');
 
 //### Delete Function ###
 Route::delete('/deleteProduct/{code}','DataController@deleteProduct');
 Route::delete('/deleteEm/{code}','DataController@deleteEm');
 Route::delete('/deleteCart','DataController@deleteCart');
+Route::delete('/deletecus/{code}','DataController@deletecus');

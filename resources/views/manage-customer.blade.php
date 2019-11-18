@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="UTF-8">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,26 +10,25 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>Amado - Furniture Ecommerce Template | Promotion</title>
+    <title>Gunpla Store | Plastic Model Shop</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="./amado-master/img/core-img/favicon.ico">
 
     <!-- Core Style CSS -->
     <link rel="stylesheet" href="./amado-master/css/core-style.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style.css">
     <script src="./amado-master/js/app.js"></script>
-
 </head>
 
 <body>
-    <div style="display:none" id="key">
+    <div style="display:none" id="Key">
         <p>username</p>
         <p>jobTitle</p>
         <p>employeeNumber</p>
     </div>
     <!-- Search Wrapper Area Start -->
-    <div class="search-wrapper section-padding-100">
+    <div class="search-wrapper section-padding-50">
         <div class="search-close">
             <i class="fa fa-close" aria-hidden="true"></i>
         </div>
@@ -36,14 +36,17 @@
             <div class="row">
                 <div class="col-12">
                     <div class="search-content">
-                        <form action="#" method="get">
-                            <input type="search" name="search" id="search" placeholder="Type your keyword...">
+                        <form action="" method="get">
+                            <!-- <input type="search" name="search" id="search" placeholder="Type your keyword..."> -->
+                            <input type="text" id="myInput" onkeyup="filterByProductName()" placeholder="Search for names..">
                             <button type="submit"><img src="./amado-master/img/core-img/search.png" alt=""></button>
                         </form>
+                    </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
     <!-- Search Wrapper Area End -->
 
@@ -54,82 +57,50 @@
         <div class="mobile-nav">
             <!-- Navbar Brand -->
             <div class="amado-navbar-brand">
-                <a href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
+                <a  href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
+
             </div>
+
+            <!-- <li class="active"><a href="index.html">Home</a></li>
+            <li><a href="shop">Shop</a></li>
+            <li><a href="product-details.html">Product</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="checkout.html">Checkout</a></li> -->
+
+            <!-- <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> </a> -->
+
             <!-- Navbar Toggler -->
             <div class="amado-navbar-toggler">
                 <span></span><span></span><span></span>
             </div>
+
         </div>
 
         <!-- Header Area Start -->
         <header class="header-area clearfix">
-            
+
             <!-- Close Icon -->
             <!-- <div class="nav-close">
                 <i class="fa fa-close" aria-hidden="true"></i>
             </div> -->
             <!-- Logo -->
             <div class="logo">
-                <a href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
+                <a  href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
             </div>
 
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-30">
                 <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
-                <a href="cart.html" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
-                <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
             </div>
-
-            <!-- Amado Nav -->
-            <nav class="amado-nav">
-                <ul>
-                <div class="amado-nav">
-                    <!--Scale bar-->
-                    <button
-                        class="navbar-toggler"
-                        type="button"
-                        data-toggle="collapse"
-                        data-target="#footerNavContent"
-                        aria-controls="footerNavContent"
-                        aria-expanded="false"
-                        >SCALE
-                        <i class="fa fa-caret-down"></i>
-                    </button>
-                    <div class="collapse navbar-collapse" id="footerNavContent">
-                        <ul>
-                            <li class="nav-item" id="Scale">
-                            </li>
-                        </ul>
-                    </div>
-                    <!--Vendor bar-->
-                    <button
-                        class="navbar-toggler"
-                        type="button"
-                        data-toggle="collapse"
-                        data-target="#footer"
-                        aria-controls="footerNavContent"
-                        aria-expanded="false"
-                        >VENDOR
-                        <i class="fa fa-caret-down"></i>
-                    </button>
-                    <div class="collapse navbar-collapse" id="footer">
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item" id="Vendor">
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                </ul>
-            </nav>
 
             <!-- Button Group -->
             <div class="amado-btn-group mt-30 mb-100">
-                <a href="/welcome" class="btn amado-btn">Back</a>
+                <a href="#" onclick="document.getElementById('id04').style.display='block'"  class="btn amado-btn" >AddCustomer +</a>
+                <br>
+                <a href="welcome" class="btn amado-btn">Back</a>
                 <br>
                 <a href="/" class="btn amado-btn">Logout</a>
             </div>
-            
             <!-- Pop up -->
                 <!--Login pop up-->
                 <div id="id01" class="modal">
@@ -157,71 +128,52 @@
                     </form>
                 </div>
                 <!-- product pop up -->
-                <div id="id02" class="modal" style="display:none">
+                
+                <div id="id03" class="modal" style="display:none">
                     <!-- showProductDetail() -->
                 </div>
-        </header>
-        <!-- Header Area End -->
-
-        <!-- pop up shipping details -->
-                
-                    <!-- product-order -->
-                    <form class="modal-content animate" style="padding-top:5%">
-                    <!-- cart-table-area  -->
-                        <div class="section-padding-60">
-                            <div class="row">
-                                <div>
-                                    <div class="cart-head mt-50 mb-10">
-                                        <h2>Promotion Management</h2>
-                                    </div>
-                                    <div class="table">
-                                        <table>
-                                            <thead>
-                                                <tr style="background-color:#fbb710">
-                                                    <th style="width:20%">Promotion ID</th>
-                                                    <th style="width:20%">Code</th>
-                                                    <th >Number</th>
-                                                    <th style="width:20%">Details</th>
-                                                    <th >Expair Date</th>
-                                                </tr>
-                                                
-                                            </thead>
-                                            <tbody id="order_table_body">
-                                            </tbody>
-                                            <script>$data = <?php echo $jsonOrder?>; ShowShipping($data);</script>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                
-            <!-- pop-up add order to shipping -->
-            <div id="id04" class="modal">
+                <!-- popup add new employee -->
+                <div id="id04" class="modal">
                     <span onclick="document.getElementById('id04').style.display='none'"
                         class="close" title="Close Modal">&times;
                     </span>
-                    <!-- order-status -->
+                    <!-- product-order -->
                     <form class="modal-content animate" action="/action_page.php">
                     <div class="cart-table-area section-padding-60">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-12 col-lg-8">
                                 <div class="cart-title mt-50">
-                                    <h2>New Promotion</h2>
+                                    <h2>New Customer</h2>
                                 </div>
                                 <div class="product-meta-data">
-                                    <form>
-                                        <p>Promotion ID : <input type="text" name="promotionID"></p>
-                                        <p>Code : <input type="text" name="code"></p>
-                                        <p>Number : <br><input type="number" style="width:100%"  name="number"></p>
-                                        <p>Details : <input type="text" name="details"></p>
-                                        <p>Expair Date : <input type="date" style="width:100%" name="expairDate"></p>
-                                    
-                                    </form>
-                                    <br>
-                                    <a href="#" class="btn amado-btn">SAVE</a>
-                                    <br><br>
+                                <label for="customerNum"><b>Customer Number</b></label>
+                                <input id="wcusnum" type="text" placeholder="204" name="customerNum" required>
+                                <label for="customerName"><b>Customer Name</b></label>
+                                <input id="wcompany" type="text" placeholder="Your Company" name="customerName" required>
+                                <label for="firstName"><b>First Name</b></label>
+                                <input id="wfname" type="text" placeholder="" name="firstName" required>
+                                <label for="lastName"><b>Last Name</b></label>
+                                <input id="wlname" type="text" placeholder="" name="lastName" required>
+                                <label for="phoneNum"><b>Phone number</b></label>
+                                <input id="wphone" type="text" placeholder="Ex. 088xxxxxx" name="phoneNum" required>
+                                <label for="addrline1"><b>Address Line 1</b></label>
+                                <input id="wadd1" type="text" placeholder="" name="addrline1" required>
+                                <label for="addrline2"><b>Address Line 2</b></label>
+                                <input id="wadd2" type="text" placeholder="" name="addrline2">
+                                <label for="city"><b>City</b></label>
+                                <input id="wcity" type="text" placeholder="" name="city">
+                                <label for="state"><b>State</b></label>
+                                <input id="wstate" type="text" placeholder="" name="state">
+                                <label for="postalCode"><b>PostalCode</b></label>
+                                <input id="wpos" type="text" placeholder="" name="postalCode">
+                                <label for="country"><b>Country</b></label>
+                                <input id="wcoun" type="text" placeholder="" name="country">
+                                <label for="saleRepEmNum"><b>SaleRepEmployeeNumber</b></label>
+                                <input id="wsale" type="text" placeholder="4-digit code" name="saleRepEmNum" required>
+                                <label for="credit"><b>CreditLimit</b></label>
+                                <input id="wcredit" type="text" placeholder="" name="credit">
+                                <button type="button" onclick="insertcus()">Confirm</button>
                                 </div>
                             </div>
                         </div>
@@ -229,17 +181,30 @@
                     </div>
                     </form>
                 </div>
+        </header>
+        <!-- Header Area End -->
+
+        <!-- Product Catagories Area Start -->
+        <div class="products-catagories-area clearfix" id="customerArea"></div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            var customer = <?php echo $jsoncustomer?>;
+            showCustomer(customer);
+        </script>
+        <!-- Product Catagories Area End -->
 
     </div>
     <!-- ##### Main Content Wrapper End ##### -->
+
+    <!-- ##### Footer Area Start ##### -->
     <br>
     <footer class="footer_area">
         <div >
         <!-- Logo -->
-        <a href="/welcome" style="padding:0px 0px 0px 50px"><img src="./amado-master/img/core-img/logoDarkBG.png" alt=""></a>  
+        <a href="/welcome" style="padding:0px 0px 0px 50px"><img src="./amado-master/img/core-img/logoDarkBG.png" alt=""></a>
         </div>
     </footer>
-   
+    <!-- ##### Footer Area End ##### -->
 
     <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
     <script src="./amado-master/js/jquery/jquery-2.2.4.min.js"></script>
@@ -253,6 +218,7 @@
     <script src="./amado-master/js/active.js"></script>
     <!-- DB function -->
     <script src="./amado-master/js/app.js"></script>
+
 </body>
 
 </html>

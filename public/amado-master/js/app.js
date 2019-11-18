@@ -5,56 +5,99 @@ var tableemployee = "<br><br><br>";
 var tableaddress = "";
 var tablestock = "";
 var tablepromotion = "";
+var tablecustomer = "";
 //--------------Show script------------------//
-function showCustomerAddress(input) {
-    x = JSON.parse(input);
-    var tableaddress = "";
-    var n = 0;
-    x.forEach( function (a) {
-        if (n == input.length - 1) {
-            tableaddress += `
-            <!-- class="radio-container" -->
-            <table style="width: 100%">
-            <tbody>
-            <tr>
-            <td style="text-align: left; margin-right: 10px; max-width: 10%; border-bottom: none;">
-            <label class="radio-container">
-            <input type="radio" name="addressSelect" value="${n}">
-            <span class="checkmark"></span>
-            </label>
-            </td>
-            <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%; border-bottom: none">
-            <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>
-                            </td>
-                            </tr>
-                            </tbody>
-                            </table>
-                            `;
-                        } else {
-                            n++;
-                            tableaddress += `
-                            <table style="width: 100%">
-                            <tbody>
+function showCustomerAddress(input, editAble) {
+    console.log(editAble);
+    if (editAble === true) {
+        x = JSON.parse(input);
+        var tableaddress = "";
+        var n = 0;
+        x.forEach( function (a) {
+            if (n == input.length - 1) {
+                tableaddress += `
+                    <!-- class="radio-container" -->
+                    <table style="width: 100%">
+                        <tbody>
                             <tr>
-                            <td style="text-align: left; margin-right: 10px; max-width: 10%; border-bottom: none">
-                            <label class="radio-container">
-                            <input type="radio" name="addressSelect" value="${n}">
-                            <span class="checkmark"></span>
-                            </label>
-                            </td>
-                            <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%;">
-                            <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            `;
-        }
-    });
+                                <td style="text-align: left; margin-right: 10px; max-width: 10%; border-bottom: none;">
+                                    <label class="radio-container">
+                                        <input type="radio" name="addressSelect" value="${n}">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </td>
+                                <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%; border-bottom: none">
+                                    <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                `;
+            } else {
+                n++;
+                tableaddress += `
+                    <table style="width: 100%">
+                        <tbody>
+                            <tr>
+                                <td style="text-align: left; margin-right: 10px; max-width: 10%; border-bottom: none">
+                                    <label class="radio-container">
+                                        <input type="radio" name="addressSelect" value="${n}">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </td>
+                                <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%;">
+                                    <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                `;
+            }
+        });
+    }else{
+        x = JSON.parse(input);
+        var tableaddress = "";
+        var n = 0;
+        x.forEach( function (a) {
+            if (n == input.length - 1) {
+                tableaddress += `
+                    <!-- class="radio-container" -->
+                    <table style="width: 100%">
+                        <tbody>
+                            <tr>
+                                <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%; border-bottom: none">
+                                    <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                `;
+            } else {
+                n++;
+                tableaddress += `
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div>
+                                    <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>
+
+                                    </div>
+                                    </td>
+                                    <td><a href="#" class="btn amado-btn" >Delete</a>
+                                    <a href="#" class="btn amado-btn" >Edit</a>
+                                    </td>
+                                    </tr>
+                        </tbody>
+                    </table>
+                `;
+            }
+        });
+    }
     document.getElementById("addressArea").innerHTML = tableaddress;
 }
 
-function getAddress(customerNumber){
+function getAddress(customerNumber,editAble){
     //console.log(customerNumber);
     $.ajaxSetup({
         headers: {
@@ -66,10 +109,9 @@ function getAddress(customerNumber){
         url: '/getAddress/' + customerNumber,
         success: function (data) {
             console.log(data[1]);
-            showCustomerAddress(data[0]);
+            showCustomerAddress(data[0], editAble);
             var d = JSON.parse(data[1]);
             document.getElementById("points").innerHTML = d[0].point;
-            //var x = JSON.parse(data);
             // console.log(x[0].customerNumber);
             // return x[0];
         }
@@ -196,6 +238,39 @@ function showEmployee(employee) {
     document.getElementById("employeeArea").innerHTML = tableemployee;
 }
 
+function showCustomer(customer) {
+    tablecustomer = "<br><br><br>";
+    jsoncustomer = customer;
+    customer.forEach(function (a) {
+        tablecustomer += `
+        <div class="single-products-catagory">
+                <a href="#" onclick="PopUpCustomer('${a.customerNumber}', false),getAddress(${a.customerNumber}, false)">
+                <img src="./amado-master/img/core-img/employeeM.png" alt="">
+                <!-- Hover Content -->
+                <div class="hover-content">
+                    <div class="line"></div>
+                    <p>Number ${a.customerNumber}</p>
+                    <h5>${a.customerName}</h5>
+                    <h4>${a.contactFirstName} ${a.contactFirstName}</h4>
+                </div>
+                <div class="cusDetail" style= "display:none">
+                    <p>${a.customerNumber}</p>
+                    <p>${a.customerName}</p>
+                    <p>${a.contactLastName}</p>
+                    <p>${a.contactFirstName}</p>
+                    <p>${a.phone}</p>
+                    <p>${a.salesRepEmployeeNumber}</p>
+                    <p>${a.creditLimit}</p>
+                    <p>${a.point}</p>
+                </div>
+                </a>
+                <button onclick="PopUpCustomer('${a.customerNumber}', true),getAddress(${a.customerNumber}, false)" class="btn amado-btn">Edit</button>
+        </div>
+        `
+    });
+    document.getElementById("customerArea").innerHTML = tablecustomer;
+}
+
 //stockin
 function stockin(stock){
     tablestock = "";
@@ -233,9 +308,87 @@ function promotion(promo){
     document.getElementById("promotion").innerHTML = tablepromotion;
 }
 //---------------Pop Up ----------------//
+//Customer
+function PopUpCustomer(a, editAble){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'get',
+        url: '/editcus/' + a,
+        success: function (data) {
+            var b = JSON.parse(data)[0];
+            var box = `
+            <span onclick="document.getElementById('id03').style.display='none'"
+                class="close" title="Close Modal">&times;
+            </span>
+            <form class="modal-content animate" action="/action_page.php">
+                <div class="container">
+                    <div class="single-product-area section-padding-100 clearfix" >
+                        <div class="container-fluid" >
+                            <div class="row">
+                                <div class="col-lg-7">
+                                    <div class="single_product_thumb">
+                                        <div id="product_details_slider" class="carousel slide" data-ride="carousel">
+                                            <div class="carousel-inner">
+                                                    <a class="gallery_img" href="./amado-master/img/core-img/employeeM.png">
+                                                        <img class="d-block w-100" src="./amado-master/img/core-img/employeeM.png" alt="First slide">
+                                                    </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-5">
+                                    <div class="single_product_desc">
+                                        <div class="product-meta-data">
+                                            <div class="line"></div>`;
+            if (editAble === true) {
+            box += `
+                <form>
+                    <p>Number: <input type="text" id="cusnum" name="text" value="${b.customerNumber}"></p>
+                    <p>Name: <input type="text" id="cusname" name="text" value="${b.customerName}"></p>
+                    <p>ContactFirstName: <input type="text" id="cusfname" name="text" value="${b.contactFirstName}"></p>
+                    <p>ContactLastName: <input type="text" id="cuslname" name="text" value="${b.contactLastName}"></p>
+                    <p>Phone: <input type="text" id="cusphone" name="text" value="${b.phone}"></p>
+                    <p>SalesRep: <input type="text" id="salerep" name="text" value="${b.salesRepEmployeeNumber}"></p>
+                    <p>CreditLimit: <input type="text" id="cuslimit" name="text" value="${b.creditLimit}"></p>
+                    <p>Point: <input type="text" id="cuspoint" name="text" value="${b.point}"></p>
+                    <br>
+                    <h5>Address:</h5>
+                    </div>
+                    <div class="product-meta-data" id="addressArea"><div>
+                    </div>
+                </form>
+                </div>
+                    <br>
+                    <a href="#" class="btn amado-btn" onclick="deletecus('${b.customerNumber}')">Delete</a>
+                    <a href="#" class="btn amado-btn" onclick="updatecus('${b.customerNumber}')">Save</a>`
+            }else{
+            box += `
+            <div class="product-meta-data">
+                <h3>Number: ${b.customerNumber}</h3>
+                <h3>${b.customerName}</h3>
+                <h4>${b.contactFirstName} ${b.contactLastName}</h4>
+                <h6>Phone: ${b.phone}</h6>
+                <h6>SalesRep: ${b.salesRepEmployeeNumber}</h6>
+                <h6>CreditLimit: ${b.creditLimit}</h6>
+                <p class="avaibility"><i class="fa fa-circle"></i>Point: ${b.point}</p>
+                <br>
+                <h5>Address:</h5>
+            </div>
+            <div class="product-meta-data" id="addressArea"><div>
+            </div>`
+            }
+        box += `</div></div></div></div></div></div></div></form>`;
+        document.getElementById("id03").innerHTML = box;
+        document.getElementById("id03").style.display = 'block';
+        }
+    });
+}
 //Employee
 function PopUpEmployee(number, lname, fname, email, office, report, job, exetension, editAble){
-
     //showEmployeeDetail(a) = PopUpProduct(a, false)
     //EditEmployeeDetail(a) = PopUpProduct(a, true)
     var box = `
@@ -269,7 +422,17 @@ function PopUpEmployee(number, lname, fname, email, office, report, job, exetens
                 <p>FirstName: <input type="text" id="efn" name="text" value="${fname}"></p>
                 <p>LastName: <input type="text" id="eln" name="text" value="${lname}"></p>
                 <p>Email: <input type="text" id="eem" name="text" value="${email}"></p>
-                <p>JobTitle: <input type="text" id="ej" name="text" value="${job}"></p>
+                <p>JobTitle: ${job}</p>
+                <p>Promote and Demote:</p>
+                <div>
+                        <select class="w-100" id="ej" value="${job}">
+                        <option value="VP Sales">VP Sales</option>
+                        <option value="Sales Manager (APAC)">Sales Manager (APAC)</option>
+                        <option value="Sale Manager (EMEA)">Sale Manager (EMEA)</option>
+                        <option value="Sales Manager (NA)">Sales Manager (NA)</option>
+                        <option value="Sales Rep">Sales Rep</option>
+                        </select>
+                </div>
                 <p>OfficeCode: <input type="text" id="eof" name="text" value="${office}"></p>
                 <p>ReportTo: <input type="text" id="er" name="text" value="${report}"></p>
                 <p>Extension: <input type="text" id="ee" name="text" value="${exetension}"></p>
@@ -279,15 +442,14 @@ function PopUpEmployee(number, lname, fname, email, office, report, job, exetens
             <a href="#" class="btn amado-btn" onclick="updateem('${number}')">Save</a>`;
     }else{
         box += `
-            <form>
-                <p>FirstName: ${fname}</p>
-                <p>LastName: ${lname}</p>
-                <p>Email: ${email}</p>
-                <p>JobTitle: ${job}</p>
-                <p>OfficeCode: ${office}</p>
-                <p>ReportTo: ${report}</p>
-                <p>Extension: ${exetension}</p>
-            </form>
+        <div class="product-meta-data">
+            <h3>${fname} ${lname}</h3>
+            <h4>Job: ${job}</h4>
+            <h5>ReportTo: ${report}</h5>
+            <h5>OfficeCode: ${office}</h5>
+            <h5>Extension: ${exetension}</h5>
+            <p class="avaibility"><i class="fa fa-circle"></i>Email: ${email}</p>
+        </div>
         </div>`
     }
     box += `</div></div></div></div></div></div></div></form>`;
@@ -306,7 +468,6 @@ function PopUpodstatus(a){
         url: '/editstatus/' + a,
         success: function (data) {
             var b = JSON.parse(data)[0];
-            console.log(b);
     var status = `
         <span onclick="document.getElementById('id08').style.display='none'"
             class="close" title="Close Modal">&times;
@@ -622,6 +783,36 @@ function insertpromotion(){
         }
     });
 }
+
+//Customer
+function insertcus(){
+    var customer = {"wcusnum": document.getElementById("wcusnum").value.toString(),
+                    "wcompany": document.getElementById("wcompany").value.toString(),
+                    "wfname": document.getElementById("wfname").value.toString(),
+                    "wlname": document.getElementById("wlname").value.toString(),
+                    "wphone": document.getElementById("wphone").value.toString(),
+                    "wcity": document.getElementById("wcity").value.toString(),
+                    "wstate": document.getElementById("wstate").value.toString(),
+                    "wpos": document.getElementById("wpos").value.toString(),
+                    "wcoun": document.getElementById("wcoun").value.toString(),
+                    "wsale": document.getElementById("wsale").value.toString(),
+                    "wcredit": document.getElementById("wcredit").value.toString()};
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/insertcus',
+        data: customer,
+        dataType: "json",
+        success: function (data) {
+            document.getElementById('id04').style.display='none';
+            showCustomer(data);
+        }
+    });
+}
 // -----------------------End Insert-------------------------//
 
 // ----------------------Update-------------------------------//
@@ -682,6 +873,33 @@ function updateem(a){
     });
 }
 
+//Customer
+function updatecus(a){
+    var product = { "cusnum": document.getElementById("cusnum").value.toString(),
+                    "cusname": document.getElementById("cusname").value.toString(),
+                    "cusfname": document.getElementById("cusfname").value.toString(),
+                    "cuslname": document.getElementById("cuslname").value.toString(),
+                    "cusphone": document.getElementById("cusphone").value.toString(),
+                    "salerep": document.getElementById("salerep").value.toString(),
+                    "cuslimit": document.getElementById("cuslimit").value.toString(),
+                    "cuspoint": document.getElementById("cuspoint").value.toString()};
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/updatecus/' + a,
+        data: product,
+        dataType: "json",
+        success: function (data) {
+            document.getElementById('id03').style.display = 'none';
+            showCustomer(data);
+        }
+    });
+}
+
 //Shipping
 function updateship(a){
     var product = { "shipdate": document.getElementById("shipdate").value.toString(),
@@ -698,7 +916,6 @@ function updateship(a){
         data: product,
         dataType: "json",
         success: function (data) {
-            console.log(data);
             document.getElementById('id08').style.display = 'none';
             ShowShipping(data);
         }
@@ -739,6 +956,23 @@ function deleteem(a){
         success: function (data) {
             document.getElementById('id03').style.display = 'none';
             showEmployee(data);
+        }
+    });
+}
+
+//Customer
+function deletecus(a){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'delete',
+        url: '/deletecus/' + a,
+        success: function (data) {
+            document.getElementById('id03').style.display = 'none';
+            showCustomer(data);
         }
     });
 }
