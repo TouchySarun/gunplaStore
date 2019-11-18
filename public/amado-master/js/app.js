@@ -75,17 +75,19 @@ function showCustomerAddress(input, editAble) {
             } else {
                 n++;
                 tableaddress += `
-                    <table style="width: 100%">
+                    <table>
                         <tbody>
                             <tr>
                                 <td>
                                     <div>
                                     <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>
-                                    <a href="#" class="btn amado-btn" >Delete</a>
-                                    <a href="#" class="btn amado-btn" >Save</a>                      
+                                                       
                                     </div>
                                     </td>
-                            </tr>
+                                    <td><a href="#" class="btn amado-btn" >Delete</a>
+                                    <a href="#" class="btn amado-btn" >Edit</a>   
+                                    </td>                             
+                                    </tr>
                         </tbody>
                     </table>
                 `;
