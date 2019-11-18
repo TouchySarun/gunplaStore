@@ -34,24 +34,34 @@ class DataController extends Controller
         $jsonScale = json_encode($distinctscale);
         return view('manage-order',['jsonProduct'=>$jsonProduct, 'jsonVendor'=>$jsonVendor, 'jsonScale'=>$jsonScale]);
     }
-    public function mnemployee(){
-        $employee = DB::select('select * from employees');
-        $jsonEmployee = json_encode($employee);
-        return view('manage-employee',['jsonEmployee'=>$jsonEmployee]);
-    }
+    // public function mnemployee(){
+    //     $employee = DB::select('select * from employees');
+    //     $jsonEmployee = json_encode($employee);
+    //     return view('manage-employee',['jsonEmployee'=>$jsonEmployee]);
+    // }
     public function mncus(){
         $customer = DB::select('select * from customers');
         $jsoncustomer = json_encode($customer);
         return view('manage-customer',['jsoncustomer'=>$jsoncustomer]);
     }
     public function insertToCart(Request $request){
-        DB::insert("
-            insert into cart(orderNumber,orderLineNumber,productCode,priceEach,qty)
-            values ('$request->orderNumber','$request->Name','$request->productCode','$request->price','$request->qty')
-        ");
+        $x = DB::select("select qty from cart where productCode ='$request->productCode'");
+        if($x != null){
+            $y = $x[0]->qty+$request->qty;
+            DB::update("update cart set qty = $y where productCode = '$request->productCode'");
+            // return json_encode($y);
+        }else{
+            DB::insert("
+                insert into cart(orderNumber,orderLineNumber,productCode,priceEach,qty)
+                values ('$request->orderNumber','$request->Name','$request->productCode','$request->price','$request->qty')
+            ");
+        }
         $data = DB::select('select * from cart');
         $jsonProduct = json_encode($data);
         return $jsonProduct;
+    }
+    public function deleteCart(){
+        DB::delete('delete from cart');
     }
     public function editProduct($code){
         $jdata = DB::select("select * from products where productCode = '$code'");
@@ -74,9 +84,11 @@ class DataController extends Controller
         $product = DB::select('select * from cart');
         return view('cart',['product'=>json_encode($product),'jsonCustomer'=> '']);
     }
+
     public function getAddress($code){
         $address = DB::select("select * from addresses where customerNumber like '$code'");
-        return json_encode($address);
+        $point = DB::select("select point from customers where customerNumber like '$code'");
+        return [json_encode($address),json_encode($point)];
     }
     public function successOrder(Request $request){
         $OrderNumber = DB::select('select distinct orderNumber from cart ');
@@ -88,10 +100,10 @@ class DataController extends Controller
         // date_modify("+7 days",$reqdate);
         // date_add($redate,date_interval_create_from_date_string("7 days"));
         // $date->modify('+7 day');
-         
+
         DB::insert("
             insert into orders(orderNumber,orderDate,requiredDate, status, customerNumber)
-            values ('$x->orderNumber','$date','','default','$request->customerNumber')
+            values ('$x->orderNumber','$date','$request->shippingDate','in progress','$request->customerNumber')
         ");
 
         $i = 1;
@@ -100,7 +112,7 @@ class DataController extends Controller
             $p = $P->productCode ;
             $Qty = DB::select("select sum(qty) as QTY from cart where productCode like '$p' Group by productCode");
             $pricEach = DB::select("select buyPrice from products where productCode like '$p'");
-            // echo $i . " ";   
+            // echo $i . " ";
             // echo $P->productCode . " ";
             $qty = $Qty[0];
             $price = $pricEach[0];
@@ -110,8 +122,17 @@ class DataController extends Controller
             ");
             $i = $i + $j;
         }
+        $z = (int)$request->Point;
+
+        $Point = DB::select("select point from customers where customerNumber like '$request->customerNumber'");
+        $x = $Point[0];
+        $y = $x->point;
+        $x = $z+$y;
+
+        DB::update("update customers set point =$x where customerNumber like '$request->customerNumber'");
+        return $z;
         DB::delete('delete from cart');
-        
+
         // return $jsonProduct;
         return view('welcome');
         // return $ProductCode;
@@ -124,15 +145,18 @@ class DataController extends Controller
 
     public function login(Request $request)
     {
+        // normal function
         $x = sha1($request->psw);
         $employeekey = DB::select("select * from passwords where employeeNumber like '$request->uname' and password like '$x'");
         if($employeekey != null)
         {
             $employeeDetail = DB::select("select * from employees where employeeNumber = '$request->uname' ");
+            $emp = json_encode($employeeDetail);
             $pro = DB::select('select * from promotion');
             $jsonpro = json_encode($pro);
             // $sale = DB::select("select * from employees ");
-            return view('/welcome',['userDetail'=>json_encode($employeeDetail),'jsonpro'=>$jsonpro]);
+            return redirect ('/welcome')-> with('firstLogin',$emp);
+            //return view(,['userDetail'=>json_encode($employeeDetail),'jsonpro'=>$jsonpro])->with();
         }
         else
         {
@@ -146,6 +170,18 @@ class DataController extends Controller
         //     $ans ++;
         // }
         // return redirect ('/')-> with('alert', success);
+    }
+    public function reqSell(Request $request){
+        $x = DB::select("select * from employees where employeeNumber = '$request->employeeNumber' and jobTitle like '%'||'Sale'||'%'");
+        if($x != null){
+            return json_encode($x);
+        }else{
+            return json_encode('error');
+        }
+    }
+    public function getMyEmployee(Request $request){
+        $x = DB::select("select * from employees where reportsTo = '$request->employeeNumber'");
+        return json_encode($x);
     }
     public function insertProduct(Request $request){
         DB::insert("insert into products(productName,productCode,productLine,productScale,productVendor,productDescription,quantityInstock,buyPrice,MSRP)
@@ -162,9 +198,16 @@ class DataController extends Controller
     public function insertEm(Request $request){
         DB::insert("insert into employees(employeeNumber,lastName,firstName,extension,email,officeCode,reportsTo,jobTitle)
         values ('$request->enumber','$request->elname','$request->efname','$request->eex','$request->eemail','$request->ecode','$request->ere','$request->ejob')");
-        $data = DB::select('select * from employees');
+        $data = DB::select("select * from employees where reportsTo = '$request->er'");
         $jsonProduct = json_encode($data);
         return $jsonProduct;
+    }
+    public function updatePayment(Request $request){
+        DB::insert("
+                insert into payments(customerNumber,checkNumber,paymentDate,amount)
+                values ('$request->customerNumber','$request->checkNumber','$request->paymentDate','$request->amount')
+        ");
+        return $request ;
     }
 
     public function insertcus(Request $request){
@@ -191,9 +234,11 @@ class DataController extends Controller
         return $jsonProduct;
     }
     public function updateEm(Request $request,$code){
+        $x = DB::select("select reportsTo from employees where employeeNumber = '$code'");
+        $x = $x[0]->reportsTo;
         DB::update("update employees set lastName = ?,firstName = ?,extension = ?,email = ?,officeCode = ?,reportsTo = ?,jobTitle = ? where employeeNumber = ?",
         [$request->eln,$request->efn,$request->ee,$request->eem,$request->eof,$request->er,$request->ej,$code]);
-        $data = DB::select('select * from employees');
+        $data = DB::select("select * from employees where reportsTo = '$x'");
         $jsonProduct = json_encode($data);
         return $jsonProduct;
     }
@@ -218,6 +263,12 @@ class DataController extends Controller
         return view('shipping',['jsonOrder'=>$jsonOrder]);
     }
 
+    public function payment(){
+        $Payment = DB::select('select * from payments');
+        $jsonPayment = json_encode($Payment);
+        return view('payment',['jsonPayment'=>$jsonPayment]);
+    }
+
     public function promotion(){
         $pro = DB::select('select * from promotion');
         $jsonpro = json_encode($pro);
@@ -231,8 +282,9 @@ class DataController extends Controller
     }
 
     public function deleteEm($code){
-        $data = DB::select("delete from employees where employeeNumber = '$code'");
-        $data2 = DB::select('select * from employees');
+        $data = DB::select("select reportsTo from employees where employeeNumber = '$code' ");
+        DB::select("delete from employees where employeeNumber = '$code'");
+        $data2 = DB::select("select * from employees where reportsTo = '$data'");
         return $data2;
     }
 

@@ -137,7 +137,7 @@
             </div>
 
         </header>
-        
+
 
     </div>
     <!-- ##### Main Content Wrapper End ##### -->
@@ -194,6 +194,7 @@
             showProduct(json, false, false);
             dropdownVender(Vendor);
             dropdownScale(Scale);
+            sessionStorage.clear();
         </script>
         <!-- Product Catagories Area End -->
 

@@ -25,12 +25,26 @@
     <!-- Search Wrapper Area Start -->
     <!-- @if(session()->has('success')) -->
     <!-- @endif -->
-    <script>
-        var user = <?php echo $userDetail?>;
-        sessionStorage.setItem('employeeNumber',user[0].employeeNumber);
-        sessionStorage.setItem('title',user[0].jobTitle);
-    </script>
-    
+    @if(session()->has('firstLogin'))
+        <div id="firstLogin">{{ session('firstLogin') }}</div>
+        <script>
+            var user = document.getElementById('firstLogin').innerHTML;
+            var x = JSON.parse(user);
+            console.log(x);
+            sessionStorage.setItem('employeeNumber',x[0].employeeNumber);
+            sessionStorage.setItem('title',x[0].jobTitle);
+        </script>
+    @endif
+
+        <div id = "typeError" class= "modal" style = "display:none">
+            <form class="modal-content animate" >
+                <div class="container" style="background-color:#f1f1f1">
+                <button type="button" onclick="document.getElementById('typeError').style.display='none'"
+                    class="cancelbtn">Can't go to this page.</button>
+                </div>
+            </form>
+        </div>
+
     <div class="search-wrapper section-padding-50">
         <div class="search-close">
             <i class="fa fa-close" aria-hidden="true"></i>
@@ -82,9 +96,16 @@
 
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-30">
-                <p>EmployeeID:</p>
                 <p id="showUser"></p>
-                <script>document.getElementById('showUser').innerHTML=sessionStorage.getItem('employeeNumber')</script>
+                <script>
+                    var x = sessionStorage.getItem('employeeNumber');
+                    var y = sessionStorage.getItem('title')
+                    if(x != null ){
+                        document.getElementById('showUser').innerHTML="EmployeeID : " +x+"<br>Job title : "+y;
+                    }else{
+                        window.location.href = "/";
+                }
+                </script>
                 <a href="cart.html" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
                 <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
             </div>
@@ -149,7 +170,7 @@
                                                 <th>Number</th>
                                                 <th style="width:20%">Details</th>
                                                 <th >Expired Date</th>
-                                            </tr>                                            
+                                            </tr>
                                         </thead>
                                         <tbody id="promotion"></tbody>
                                     </table>
@@ -194,7 +215,7 @@
                 </div>
         </header>
         <!-- Header Area End -->
-    
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <!-- Hyperlink Navigation Area -->
@@ -206,21 +227,21 @@
             Order
         </a>
         <!-- order-status.blade.php -->
-        <a href="/mnpd" class="btn amado-big-btn">
-            <br><br><br>
+        <!-- sale only href="/mnpd" -->
+        <button onclick="reqTomnpd(sessionStorage.getItem('employeeNumber'))" class="btn amado-big-btn">
             <img src="./amado-master/img/core-img/stock.png"><br><br>
             Product & Stock
-        </a>
+        </button>
         <a href="/shipping" class="btn amado-big-btn">
             <br><br><br>
             <img src="./amado-master/img/core-img/shipping_details.png"><br><br>
-            Shipping Details
+            Shipping Details<br>& Paymants
         </a>
-        <a href="/mnem" class="btn amado-big-btn">
-            <br><br><br>
+        <!-- sale only -->
+        <button onclick="reqTomnem(sessionStorage.getItem('employeeNumber'))" class="btn amado-big-btn">
             <img src="./amado-master/img/core-img/employee.png"><br><br>
             Employee
-        </a>
+        </button>
         <a href="/mncus" class="btn amado-big-btn">
             <br><br><br>
             <img src="./amado-master/img/core-img/customers.png"><br><br>
@@ -234,7 +255,7 @@
     </div>
 
     <script>
-        $data = <?php echo $jsonpro ?? ''?>; 
+        $data = <?php echo $jsonpro ?? ''?>;
         promotion($data);
     </script>
     <!-- Mobile Nav (max width 767px)-->

@@ -175,8 +175,7 @@
         <div class="products-catagories-area clearfix" id="employeeArea"></div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script type="text/javascript">
-            var Employee = <?php echo $jsonEmployee?>;
-            showEmployee(Employee);
+            getMyEmployee(sessionStorage.getItem('employeeNumber'));
         </script>
         <!-- Product Catagories Area End -->
 
