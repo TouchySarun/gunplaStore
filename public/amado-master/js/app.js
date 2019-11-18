@@ -16,7 +16,6 @@ function showCustomerAddress(input, editAble) {
         x.forEach( function (a) {
             if (n == input.length - 1) {
                 tableaddress += `
-                    <!-- class="radio-container" -->
                     <table style="width: 100%">
                         <tbody>
                             <tr>
@@ -61,7 +60,6 @@ function showCustomerAddress(input, editAble) {
         x.forEach( function (a) {
             if (n == input.length - 1) {
                 tableaddress += `
-                    <!-- class="radio-container" -->
                     <table style="width: 100%">
                         <tbody>
                             <tr>
@@ -80,14 +78,14 @@ function showCustomerAddress(input, editAble) {
                             <tr>
                                 <td>
                                     <div>
-                                    <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>
-                                                       
+                                        <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>           
                                     </div>
-                                    </td>
-                                    <td><a href="#" class="btn amado-btn" >Delete</a>
+                                </td>
+                                <td>
+                                    <a href="#" class="btn amado-btn" >Delete</a>
                                     <a href="#" class="btn amado-btn" >Edit</a>   
-                                    </td>                             
-                                    </tr>
+                                </td>                             
+                            </tr>
                         </tbody>
                     </table>
                 `;
@@ -95,6 +93,7 @@ function showCustomerAddress(input, editAble) {
         });
     }
     document.getElementById("addressArea").innerHTML = tableaddress;
+    document.getElementById("addressArea2").innerHTML = tableaddress;
 }
 
 function getAddress(customerNumber,editAble){

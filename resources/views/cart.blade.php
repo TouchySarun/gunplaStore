@@ -188,25 +188,33 @@
                                         </select>
                                     </div>
                             </div>
-                            <h5>Select Shipping Address</h5>
+                            <h5>Customer Address</h5>
                             <div class="col-12" style="padding: 0px">
                                 <div>
                                     <form style="border: none">
-                                        <input type="text" name="searchID" id="searchID" placeholder="Type Customer Number...">
-                                        <a class="btn amado-btn" style="max-width: 22%" onclick="getAddress(document.getElementById('searchID').value, true)"><img src="./amado-master/img/core-img/search.png" alt=""></a>
+                                        <input type="text" name="searchID" id="searchID" style="max-width: 75%" placeholder="Type Customer Number...">
+                                        <a class="btn amado-btn" style="min-width:20%; width:20%" onclick="getAddress(document.getElementById('searchID').value, true)"><img src="./amado-master/img/core-img/search.png" alt=""></a>
                                     </form>
                                 </div>
                             </div><br>
+                            <h5>Select Shipping Address</h5>
                             <div class="checkout_details_area clearfix col-12" style="padding: 0px">
                                     <form style="border: none">
                                         <div class="form-control" id="addressArea" style="padding: 15px 20px"></div>
-                                            
+                                    </form> 
+                            </div> 
+                            <h5>Select Billing Address</h5>
+                            <div class="checkout_details_area clearfix col-12" style="padding: 0px">
+                                    <form style="border: none">
+                                        <div class="form-control" id="addressArea2" style="padding: 15px 20px"></div>
                                         <div class="confirm-control">
                                             <!-- Add Address Button -->
                                             <a href="#" onclick="document.getElementById('id01').style.display='block'" class="btn amado-btn" style="width: 48%">
                                                 Add Address
                                             </a>
-                                            <a href="/welcome" onclick="AddToOrder()" class="btn amado-btn" style="width: 48%">Checkout</a>
+                                            <a href="/welcome" onclick="AddToOrder()" class="btn amado-btn" style="width: 48%">
+                                                Checkout
+                                            </a>
                                         </div>
                                     </form>
                             </div>

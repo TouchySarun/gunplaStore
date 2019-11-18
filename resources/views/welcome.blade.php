@@ -37,6 +37,8 @@
         var user = <?php echo $userDetail?>;
         sessionStorage.setItem('employeeNumber',user[0].employeeNumber);
         sessionStorage.setItem('title',user[0].jobTitle);
+        sessionStorage.setItem('employeeFName',user[0].firstName);
+        sessionStorage.setItem('employeeLName',user[0].lastName);
     </script>
     
     <div class="search-wrapper section-padding-50">
@@ -90,22 +92,23 @@
 
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-30">
-                <p>EmployeeID:</p>
-                <p id="showUser"></p>
-                <script>document.getElementById('showUser').innerHTML=sessionStorage.getItem('employeeNumber')</script>
-                <a href="cart.html" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
-                <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
+                <!-- <a href="/order" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a> -->
             </div>
 
             <!-- Amado Nav -->
             <nav class="amado-nav">
                 <ul>
-                    <div class="amado-nav">
+                    <div class="amado-nav" style="cursor: default">
                         <img src="./amado-master/img/core-img/employeeM.png">
-                        <div id="employeeInfo"></div>
-                            <script>
-                                document.getElementById('showUser').innerHTML = sessionStorage.getItem('employeeNumber');
-                            </script>
+                        <h5 class="mt-30"><span id="showUserFName"></span> <span id="showUserLName"></span></h5>
+                        <p id="showUserTitle" style="margin-bottom: 5px"></p>
+                        <p><span>Employee ID: </span><span id="showUserID"></span></p>
+                        <script>
+                            document.getElementById('showUserID').innerHTML=sessionStorage.getItem('employeeNumber');
+                            document.getElementById('showUserTitle').innerHTML=sessionStorage.getItem('title');
+                            document.getElementById('showUserFName').innerHTML=sessionStorage.getItem('employeeFName');
+                            document.getElementById('showUserLName').innerHTML=sessionStorage.getItem('employeeLName');
+                        </script>
                         <!-- Button Group -->
                         <div class="amado-btn-group mt-30 mb-100">
                             <a href="/" class="btn amado-btn">Logout</a>
