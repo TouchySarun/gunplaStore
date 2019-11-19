@@ -53,7 +53,9 @@ Route::post('/insertEm','DataController@insertEm');
 Route::post('/updateProduct/{code}','DataController@updateProduct');
 Route::post('/updateEm/{code}','DataController@updateEm');
 Route::post('/insertToCart','DataController@insertToCart');
+Route::post('/NumberCart','DataController@NumberCart');
 
+Route::post('/getPro','DataController@getPromotion');
 Route::get('/UpdatePayment','DataController@UpdatePayment');
 
 Route::post('/updatecus/{code}','DataController@updatecus');

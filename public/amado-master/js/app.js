@@ -109,6 +109,38 @@ function showProduct(json, editable, orderable) {
     document.getElementById("productArea").innerHTML = tableproduct;
 }
 
+function getPromotion(){
+
+    var Code = {
+        'code' : document.getElementById('searchPro').value
+    };
+    console.log(Code);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    console.log('ajax');
+    $.ajax({
+        type: 'post',
+        url: '/getPro',
+        data: Code,
+        dataType:'Text',
+        success: function (data){
+            var d = JSON.parse(data);
+            if(d[0] === undefined){
+                document.getElementById("discount").innerHTML = 'Code invalid';
+            }else if((JSON.parse(d[1])[0].qty) == 0){
+                document.getElementById("discount").innerHTML = 'Run out of quota';
+            } else {
+                document.getElementById("discount").innerHTML = (d[0])[0].detail; // try to get form $discount
+                order_calculator();
+            }
+        }
+    });
+
+}
+
 function showCart(product){
     tableCart = '';
     i = 0;
@@ -928,11 +960,16 @@ function order_calculator(){
         sum += price * num;
         mempoint = Math.floor(sum / 100) * 3;
     }
-    document.getElementById("sumprice").innerHTML = '$' + sum;
+    var n = sum.toFixed(2);
+    document.getElementById("sumprice").innerHTML = '$ ' + n;
+    var d = document.getElementById("discount").innerHTML;
     document.getElementById("mempoint").innerHTML = mempoint;
-
-
-
+    console.log(d);
+    if((d !== 'Code Invalid')&&(d !== '-')&&(d !== 'Run out of quota')){
+        n = n-parseFloat(d);
+        n = n.toFixed(2);
+    }
+    document.getElementById("total").innerHTML = '$ ' + n;
 }
 
 function ShowShipping(input) {
@@ -987,7 +1024,8 @@ function AddToOrder(){
         'Point' : document.getElementById("mempoint").innerText,
         'shippingDate' : document.getElementById("shipDate").value.toString(),
         'shippingAddr' : shippingAddr,
-        'billingAddr' : billingAddr
+        'billingAddr' : billingAddr,
+        'code' : document.getElementById("searchPro").value.toString()
     };
     //console.log(Billing);
     $.ajaxSetup({
@@ -996,10 +1034,9 @@ function AddToOrder(){
         }
     });
     $.ajax({
-        type: 'post',
+        type: 'get',
         url: '/successOrder',
         data: Billing,
-        dataType:'Text',
         success: function (data){
             console.log(data);
         }
@@ -1018,12 +1055,7 @@ function deleteCart(){
     });
 }
 function AddToCart(orderNumber,Name,price, pdCode, num ,n){
-
-    var i = Number(document.getElementById('NumberCart').innerText)
-    i = i+Number(num);
     document.getElementById(n).value = 0;
-
-    document.getElementById('NumberCart').innerText = (i);
     var product = {
         "orderNumber": orderNumber,
         "Name" : Name,
@@ -1031,6 +1063,7 @@ function AddToCart(orderNumber,Name,price, pdCode, num ,n){
         "productCode": pdCode,
         "qty": num
     };
+    NumberCart();
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -1042,6 +1075,24 @@ function AddToCart(orderNumber,Name,price, pdCode, num ,n){
         data: product,
         success: function (data){
             console.log(data);
+        }
+    });
+}
+
+function NumberCart(){
+    console.log('Number Open');
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/NumberCart',
+        success: function (data){
+            var d = JSON.parse(data);
+            // console.log(d[0].Qty);
+            document.getElementById("NumberCart").innerHTML = d[0].Qty;
         }
     });
 }
@@ -1121,6 +1172,9 @@ function AddToPayment(){
         })
     });
 }
+
+
+
 function getMyEmployee(employeeNumber){
     var a = {"employeeNumber":employeeNumber};
     $.ajaxSetup({

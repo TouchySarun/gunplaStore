@@ -180,8 +180,9 @@
             showProduct(json,false,true);
             dropdownVender(Vendor);
             dropdownScale(Scale);
-
+            NumberCart();
         </script>
+
         <!-- Product Catagories Area End -->
 
     </div>

@@ -163,13 +163,19 @@
                             <h5>Cart Total</h5>
                             <ul class="summary-table">
                                 <li><span>Subtotal :</span><span id="sumprice"></span></li>
+
                                 <li><span>Promotion Code :</span>
-                                    <div class="col-10">
-                                        <input type="text" class="form-control" style="padding: 5px 10px" id="code" placeholder="Code">
-                                    </div>
+                                    <div class="col-12" style="padding: 0px">
+                                    <div>
+                                        <form style="border: none">
+                                        <input type="text" name="searchPro" id="searchPro" style="max-width: 75%" placeholder=" Promotion Code...">
+                                        <a class="btn amado-btn" style="min-width:20%; width:20%" onclick="getPromotion()"><img src="./amado-master/img/core-img/search.png" alt=""></a>
+                                        </form>
+                                </div>
+                            </div>
                                 </li>
-                                <li><span>Discount :</span> <span>-</span></li>
-                                <li><span>Total :</span> <span id="sumprice"></span></li>
+                                <li><span>Discount :</span><span id="discount">-</span></li>
+                                <li><span>Total :</span> <span id="total"></span></li>
                                 <li><span>Points :</span> <span id="mempoint"></span><span>Points</span></li>
                                 <li><span>Member Points :</span> <span id="points"></span><span>Points</span></li>
                                 <li><span>Shipping Date :</span>

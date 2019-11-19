@@ -60,6 +60,12 @@ class DataController extends Controller
         $jsonProduct = json_encode($data);
         return $jsonProduct;
     }
+
+    public function NumberCart(){
+        $Qty = DB::select("select sum(qty) as Qty from cart");
+        return json_encode($Qty);
+    }
+
     public function deleteCart(){
         DB::delete('delete from cart');
     }
@@ -100,14 +106,13 @@ class DataController extends Controller
             values ('$x->orderNumber','$date','$request->shippingDate','in progress','$request->customerNumber','$request->shippingAddr', '$request->billingAddr')
         ");
 
+        //insert order details each row from cart to orderdetails
         $i = 1;
         $j = 1;
         foreach($ProductCode as $P){
             $p = $P->productCode ;
             $Qty = DB::select("select sum(qty) as QTY from cart where productCode like '$p' Group by productCode");
             $pricEach = DB::select("select buyPrice from products where productCode like '$p'");
-            // echo $i . " ";
-            // echo $P->productCode . " ";
             $qty = $Qty[0];
             $price = $pricEach[0];
             DB:: insert("
@@ -116,20 +121,23 @@ class DataController extends Controller
             ");
             $i = $i + $j;
         }
-        $z = (int)$request->Point;
 
+        //update point in customer table
+        $z = (int)$request->Point;
         $Point = DB::select("select point from customers where customerNumber like '$request->customerNumber'");
         $x = $Point[0];
         $y = $x->point;
         $x = $z+$y;
-
         DB::update("update customers set point =$x where customerNumber like '$request->customerNumber'");
+
+        $x=json_encode($request->code);
+        //update qty of promotion in promotion table
+        DB::update("update promotion set qty =qty-1 where promotionCode like $x");
+
+        //delete cart
         DB::delete('delete from cart');
 
-        // return $jsonProduct;
-        return view('welcome');
-        // return $ProductCode;
-        // return null;
+         return view('welcome');
     }
 
     // public function checkout(){
@@ -285,6 +293,12 @@ class DataController extends Controller
         $data = DB::select("delete from customers where customerNumber = '$code'");
         $data2 = DB::select('select * from customers');
         return $data2;
+    }
+
+    public function getPromotion(Request $code){
+        $qty = DB::select("select qty from promotion where promotionCode like '$code->code'");
+        $c = DB::select("select detail from promotion where promotionCode like '$code->code'");
+        return [$c,json_encode($qty)];
     }
 }
 
