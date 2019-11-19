@@ -193,9 +193,8 @@ function getPromotion(){
             var d = JSON.parse(data);
             console.log(d[0]);
             if(d[0] === undefined){
-                console.log('not a Code');
+                document.getElementById("discount").innerHTML = 'Code invalid';
             }else{
-                console.log(d[0].detail);
                 document.getElementById("discount").innerHTML = d[0].detail; // try to get form $discount
                 order_calculator();
             }
@@ -1025,14 +1024,15 @@ function order_calculator(){
         mempoint = Math.floor(sum / 100) * 3;
     }    
     var n = sum.toFixed(2);
-    var d = document.getElementById("discount").innerHTML; 
     document.getElementById("sumprice").innerHTML = '$ ' + n;
+    var d = document.getElementById("discount").innerHTML;
     document.getElementById("mempoint").innerHTML = mempoint;
-    if(d !== '-'){
+    console.log(d);
+    if((d !== 'Code Invalid')&&(d !== '-')){ 
         n = n-parseFloat(d);
         n = n.toFixed(2);
-        document.getElementById("total").innerHTML = '$ ' + n;
-    } 
+    }
+    document.getElementById("total").innerHTML = '$ ' + n;
 }
 
 function ShowShipping(input) {
