@@ -7,10 +7,37 @@ var tablestock = "";
 var tablepromotion = "";
 var tablecustomer = "";
 //--------------Show script------------------//
-function showCustomerAddress(input, editAble) {
+function showCustomerAddress(input, editAble) { //, editAble
     console.log(editAble);
-    if (editAble === true) {
-        x = JSON.parse(input);
+    x = JSON.parse(input);
+    console.log(x);
+    if (editAble == true) {
+        var tableaddress = "";
+        x.forEach( function (a) {
+            tableaddress += `
+                <table style="width:100%">
+                    <tbody>
+                        <tr>
+                            <td style="width:70%">
+                                <div><p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>           
+                                </div>
+                            </td>
+                            <td style="width:15%; flex: 0 0 15%; padding-right: 1px; border-right: 1px solid #6d6d6d">
+                                <a href="#" onclick="PopUpAddress('${a.customerNumber}')" class="btn amado-btn-white" style="min-width:20%; width=100%">
+                                    <img src="./amado-master/img/core-img/pencil.png" width="25" height="25">
+                                </a>
+                            </td>
+                            <td style="width:15%; flex: 0 0 15%; padding-left: 1px">
+                                <a href="#" onclick="deleteAddr('${a.customerNumber}')" class="btn amado-btn-white" style="min-width:20%; width=100%">
+                                    <img src="./amado-master/img/core-img/trash.png" width="25" height="25">
+                                </a> 
+                            </td>                     
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+        });
+    } else {
         var tableaddress = "";
         var n = 0;
         x.forEach( function (a) {
@@ -53,50 +80,12 @@ function showCustomerAddress(input, editAble) {
                 `;
             }
         });
-    }else{
-        x = JSON.parse(input);
-        var tableaddress = "";
-        var n = 0;
-        x.forEach( function (a) {
-            if (n == input.length - 1) {
-                tableaddress += `
-                    <table style="width: 100%">
-                        <tbody>
-                            <tr>
-                                <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%; border-bottom: none">
-                                    <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>                    
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                `;
-            } else {
-                n++;
-                tableaddress += `
-                    <table style="width:100%">
-                        <tbody>
-                            <tr>
-                                <td style="width:80%">
-                                    <div>
-                                        <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>           
-                                    </div>
-                                </td>
-                                <td style="width:20%">
-                                    <a href="#" class="btn amado-btn" style="min-width:20%; width=100%">Delete</a>
-                                    <a href="#" class="btn amado-btn" style="min-width:20%; width=100%">Edit</a>   
-                                </td>                             
-                            </tr>
-                        </tbody>
-                    </table>
-                `;
-            }
-        });
     }
-    document.getElementById("addressArea").innerHTML = tableaddress;
-    document.getElementById("addressArea2").innerHTML = tableaddress;
+    document.getElementById("addressArea").innerHTML = tableaddress;    //Shipping Address
+    document.getElementById("addressArea2").innerHTML = tableaddress;   //Billing Address
 }
 
-function getAddress(customerNumber,editAble){
+function getAddress(customerNumber, editAble){ //editAble
     //console.log(customerNumber);
     $.ajaxSetup({
         headers: {
@@ -107,7 +96,7 @@ function getAddress(customerNumber,editAble){
         type: 'get',
         url: '/getAddress/' + customerNumber,
         success: function (data) {
-            showCustomerAddress(data, editAble);
+            showCustomerAddress(data, editAble); //editAble
             //var x = JSON.parse(data);
             // console.log(x[0].customerNumber);
             // return x[0];
@@ -257,7 +246,7 @@ function showCustomer(customer) {
                     <p>${a.point}</p>
                 </div>
                 </a>
-                <button onclick="PopUpCustomer('${a.customerNumber}', true),getAddress(${a.customerNumber}, false)" class="btn amado-btn">Edit</button>
+                <button onclick="PopUpCustomer('${a.customerNumber}', true),getAddress(${a.customerNumber}, true)" class="btn amado-btn">Edit</button>
         </div>
         `
     });
@@ -603,6 +592,45 @@ function PopUpProduct(a, editAble){
         }
     });
 }
+// Address
+function PopUpAddress(a) {
+    // console.log(a);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'get',
+        url: '/editAddress/' + a,
+        success: function (data) {
+            var b = JSON.parse(data)[0];
+            console.log(b);
+                var box = `
+                <span onclick="document.getElementById('id05').style.display='none'" class="close" title="Close Modal">&times;
+                </span>
+                <!-- Form inside popup -->
+                <form class="modal-content animate" action="/action_page.php">
+                    <div class="container">
+                        <h4>Edit Customer Address</h4><br>
+                        <p><b>Address Line 1</b> <input type="text" placeholder="" id="addressLine1" name="addressLine1" value="${b.addressLine1}"></p>
+                        <p><b>Address Line 2</b> <input type="text" placeholder="" id="addressLine2" name="addressLine2" value="${b.addressLine2}"></p>
+                        <p><b>City</b> <input type="text" placeholder="" id="city" name="city" value="${b.city}"></p>
+                        <p><b>State</b> <input type="text" placeholder="" id="state" name="state" value="${b.state}"></p>
+                        <p><b>Country</b> <input type="text" placeholder="" id="country" name="country" value="${b.country}"></p>
+                        <p><b>Postal Code</b> <input type="text" placeholder="" id="postalCode" name="postalCode" value="${b.postalCode}"></p>
+                        <p><b>Address ID</b> <p id="addrnum">${b.addressNumber}</p>
+                        <p><b>Customer ID</b> <p>${b.customerNumber}</p>
+                        <a href="#" class="btn amado-btn" onclick="deleteAddr('${b.customerNumber}')">Delete</a>
+                        <a href="#" class="btn amado-btn" onclick="updateAddr('${b.customerNumber}')">Save</a>
+                    </div>
+                </form>
+            `;            
+            document.getElementById("id05").innerHTML = box;
+            document.getElementById("id05").style.display = 'block';
+        }
+    });
+}
 
 //------------end show script------------//
 
@@ -807,6 +835,36 @@ function insertcus(){
         }
     });
 }
+
+// Address
+function insertAddress(){
+    var address = {
+        "addrline1": document.getElementById("addressLine1").value.toString(),
+        "addrline2": document.getElementById("addressLine2").value.toString(),
+        "city": document.getElementById("city").value.toString(),
+        "state": document.getElementById("state").value.toString(),
+        "postalcode": document.getElementById("postalCode").value.toString(),
+        "country": document.getElementById("country").value.toString(),
+        "custnum": document.getElementById("custnum").value.toString(),
+        "addrnum": document.getElementById("addrnum").value.toString()
+    };
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/addAddress',
+        data: address,
+        dataType: "json",
+        success: function (data) {
+            console.log(data);
+            document.getElementById('id01').style.display = 'none';
+            showCustomerAddress(data, true);
+        }
+    });
+}
 // -----------------------End Insert-------------------------//
 
 // ----------------------Update-------------------------------//
@@ -916,7 +974,49 @@ function updateship(a){
     });
 }
 
-
+//Address
+function updateAddr(a){
+    var address = {
+        "addrline1": document.getElementById("addressLine1").value.toString(),
+        "addrline2": document.getElementById("addressLine2").value.toString(),
+        "city": document.getElementById("city").value.toString(),
+        "state": document.getElementById("state").value.toString(),
+        "postalcode": document.getElementById("postalCode").value.toString(),
+        "country": document.getElementById("country").value.toString(),
+        "addrnum": document.getElementById("addrnum").innerText
+    };
+    console.log(address);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/updateAddress/' + a,
+        data: address,
+        dataType: 'json',
+        success: function (data) {
+            document.getElementById('id05').style.display = 'none';
+            showCustomerAddress(data, true);
+        }
+    });
+}
+function deleteAddr(a){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/deleteAddress/' + a,
+        success: function (data) {
+            document.getElementById('id04').style.display = 'none';
+            showCustomer(data);
+        }
+    });
+}
 // ---------------------End Update---------------------------//
 
 // -----------------------Delete-----------------------------//
@@ -1075,73 +1175,6 @@ function AddToCart(orderNumber,Name,price, pdCode, num ,n){
         data: product,
         success: function (data){
             console.log(data);
-        }
-    });
-}
-
-function insertAddress(){
-    var address = {
-        "addrline1": document.getElementById("addressLine1").value.toString(),
-        "addrline2": document.getElementById("addressLine2").value.toString(),
-        "city": document.getElementById("city").value.toString(),
-        "state": document.getElementById("state").value.toString(),
-        "postalcode": document.getElementById("postalCode").value.toString(),
-        "country": document.getElementById("country").value.toString(),
-        "custnum": document.getElementById("custnum").value.toString(),
-        "addrnum": document.getElementById("addrnum").value.toString()
-    };
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    $.ajax({
-        type: 'post',
-        url: '/addAddress',
-        data: address,
-        dataType: "json",
-        success: function (data) {
-            console.log(data);
-            document.getElementById('id01').style.display = 'none';
-            showCustomerAddress(data);
-        }
-    });
-}
-
-function PopUpAddress(a) {
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    $.ajax({
-        type: 'get',
-        url: '/editAddress/' + a,
-        success: function (data) {
-            var b = JSON.parse(data)[0];
-            console.log(b);
-            var box = `
-            <span onclick="document.getElementById('id03').style.display='none'" class="close" title="Close Modal">&times;
-            </span>
-                <!-- Form inside popup -->
-                <form class="modal-content animate" action="/action_page.php">
-                    <div class="container">
-                        <h4>Edit Customer Address</h4><br>
-                        <p><b>Address Line 1</b> <input type="text" placeholder="" id="addressLine1" name="addressLine1" value="${b.addressLine1}"></p>
-                        <p><b>Address Line 2</b> <input type="text" placeholder="" id="addressLine2" name="addressLine2" value="${b.addressLine2}"></p>
-                        <p><b>City</b> <input type="text" placeholder="" id="city" name="city" value="${b.city}"></p>
-                        <p><b>State</b> <input type="text" placeholder="" id="state" name="state" value="${b.state}"></p>
-                        <p><b>Country</b> <input type="text" placeholder="" id="country" name="country" value="${b.country}"></p>
-                        <p><b>Postal Code</b> <input type="text" placeholder="" id="postalCode" name="postalCode" value="${b.postalCode}"></p>
-                        <p><b>Address ID</b> <input type="text" placeholder="" id="addrnum" name="addrnum" value="${b.addressNumber}" readonly></p>
-                        <p><b>Customer ID</b> <input type="text" placeholder="" id="custnum" name="custnum" value="${b.customerNumber}" readonly></p>
-                        <a href="#" class="btn amado-btn" onclick="deleteAddress('${b.addressNumber}')">Delete</a>
-                        <a href="#" class="btn amado-btn" onclick="updateAddress('${b.addressNumber}')">Save</a>
-                    </div>
-                </form>
-            `;
-            document.getElementById("id03").innerHTML = box;
-            document.getElementById("id03").style.display = 'block';
         }
     });
 }

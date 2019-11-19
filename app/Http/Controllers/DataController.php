@@ -83,7 +83,7 @@ class DataController extends Controller
     }
 
     public function getAddress($code){
-        $address = DB::select("select * from addresses where customerNumber like '$code'");
+        $address = DB::select("select * from addresses where customerNumber = '$code' and deleteFlag = 'false'");
         return json_encode($address);
     }
     public function addAddress(Request $request){
@@ -95,21 +95,24 @@ class DataController extends Controller
                     '$request->postalcode',
                     '$request->country',
                     '$request->custnum',
-                    '$request->addrnum')"
+                    '$request->addrnum',
+                    'false')"
         );
     }
     public function editAddress($code){
-        $data = DB::select("select * from addresses where addressNumber = '$code'");
+        $data = DB::select("select * from addresses where customerNumber = '$code'");
         return json_encode($data);
     }
     public function updateAddress(Request $request, $code){
-        DB::update("update addresses set addressLine1 = ?,addressLine2 = ?,city = ?,state = ?,postalCode = ?,country = ?,customerNumber = ?,addressNumber = ? where customerNumber = ?",
-        [$request->addrline1,$request->addrline2,$request->city,$request->state,$request->postalcode,$request->country,$request->custnum,$request->addrnum,$code]);
-        $data = DB::select('select * from addresses');
+        DB::update("update addresses set addressLine1 = ?,addressLine2 = ?,city = ?,state = ?,postalCode = ?,country = ? where addressNumber = ? and customerNumber = ?",
+        [$request->addrline1,$request->addrline2,$request->city,$request->state,$request->postalcode,$request->country,$request->addrnum,$code]);
+        $data = DB::select("select * from addresses");
         return json_encode($data);
     }
-    public function deleteAddress($code){      //Soft-delete -> still be available on order history
-
+    public function deleteAddress($code){      //Soft-delete -> still available on shipping details
+        DB::update("update addresses set deleteFlag = 'true' where customerNumber = '$code'");
+        $data = DB::select("select * from addresses");
+        return json_encode($data);
     }
 
     public function successOrder(Request $request){

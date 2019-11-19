@@ -181,6 +181,10 @@
                     </div>
                     </form>
                 </div>
+                <!-- Pop up for edit address -->
+                <div id="id05" class="modal">
+                    <!-- PopUpAddress() -->
+                </div>
         </header>
         <!-- Header Area End -->
 
