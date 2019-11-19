@@ -195,10 +195,12 @@
                                             </thead>
                                             <tbody id="order_table_body">
                                             </tbody>
-                                            
-                                            <script>$data = <?php echo $jsonOrder?>; ShowShipping($data);</script>
                                         </table>
                                     </div>
+                                    <script> 
+                                        var data = <?php echo $jsonOrder?>; 
+                                        ShowShipping(data);
+                                    </script>
                                 </div>
                             </div>
                         </div>

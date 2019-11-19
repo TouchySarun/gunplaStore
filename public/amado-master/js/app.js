@@ -172,6 +172,38 @@ function showProduct(json, editable, orderable) {
     document.getElementById("productArea").innerHTML = tableproduct;
 }
 
+function getPromotion(){
+
+    var Code = {
+        'code' : document.getElementById('searchPro').value
+    };
+    console.log(Code);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    console.log('ajax');
+    $.ajax({
+        type: 'post',
+        url: '/getPro',
+        data: Code,
+        dataType:'Text',
+        success: function (data){
+            var d = JSON.parse(data);
+            console.log(d[0]);
+            if(d[0] === undefined){
+                console.log('not a Code');
+            }else{
+                console.log(d[0].detail);
+                document.getElementById("discount").innerHTML = d[0].detail; // try to get form $discount
+                order_calculator();
+            }
+        }
+    });
+
+}
+
 function showCart(product){
     tableCart = '';
     i = 0;
@@ -991,12 +1023,16 @@ function order_calculator(){
         console.log(num);
         sum += price * num;
         mempoint = Math.floor(sum / 100) * 3;
-    }
-    document.getElementById("sumprice").innerHTML = '$' + sum;
+    }    
+    var n = sum.toFixed(2);
+    var d = document.getElementById("discount").innerHTML; 
+    document.getElementById("sumprice").innerHTML = '$ ' + n;
     document.getElementById("mempoint").innerHTML = mempoint;
-
-
-
+    if(d !== '-'){
+        n = n-parseFloat(d);
+        n = n.toFixed(2);
+        document.getElementById("total").innerHTML = '$ ' + n;
+    } 
 }
 
 function ShowShipping(input) {
@@ -1036,8 +1072,9 @@ function AddToOrder(){
 
     var Billing = {
         'customerNumber' : document.getElementById("searchID").value.toString(),
-        'Point' : document.getElementById("mempoint").innerText,
-        'shippingDate' : document.getElementById("shipDate").value.toString()
+        'Point' : document.getElementById("mempoint").innerHTML,
+        'shippingDate' : document.getElementById("shipDate").value.toString(),
+        'code' : document.getElementById("searchPro").value.toString()
     };
     console.log(Billing);
     $.ajaxSetup({
@@ -1046,10 +1083,9 @@ function AddToOrder(){
         }
     });
     $.ajax({
-        type: 'post',
+        type: 'get',
         url: '/successOrder',
         data: Billing,
-        dataType:'Text',
         success: function (data){
             console.log(data);
         }
