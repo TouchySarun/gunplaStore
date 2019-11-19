@@ -133,7 +133,7 @@ class DataController extends Controller
         //delete cart
         DB::delete('delete from cart');
 
-        // return view('welcome');
+         return view('welcome');
     }
 
     // public function checkout(){
@@ -292,8 +292,9 @@ class DataController extends Controller
     }
 
     public function getPromotion(Request $code){
+        $qty = DB::select("select qty from promotion where promotionCode like '$code->code'"); 
         $c = DB::select("select detail from promotion where promotionCode like '$code->code'");
-        return $c;
+        return [$c,json_encode($qty)];
     }
 }
 

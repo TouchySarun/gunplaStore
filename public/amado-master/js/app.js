@@ -191,11 +191,12 @@ function getPromotion(){
         dataType:'Text',
         success: function (data){
             var d = JSON.parse(data);
-            console.log(d[0]);
             if(d[0] === undefined){
                 document.getElementById("discount").innerHTML = 'Code invalid';
-            }else{
-                document.getElementById("discount").innerHTML = d[0].detail; // try to get form $discount
+            }else if((JSON.parse(d[1])[0].qty) == 0){
+                document.getElementById("discount").innerHTML = 'Run out of quota';
+            } else {
+                document.getElementById("discount").innerHTML = (d[0])[0].detail; // try to get form $discount
                 order_calculator();
             }
         }
@@ -1028,7 +1029,7 @@ function order_calculator(){
     var d = document.getElementById("discount").innerHTML;
     document.getElementById("mempoint").innerHTML = mempoint;
     console.log(d);
-    if((d !== 'Code Invalid')&&(d !== '-')){ 
+    if((d !== 'Code Invalid')&&(d !== '-')&&(d !== 'Run out of quota')){ 
         n = n-parseFloat(d);
         n = n.toFixed(2);
     }
