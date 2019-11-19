@@ -1106,12 +1106,7 @@ function deleteCart(){
     });
 }
 function AddToCart(orderNumber,Name,price, pdCode, num ,n){
-
-    var i = Number(document.getElementById('NumberCart').innerText)
-    i = i+Number(num);
     document.getElementById(n).value = 0;
-
-    document.getElementById('NumberCart').innerText = (i);
     var product = {
         "orderNumber": orderNumber,
         "Name" : Name,
@@ -1119,6 +1114,7 @@ function AddToCart(orderNumber,Name,price, pdCode, num ,n){
         "productCode": pdCode,
         "qty": num
     };
+    NumberCart();
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -1130,6 +1126,24 @@ function AddToCart(orderNumber,Name,price, pdCode, num ,n){
         data: product,
         success: function (data){
             console.log(data);
+        }
+    });
+}
+
+function NumberCart(){
+    console.log('Number Open');
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/NumberCart',
+        success: function (data){
+            var d = JSON.parse(data);
+            // console.log(d[0].Qty);
+            document.getElementById("NumberCart").innerHTML = d[0].Qty;
         }
     });
 }
@@ -1209,6 +1223,9 @@ function AddToPayment(){
         })
     });
 }
+
+
+
 function getMyEmployee(employeeNumber){
     var a = {"employeeNumber":employeeNumber};
     $.ajaxSetup({

@@ -60,6 +60,12 @@ class DataController extends Controller
         $jsonProduct = json_encode($data);
         return $jsonProduct;
     }
+
+    public function NumberCart(){
+        $Qty = DB::select("select sum(qty) as Qty from cart");
+        return json_encode($Qty);
+    }
+
     public function deleteCart(){
         DB::delete('delete from cart');
     }
