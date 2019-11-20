@@ -8,29 +8,39 @@ var tablepromotion = "";
 var tablecustomer = "";
 //--------------Show script------------------//
 function showCustomerAddress(input, editAble,redioname,id) {
-    console.log(id);
         x = JSON.parse(input);
         var n = 0;
         var tableaddress = `<table style="width: 100%"><tbody>`;
         x.forEach( function (a) {
             tableaddress += `
-                <tr>
-                    <td style="text-align: left; margin-right: 10px; max-width: 10%; border-bottom: none;">
-                        <label class="radio-container">
-                            <input type="radio" name="${redioname}" value="${n}">
-                            <span class="checkmark"></span>
-                        </label>
-                    </td>
-                    <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%; border-bottom: none">
-                        <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>
-                        `;
-            if(n != x.length-1) tableaddress+= `<a class="line"></a>`;n++;
-            tableaddress += `</td></tr>`;
+            <tr>`;
+                if(editAble != true){tableaddress += `
+                <td style="text-align: left; margin-right: 10px; max-width: 10%; border-bottom: none;">
+                    <label class="radio-container">
+                        <input type="radio" name="${redioname}" value="${n}">
+                        <span class="checkmark"></span>
+                    </label>
+                </td>`;}
+                tableaddress += `
+                <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%; border-bottom: none">
+                    <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>`;
+                    if(n != x.length-1) tableaddress+= `<a class="line"></a>`;n++;tableaddress += `
+                </td>`;
+                if(editAble === true){tableaddress += `
+                <td style="width:15%; flex: 0 0 15%; padding-right: 1px; border-right: 1px solid #6d6d6d">
+                    <a href="#" onclick="PopUpAddress('${a.customerNumber}')" class="btn amado-btn-white" style="min-width:20%; width=100%">
+                        <img src="./amado-master/img/core-img/pencil.png" width="25" height="25">
+                    </a>
+                </td>
+                <td style="width:15%; flex: 0 0 15%; padding-left: 1px">
+                    <a href="#" onclick="deleteAddr('${a.customerNumber}')" class="btn amado-btn-white" style="min-width:20%; width=100%">
+                        <img src="./amado-master/img/core-img/trash.png" width="25" height="25">
+                    </a>
+                </td>  `;}
+                tableaddress+= `
+            </tr>`;
         });
-        tableaddress += '</tbody></table>';
-        if(editAble === true){
-            tableaddress += '<a href="#" class="btn amado-btn" >Delete</a><a href="#" class="btn amado-btn" >Edit</a> ';
-        }
+        tableaddress += `</tbody></table>`;
     document.getElementById(`${id}`).innerHTML = tableaddress;
 }
 
@@ -45,10 +55,15 @@ function getAddress(customerNumber,editAble,redioname,id){
         type: 'get',
         url: '/getAddress/' + customerNumber,
         success: function (data) {
-            // console.log(data[0]);
+
+            console.log(data);
             showCustomerAddress(data[0], editAble,redioname,id);
             var d = JSON.parse(data[1]);
-            document.getElementById("points").innerHTML = d[0].point;
+            var points = document.getElementById("points");
+            if(points != null){
+                points.innerHTML = d[0].point;
+            }
+
             // console.log(x[0].customerNumber);
             // return x[0];
         }
@@ -212,7 +227,7 @@ function showCustomer(customer) {
     customer.forEach(function (a) {
         tablecustomer += `
         <div class="single-products-catagory">
-                <a href="#" onclick="PopUpCustomer('${a.customerNumber}', false),getAddress(${a.customerNumber}, false)">
+                <a href="#" onclick="PopUpCustomer('${a.customerNumber}', false),getAddress(${a.customerNumber}, false, 'dont need', 'addressArea')">
                 <img src="./amado-master/img/core-img/employeeM.png" alt="">
                 <!-- Hover Content -->
                 <div class="hover-content">
@@ -232,7 +247,7 @@ function showCustomer(customer) {
                     <p>${a.point}</p>
                 </div>
                 </a>
-                <button onclick="PopUpCustomer('${a.customerNumber}', true),getAddress(${a.customerNumber}, true)" class="btn amado-btn">Edit</button>
+                <button onclick="PopUpCustomer('${a.customerNumber}', true),getAddress(${a.customerNumber}, true, 'dont need', 'addressArea')" class="btn amado-btn">Edit</button>
         </div>
         `
     });
@@ -846,7 +861,7 @@ function insertAddress(){
         success: function (data) {
             console.log(data);
             document.getElementById('id01').style.display = 'none';
-            showCustomerAddress(data, true);
+            showCustomerAddress(data, true, 'dont need', 'addressArea');
         }
     });
 }
@@ -983,7 +998,7 @@ function updateAddr(a){
         dataType: 'json',
         success: function (data) {
             document.getElementById('id05').style.display = 'none';
-            showCustomerAddress(data, true);
+            showCustomerAddress(data, true, 'dont need', 'addressArea');
         }
     });
 }
@@ -1069,13 +1084,12 @@ function order_calculator(){
         var num = document.getElementById(`qty${i}`).value;
         //console.log(num);
         sum += price * num;
-        mempoint = Math.floor(sum / 100) * 3;
     }
+    mempoint = Math.floor(sum / 100) * 3;
     var n = sum.toFixed(2);
     document.getElementById("sumprice").innerHTML = '$ ' + n;
     var d = document.getElementById("discount").innerHTML;
     document.getElementById("mempoint").innerHTML = mempoint;
-    console.log(d);
     if((d !== 'Code Invalid')&&(d !== '-')&&(d !== 'Run out of quota')){
         n = n-parseFloat(d);
         n = n.toFixed(2);
