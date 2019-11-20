@@ -983,7 +983,7 @@ function deletepromotion(){
         url: '/deletepromotion',
         success: function (data) {
             console.log(data);
-            // promotion(data);
+            promotion(data);
             // document.getElementById('id03').style.display = 'none';
             // showProduct(data, true, false);
         }
