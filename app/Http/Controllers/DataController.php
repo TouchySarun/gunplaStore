@@ -18,6 +18,13 @@ class DataController extends Controller
         $jsonScale = json_encode($distinctscale);
         return view('index',['jsonProduct'=>$jsonProduct, 'jsonVendor'=>$jsonVendor, 'jsonScale'=>$jsonScale]);
     }
+
+    public function employeeInfo(Request $request){
+        $data = DB::select("select * from employees where employeeNumber = '$request->showUser'");
+        $jsonEmployee = json_encode($data);
+        return view('welcome',['jsonEmployee'=>$jsonEmployee]);
+    }
+
     public function mnproduct(){
         $data = DB::select('select * from products');
         $datastock = DB::select('select * from stock');
@@ -96,6 +103,35 @@ class DataController extends Controller
         $point = DB::select("select point from customers where customerNumber like '$code'");
         return [json_encode($address),json_encode($point)];
     }
+    public function addAddress(Request $request){
+        DB::insert("insert into addresses
+            values ('$request->addrline1',
+                    '$request->addrline2',
+                    '$request->city',
+                    '$request->state',
+                    '$request->postalcode',
+                    '$request->country',
+                    '$request->custnum',
+                    '$request->addrnum',
+                    'false')"
+        );
+    }
+    public function editAddress($code){
+        $data = DB::select("select * from addresses where customerNumber = '$code'");
+        return json_encode($data);
+    }
+    public function updateAddress(Request $request, $code){
+        DB::update("update addresses set addressLine1 = ?,addressLine2 = ?,city = ?,state = ?,postalCode = ?,country = ? where addressNumber = ? and customerNumber = ?",
+        [$request->addrline1,$request->addrline2,$request->city,$request->state,$request->postalcode,$request->country,$request->addrnum,$code]);
+        $data = DB::select("select * from addresses");
+        return json_encode($data);
+    }
+    public function deleteAddress($code){      //Soft-delete -> still available on shipping details
+        DB::update("update addresses set deleteFlag = 'true' where customerNumber = '$code'");
+        $data = DB::select("select * from addresses");
+        return json_encode($data);
+    }
+
     public function successOrder(Request $request){
         $OrderNumber = DB::select('select distinct orderNumber from cart ');
         $ProductCode = DB :: select('select distinct productCode from cart ');
@@ -139,10 +175,6 @@ class DataController extends Controller
 
          return view('welcome');
     }
-
-    // public function checkout(){
-    //     $data = DB::select("select * from customers");
-    //     $jsonCustomer = json_encode($data);
 
     public function login(Request $request)
     {

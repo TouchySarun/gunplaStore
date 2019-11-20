@@ -219,7 +219,7 @@ function showCustomer(customer) {
                     <div class="line"></div>
                     <p>Number ${a.customerNumber}</p>
                     <h5>${a.customerName}</h5>
-                    <h4>${a.contactFirstName} ${a.contactFirstName}</h4>
+                    <h4>${a.contactFirstName} ${a.contactLastName}</h4>
                 </div>
                 <div class="cusDetail" style= "display:none">
                     <p>${a.customerNumber}</p>
@@ -232,7 +232,7 @@ function showCustomer(customer) {
                     <p>${a.point}</p>
                 </div>
                 </a>
-                <button onclick="PopUpCustomer('${a.customerNumber}', true),getAddress(${a.customerNumber}, false)" class="btn amado-btn">Edit</button>
+                <button onclick="PopUpCustomer('${a.customerNumber}', true),getAddress(${a.customerNumber}, true)" class="btn amado-btn">Edit</button>
         </div>
         `
     });
@@ -577,6 +577,45 @@ function PopUpProduct(a, editAble){
         }
     });
 }
+// Address
+function PopUpAddress(a) {
+    // console.log(a);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'get',
+        url: '/editAddress/' + a,
+        success: function (data) {
+            var b = JSON.parse(data)[0];
+            console.log(b);
+                var box = `
+                <span onclick="document.getElementById('id05').style.display='none'" class="close" title="Close Modal">&times;
+                </span>
+                <!-- Form inside popup -->
+                <form class="modal-content animate" action="/action_page.php">
+                    <div class="container">
+                        <h4>Edit Customer Address</h4><br>
+                        <p><b>Address Line 1</b> <input type="text" placeholder="" id="addressLine1" name="addressLine1" value="${b.addressLine1}"></p>
+                        <p><b>Address Line 2</b> <input type="text" placeholder="" id="addressLine2" name="addressLine2" value="${b.addressLine2}"></p>
+                        <p><b>City</b> <input type="text" placeholder="" id="city" name="city" value="${b.city}"></p>
+                        <p><b>State</b> <input type="text" placeholder="" id="state" name="state" value="${b.state}"></p>
+                        <p><b>Country</b> <input type="text" placeholder="" id="country" name="country" value="${b.country}"></p>
+                        <p><b>Postal Code</b> <input type="text" placeholder="" id="postalCode" name="postalCode" value="${b.postalCode}"></p>
+                        <p><b>Address ID</b> <p id="addrnum">${b.addressNumber}</p>
+                        <p><b>Customer ID</b> <p>${b.customerNumber}</p>
+                        <a href="#" class="btn amado-btn" onclick="deleteAddr('${b.customerNumber}')">Delete</a>
+                        <a href="#" class="btn amado-btn" onclick="updateAddr('${b.customerNumber}')">Save</a>
+                    </div>
+                </form>
+            `;
+            document.getElementById("id05").innerHTML = box;
+            document.getElementById("id05").style.display = 'block';
+        }
+    });
+}
 
 //------------end show script------------//
 
@@ -781,6 +820,36 @@ function insertcus(){
         }
     });
 }
+
+// Address
+function insertAddress(){
+    var address = {
+        "addrline1": document.getElementById("addressLine1").value.toString(),
+        "addrline2": document.getElementById("addressLine2").value.toString(),
+        "city": document.getElementById("city").value.toString(),
+        "state": document.getElementById("state").value.toString(),
+        "postalcode": document.getElementById("postalCode").value.toString(),
+        "country": document.getElementById("country").value.toString(),
+        "custnum": document.getElementById("custnum").value.toString(),
+        "addrnum": document.getElementById("addrnum").value.toString()
+    };
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/addAddress',
+        data: address,
+        dataType: "json",
+        success: function (data) {
+            console.log(data);
+            document.getElementById('id01').style.display = 'none';
+            showCustomerAddress(data, true);
+        }
+    });
+}
 // -----------------------End Insert-------------------------//
 
 // ----------------------Update-------------------------------//
@@ -890,7 +959,49 @@ function updateship(a){
     });
 }
 
-
+//Address
+function updateAddr(a){
+    var address = {
+        "addrline1": document.getElementById("addressLine1").value.toString(),
+        "addrline2": document.getElementById("addressLine2").value.toString(),
+        "city": document.getElementById("city").value.toString(),
+        "state": document.getElementById("state").value.toString(),
+        "postalcode": document.getElementById("postalCode").value.toString(),
+        "country": document.getElementById("country").value.toString(),
+        "addrnum": document.getElementById("addrnum").innerText
+    };
+    console.log(address);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/updateAddress/' + a,
+        data: address,
+        dataType: 'json',
+        success: function (data) {
+            document.getElementById('id05').style.display = 'none';
+            showCustomerAddress(data, true);
+        }
+    });
+}
+function deleteAddr(a){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/deleteAddress/' + a,
+        success: function (data) {
+            document.getElementById('id04').style.display = 'none';
+            showCustomer(data);
+        }
+    });
+}
 // ---------------------End Update---------------------------//
 
 // -----------------------Delete-----------------------------//
