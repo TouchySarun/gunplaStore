@@ -151,8 +151,7 @@ class DataController extends Controller
         DB::insert("insert into products(productName,productCode,productLine,productScale,productVendor,productDescription,quantityInstock,buyPrice,MSRP)
         values ('$request->pname','$request->pcode','$request->pline','$request->pscale','$request->pvendor','$request->pdes','$request->pnumber','$request->pprice','$request->pmsrp')");
         DB::insert("insert into stock(stockNumber,stockDate,productCode,qty)
-        values ('$request->snum',strftime('%Y-%m-%d',date('now')),'$request->pcode','$request->pnumber')");
-        $productl = DB::select("select * from productlines where productLine = $request->pline");
+        values ('$request->snum',date('now','localtime'),'$request->pcode','$request->pnumber')");
         $data = DB::select('select * from products');
         $datastock = DB::select('select * from stock');
         $jsonProduct = json_encode(array($data,$datastock));
@@ -219,6 +218,7 @@ class DataController extends Controller
     }
 
     public function promotion(){
+        $data = DB::select("delete from promotion where expairDate = date('now','localtime')");
         $pro = DB::select('select * from promotion');
         $jsonpro = json_encode($pro);
         return view('welcome',['jsonpro'=>$jsonpro]);
@@ -239,6 +239,13 @@ class DataController extends Controller
     public function deletecus($code){
         $data = DB::select("delete from customers where customerNumber = '$code'");
         $data2 = DB::select('select * from customers');
+        return $data2;
+    }
+
+    public function deletepromotion(){
+        $data = DB::select("delete from promotion where expairDate = date('now','localtime')");
+        // // $data = DB::select("delete from promotion where expairDate = strftime('%Y-%m-%d',date('now'))");
+        $data2 = DB::select('select * from promotion');
         return $data2;
     }
 }

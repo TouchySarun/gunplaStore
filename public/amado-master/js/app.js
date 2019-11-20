@@ -286,8 +286,8 @@ function stockin(stock){
 //promotion
 function promotion(promo){
     tablepromotion = "";
-    console.log(promo);
     promo.forEach( function(a) {
+        deletepromotion();
     tablepromotion += `
         <tr>
             <td><h5>${a.promotionId}</h5></td>
@@ -295,7 +295,7 @@ function promotion(promo){
             <td class="cart_product_desc">
                 <h5>${a.qty}</h5>
             </td>
-            <td><h5>${a.stockDate}</h5></td>
+            <td><h5>${a.detail}</h5></td>
             <td><h5>${a.expairDate}</h5></td>
         </tr>
         `
@@ -971,6 +971,24 @@ function deletecus(a){
         }
     });
 }
+
+function deletepromotion(){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'delete',
+        url: '/deletepromotion',
+        success: function (data) {
+            console.log(data);
+            // promotion(data);
+            // document.getElementById('id03').style.display = 'none';
+            // showProduct(data, true, false);
+        }
+    });
+}
 // ----------------------End Delete-----------------------------//
 
 // ----------------------Calculate-----------------------------//
@@ -1076,6 +1094,7 @@ function AddToCart(orderNumber,Name,price, pdCode, num ,n){
         data: product,
         success: function (data){
             console.log(data);
+            promotion(data);
         }
     });
 }
