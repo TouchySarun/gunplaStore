@@ -187,7 +187,7 @@
                                 <div class="cart-title mt-50">
                                     <h2>New Promotion</h2>
                                 </div>
-                                <div class="product-meta-data">
+                                <div class="product -meta-data">
                                     <form>
                                         <p>Promotion ID : <input id="promid" type="text" name="promotionID"></p>
                                         <p>Code : <input id="promcode" type="text" name="code"></p>
@@ -239,7 +239,7 @@
             <img src="./amado-master/img/core-img/customers.png"><br><br>
             Customers
         </a>
-        <a href="#" onclick="document.getElementById('id01').style.display='block'" class="btn amado-big-btn">
+        <a href="#" onclick="(document.getElementById('id01').style.display='block')" class="btn amado-big-btn">
             <br><br><br>
             <img src="./amado-master/img/core-img/promotion.png"><br><br>
             Promotion
