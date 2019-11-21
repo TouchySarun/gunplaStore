@@ -28,7 +28,7 @@ function showCustomerAddress(input, editAble,redioname,id) {
                 </td>`;
                 if(editAble === true){tableaddress += `
                 <td style="width:15%; flex: 0 0 15%; padding-right: 1px; border-right: 1px solid #6d6d6d">
-                    <a href="#" onclick="PopUpAddress('${a.customerNumber}')" class="btn amado-btn-white" style="min-width:20%; width=100%">
+                    <a href="#" onclick="PopUpAddress('${a.addressLine1}', '${a.addressLine2}','${a.city}', '${a.state}', '${a.country}', '${a.postalCode}','${a.customerNumber}','${a.addressNumber}')" class="btn amado-btn-white" style="min-width:20%; width=100%">
                         <img src="./amado-master/img/core-img/pencil.png" width="25" height="25">
                     </a>
                 </td>
@@ -55,8 +55,7 @@ function getAddress(customerNumber,editAble,redioname,id){
         type: 'get',
         url: '/getAddress/' + customerNumber,
         success: function (data) {
-
-            console.log(data);
+            //console.log(data);
             showCustomerAddress(data[0], editAble,redioname,id);
             var d = JSON.parse(data[1]);
             var points = document.getElementById("points");
@@ -222,6 +221,7 @@ function showEmployee(employee) {
 }
 
 function showCustomer(customer) {
+    console.log(customer);
     tablecustomer = "<br><br><br>";
     jsoncustomer = customer;
     customer.forEach(function (a) {
@@ -594,43 +594,26 @@ function PopUpProduct(a, editAble){
     });
 }
 // Address
-function PopUpAddress(a) {
-    // console.log(a);
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    $.ajax({
-        type: 'get',
-        url: '/editAddress/' + a,
-        success: function (data) {
-            var b = JSON.parse(data)[0];
-            console.log(b);
-                var box = `
-                <span onclick="document.getElementById('id05').style.display='none'" class="close" title="Close Modal">&times;
-                </span>
-                <!-- Form inside popup -->
-                <form class="modal-content animate" action="/action_page.php">
-                    <div class="container">
-                        <h4>Edit Customer Address</h4><br>
-                        <p><b>Address Line 1</b> <input type="text" placeholder="" id="addressLine1" name="addressLine1" value="${b.addressLine1}"></p>
-                        <p><b>Address Line 2</b> <input type="text" placeholder="" id="addressLine2" name="addressLine2" value="${b.addressLine2}"></p>
-                        <p><b>City</b> <input type="text" placeholder="" id="city" name="city" value="${b.city}"></p>
-                        <p><b>State</b> <input type="text" placeholder="" id="state" name="state" value="${b.state}"></p>
-                        <p><b>Country</b> <input type="text" placeholder="" id="country" name="country" value="${b.country}"></p>
-                        <p><b>Postal Code</b> <input type="text" placeholder="" id="postalCode" name="postalCode" value="${b.postalCode}"></p>
-                        <p><b>Address ID</b> <p id="addrnum">${b.addressNumber}</p>
-                        <p><b>Customer ID</b> <p>${b.customerNumber}</p>
-                        <a href="#" class="btn amado-btn" onclick="deleteAddr('${b.customerNumber}')">Delete</a>
-                        <a href="#" class="btn amado-btn" onclick="updateAddr('${b.customerNumber}')">Save</a>
-                    </div>
-                </form>
-            `;
-            document.getElementById("id05").innerHTML = box;
-            document.getElementById("id05").style.display = 'block';
-        }
-    });
+function PopUpAddress(addressLine1, addressLine2,city,state,country,postalCode,customerNumber,addressNumber) {
+    var box = `
+        <span onclick="document.getElementById('id05').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <form class="modal-content animate" action="/action_page.php">
+            <div class="container">
+                <h4>Edit Customer Address</h4><br>
+                <p><b>Address Line 1</b> <input type="text" placeholder="" id="addressLine1" name="addressLine1" value="${addressLine1}"></p>
+                <p><b>Address Line 2</b> <input type="text" placeholder="" id="addressLine2" name="addressLine2" value="${addressLine2}"></p>
+                <p><b>City</b> <input type="text" placeholder="" id="city" name="city" value="${city}"></p>
+                <p><b>State</b> <input type="text" placeholder="" id="state" name="state" value="${state}"></p>
+                <p><b>Country</b> <input type="text" placeholder="" id="country" name="country" value="${country}"></p>
+                <p><b>Postal Code</b> <input type="text" placeholder="" id="postalCode" name="postalCode" value="${postalCode}"></p>
+                <p><b>Address ID</b> <p id="addrnum">${addressNumber}</p>
+                <p><b>Customer ID</b> <p>${customerNumber}</p>
+                <a href="#" class="btn amado-btn" onclick="deleteAddr('${customerNumber}')">Delete</a>
+                <a href="#" class="btn amado-btn" onclick="updateAddr('${customerNumber}')">Save</a>
+            </div>
+        </form>`
+    document.getElementById("id05").innerHTML = box;
+    document.getElementById("id05").style.display = 'block';
 }
 
 //------------end show script------------//
@@ -1014,7 +997,8 @@ function deleteAddr(a){
         url: '/deleteAddress/' + a,
         success: function (data) {
             document.getElementById('id04').style.display = 'none';
-            showCustomer(data);
+            data1 = JSON.parse(data);
+            showCustomer(data1);
         }
     });
 }
@@ -1150,28 +1134,36 @@ function stock(){
     });
 }
 function AddToOrder(){
-    var radios = document.getElementsByName('addressSelect');
     var shippingAddr, billingAddr;
-        for (var i = 0, length = radios.length; i < length; i++){
-            if (radios[i].checked){
+    var radios = document.getElementsByName('addressArea');
+    for (var i = 0; i < radios.length; i++){
+        if (radios[i].checked){
                 shippingAddr = radios[i].value;
             }
         }
-    radios = document.getElementsByName('addressSelect2');
+    radios = document.getElementsByName('addressArea2');
         for (var i = 0, length = radios.length; i < length; i++){
             if (radios[i].checked){
                 billingAddr = radios[i].value;
             }
         }
+    var code = document.getElementById("searchPro").value.toString();
+    if(code == ""){
+        code = '0';
+    }
+    var shipDate = document.getElementById("shipDate").value.toString();
+    if(shipDate == ""){
+        shipDate = "order date +7";
+    }
     var Billing = {
         'customerNumber' : document.getElementById("searchID").value.toString(),
         'Point' : document.getElementById("mempoint").innerText,
-        'shippingDate' : document.getElementById("shipDate").value.toString(),
+        'shippingDate' : shipDate,
         'shippingAddr' : shippingAddr,
         'billingAddr' : billingAddr,
-        'code' : document.getElementById("searchPro").value.toString()
+        'code' : code
     };
-    //console.log(Billing);
+    console.log(Billing);
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -1182,7 +1174,8 @@ function AddToOrder(){
         url: '/successOrder',
         data: Billing,
         success: function (data){
-            console.log(data);
+            //console.log(data);
+                window.location.replace('/welcome');
         }
     });
 }
@@ -1200,6 +1193,8 @@ function deleteCart(){
 }
 function AddToCart(orderNumber,Name,price, pdCode, num ,n){
     document.getElementById(n).value = 0;
+    console.log(orderNumber);
+    if(orderNumber != "" && orderNumber != null){
     var product = {
         "orderNumber": orderNumber,
         "Name" : Name,
@@ -1222,6 +1217,9 @@ function AddToCart(orderNumber,Name,price, pdCode, num ,n){
             promotion(data);
         }
     });
+    }else{
+        document.getElementById('error').style.display = "block";
+    }
 }
 
 function NumberCart(){
@@ -1262,9 +1260,28 @@ function reqTomnpd(employeeNumber){
             }
         })
     });
-
 }
-
+function reqTomnpr(employeeNumber){
+    var a = {"employeeNumber":employeeNumber};
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/reqPro',
+        data: a,
+        dataType:"json",
+        success : (function(data){
+            if(data != 'error'){
+                document.getElementById('id01').style.display='block'
+            }else{
+                document.getElementById('typeError').style.display = 'block';
+            }
+        })
+    });
+}
 function reqTomnem(employeeNumber){
     var a = {"employeeNumber":employeeNumber};
     $.ajaxSetup({

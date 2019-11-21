@@ -66,6 +66,7 @@ Route::post('/updateProduct/{code}','DataController@updateProduct');
 Route::post('/insertToCart','DataController@insertTocart');
 Route::post('/insertpromotion','DataController@insertpromotion');
 Route::post('/reqSell','DataController@reqSell');
+Route::post('/reqPro','DataController@reqPro');
 Route::post('/getMyEmployee','DataController@getMyEmployee');
 Route::post('/insertcus','DataController@insertcus');
 Route::post('/insertEm','DataController@insertEm');

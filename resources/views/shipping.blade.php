@@ -65,7 +65,7 @@
 
         <!-- Header Area Start -->
         <header class="header-area clearfix">
-            
+
             <!-- Close Icon -->
             <!-- <div class="nav-close">
                 <i class="fa fa-close" aria-hidden="true"></i>
@@ -74,6 +74,15 @@
             <div class="logo">
                 <a href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
             </div>
+            <p id="showUser"></p>
+            <script>
+                var x = sessionStorage.getItem('employeeNumber');
+                if(x != null ){
+                    document.getElementById('showUser').innerHTML="EmployeeID:" +x;
+                }else{
+                    window.location.href = "/";
+                }
+            </script>
 
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-30">
@@ -132,7 +141,7 @@
                 <br>
                 <a href="/" class="btn amado-btn">Logout</a>
             </div>
-            
+
             <!-- Pop up -->
                 <!--Login pop up-->
                 <div id="id01" class="modal">
@@ -191,34 +200,34 @@
                                                     <th >CustomerNumber</th>
                                                     <th > </th>
                                                 </tr>
-                                                
+
                                             </thead>
                                             <tbody id="order_table_body">
                                             </tbody>
                                         </table>
                                     </div>
-                                    <script> 
-                                        var data = <?php echo $jsonOrder?>; 
+                                    <script>
+                                        var data = <?php echo $jsonOrder?>;
                                         ShowShipping(data);
                                     </script>
                                 </div>
                             </div>
                         </div>
                     </form>
-                
-    
+
+
             <!-- pop-up add order to shipping -->
-            
+
 
     </div>
     <!-- ##### Main Content Wrapper End ##### -->
     <br>
-    
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <footer class="footer_area">
         <div >
         <!-- Logo -->
-        <a href="/welcome" style="padding:0px 0px 0px 50px"><img src="./amado-master/img/core-img/logoDarkBG.png" alt=""></a>  
+        <a href="/welcome" style="padding:0px 0px 0px 50px"><img src="./amado-master/img/core-img/logoDarkBG.png" alt=""></a>
         </div>
     </footer>
 

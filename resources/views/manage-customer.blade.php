@@ -87,6 +87,15 @@
             <div class="logo">
                 <a  href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
             </div>
+            <p id="showUser"></p>
+            <script>
+                var x = sessionStorage.getItem('employeeNumber');
+                if(x != null ){
+                    document.getElementById('showUser').innerHTML="EmployeeID:" +x;
+                }else{
+                    window.location.href = "/";
+                }
+            </script>
 
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-30">
@@ -128,12 +137,12 @@
                     </form>
                 </div>
                 <!-- product pop up -->
-                
+
                 <div id="id03" class="modal" style="display:none">
                     <!-- showProductDetail() -->
                 </div>
                 <!-- popup add new employee -->
-                <div id="id04" class="modal">
+                <div id="id04" style="display:none">
                     <span onclick="document.getElementById('id04').style.display='none'"
                         class="close" title="Close Modal">&times;
                     </span>

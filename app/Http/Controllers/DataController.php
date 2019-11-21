@@ -99,7 +99,7 @@ class DataController extends Controller
     }
     //and deleteFlag = 'flase'
     public function getAddress($code){
-        $address = DB::select("select * from addresses where customerNumber like '$code' ");
+        $address = DB::select("select * from addresses where customerNumber like '$code' and deleteFlag = 'false'");
         $point = DB::select("select point from customers where customerNumber like '$code'");
         return [json_encode($address),json_encode($point)];
     }
@@ -128,7 +128,7 @@ class DataController extends Controller
     }
     public function deleteAddress($code){      //Soft-delete -> still available on shipping details
         DB::update("update addresses set deleteFlag = 'true' where customerNumber = '$code'");
-        $data = DB::select("select * from addresses");
+        $data = DB::select("select * from customers");
         return json_encode($data);
     }
 
@@ -142,7 +142,7 @@ class DataController extends Controller
             values ('$x->orderNumber','$date','$request->shippingDate','in progress','$request->customerNumber','$request->shippingAddr', '$request->billingAddr')
         ");
 
-        //insert order details each row from cart to orderdetails
+        // insert order details each row from cart to orderdetails
         $i = 1;
         $j = 1;
         foreach($ProductCode as $P){
@@ -168,7 +168,7 @@ class DataController extends Controller
 
         $x=json_encode($request->code);
         //update qty of promotion in promotion table
-        DB::update("update promotion set qty =qty-1 where promotionCode like $x");
+        DB::update("update promotion set qty =qty-1 where promotionCode like '$x'");
 
         //delete cart
         DB::delete('delete from cart');
@@ -188,7 +188,7 @@ class DataController extends Controller
             $pro = DB::select('select * from promotion');
             $jsonpro = json_encode($pro);
             // $sale = DB::select("select * from employees ");
-            return redirect ('/welcome')-> with('firstLogin',$emp);
+            return redirect ('welcome')-> with('firstLogin',$emp);
             //return view(,['userDetail'=>json_encode($employeeDetail),'jsonpro'=>$jsonpro])->with();
         }
         else
@@ -206,6 +206,14 @@ class DataController extends Controller
     }
     public function reqSell(Request $request){
         $x = DB::select("select * from employees where employeeNumber = '$request->employeeNumber' and jobTitle like '%'||'Sale'||'%'");
+        if($x != null){
+            return json_encode($x);
+        }else{
+            return json_encode('error');
+        }
+    }
+    public function reqPro(Request $request){
+        $x = DB::select("select * from employees where employeeNumber = '$request->employeeNumber' and jobTitle like '%'||'VP marketing'||'%'");
         if($x != null){
             return json_encode($x);
         }else{
