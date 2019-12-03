@@ -23,7 +23,7 @@
 
 <body>
     <!-- <script>
-        
+
         sessionStorage.getItem("empNum", user[0].employeeNumber);
         sessionStorage.getItem("empFname", user[0].firstName);
         sessionStorage.getItem("empLname", user[0].lastName);
@@ -239,7 +239,7 @@
             <img src="./amado-master/img/core-img/customers.png"><br><br>
             Customers
         </a>
-        <a href="#" onclick="(document.getElementById('id01').style.display='block')" class="btn amado-big-btn">
+        <a href="#" onclick="reqTomnpr(sessionStorage.getItem('employeeNumber'))" class="btn amado-big-btn">
             <br><br><br>
             <img src="./amado-master/img/core-img/promotion.png"><br><br>
             Promotion

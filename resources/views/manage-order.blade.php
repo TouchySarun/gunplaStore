@@ -24,6 +24,15 @@
 </head>
 
 <body>
+
+    <div id = "error" class= "modal" style = "display:none">
+        <form class="modal-content animate" >
+            <div class="container" style="background-color:#f1f1f1">
+            <button type="button" onclick="document.getElementById('error').style.display='none'"
+                class="cancelbtn">Please enter Order Number.</button>
+            </div>
+        </form>
+    </div>
     <!-- Search Wrapper Area Start -->
     <div class="search-wrapper section-padding-50">
         <div class="search-close">
@@ -179,9 +188,11 @@
             var Scale = <?php echo $jsonScale?>;
             dropdownVender(Vendor);
             dropdownScale(Scale);
+            NumberCart();
             showProduct(json,false,true);
 
         </script>
+
         <!-- Product Catagories Area End -->
 
     </div>

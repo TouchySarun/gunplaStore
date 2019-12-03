@@ -64,7 +64,7 @@
 
         <!-- Header Area Start -->
         <header class="header-area clearfix">
-            
+
             <!-- Close Icon -->
             <!-- <div class="nav-close">
                 <i class="fa fa-close" aria-hidden="true"></i>
@@ -73,6 +73,15 @@
             <div class="logo">
                 <a href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
             </div>
+            <p id="showUser"></p>
+            <script>
+                var x = sessionStorage.getItem('employeeNumber');
+                if(x != null ){
+                    document.getElementById('showUser').innerHTML="EmployeeID:" +x;
+                }else{
+                    window.location.href = "/";
+                }
+            </script>
 
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-30">
@@ -131,7 +140,7 @@
                 <br>
                 <a href="/" class="btn amado-btn">Logout</a>
             </div>
-            
+
             <!-- Pop up -->
                 <!--Login pop up-->
                 <div id="id01" class="modal">
@@ -166,7 +175,7 @@
         <!-- Header Area End -->
 
         <!-- pop up shipping details -->
-                
+
                     <!-- product-order -->
                     <form class="modal-content animate" style="padding-top:5%">
                     <!-- cart-table-area  -->
@@ -188,7 +197,7 @@
                                             </thead>
                                             <tbody id="payment_table_body">
                                             </tbody>
-                                            <script>$data = <?php echo $jsonPayment?>; 
+                                            <script>$data = <?php echo $jsonPayment?>;
                                             ShowPayment($data);
                                             </script>
                                         </table>
@@ -197,7 +206,7 @@
                             </div>
                         </div>
                     </form>
-                
+
             <!-- pop-up add payment -->
             <div id="id04" class="modal">
                     <span onclick="document.getElementById('id04').style.display='none'"
@@ -249,7 +258,7 @@
     <footer class="footer_area">
         <div >
         <!-- Logo -->
-        <a href="/welcome" style="padding:0px 0px 0px 50px"><img src="./amado-master/img/core-img/logoDarkBG.png" alt=""></a>  
+        <a href="/welcome" style="padding:0px 0px 0px 50px"><img src="./amado-master/img/core-img/logoDarkBG.png" alt=""></a>
         </div>
     </footer>
 

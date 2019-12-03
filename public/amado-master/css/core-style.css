@@ -365,7 +365,7 @@ img {
 /* Height */
 .height-200 {
   height: 200px !important; }
-  
+
 .height-400 {
   height: 400px !important; }
 
@@ -621,7 +621,7 @@ img {
     background-color: #a19283;
 }
 
-.amado-btn-white {
+.whitebtn {
   display: inline-block;
   min-width: 35px;
   height: 35px;
@@ -633,7 +633,7 @@ img {
   line-height: 56px;
   background-color: #ffffff;
   font-weight: 400; }
-  .amado-btn.active, .amado-btn:hover, .amado-btn:focus {
+  .whitebtn.active, .whitebtn:hover, .whitebtn:focus {
     color: #fb8210;
     background-color: #ffffff;
 }
@@ -909,7 +909,7 @@ img {
         -ms-flex: 0 0 100%;
         flex: 0 0 100%;
         width: 100%;
-        max-width: 100%; } }  
+        max-width: 100%; } }
   .main-content-wrapper .welcome-area {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 calc(100%);
@@ -991,7 +991,7 @@ img {
         -ms-flex-order: 1;
         order: 1;
         padding-top: 50px; } }
-        
+
   /* order by tiew */
   .cart-order-area{
     position: relative;
@@ -1162,9 +1162,9 @@ img {
         color: #6b6b6b;
         font-weight: 400;
         margin-bottom: 15px; }
-   
+
   /* end order by tiew */
-  
+
 
   .main-content-wrapper .cart-table-area {
     position: relative;
@@ -1410,7 +1410,7 @@ img {
           -ms-flex: 0 0 100%;
           flex: 0 0 100%;
           width: 90%;
-          max-width: 90%; 
+          max-width: 90%;
           border-bottom: 1px solid #252525; }
           .main-content-wrapper .checkout-table-area table tbody tr td h5 {
             font-size: 18px;

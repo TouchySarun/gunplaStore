@@ -18,13 +18,13 @@ class DataController extends Controller
         $jsonScale = json_encode($distinctscale);
         return view('index',['jsonProduct'=>$jsonProduct, 'jsonVendor'=>$jsonVendor, 'jsonScale'=>$jsonScale]);
     }
-    
+
     public function employeeInfo(Request $request){
         $data = DB::select("select * from employees where employeeNumber = '$request->showUser'");
         $jsonEmployee = json_encode($data);
         return view('welcome',['jsonEmployee'=>$jsonEmployee]);
     }
-    
+
     public function mnproduct(){
         $data = DB::select('select * from products');
         $datastock = DB::select('select * from stock');
@@ -67,6 +67,12 @@ class DataController extends Controller
         $jsonProduct = json_encode($data);
         return $jsonProduct;
     }
+
+    public function NumberCart(){
+        $Qty = DB::select("select sum(qty) as Qty from cart");
+        return json_encode($Qty);
+    }
+
     public function deleteCart(){
         DB::delete('delete from cart');
     }
@@ -91,14 +97,14 @@ class DataController extends Controller
         $product = DB::select('select * from cart');
         return view('cart',['product'=>json_encode($product),'jsonCustomer'=> '']);
     }
-
+    //and deleteFlag = 'flase'
     public function getAddress($code){
-        $address = DB::select("select * from addresses where customerNumber like '$code'");
+        $address = DB::select("select * from addresses where customerNumber like '$code' and deleteFlag = 'false'");
         $point = DB::select("select point from customers where customerNumber like '$code'");
         return [json_encode($address),json_encode($point)];
     }
     public function addAddress(Request $request){
-        DB::insert("insert into addresses 
+        DB::insert("insert into addresses
             values ('$request->addrline1',
                     '$request->addrline2',
                     '$request->city',
@@ -122,7 +128,7 @@ class DataController extends Controller
     }
     public function deleteAddress($code){      //Soft-delete -> still available on shipping details
         DB::update("update addresses set deleteFlag = 'true' where customerNumber = '$code'");
-        $data = DB::select("select * from addresses");
+        $data = DB::select("select * from customers");
         return json_encode($data);
     }
 
@@ -131,25 +137,18 @@ class DataController extends Controller
         $ProductCode = DB :: select('select distinct productCode from cart ');
         $x = $OrderNumber[0];
         $date = date('Y-m-d',time());
-        // $reqdate = $date;
-        // date_add(date_interval_create_from_date_string("7 days"),$reqdate);
-        // date_modify("+7 days",$reqdate);
-        // date_add($redate,date_interval_create_from_date_string("7 days"));
-        // $date->modify('+7 day');
-
         DB::insert("
-            insert into orders(orderNumber,orderDate,requiredDate, status, customerNumber)
-            values ('$x->orderNumber','$date','$request->shippingDate','in progress','$request->customerNumber')
+            insert into orders(orderNumber,orderDate,requiredDate, status, customerNumber,shippingAddr, billingAddr)
+            values ('$x->orderNumber','$date','$request->shippingDate','in progress','$request->customerNumber','$request->shippingAddr', '$request->billingAddr')
         ");
 
+        // insert order details each row from cart to orderdetails
         $i = 1;
         $j = 1;
         foreach($ProductCode as $P){
             $p = $P->productCode ;
             $Qty = DB::select("select sum(qty) as QTY from cart where productCode like '$p' Group by productCode");
             $pricEach = DB::select("select buyPrice from products where productCode like '$p'");
-            // echo $i . " ";
-            // echo $P->productCode . " ";
             $qty = $Qty[0];
             $price = $pricEach[0];
             DB:: insert("
@@ -158,21 +157,23 @@ class DataController extends Controller
             ");
             $i = $i + $j;
         }
-        $z = (int)$request->Point;
 
+        //update point in customer table
+        $z = (int)$request->Point;
         $Point = DB::select("select point from customers where customerNumber like '$request->customerNumber'");
         $x = $Point[0];
         $y = $x->point;
         $x = $z+$y;
-
         DB::update("update customers set point =$x where customerNumber like '$request->customerNumber'");
-        return $z;
+
+        $x=json_encode($request->code);
+        //update qty of promotion in promotion table
+        DB::update("update promotion set qty =qty-1 where promotionCode like '$x'");
+
+        //delete cart
         DB::delete('delete from cart');
 
-        // return $jsonProduct;
-        return view('welcome');
-        // return $ProductCode;
-        // return null;
+         return view('welcome');
     }
 
     public function login(Request $request)
@@ -187,7 +188,7 @@ class DataController extends Controller
             $pro = DB::select('select * from promotion');
             $jsonpro = json_encode($pro);
             // $sale = DB::select("select * from employees ");
-            return redirect ('/welcome')-> with('firstLogin',$emp);
+            return redirect ('welcome')-> with('firstLogin',$emp);
             //return view(,['userDetail'=>json_encode($employeeDetail),'jsonpro'=>$jsonpro])->with();
         }
         else
@@ -205,6 +206,14 @@ class DataController extends Controller
     }
     public function reqSell(Request $request){
         $x = DB::select("select * from employees where employeeNumber = '$request->employeeNumber' and jobTitle like '%'||'Sale'||'%'");
+        if($x != null){
+            return json_encode($x);
+        }else{
+            return json_encode('error');
+        }
+    }
+    public function reqPro(Request $request){
+        $x = DB::select("select * from employees where employeeNumber = '$request->employeeNumber' and jobTitle like '%'||'VP marketing'||'%'");
         if($x != null){
             return json_encode($x);
         }else{
@@ -326,6 +335,11 @@ class DataController extends Controller
         return $data2;
     }
 
+    public function getPromotion(Request $code){
+        $qty = DB::select("select qty from promotion where promotionCode like '$code->code'");
+        $c = DB::select("select detail from promotion where promotionCode like '$code->code'");
+        return [$c,json_encode($qty)];
+    }
     public function deletepromotion(){
         $data = DB::select("delete from promotion where expairDate = date('now','localtime')");
         // // $data = DB::select("delete from promotion where expairDate = strftime('%Y-%m-%d',date('now'))");
