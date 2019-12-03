@@ -175,26 +175,8 @@
                                     <form>
                                         <p>StockNumber: <input type="text" id="snumber" name="snumber" placeholder="10100"></p>
                                         <p>ProductCode: <input type="text" id="code" name="code" placeholder="S10_1678"></p>
-                                        <p>Name: <input type="text" id="name" name="name" placeholder="1972 Alfa Romeo GTA"></p>
-                                        <p>Line:
-                                        <div>
-                                            <select class="w-100" id="line">
-                                                <option value="Classic Cars">Classic Cars</option>
-                                                <option value="Motorcycles">Motorcycles</option>
-                                                <option value="Planes">Planes</option>
-                                                <option value="Ships">Ships</option>
-                                                <option value="Trains">Trains</option>
-                                                <option value="Trucks and Buses">Trucks and Buses</option>
-                                                <option value="Vintage Cars">Vintage Cars</option>
-                                            </select>
-                                        </div>
-                                        </p>
-                                        <p>Scale: <input type="text" id="scale" name="scale" placeholder="1:10"></p>
-                                        <p>Vendor: <input type="text" id="vendor" name="vendor" placeholder="Highway 66 Mini Classics"></p>
                                         <p>Number: <input type="text" id="number" name="number" placeholder="7933"></p>
-                                        <p>buyPrice: <input type="text" id="price" name="price" placeholder="48.81"></p>
-                                        <p>MSRP: <input type="text" id="msrp" name="msrp" placeholder="95.70"></p>
-                                        <p>Description: <br><textarea id="pdes" name="description" style="width:600px; height:250px;"></textarea></p>
+                                        <p>Date: <br><input type="date" id="prodate" name="prodate"></p>
                                         <!-- <button>OK</button> -->
                                         <a href="#" onclick="insertitem()" class="btn amado-btn" type="submit">OK</a>
                                         <br><br>
