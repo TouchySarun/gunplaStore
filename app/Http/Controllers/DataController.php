@@ -18,6 +18,13 @@ class DataController extends Controller
         $jsonScale = json_encode($distinctscale);
         return view('index',['jsonProduct'=>$jsonProduct, 'jsonVendor'=>$jsonVendor, 'jsonScale'=>$jsonScale]);
     }
+
+    public function employeeInfo(Request $request){
+        $data = DB::select("select * from employees where employeeNumber = '$request->showUser'");
+        $jsonEmployee = json_encode($data);
+        return view('welcome',['jsonEmployee'=>$jsonEmployee]);
+    }
+
     public function mnproduct(){
         $data = DB::select('select * from products');
         $datastock = DB::select('select * from stock');
@@ -90,25 +97,52 @@ class DataController extends Controller
         $product = DB::select('select * from cart');
         return view('cart',['product'=>json_encode($product),'jsonCustomer'=> '']);
     }
-
+    //and deleteFlag = 'flase'
     public function getAddress($code){
-        $address = DB::select("select * from addresses where customerNumber like '$code'");
+        $address = DB::select("select * from addresses where customerNumber like '$code' and deleteFlag = 'false'");
         $point = DB::select("select point from customers where customerNumber like '$code'");
         return [json_encode($address),json_encode($point)];
     }
+    public function addAddress(Request $request){
+        DB::insert("insert into addresses
+            values ('$request->addrline1',
+                    '$request->addrline2',
+                    '$request->city',
+                    '$request->state',
+                    '$request->postalcode',
+                    '$request->country',
+                    '$request->custnum',
+                    '$request->addrnum',
+                    'false')"
+        );
+    }
+    public function editAddress($code){
+        $data = DB::select("select * from addresses where customerNumber = '$code'");
+        return json_encode($data);
+    }
+    public function updateAddress(Request $request, $code){
+        DB::update("update addresses set addressLine1 = ?,addressLine2 = ?,city = ?,state = ?,postalCode = ?,country = ? where addressNumber = ? and customerNumber = ?",
+        [$request->addrline1,$request->addrline2,$request->city,$request->state,$request->postalcode,$request->country,$request->addrnum,$code]);
+        $data = DB::select("select * from addresses");
+        return json_encode($data);
+    }
+    public function deleteAddress($code){      //Soft-delete -> still available on shipping details
+        DB::update("update addresses set deleteFlag = 'true' where customerNumber = '$code'");
+        $data = DB::select("select * from customers");
+        return json_encode($data);
+    }
+
     public function successOrder(Request $request){
         $OrderNumber = DB::select('select distinct orderNumber from cart ');
         $ProductCode = DB :: select('select distinct productCode from cart ');
         $x = $OrderNumber[0];
         $date = date('Y-m-d',time());
-
-        //insert from cart to orders 
         DB::insert("
-            insert into orders(orderNumber,orderDate,requiredDate,shippedDate,status, customerNumber,comments)
-            values ('$x->orderNumber','$date','$request->shippingDate','','In progress','$request->customerNumber','')
+            insert into orders(orderNumber,orderDate,requiredDate, status, customerNumber,shippingAddr, billingAddr)
+            values ('$x->orderNumber','$date','$request->shippingDate','in progress','$request->customerNumber','$request->shippingAddr', '$request->billingAddr')
         ");
 
-        //insert order details each row from cart to orderdetails 
+        // insert order details each row from cart to orderdetails
         $i = 1;
         $j = 1;
         foreach($ProductCode as $P){
@@ -123,7 +157,7 @@ class DataController extends Controller
             ");
             $i = $i + $j;
         }
-        
+
         //update point in customer table
         $z = (int)$request->Point;
         $Point = DB::select("select point from customers where customerNumber like '$request->customerNumber'");
@@ -134,17 +168,15 @@ class DataController extends Controller
 
         $x=json_encode($request->code);
         //update qty of promotion in promotion table
-        DB::update("update promotion set qty =qty-1 where promotionCode like $x");
-        
+        DB::update("update promotion set qty =qty-1 where promotionCode like '$x'");
+
         //delete cart
         DB::delete('delete from cart');
 
          return view('welcome');
-    }
 
-    // public function checkout(){
-    //     $data = DB::select("select * from customers");
-    //     $jsonCustomer = json_encode($data);
+
+    }
 
     public function login(Request $request)
     {
@@ -158,7 +190,7 @@ class DataController extends Controller
             $pro = DB::select('select * from promotion');
             $jsonpro = json_encode($pro);
             // $sale = DB::select("select * from employees ");
-            return redirect ('/welcome')-> with('firstLogin',$emp);
+            return redirect ('welcome')-> with('firstLogin',$emp);
             //return view(,['userDetail'=>json_encode($employeeDetail),'jsonpro'=>$jsonpro])->with();
         }
         else
@@ -182,6 +214,14 @@ class DataController extends Controller
             return json_encode('error');
         }
     }
+    public function reqPro(Request $request){
+        $x = DB::select("select * from employees where employeeNumber = '$request->employeeNumber' and jobTitle like '%'||'VP marketing'||'%'");
+        if($x != null){
+            return json_encode($x);
+        }else{
+            return json_encode('error');
+        }
+    }
     public function getMyEmployee(Request $request){
         $x = DB::select("select * from employees where reportsTo = '$request->employeeNumber'");
         return json_encode($x);
@@ -190,8 +230,7 @@ class DataController extends Controller
         DB::insert("insert into products(productName,productCode,productLine,productScale,productVendor,productDescription,quantityInstock,buyPrice,MSRP)
         values ('$request->pname','$request->pcode','$request->pline','$request->pscale','$request->pvendor','$request->pdes','$request->pnumber','$request->pprice','$request->pmsrp')");
         DB::insert("insert into stock(stockNumber,stockDate,productCode,qty)
-        values ('$request->snum',strftime('%Y-%m-%d',date('now')),'$request->pcode','$request->pnumber')");
-        $productl = DB::select("select * from productlines where productLine = $request->pline");
+        values ('$request->snum',date('now','localtime'),'$request->pcode','$request->pnumber')");
         $data = DB::select('select * from products');
         $datastock = DB::select('select * from stock');
         $jsonProduct = json_encode(array($data,$datastock));
@@ -273,6 +312,7 @@ class DataController extends Controller
     }
 
     public function promotion(){
+        $data = DB::select("delete from promotion where expairDate = date('now','localtime')");
         $pro = DB::select('select * from promotion');
         $jsonpro = json_encode($pro);
         return view('welcome',['jsonpro'=>$jsonpro]);
@@ -298,9 +338,15 @@ class DataController extends Controller
     }
 
     public function getPromotion(Request $code){
-        $qty = DB::select("select qty from promotion where promotionCode like '$code->code'"); 
+        $qty = DB::select("select qty from promotion where promotionCode like '$code->code'");
         $c = DB::select("select detail from promotion where promotionCode like '$code->code'");
         return [$c,json_encode($qty)];
+    }
+    public function deletepromotion(){
+        $data = DB::select("delete from promotion where expairDate = date('now','localtime')");
+        // // $data = DB::select("delete from promotion where expairDate = strftime('%Y-%m-%d',date('now'))");
+        $data2 = DB::select('select * from promotion');
+        return $data2;
     }
 }
 

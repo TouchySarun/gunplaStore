@@ -67,10 +67,8 @@
             </div>
 
             <!-- Cart Menu -->
-            <div class="cart-fav-search mb-30">
+            <div class="cart-fav-search mb-10">
                 <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
-                <a href="cart.html" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
-                <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
             </div>
 
             <!-- Amado Nav -->
@@ -116,11 +114,11 @@
             </nav>
 
             <!-- Button Group -->
-            <div class="amado-btn-group mt-30 mb-100">
-                <a href="#" onclick = "document.getElementById('id01').style.display='block'" class="btn amado-btn">
+            <div class="amado-btn-group mt-20 mb-100">
+                <a href="#" onclick = "document.getElementById('id01').style.display='block'" class="btn amado-btn-plus">
                     Login
                 </a>
-                <br>
+                <br><br>
                 <a href="#" onclick = "categorize(Vendor,'Vendor')" class="btn amado-btn">
                     Catagorize by Vendor
                 </a>
@@ -183,15 +181,17 @@
 
         <!-- Product Catagories Area Start -->
         <div class="products-catagories-area clearfix" id="productArea" >
-        <script>
+        
+        </div>
+        <script type="text/javascript">
             var json = <?php echo $jsonProduct?>;
             var Vendor = <?php echo $jsonVendor?>;
             var Scale = <?php echo $jsonScale?>;
-            showProduct(json, false, false);
             dropdownVender(Vendor);
             dropdownScale(Scale);
+            showProduct(json, false, false);
         </script>
-        </div>
+        
 
         
         <!-- Product Catagories Area End -->

@@ -10,7 +10,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>Amado - Furniture Ecommerce Template | Shipping</title>
+    <title>Shipping | Gunpla Store Plastic Model Shop</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="./amado-master/img/core-img/favicon.ico">
@@ -65,7 +65,7 @@
 
         <!-- Header Area Start -->
         <header class="header-area clearfix">
-            
+
             <!-- Close Icon -->
             <!-- <div class="nav-close">
                 <i class="fa fa-close" aria-hidden="true"></i>
@@ -74,99 +74,45 @@
             <div class="logo">
                 <a href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
             </div>
+            <!-- <p id="showUser"></p>
+            <script>
+                var x = sessionStorage.getItem('employeeNumber');
+                if(x != null ){
+                    document.getElementById('showUser').innerHTML="EmployeeID:" +x;
+                }else{
+                    window.location.href = "/";
+                }
+            </script> -->
 
-            <!-- Cart Menu -->
-            <div class="cart-fav-search mb-30">
-                <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
-                <!-- <a href="cart.html" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
-                <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a> -->
-            </div>
+            <div class="amado-nav" style="cursor: default">
+                <img src="./amado-master/img/core-img/employeeM.png">
+                <h5 class="mt-30"><span id="showUserFName"></span> <span id="showUserLName"></span></h5>
+                    <p id="showUserTitle" style="margin-bottom: 5px"></p>
+                    <p><span>Employee ID: </span><span id="showUserID"></span></p>
+                <script>
+                    document.getElementById('showUserID').innerHTML=sessionStorage.getItem('employeeNumber');
+                    document.getElementById('showUserTitle').innerHTML=sessionStorage.getItem('title');
+                    document.getElementById('showUserFName').innerHTML=sessionStorage.getItem('employeeFName');
+                    document.getElementById('showUserLName').innerHTML=sessionStorage.getItem('employeeLName');
+                </script>
 
-            <!-- Amado Nav -->
-            <nav class="amado-nav">
-                <ul>
-                <div class="amado-nav">
-                    <!--Scale bar-->
-                    <button
-                        class="navbar-toggler"
-                        type="button"
-                        data-toggle="collapse"
-                        data-target="#footerNavContent"
-                        aria-controls="footerNavContent"
-                        aria-expanded="false"
-                        >SCALE
-                        <i class="fa fa-caret-down"></i>
-                    </button>
-                    <div class="collapse navbar-collapse" id="footerNavContent">
-                        <ul>
-                            <li class="nav-item" id="Scale">
-                            </li>
-                        </ul>
-                    </div>
-                    <!--Vendor bar-->
-                    <button
-                        class="navbar-toggler"
-                        type="button"
-                        data-toggle="collapse"
-                        data-target="#footer"
-                        aria-controls="footerNavContent"
-                        aria-expanded="false"
-                        >VENDOR
-                        <i class="fa fa-caret-down"></i>
-                    </button>
-                    <div class="collapse navbar-collapse" id="footer">
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item" id="Vendor">
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                </ul>
-            </nav>
-
-          <!-- Button Group -->
-          <div class="amado-btn-group mt-30 mb-100">
-                <a href="/payment" class="btn amado-btn-plus">Payments</a>
+            <!-- Button Group -->
+                <div class="amado-btn-group mt-20 mb-100">
+                    <a href="/payment" class="btn amado-btn-plus">Payments</a>
                 <br><br>
-                <a href="/welcome" class="btn amado-btn">Back</a>
+                    <a href="/welcome" class="btn amado-btn">Back</a>
                 <br>
-                <a href="/" class="btn amado-btn">Logout</a>
-            </div>
-            
-            <!-- Pop up -->
-                <!--Login pop up-->
-                <div id="id01" class="modal">
-                    <span onclick="document.getElementById('id01').style.display='none'"
-                        class="close" title="Close Modal">&times;
-                    </span>
-
-                    <!-- Modal Content -->
-                    <form class="modal-content animate" action="/action_page.php">
-                        <div class="container">
-                            <label for="uname"><b>Username</b></label>
-                                <input type="text" placeholder="Enter Username" name="uname" required>
-                            <label for="psw"><b>Password</b></label>
-                                <input type="password" placeholder="Enter Password" name="psw" required>
-                                <button type="submit">Login</button>
-                            <label>
-                                <input type="checkbox" checked="checked" name="remember"> Remember me
-                            </label>
-                            <span class="psw"><a href="#">Forgot password?</a></span>
-                        </div>
-                        <div class="container" style="background-color:#f1f1f1">
-                        <button type="button" onclick="document.getElementById('id01').style.display='none'"
-                            class="cancelbtn">Cancel</button>
-                        </div>
-                    </form>
+                    <a href="/" class="btn amado-btn">Logout</a>
                 </div>
-                <!-- product pop up -->
+            </div>
+
+            <!-- edit pop up -->
                 <div id="id02" class="modal" style="display:none">
                     <!-- showProductDetail() -->
                 </div>
         </header>
         <!-- Header Area End -->
 
-        <!-- pop up shipping details -->
         <div id="id08" class="modal" style="display:none"></div>
 
                     <!-- product-order -->
@@ -183,42 +129,42 @@
                                             <thead>
                                                 <tr style="background-color:#fbb710">
                                                     <th >OrderNumber</th>
-                                                    <th style="width:20%">OrderDate</th>
-                                                    <th style="width:20%">RequiredDate</th>
-                                                    <th style="width:20%">ShippedDate</th>
+                                                    <th style="width: 150px">OrderDate</th>
+                                                    <th style="width: 150px">RequiredDate</th>
+                                                    <th style="width: 150px">ShippedDate    </th>
                                                     <th >Status</th>
-                                                    <th style="width:25%">Comments</th>
+                                                    <th >Comments</th>
                                                     <th >CustomerNumber</th>
                                                     <th > </th>
                                                 </tr>
-                                                
+
                                             </thead>
                                             <tbody id="order_table_body">
                                             </tbody>
                                         </table>
                                     </div>
-                                    <script> 
-                                        var data = <?php echo $jsonOrder?>; 
+                                    <script>
+                                        var data = <?php echo $jsonOrder?>;
                                         ShowShipping(data);
                                     </script>
                                 </div>
                             </div>
                         </div>
                     </form>
-                
-    
+
+
             <!-- pop-up add order to shipping -->
-            
+
 
     </div>
     <!-- ##### Main Content Wrapper End ##### -->
     <br>
-    
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <footer class="footer_area">
         <div >
         <!-- Logo -->
-        <a href="/welcome" style="padding:0px 0px 0px 50px"><img src="./amado-master/img/core-img/logoDarkBG.png" alt=""></a>  
+        <a href="/welcome" style="padding:0px 0px 0px 50px"><img src="./amado-master/img/core-img/logoDarkBG.png" alt=""></a>
         </div>
     </footer>
 

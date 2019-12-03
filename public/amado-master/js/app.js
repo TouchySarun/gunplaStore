@@ -7,97 +7,44 @@ var tablestock = "";
 var tablepromotion = "";
 var tablecustomer = "";
 //--------------Show script------------------//
-function showCustomerAddress(input, editAble) {
-    console.log(editAble);
-    if (editAble === true) {
+function showCustomerAddress(input, editAble,redioname,id) {
         x = JSON.parse(input);
-        var tableaddress = "";
         var n = 0;
+        var tableaddress = `<table style="width: 100%"><tbody>`;
         x.forEach( function (a) {
-            if (n == input.length - 1) {
+            tableaddress += `
+            <tr>`;
+                if(editAble != true){tableaddress += `
+                <td style="text-align: left; margin-right: 10px; max-width: 10%; border-bottom: none;">
+                    <label class="radio-container">
+                        <input type="radio" name="${redioname}" value="${n}">
+                        <span class="checkmark"></span>
+                    </label>
+                </td>`;}
                 tableaddress += `
-                    <!-- class="radio-container" -->
-                    <table style="width: 100%">
-                        <tbody>
-                            <tr>
-                                <td style="text-align: left; margin-right: 10px; max-width: 10%; border-bottom: none;">
-                                    <label class="radio-container">
-                                        <input type="radio" name="addressSelect" value="${n}">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </td>
-                                <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%; border-bottom: none">
-                                    <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                `;
-            } else {
-                n++;
-                tableaddress += `
-                    <table style="width: 100%">
-                        <tbody>
-                            <tr>
-                                <td style="text-align: left; margin-right: 10px; max-width: 10%; border-bottom: none">
-                                    <label class="radio-container">
-                                        <input type="radio" name="addressSelect" value="${n}">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </td>
-                                <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%;">
-                                    <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                `;
-            }
+                <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%; border-bottom: none">
+                    <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>`;
+                    if(n != x.length-1) tableaddress+= `<a class="line"></a>`;n++;tableaddress += `
+                </td>`;
+                if(editAble === true){tableaddress += `
+                <td style="width:15%; flex: 0 0 15%; padding-right: 1px; border-right: 1px solid #6d6d6d">
+                    <a href="#" onclick="PopUpAddress('${a.addressLine1}', '${a.addressLine2}','${a.city}', '${a.state}', '${a.country}', '${a.postalCode}','${a.customerNumber}','${a.addressNumber}')" class="btn amado-btn-white" style="min-width:20%; width=100%">
+                        <img src="./amado-master/img/core-img/pencil.png" width="25" height="25">
+                    </a>
+                </td>
+                <td style="width:15%; flex: 0 0 15%; padding-left: 1px">
+                    <a href="#" onclick="deleteAddr('${a.customerNumber}')" class="btn amado-btn-white" style="min-width:20%; width=100%">
+                        <img src="./amado-master/img/core-img/trash.png" width="25" height="25">
+                    </a>
+                </td>  `;}
+                tableaddress+= `
+            </tr>`;
         });
-    }else{
-        x = JSON.parse(input);
-        var tableaddress = "";
-        var n = 0;
-        x.forEach( function (a) {
-            if (n == input.length - 1) {
-                tableaddress += `
-                    <!-- class="radio-container" -->
-                    <table style="width: 100%">
-                        <tbody>
-                            <tr>
-                                <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%; border-bottom: none">
-                                    <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                `;
-            } else {
-                n++;
-                tableaddress += `
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div>
-                                    <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>
-
-                                    </div>
-                                    </td>
-                                    <td><a href="#" class="btn amado-btn" >Delete</a>
-                                    <a href="#" class="btn amado-btn" >Edit</a>
-                                    </td>
-                                    </tr>
-                        </tbody>
-                    </table>
-                `;
-            }
-        });
-    }
-    document.getElementById("addressArea").innerHTML = tableaddress;
+        tableaddress += `</tbody></table>`;
+    document.getElementById(`${id}`).innerHTML = tableaddress;
 }
 
-function getAddress(customerNumber,editAble){
+function getAddress(customerNumber,editAble,redioname,id){
     //console.log(customerNumber);
     $.ajaxSetup({
         headers: {
@@ -108,10 +55,14 @@ function getAddress(customerNumber,editAble){
         type: 'get',
         url: '/getAddress/' + customerNumber,
         success: function (data) {
-            console.log(data[1]);
-            showCustomerAddress(data[0], editAble);
+            //console.log(data);
+            showCustomerAddress(data[0], editAble,redioname,id);
             var d = JSON.parse(data[1]);
-            document.getElementById("points").innerHTML = d[0].point;
+            var points = document.getElementById("points");
+            if(points != null){
+                points.innerHTML = d[0].point;
+            }
+
             // console.log(x[0].customerNumber);
             // return x[0];
         }
@@ -128,10 +79,12 @@ function showProduct(json, editable, orderable) {
                     json.forEach(function (a) {
         tableproduct += `
         <div class="single-products-catagory">
+        
         <a href="#" onclick="PopUpProduct('${a.productCode}', '${editable}')">
-        <img src="./amado-master/img/bg-img/1.jpg" alt="">
+        <img src="./amado-master/img/product-img/1.png" alt="">
+        
         <!-- Hover Content -->
-                <div class="hover-content">
+            <div class="hover-content">
                 <div class="line"></div>
                 <p>Stock ${a.quantityInStock}</p>
                     <p>$${a.buyPrice}</p>
@@ -232,7 +185,6 @@ function showCart(product){
     i++;
     });
     document.getElementById('order_table_body').innerHTML = tableCart;
-
 }
 
 function showEmployee(employee) {
@@ -271,19 +223,20 @@ function showEmployee(employee) {
 }
 
 function showCustomer(customer) {
+    console.log(customer);
     tablecustomer = "<br><br><br>";
     jsoncustomer = customer;
     customer.forEach(function (a) {
         tablecustomer += `
         <div class="single-products-catagory">
-                <a href="#" onclick="PopUpCustomer('${a.customerNumber}', false),getAddress(${a.customerNumber}, false)">
-                <img src="./amado-master/img/core-img/employeeM.png" alt="">
+                <a href="#" onclick="PopUpCustomer('${a.customerNumber}', false),getAddress(${a.customerNumber}, false, 'dont need', 'addressArea')">
+                <img src="./amado-master/img/core-img/customer1.png" alt="">
                 <!-- Hover Content -->
                 <div class="hover-content">
                     <div class="line"></div>
                     <p>Number ${a.customerNumber}</p>
                     <h5>${a.customerName}</h5>
-                    <h4>${a.contactFirstName} ${a.contactFirstName}</h4>
+                    <h4>${a.contactFirstName} ${a.contactLastName}</h4>
                 </div>
                 <div class="cusDetail" style= "display:none">
                     <p>${a.customerNumber}</p>
@@ -296,7 +249,7 @@ function showCustomer(customer) {
                     <p>${a.point}</p>
                 </div>
                 </a>
-                <button onclick="PopUpCustomer('${a.customerNumber}', true),getAddress(${a.customerNumber}, false)" class="btn amado-btn">Edit</button>
+                <button onclick="PopUpCustomer('${a.customerNumber}', true),getAddress(${a.customerNumber}, true, 'dont need', 'addressArea')" class="btn amado-btn">Edit</button>
         </div>
         `
     });
@@ -325,6 +278,7 @@ function stockin(stock){
 function promotion(promo){
     tablepromotion = "";
     promo.forEach( function(a) {
+        deletepromotion();
     tablepromotion += `
         <tr>
             <td><h5>${a.promotionId}</h5></td>
@@ -332,7 +286,7 @@ function promotion(promo){
             <td class="cart_product_desc">
                 <h5>${a.qty}</h5>
             </td>
-            <td><h5>${a.stockDate}</h5></td>
+            <td><h5>${a.detail}</h5></td>
             <td><h5>${a.expairDate}</h5></td>
         </tr>
         `
@@ -365,8 +319,8 @@ function PopUpCustomer(a, editAble){
                                     <div class="single_product_thumb">
                                         <div id="product_details_slider" class="carousel slide" data-ride="carousel">
                                             <div class="carousel-inner">
-                                                    <a class="gallery_img" href="./amado-master/img/core-img/employeeM.png">
-                                                        <img class="d-block w-100" src="./amado-master/img/core-img/employeeM.png" alt="First slide">
+                                                    <a class="gallery_img" href="./amado-master/img/core-img/customer1.png">
+                                                        <img class="d-block w-100" src="./amado-master/img/core-img/customer1.png" alt="First slide">
                                                     </a>
                                             </div>
                                         </div>
@@ -515,10 +469,10 @@ function PopUpodstatus(a){
                     <div class="product-meta-data">
                         <form>
                             <p>ShippedDate:
-                            <br><input id="shipdate" type="date" name="shipdate" value="${b.shippedDate}"></p>
+                            <br><input id="shipdate" type="date" style="width: 400px" name="shipdate" value="${b.shippedDate}"></p>
                             <p>Status:
                             <div>
-                                <select class="w-100" id="order_status" value="${b.status}">
+                                <select class="w-75" id="order_status" value="${b.status}">
                                     <option value="Cancelled">Cancelled</option>
                                     <option value="Disputed">Disputed</option>
                                     <option value="In process">In process</option>
@@ -571,30 +525,30 @@ function PopUpProduct(a, editAble){
                             <div class="single_product_thumb">
                                 <div id="product_details_slider" class="carousel slide" data-ride="carousel">
                                 <ol class="carousel-indicators">
-                                <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(./amado-master/img/product-img/pro-big-1.jpg);"></li>
-                                <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(./amado-master/img/product-img/pro-big-2.jpg);"></li>
-                                <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(./amado-master/img/product-img/pro-big-3.jpg);"></li>
-                                <li data-target="#product_details_slider" data-slide-to="3" style="background-image: url(./amado-master/img/product-img/pro-big-4.jpg);"></li>
+                                <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(./amado-master/img/product-img/1.png);"></li>
+                                <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(./amado-master/img/product-img/2.png);"></li>
+                                <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(./amado-master/img/product-img/3.png);"></li>
+                                <li data-target="#product_details_slider" data-slide-to="3" style="background-image: url(./amado-master/img/product-img/4.png);"></li>
                             </ol>
                                     <div class="carousel-inner">
                                         <div class="carousel-item active">
-                                            <a class="gallery_img" href="./amado-master/img/product-img/pro-big-1.jpg">
-                                            <img class="d-block w-100" src="./amado-master/img/product-img/pro-big-1.jpg" alt="First slide">
+                                            <a class="gallery_img" href="./amado-master/img/product-img/1.png">
+                                            <img class="d-block w-100" src="./amado-master/img/product-img/1.png" alt="First slide">
                                             </a>
                                         </div>
                                         <div class="carousel-item">
-                                            <a class="gallery_img" href="./amado-master/img/product-img/pro-big-2.jpg">
-                                            <img class="d-block w-100" src="./amado-master/img/product-img/pro-big-2.jpg" alt="Second slide">
+                                            <a class="gallery_img" href="./amado-master/img/product-img/2.png">
+                                            <img class="d-block w-100" src="./amado-master/img/product-img/2.png" alt="Second slide">
                                             </a>
                                         </div>
                                         <div class="carousel-item">
-                                            <a class="gallery_img" href="./amado-master/img/product-img/pro-big-3.jpg">
-                                            <img class="d-block w-100" src="./amado-master/img/product-img/pro-big-3.jpg" alt="Third slide">
+                                            <a class="gallery_img" href="./amado-master/img/product-img/3.png">
+                                            <img class="d-block w-100" src="./amado-master/img/product-img/3.png" alt="Third slide">
                                             </a>
                                         </div>
                                         <div class="carousel-item">
-                                            <a class="gallery_img" href="./amado-master/img/product-img/pro-big-4.jpg">
-                                            <img class="d-block w-100" src="./amado-master/img/product-img/pro-big-4.jpg" alt="Fourth slide">
+                                            <a class="gallery_img" href="./amado-master/img/product-img/4.png">
+                                            <img class="d-block w-100" src="./amado-master/img/product-img/4.png" alt="Fourth slide">
                                             </a>
                                         </div>
                                     </div>
@@ -605,41 +559,64 @@ function PopUpProduct(a, editAble){
                             <div class="single_product_desc">`;
             if (editAble === true) {
                 box += `<div class="product-meta-data">
-                <div class="line"></div>
-                <form>
-                    <p>Price: <input type="text" id="price" name="number" value="${b.buyPrice}"></p>
-                    <p>Name: <input type="text" id="name" name="text" value="${b.productName}"></p>
-                    <p>Scale: <input type="text" id="scale" name="text" value="${b.productScale}"></p>
-                    <p>Vendor: <input type="text" id="vendor" name="text" value="${b.productVendor}"></p>
-                    <p>Instock: <input type="text" id="stock" name="text" value="${b.quantityInStock}"></p>
-                </form>
-            </div>
-            <div class="short_overview my-5">
-                <p>Description: <textarea id="des" name="message" style="width:400px; height:250px;">${b.productDescription}</textarea></p>
-            </div>
-            <a href="#" class="btn amado-btn" onclick="deleteitem('${b.productCode}')">Delete</a>
-            <a href="#" class="btn amado-btn" onclick="updateitem('${b.productCode}')">Save</a>
+                    <div class="line"></div>
+                    <form>
+                        <p class="product-price">Price: <input type="text" id="price" name="number" value="${b.buyPrice}"></p>
+                        <p><h3>Name: </h3><input type="text" id="name" name="text" value="${b.productName}"></p>
+                        <p><h4>Scale: </h4><input type="text" id="scale" name="text" value="${b.productScale}"></p>
+                        <p><h5>Vendor: </h5><input type="text" id="vendor" name="text" value="${b.productVendor}"></p>
+                        <p>Instock: <input type="text" id="stock" name="text" value="${b.quantityInStock}"></p>
+                    </form>
+                </div>
+                <div class="short_overview my-5">
+                    <p>Description: <textarea id="des" name="message" style="width:400px; height:250px;">${b.productDescription}</textarea></p>
+                </div>
+                <a href="#" class="btn amado-btn" onclick="deleteitem('${b.productCode}')">Delete</a>
+                <a href="#" class="btn amado-btn" onclick="updateitem('${b.productCode}')">Save</a>
 
             </div></div></div></div></div></div></form>`;
             } else {
-                box += `
-        <div class="product-meta-data">
-            <div class="line"></div>
-            <p class="product-price">$${b.buyPrice}</p>
-                <h3>${b.productName}</h6>
-                <h4>Scale ${b.productScale}</h6>
-                <h5>Vendor ${b.productVendor}</h5>
-            <p class="avaibility"><i class="fa fa-circle"></i> ${b.quantityInStock} In Stock</p>
-        </div>
-        <div class="short_overview my-5">
-            <p>${b.productDescription}</p>
-        </div>
-        </div></div></div></div></div></div></form>`
+                box += `<div class="product-meta-data">
+                <div class="line"></div>
+                    <form>
+                        <p class="product-price">$${b.buyPrice}</p>
+                        <h3>${b.productName}</h3>
+                        <h4>Scale ${b.productScale}</h4>
+                        <h5>Vendor ${b.productVendor}</h5>
+                        <p class="avaibility"><i class="fa fa-circle"></i> ${b.quantityInStock} In Stock</p>
+                    </form>
+                </div>
+                <div class="short_overview my-5">
+                    <p>${b.productDescription}</p>
+                </div>
+            </div></div></div></div></div></div></form>`
             }
             document.getElementById("id02").innerHTML = box;
             document.getElementById("id02").style.display = 'block';
         }
     });
+}
+// Address
+function PopUpAddress(addressLine1, addressLine2,city,state,country,postalCode,customerNumber,addressNumber) {
+    var box = `
+        <span onclick="document.getElementById('id05').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <form class="modal-content animate" action="/action_page.php">
+            <div class="container">
+                <h4>Edit Customer Address</h4><br>
+                <p><b>Address Line 1</b> <input type="text" placeholder="" id="addressLine1" name="addressLine1" value="${addressLine1}"></p>
+                <p><b>Address Line 2</b> <input type="text" placeholder="" id="addressLine2" name="addressLine2" value="${addressLine2}"></p>
+                <p><b>City</b> <input type="text" placeholder="" id="city" name="city" value="${city}"></p>
+                <p><b>State</b> <input type="text" placeholder="" id="state" name="state" value="${state}"></p>
+                <p><b>Country</b> <input type="text" placeholder="" id="country" name="country" value="${country}"></p>
+                <p><b>Postal Code</b> <input type="text" placeholder="" id="postalCode" name="postalCode" value="${postalCode}"></p>
+                <p><b>Address ID</b> <p id="addrnum">${addressNumber}</p>
+                <p><b>Customer ID</b> <p>${customerNumber}</p>
+                <a href="#" class="btn amado-btn" onclick="deleteAddr('${customerNumber}')">Delete</a>
+                <a href="#" class="btn amado-btn" onclick="updateAddr('${customerNumber}')">Save</a>
+            </div>
+        </form>`
+    document.getElementById("id05").innerHTML = box;
+    document.getElementById("id05").style.display = 'block';
 }
 
 //------------end show script------------//
@@ -845,6 +822,36 @@ function insertcus(){
         }
     });
 }
+
+// Address
+function insertAddress(){
+    var address = {
+        "addrline1": document.getElementById("addressLine1").value.toString(),
+        "addrline2": document.getElementById("addressLine2").value.toString(),
+        "city": document.getElementById("city").value.toString(),
+        "state": document.getElementById("state").value.toString(),
+        "postalcode": document.getElementById("postalCode").value.toString(),
+        "country": document.getElementById("country").value.toString(),
+        "custnum": document.getElementById("custnum").value.toString(),
+        "addrnum": document.getElementById("addrnum").value.toString()
+    };
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/addAddress',
+        data: address,
+        dataType: "json",
+        success: function (data) {
+            console.log(data);
+            document.getElementById('id01').style.display = 'none';
+            showCustomerAddress(data, true, 'dont need', 'addressArea');
+        }
+    });
+}
 // -----------------------End Insert-------------------------//
 
 // ----------------------Update-------------------------------//
@@ -954,7 +961,50 @@ function updateship(a){
     });
 }
 
-
+//Address
+function updateAddr(a){
+    var address = {
+        "addrline1": document.getElementById("addressLine1").value.toString(),
+        "addrline2": document.getElementById("addressLine2").value.toString(),
+        "city": document.getElementById("city").value.toString(),
+        "state": document.getElementById("state").value.toString(),
+        "postalcode": document.getElementById("postalCode").value.toString(),
+        "country": document.getElementById("country").value.toString(),
+        "addrnum": document.getElementById("addrnum").innerText
+    };
+    console.log(address);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/updateAddress/' + a,
+        data: address,
+        dataType: 'json',
+        success: function (data) {
+            document.getElementById('id05').style.display = 'none';
+            showCustomerAddress(data, true, 'dont need', 'addressArea');
+        }
+    });
+}
+function deleteAddr(a){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/deleteAddress/' + a,
+        success: function (data) {
+            document.getElementById('id04').style.display = 'none';
+            data1 = JSON.parse(data);
+            showCustomer(data1);
+        }
+    });
+}
 // ---------------------End Update---------------------------//
 
 // -----------------------Delete-----------------------------//
@@ -1008,6 +1058,24 @@ function deletecus(a){
         }
     });
 }
+
+function deletepromotion(){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'delete',
+        url: '/deletepromotion',
+        success: function (data) {
+            console.log(data);
+            promotion(data);
+            // document.getElementById('id03').style.display = 'none';
+            // showProduct(data, true, false);
+        }
+    });
+}
 // ----------------------End Delete-----------------------------//
 
 // ----------------------Calculate-----------------------------//
@@ -1020,16 +1088,15 @@ function order_calculator(){
     for (var i = 0; i < tr.length; i++) {
         var price = tr[i].getElementsByTagName("td")[2].innerText;
         var num = document.getElementById(`qty${i}`).value;
-        console.log(num);
+        //console.log(num);
         sum += price * num;
-        mempoint = Math.floor(sum / 100) * 3;
-    }    
+    }
+    mempoint = Math.floor(sum / 100) * 3;
     var n = sum.toFixed(2);
     document.getElementById("sumprice").innerHTML = '$ ' + n;
     var d = document.getElementById("discount").innerHTML;
     document.getElementById("mempoint").innerHTML = mempoint;
-    console.log(d);
-    if((d !== 'Code Invalid')&&(d !== '-')&&(d !== 'Run out of quota')){ 
+    if((d !== 'Code Invalid')&&(d !== '-')&&(d !== 'Run out of quota')){
         n = n-parseFloat(d);
         n = n.toFixed(2);
     }
@@ -1065,17 +1132,39 @@ function stock(){
         type: 'post',
         url: '/stock',
         success: function (data) {
-            console.log(data);
+            //console.log(data);
         }
     });
 }
 function AddToOrder(){
-
+    var shippingAddr, billingAddr;
+    var radios = document.getElementsByName('addressArea');
+    for (var i = 0; i < radios.length; i++){
+        if (radios[i].checked){
+                shippingAddr = radios[i].value;
+            }
+        }
+    radios = document.getElementsByName('addressArea2');
+        for (var i = 0, length = radios.length; i < length; i++){
+            if (radios[i].checked){
+                billingAddr = radios[i].value;
+            }
+        }
+    var code = document.getElementById("searchPro").value.toString();
+    if(code == ""){
+        code = '0';
+    }
+    var shipDate = document.getElementById("shipDate").value.toString();
+    if(shipDate == ""){
+        shipDate = "order date +7";
+    }
     var Billing = {
         'customerNumber' : document.getElementById("searchID").value.toString(),
-        'Point' : document.getElementById("mempoint").innerHTML,
-        'shippingDate' : document.getElementById("shipDate").value.toString(),
-        'code' : document.getElementById("searchPro").value.toString()
+        'Point' : document.getElementById("mempoint").innerText,
+        'shippingDate' : shipDate,
+        'shippingAddr' : shippingAddr,
+        'billingAddr' : billingAddr,
+        'code' : code
     };
     console.log(Billing);
     $.ajaxSetup({
@@ -1088,10 +1177,10 @@ function AddToOrder(){
         url: '/successOrder',
         data: Billing,
         success: function (data){
-            console.log(data);
+            //console.log(data);
+                window.location.replace('/welcome');
         }
     });
-    console.log('sucees Hurey');
 }
 function deleteCart(){
 
@@ -1107,6 +1196,8 @@ function deleteCart(){
 }
 function AddToCart(orderNumber,Name,price, pdCode, num ,n){
     document.getElementById(n).value = 0;
+    console.log(orderNumber);
+    if(orderNumber != "" && orderNumber != null){
     var product = {
         "orderNumber": orderNumber,
         "Name" : Name,
@@ -1125,9 +1216,12 @@ function AddToCart(orderNumber,Name,price, pdCode, num ,n){
         data: product,
         success: function (data){
             console.log(data);
+            promotion(data);
         }
     });
-    NumberCart();
+    }else{
+        document.getElementById('error').style.display = "block";
+    }
 }
 
 function NumberCart(){
@@ -1168,9 +1262,28 @@ function reqTomnpd(employeeNumber){
             }
         })
     });
-
 }
-
+function reqTomnpr(employeeNumber){
+    var a = {"employeeNumber":employeeNumber};
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/reqPro',
+        data: a,
+        dataType:"json",
+        success : (function(data){
+            if(data != 'error'){
+                document.getElementById('id01').style.display='block'
+            }else{
+                document.getElementById('typeError').style.display = 'block';
+            }
+        })
+    });
+}
 function reqTomnem(employeeNumber){
     var a = {"employeeNumber":employeeNumber};
     $.ajaxSetup({
