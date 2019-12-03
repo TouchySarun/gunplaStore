@@ -1114,7 +1114,6 @@ function AddToCart(orderNumber,Name,price, pdCode, num ,n){
         "productCode": pdCode,
         "qty": num
     };
-    NumberCart();
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -1128,6 +1127,7 @@ function AddToCart(orderNumber,Name,price, pdCode, num ,n){
             console.log(data);
         }
     });
+    NumberCart();
 }
 
 function NumberCart(){
@@ -1142,8 +1142,8 @@ function NumberCart(){
         url: '/NumberCart',
         success: function (data){
             var d = JSON.parse(data);
-            // console.log(d[0].Qty);
-            document.getElementById("NumberCart").innerHTML = d[0].Qty;
+            console.log(d[0].Qty);
+            if(d[0].Qty !== null) document.getElementById("NumberCart").innerHTML = d[0].Qty;
         }
     });
 }

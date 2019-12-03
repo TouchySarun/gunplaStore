@@ -117,8 +117,6 @@
 
             <!-- Button Group -->
             <div class="amado-btn-group mt-30 mb-100">
-                <a href="#" class="btn amado-btn" >Discount</a>
-                <br>
                 <a href="#" onclick = "document.getElementById('id01').style.display='block'" class="btn amado-btn">
                     Login
                 </a>
@@ -137,7 +135,7 @@
             </div>
 
         </header>
-
+        
 
     </div>
     <!-- ##### Main Content Wrapper End ##### -->
@@ -185,8 +183,6 @@
 
         <!-- Product Catagories Area Start -->
         <div class="products-catagories-area clearfix" id="productArea" >
-        </div>
-
         <script>
             var json = <?php echo $jsonProduct?>;
             var Vendor = <?php echo $jsonVendor?>;
@@ -194,8 +190,10 @@
             showProduct(json, false, false);
             dropdownVender(Vendor);
             dropdownScale(Scale);
-            sessionStorage.clear();
         </script>
+        </div>
+
+        
         <!-- Product Catagories Area End -->
 
     </div>
