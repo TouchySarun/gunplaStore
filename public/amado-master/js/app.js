@@ -47,13 +47,13 @@ function showCustomerAddress(input, editAble) { //, editAble
                         <tbody>
                             <tr>
                                 <td style="text-align: left; margin-right: 10px; max-width: 10%; border-bottom: none;">
-                                    <label class="radio-container"> 
+                                    <label class="radio-container">
                                         <input type="radio" name="addressSelect" value="${n}">
                                         <span class="checkmark"></span>
                                     </label>
                                 </td>
                                 <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%; border-bottom: none">
-                                    <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>                    
+                                    <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>
                                 </td>
                             </tr>
                         </tbody>
@@ -72,7 +72,7 @@ function showCustomerAddress(input, editAble) { //, editAble
                                     </label>
                                 </td>
                                 <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%;">
-                                    <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>                    
+                                    <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>
                                 </td>
                             </tr>
                         </tbody>
@@ -80,7 +80,46 @@ function showCustomerAddress(input, editAble) { //, editAble
                 `;
             }
         });
-    }
+    // }else{
+    //     x = JSON.parse(input);
+    //     var tableaddress = "";
+    //     var n = 0;
+    //     x.forEach( function (a) {
+    //         if (n == input.length - 1) {
+    //             tableaddress += `
+    //                 <!-- class="radio-container" -->
+    //                 <table style="width: 100%">
+    //                     <tbody>
+    //                         <tr>
+    //                             <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%; border-bottom: none">
+    //                                 <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>
+    //                             </td>
+    //                         </tr>
+    //                     </tbody>
+    //                 </table>
+    //             `;
+    //         } else {
+    //             n++;
+    //             tableaddress += `
+    //                 <table>
+    //                     <tbody>
+    //                         <tr>
+    //                             <td>
+    //                                 <div>
+    //                                 <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>
+
+    //                                 </div>
+    //                                 </td>
+    //                                 <td><a href="#" class="btn amado-btn" >Delete</a>
+    //                                 <a href="#" class="btn amado-btn" >Edit</a>
+    //                                 </td>
+    //                                 </tr>
+    //                     </tbody>
+    //                 </table>
+    //             `;
+    //         }
+    //     });
+    // }
     document.getElementById("addressArea").innerHTML = tableaddress;    //Shipping Address
     document.getElementById("addressArea2").innerHTML = tableaddress;   //Billing Address
 }
@@ -96,13 +135,16 @@ function getAddress(customerNumber, editAble){ //editAble
         type: 'get',
         url: '/getAddress/' + customerNumber,
         success: function (data) {
-            showCustomerAddress(data, editAble); //editAble
-            //var x = JSON.parse(data);
+            console.log(data[1]);
+            showCustomerAddress(data[0], editAble);
+            var d = JSON.parse(data[1]);
+            document.getElementById("points").innerHTML = d[0].point;
             // console.log(x[0].customerNumber);
             // return x[0];
         }
     });
 }
+
 
 var jasonproduct = "";
 function showProduct(json, editable, orderable) {
@@ -159,6 +201,7 @@ function showProduct(json, editable, orderable) {
 
 function showCart(product){
     tableCart = '';
+    i = 0;
     product.forEach(function (a){
         tableCart += `<tr>
         <td class="cart_product_img">
@@ -174,15 +217,17 @@ function showCart(product){
             <div class="qty-btn d-flex">
                 <p>Qty</p>
                 <div class="quantity">
-                    <span class="qty-minus" onclick="var effect = document.getElementById('qty0'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 0 ) effect.value--;order_calculator();return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                    <input type="number" class="qty-text" id="qty0" step="1" min="0" max="300" name="quantity" value="${a.qty}">
-                    <span class="qty-plus" onclick="var effect = document.getElementById('qty0'); var qty = effect.value; if( !isNaN( qty )) effect.value++;order_calculator();return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                    <span class="qty-minus" onclick="var effect = document.getElementById('qty${i}'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 0 ) effect.value--;order_calculator();return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                    <input type="number" class="qty-text" id="qty${i}" step="1" min="0" max="300" name="quantity" value="${a.qty}">
+                    <span class="qty-plus" onclick="var effect = document.getElementById('qty${i}'); var qty = effect.value; if( !isNaN( qty )) effect.value++;order_calculator();return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
                 </div>
             </div>
         </td>
-    </tr>`
+    </tr>`;
+    i++;
     });
     document.getElementById('order_table_body').innerHTML = tableCart;
+
 }
 
 function showEmployee(employee) {
@@ -274,8 +319,8 @@ function stockin(stock){
 //promotion
 function promotion(promo){
     tablepromotion = "";
-    console.log(promo);
     promo.forEach( function(a) {
+        deletepromotion();
     tablepromotion += `
         <tr>
             <td><h5>${a.promotionId}</h5></td>
@@ -283,7 +328,7 @@ function promotion(promo){
             <td class="cart_product_desc">
                 <h5>${a.qty}</h5>
             </td>
-            <td><h5>${a.stockDate}</h5></td>
+            <td><h5>${a.detail}</h5></td>
             <td><h5>${a.expairDate}</h5></td>
         </tr>
         `
@@ -339,7 +384,7 @@ function PopUpCustomer(a, editAble){
                     <p>CreditLimit: <input type="text" id="cuslimit" name="text" value="${b.creditLimit}"></p>
                     <p>Point: <input type="text" id="cuspoint" name="text" value="${b.point}"></p>
                     <br>
-                    <h5>Address:</h5> 
+                    <h5>Address:</h5>
                     </div>
                     <div class="product-meta-data" id="addressArea"><div>
                     </div>
@@ -349,7 +394,7 @@ function PopUpCustomer(a, editAble){
                     <a href="#" class="btn amado-btn" onclick="deletecus('${b.customerNumber}')">Delete</a>
                     <a href="#" class="btn amado-btn" onclick="updatecus('${b.customerNumber}')">Save</a>`
             }else{
-            box += `                                   
+            box += `
             <div class="product-meta-data">
                 <h3>Number: ${b.customerNumber}</h3>
                 <h3>${b.customerName}</h3>
@@ -359,7 +404,7 @@ function PopUpCustomer(a, editAble){
                 <h6>CreditLimit: ${b.creditLimit}</h6>
                 <p class="avaibility"><i class="fa fa-circle"></i>Point: ${b.point}</p>
                 <br>
-                <h5>Address:</h5> 
+                <h5>Address:</h5>
             </div>
             <div class="product-meta-data" id="addressArea"><div>
             </div>`
@@ -415,7 +460,7 @@ function PopUpEmployee(number, lname, fname, email, office, report, job, exetens
                         <option value="Sales Manager (NA)">Sales Manager (NA)</option>
                         <option value="Sales Rep">Sales Rep</option>
                         </select>
-                </div>    
+                </div>
                 <p>OfficeCode: <input type="text" id="eof" name="text" value="${office}"></p>
                 <p>ReportTo: <input type="text" id="er" name="text" value="${report}"></p>
                 <p>Extension: <input type="text" id="ee" name="text" value="${exetension}"></p>
@@ -465,9 +510,9 @@ function PopUpodstatus(a){
                     </div>
                     <div class="product-meta-data">
                         <form>
-                            <p>ShippedDate: 
+                            <p>ShippedDate:
                             <br><input id="shipdate" type="date" name="shipdate" value="${b.shippedDate}"></p>
-                            <p>Status: 
+                            <p>Status:
                             <div>
                                 <select class="w-100" id="order_status" value="${b.status}">
                                     <option value="Cancelled">Cancelled</option>
@@ -1070,6 +1115,24 @@ function deletecus(a){
         }
     });
 }
+
+function deletepromotion(){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'delete',
+        url: '/deletepromotion',
+        success: function (data) {
+            console.log(data);
+            promotion(data);
+            // document.getElementById('id03').style.display = 'none';
+            // showProduct(data, true, false);
+        }
+    });
+}
 // ----------------------End Delete-----------------------------//
 
 // ----------------------Calculate-----------------------------//
@@ -1081,16 +1144,15 @@ function order_calculator(){
     var mempoint = 0;
     for (var i = 0; i < tr.length; i++) {
         var price = tr[i].getElementsByTagName("td")[2].innerText;
-
         var num = document.getElementById(`qty${i}`).value;
-
+        console.log(num);
         sum += price * num;
         mempoint = Math.floor(sum / 100) * 3;
     }
     document.getElementById("sumprice").innerHTML = '$' + sum;
-    document.getElementById("mempoint").innerHTML = mempoint + ' Points';
+    document.getElementById("mempoint").innerHTML = mempoint;
 
-    
+
 
 }
 
@@ -1111,7 +1173,6 @@ function ShowShipping(input) {
         `;
     });
     document.getElementById('order_table_body').innerHTML = shipping_table;
-
 }
 
 function stock(){
@@ -1130,9 +1191,12 @@ function stock(){
 }
 function AddToOrder(){
 
-    var CustomerNumber = {
-        'customerNumber' : document.getElementById("searchID").value.toString()
+    var Billing = {
+        'customerNumber' : document.getElementById("searchID").value.toString(),
+        'Point' : document.getElementById("mempoint").innerText,
+        'shippingDate' : document.getElementById("shipDate").value.toString()
     };
+    console.log(Billing);
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -1141,7 +1205,7 @@ function AddToOrder(){
     $.ajax({
         type: 'post',
         url: '/successOrder',
-        data: CustomerNumber,
+        data: Billing,
         dataType:'Text',
         success: function (data){
             console.log(data);
@@ -1149,7 +1213,18 @@ function AddToOrder(){
     });
     console.log('sucees Hurey');
 }
+function deleteCart(){
 
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'delete',
+        url: '/deleteCart'
+    });
+}
 function AddToCart(orderNumber,Name,price, pdCode, num ,n){
 
     var i = Number(document.getElementById('NumberCart').innerText)
@@ -1175,6 +1250,115 @@ function AddToCart(orderNumber,Name,price, pdCode, num ,n){
         data: product,
         success: function (data){
             console.log(data);
+            promotion(data);
         }
     });
+}
+
+function reqTomnpd(employeeNumber){
+    var a = {"employeeNumber":employeeNumber};
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/reqSell',
+        data: a,
+        dataType:"json",
+        success : (function(data){
+            if(data != 'error'){
+                window.location.replace('/mnpd');
+            }else{
+                document.getElementById('typeError').style.display = 'block';
+            }
+        })
+    });
+
+}
+
+function reqTomnem(employeeNumber){
+    var a = {"employeeNumber":employeeNumber};
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/reqSell',
+        data: a,
+        dataType:"json",
+        success : (function(data){
+            if(data != 'error'){
+                window.location.replace('/mnem');
+            }else{
+                document.getElementById('typeError').style.display = 'block';
+            }
+        })
+    });
+
+
+}
+
+function AddToPayment(){
+
+    var Payment = {
+        'customerNumber' : document.getElementById("customerNumber").value,
+        'checkNumber' : document.getElementById("checkNumber").value,
+        'paymentDate' : document.getElementById("paymentDate").value,
+        'amount' : document.getElementById("amount").value
+    };
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/reqSell',
+        data: a,
+        dataType:"json",
+        success : (function(data){
+            if(data != 'error'){
+                window.location.replace('/mnem');
+            }else{
+                document.getElementById('typeError').style.display = 'block';
+            }
+        })
+    });
+}
+function getMyEmployee(employeeNumber){
+    var a = {"employeeNumber":employeeNumber};
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/getMyEmployee',
+        data: a,
+        dataType:"json",
+        success : (function(data){
+            showEmployee(data);
+        })
+    });
+}
+
+function ShowPayment(input) {
+    var payment_table = "";
+    input.forEach(function (a) {
+        payment_table += `
+        <tr>
+            <td><h5>${a.customerNumber}</h5></td>
+            <td><h5>${a.checkNumber}</h5></td>
+            <td><h5>${a.paymentDate}</h5></td>
+            <td><h5>${a.amount}</h5></td>
+        </tr>
+        `;
+    });
+    document.getElementById('payment_table_body').innerHTML = payment_table;
 }

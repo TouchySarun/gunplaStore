@@ -55,7 +55,6 @@
             <!-- Navbar Brand -->
             <div class="amado-navbar-brand">
                 <a  href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
-
             </div>
             <!-- Navbar Toggler -->
             <div class="amado-navbar-toggler">
@@ -70,6 +69,15 @@
             <div class="logo">
                 <a  href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
             </div>
+            <p id="showUser"></p>
+            <script>
+                var x = sessionStorage.getItem('employeeNumber');
+                if(x != null ){
+                    document.getElementById('showUser').innerHTML="EmployeeID:" +x;
+                }else{
+                    window.location.href = "/";
+                }
+            </script>
             <input type="text" name="OrderID" id="orderId" placeholder="Order ID ...">
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-30">
@@ -124,6 +132,8 @@
                 <a href="/welcome" class="btn amado-btn">Back</a>
                 <br>
                 <a href="/" class="btn amado-btn">Logout</a>
+                <br>
+                <button onclick="deleteCart()">delete cart</button>
             </div>
             <!-- Pop up -->
                 <!--Login pop up-->
@@ -199,7 +209,7 @@
     <!-- DB function -->
     <script src="./amado-master/js/app.js"></script>
 
-    
+
 
 </body>
 

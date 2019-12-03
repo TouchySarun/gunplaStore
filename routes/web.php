@@ -1,4 +1,4 @@
-<?php
+<?php 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,12 +29,12 @@ Route::get('/welcome','DataController@promotion');
 Route::get('/mnpd','DataController@mnproduct');
 Route::get('/mncus','DataController@mncus');
 Route::get('/mnod','DataController@mnorder');
-Route::get('/mnem','DataController@mnemployee');
+Route::get('/mnem', function () {return view('manage-employee');});
 Route::get('/order','DataController@order');
 Route::get('/checkout','DataController@checkout');
 Route::get('/shipping','DataController@shipping');
 Route::get('/promotion','DataController@promotion');
-Route::get('/welcome','DataController@employeeInfo');
+Route::get('/payment','DataController@payment');
 
 //### get function ###
 Route::get('/getAddress/{code}','DataController@getAddress');
@@ -50,21 +50,28 @@ Route::get('/Subtotal', 'Datacontroller@Subtotal');
 Route::post('/addAddress','DataController@addAddress');
 Route::post('/updateAddress/{code}','DataController@updateAddress');
 Route::post('/deleteAddress/{code}','DataController@deleteAddress');    // soft-delete -> record still available
-// Product
-Route::post('/insertProduct','DataController@insertProduct');
 Route::post('/updateProduct/{code}','DataController@updateProduct');
-// Other
 Route::post('/login', 'DataController@login');
 Route::post('/stock', 'DataController@stock');
-Route::post('/insertEm','DataController@insertEm');
-Route::post('/updateEm/{code}','DataController@updateEm');
-Route::post('/updatecus/{code}','DataController@updatecus');
+
+//### Update Function ###
 Route::post('/updateship/{code}','DataController@updateship');
+Route::post('/updateEm/{code}','DataController@updateEm');
+Route::get('/UpdatePayment','DataController@UpdatePayment');
+Route::post('/updatecus/{code}','DataController@updatecus');
+
+//### Insert Function ###
 Route::post('/insertToCart','DataController@insertTocart');
 Route::post('/insertpromotion','DataController@insertpromotion');
+Route::post('/reqSell','DataController@reqSell');
+Route::post('/getMyEmployee','DataController@getMyEmployee');
 Route::post('/insertcus','DataController@insertcus');
+Route::post('/insertEm','DataController@insertEm');
+Route::post('/insertProduct','DataController@insertProduct');
 
 //### Delete Function ###
 Route::delete('/deleteProduct/{code}','DataController@deleteProduct');
 Route::delete('/deleteEm/{code}','DataController@deleteEm');
+Route::delete('/deleteCart','DataController@deleteCart');
 Route::delete('/deletecus/{code}','DataController@deletecus');
+Route::delete('/deletepromotion','DataController@deletepromotion');
