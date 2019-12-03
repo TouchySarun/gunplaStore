@@ -616,6 +616,27 @@ function PopUpAddress(addressLine1, addressLine2,city,state,country,postalCode,c
     document.getElementById("id05").style.display = 'block';
 }
 
+function PopUpAddAddress(customerNumber){
+    var box = `
+    <span onclick="document.getElementById('id05').style.display='none'" class="close" title="Close Modal">&times;</span>
+    <form class="modal-content animate" action="/action_page.php">
+        <div class="container">
+            <h4>Adding Customer Address</h4><br>
+            <p><b>Address Line 1</b> <input type="text" placeholder="" id="addressLine1" name="addressLine1" value="${addressLine1}"></p>
+            <p><b>Address Line 2</b> <input type="text" placeholder="" id="addressLine2" name="addressLine2" value="${addressLine2}"></p>
+            <p><b>City</b> <input type="text" placeholder="" id="city" name="city" value="${city}"></p>
+            <p><b>State</b> <input type="text" placeholder="" id="state" name="state" value="${state}"></p>
+            <p><b>Country</b> <input type="text" placeholder="" id="country" name="country" value="${country}"></p>
+            <p><b>Postal Code</b> <input type="text" placeholder="" id="postalCode" name="postalCode" value="${postalCode}"></p>
+            <p><b>Address ID</b> <input type="text" placeholder="" id="addrnum" name="addrnum">${addressNumber}</p>
+            <p><b>Customer ID</b> <p>${customerNumber}</p>
+            
+        </div>
+    </form>`
+    document.getElementById("id01").innerHTML = box;
+    document.getElementById("id01").style.display = 'block';
+}
+
 //------------end show script------------//
 
 //------------drop-down------------//

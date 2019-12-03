@@ -36,7 +36,7 @@ Route::get('/shipping','DataController@shipping');
 Route::get('/promotion','DataController@promotion');
 Route::get('/payment','DataController@payment');
 
-Route::get('/welcome','DataController@employeeInfo');
+// Route::get('/welcome','DataController@employeeInfo');
 
 //### get function ###
 Route::get('/getAddress/{code}','DataController@getAddress');
@@ -59,8 +59,6 @@ Route::post('/getPro','DataController@getPromotion');
 Route::get('/UpdatePayment','DataController@UpdatePayment');
 Route::post('/updateAddress/{code}','DataController@updateAddress');
 Route::post('/updatecus/{code}','DataController@updatecus');
-Route::post('/updateship/{code}','DataController@updateship');
-Route::post('/updateProduct/{code}','DataController@updateProduct');
 
 //### Insert Function ###
 Route::post('/insertToCart','DataController@insertTocart');
