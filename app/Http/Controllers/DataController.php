@@ -114,10 +114,10 @@ class DataController extends Controller
         $data = DB::select("select * from addresses where customerNumber = '$code'");
         return json_encode($data);
     }
-    public function updateAddress(Request $request, $code){
+    public function updateAddress(Request $request, $code, $addr){
         DB::update("update addresses set addressLine1 = ?,addressLine2 = ?,city = ?,state = ?,postalCode = ?,country = ? where addressNumber = ? and customerNumber = ?",
-        [$request->addrline1,$request->addrline2,$request->city,$request->state,$request->postalcode,$request->country,$request->addrnum,$code]);
-        $data = DB::select("select * from addresses");
+        [$request->addrline1,$request->addrline2,$request->city,$request->state,$request->postalcode,$request->country,$addr,$code]);
+        $data = DB::select("select * from addresses where customerNumber = '$code'");
         return json_encode($data);
     }
     public function deleteAddress($code){      //Soft-delete -> still available on shipping details
@@ -219,8 +219,17 @@ class DataController extends Controller
         return json_encode($x);
     }
     public function insertProduct(Request $request){
-        DB::insert("insert into products(productCode,quantityInstock)
-        values ('$request->pcode','$request->pnumber')");
+        $pro = DB::select("select * from products where productCode = '$request->pcode'");
+        if($pro != null){
+            $qtyjson = DB::select("select quantityInStock from products where productCode = '$request->pcode'");
+            $qtystring = $qtyjson[0]->quantityInStock;
+            $qty = (int)$qtystring+(int)$request->pnumber;
+            DB::update("update products set quantityInstock = ? where productCode = ?",
+            [$qty,$request->pcode]);
+        }else{
+            DB::insert("insert into products(productCode,quantityInstock)
+            values ('$request->pcode','$request->pnumber')");
+        }
         DB::insert("insert into stock(stockNumber,stockDate,productCode,qty)
         values ('$request->snum','$request->pdate','$request->pcode','$request->pnumber')");
         $data = DB::select('select * from products');

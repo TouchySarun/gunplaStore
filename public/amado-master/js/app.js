@@ -606,7 +606,7 @@ function PopUpAddress(addressLine1, addressLine2,city,state,country,postalCode,c
                 <p><b>Address ID</b> <p id="addrnum">${addressNumber}</p>
                 <p><b>Customer ID</b> <p>${customerNumber}</p>
                 <a href="#" class="btn amado-btn" onclick="deleteAddr('${customerNumber}')">Delete</a>
-                <a href="#" class="btn amado-btn" onclick="updateAddr('${customerNumber}')">Save</a>
+                <a href="#" class="btn amado-btn" onclick="updateAddr('${customerNumber}','${addressNumber}')">Save</a>
             </div>
         </form>`
     document.getElementById("id05").innerHTML = box;
@@ -615,10 +615,8 @@ function PopUpAddress(addressLine1, addressLine2,city,state,country,postalCode,c
 
 function PopUpAddaddress(a){
     var box = `
-    <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;
-                </span>
-                <!-- Form inside popup -->
-                <form class="modal-content animate">
+            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <form class="modal-content animate" action="/action_page.php">
                     <div class="container">
                         <h4>Adding Address</h4><br>
                         <label for="addressLine1"><b>Address Line 1</b></label>
@@ -761,6 +759,7 @@ function insertitem(){
             document.getElementById('code').value = '';
             document.getElementById('number').value = '';
             document.getElementById('prodate').value = '';
+            console.log(data);
             showProduct(data[0],true,false);
             stockin(data[1]);
         }
@@ -1011,7 +1010,7 @@ function updateship(a){
 }
 
 //Address
-function updateAddr(a){
+function updateAddr(a,b){
     var address = {
         "addrline1": document.getElementById("addressLine1").value.toString(),
         "addrline2": document.getElementById("addressLine2").value.toString(),
@@ -1028,15 +1027,17 @@ function updateAddr(a){
     });
     $.ajax({
         type: 'post',
-        url: '/updateAddress/' + a,
+        url: '/updateAddress/' + a + '/' + b,
         data: address,
         dataType: 'json',
         success: function (data) {
+            x = JSON.stringify(data);
             document.getElementById('id05').style.display = 'none';
-            showCustomerAddress(data, true, 'dont need', 'addressArea');
+            showCustomerAddress(x, true, 'dont need', 'addressArea');
         }
     });
 }
+
 function deleteAddr(a){
     $.ajaxSetup({
         headers: {

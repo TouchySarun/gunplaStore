@@ -104,8 +104,8 @@
 
             <!-- Button Group -->
             <div class="amado-btn-group mt-30 mb-100">
-                <a href="#" onclick="document.getElementById('id04').style.display='block'"  class="btn amado-btn" >AddCustomer +</a>
-                <br>
+                <a href="#" onclick="document.getElementById('id04').style.display='block'" class="btn amado-btn-plus" >AddCustomer +</a>
+                <br><br>
                 <a href="welcome" class="btn amado-btn">Back</a>
                 <br>
                 <a href="/" class="btn amado-btn">Logout</a>
@@ -118,7 +118,7 @@
                     <!-- showProductDetail() -->
                 </div>
                 <!-- popup add new employee -->
-                <div id="id04" class="modal" style="display:none">
+                <div id="id04" class="modal">
                     <span onclick="document.getElementById('id04').style.display='none'"
                         class="close" title="Close Modal">&times;
                     </span>
@@ -168,9 +168,10 @@
                 </div>
 
                 <div id="id01" class="modal">
+
                 </div>
                 <!-- Pop up for edit address -->
-                <div id="id05" class="modal">
+                <div id="id05" class="modal" style="display:none">
                     <!-- PopUpAddress() -->
                 </div>
         </header>

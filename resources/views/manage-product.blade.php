@@ -173,9 +173,9 @@
                                 </div>
                                 <div class="product-meta-data">
                                     <form>
-                                        <p>StockNumber: <input type="text" id="snumber" name="snumber" placeholder="10100"></p>
-                                        <p>ProductCode: <input type="text" id="code" name="code" placeholder="S10_1678"></p>
-                                        <p>Number: <input type="text" id="number" name="number" placeholder="7933"></p>
+                                        <p>StockNumber: <input type="text" id="snumber" name="snumber" placeholder="10100" require></p>
+                                        <p>ProductCode: <input type="text" id="code" name="code" placeholder="S10_1678" require></p>
+                                        <p>Number: <br><input type="number" id="number" name="number" placeholder="7933" require></p>
                                         <p>Date: <br><input type="date" id="prodate" name="prodate"></p>
                                         <!-- <button>OK</button> -->
                                         <a href="#" onclick="insertitem()" class="btn amado-btn" type="submit">OK</a>
@@ -199,7 +199,7 @@
             var stock = <?php echo $jsonstock?>;
             showProduct(json,true,false);
             stockin(stock);
-
+            if (snumber == null) {alert(0);}
         </script>
         <!-- Product Catagories Area End -->
     </div>
