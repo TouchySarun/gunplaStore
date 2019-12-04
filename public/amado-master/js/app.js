@@ -906,7 +906,7 @@ function insertAddress(a){
         data: address,
         dataType: "json",
         success: function (data) {
-            document.getElementById('id05').style.display = "none";
+            document.getElementById('id01').style.display = "none";
             data = JSON.stringify(data);
             showCustomerAddress(data, true, 'dont need', 'addressArea');
         }

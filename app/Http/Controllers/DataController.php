@@ -127,8 +127,8 @@ class DataController extends Controller
         return json_encode($data);
     }
     public function deleteAddress($code, $code2){      //Soft-delete -> still available on shipping details
-        DB::update("update addresses set deleteFlag = 'true' where customerNumber = '$code' and addressNumber = '$code2'");
         $data = DB::select("select * from addresses where customerNumber = '$code' and deleteFlag = 'false'");
+        DB::update("update addresses set deleteFlag = 'true' where customerNumber = '$code' and addressNumber = '$code2'");
         return $data;
     }
 
@@ -358,7 +358,7 @@ class DataController extends Controller
         return [$c,json_encode($qty)];
     }
     public function deletepromotion(){
-        $data = DB::select("delete from promotion where expairDate = date('now','localtime')");
+        $data = DB::select("delete from promotion where expairDate <= date('now','localtime')");
         // // $data = DB::select("delete from promotion where expairDate = strftime('%Y-%m-%d',date('now'))");
         $data2 = DB::select('select * from promotion');
         return $data2;
