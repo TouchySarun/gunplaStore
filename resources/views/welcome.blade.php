@@ -22,6 +22,14 @@
 </head>
 
 <body>
+    <!-- <script>
+
+        sessionStorage.getItem("empNum", user[0].employeeNumber);
+        sessionStorage.getItem("empFname", user[0].firstName);
+        sessionStorage.getItem("empLname", user[0].lastName);
+        sessionStorage.getItem("empTitle", user[0].jobTitle);
+
+    </script> -->
     <!-- Search Wrapper Area Start -->
     <!-- @if(session()->has('success')) -->
     <!-- @endif -->
@@ -113,42 +121,26 @@
             <!-- Amado Nav -->
             <nav class="amado-nav">
                 <ul>
-                    <div class="amado-nav">
-                        <!--Scale bar-->
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#footerNavContent" aria-controls="footerNavContent" aria-expanded="false">SCALE
-                            <i class="fa fa-caret-down"></i>
-                        </button>
-                        <div class="collapse navbar-collapse" id="footerNavContent">
-                            <ul>
-                                <li class="nav-item" id="Scale">
-                                </li>
-                            </ul>
-                        </div>
-                        <!--Vendor bar-->
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#footer" aria-controls="footerNavContent" aria-expanded="false">VENDOR
-                            <i class="fa fa-caret-down"></i>
-                        </button>
-                        <div class="collapse navbar-collapse" id="footer">
-                            <ul class="navbar-nav ml-auto">
-                                <li class="nav-item" id="Vendor">
-                                </li>
-                            </ul>
+                    <div class="amado-nav" style="cursor: default">
+                        <img src="./amado-master/img/core-img/employeeM.png">
+                        <h5 class="mt-30"><span id="showUserFName"></span> <span id="showUserLName"></span></h5>
+                        <p id="showUserTitle" style="margin-bottom: 5px"></p>
+                        <p><span>Employee ID: </span><span id="showUserID"></span></p>
+                        <script>
+                            document.getElementById('showUserID').innerHTML=sessionStorage.getItem('employeeNumber');
+                            document.getElementById('showUserTitle').innerHTML=sessionStorage.getItem('title');
+                            document.getElementById('showUserFName').innerHTML=sessionStorage.getItem('employeeFName');
+                            document.getElementById('showUserLName').innerHTML=sessionStorage.getItem('employeeLName');
+                        </script>
+                        <!-- Button Group -->
+                        <div class="amado-btn-group mt-30 mb-100">
+                            <a href="/" class="btn amado-btn">Logout</a>
                         </div>
                     </div>
                 </ul>
             </nav>
 
-            <!-- Button Group -->
-            <div class="amado-btn-group mt-30 mb-100">
-                <a href="#" class="btn amado-btn">Discount</a>
-                <br>
-                <a href="/" class="btn amado-btn">
-                    Logout
-                </a>
-
-            </div>
-
-            <!-- pop-up add order to shipping -->
+            <!-- PopUp Modal -->
             <div id="id01" class="modal">
                     <span onclick="document.getElementById('id01').style.display='none'"
                         class="close" title="Close Modal">&times;
@@ -247,7 +239,7 @@
             <img src="./amado-master/img/core-img/customers.png"><br><br>
             Customers
         </a>
-        <a href="#" onclick="(document.getElementById('id01').style.display='block')" class="btn amado-big-btn">
+        <a href="#" onclick="reqTomnpr(sessionStorage.getItem('employeeNumber')),deletepromotion()" class="btn amado-big-btn">
             <br><br><br>
             <img src="./amado-master/img/core-img/promotion.png"><br><br>
             Promotion

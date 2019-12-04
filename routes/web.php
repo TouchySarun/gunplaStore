@@ -17,9 +17,6 @@ Route::get('/cart', function () {
 Route::get('/shop', function () {
     return view('shop');
 });
-// Route::get('/welcome', function () {
-//     return view('welcome');
-// });
 
 use Illuminate\Support\Facades\DB;
 Route::get('/test', function () {
@@ -39,35 +36,39 @@ Route::get('/shipping','DataController@shipping');
 Route::get('/promotion','DataController@promotion');
 Route::get('/payment','DataController@payment');
 
-//### function ###
+//### get function ###
 Route::get('/getAddress/{code}','DataController@getAddress');
 Route::get('/editproduct/{code}','DataController@editProduct');
 Route::get('/editcus/{code}','DataController@editcus');
 Route::get('/editstatus/{code}','DataController@editstatus');
 Route::get('/successOrder','DataController@successOrder');
 Route::post('/login', 'DataController@login');
-Route::post('/stock', 'DataController@stock');
+Route::get('/Subtotal', 'Datacontroller@Subtotal');
+Route::get('/editAddress/{code}','DataController@editAddress');
 Route::get('/Subtotal', 'Datacontroller@Subtotal');
 
 //### Update Function ###
 Route::post('/updateship/{code}','DataController@updateship');
 Route::post('/updateProduct/{code}','DataController@updateProduct');
 Route::post('/updateEm/{code}','DataController@updateEm');
-Route::post('/insertToCart','DataController@insertToCart');
-
-Route::get('/UpdatePayment','DataController@UpdatePayment');
-
+Route::post('/NumberCart','DataController@NumberCart');
+Route::post('/getPro','DataController@getPromotion');
+Route::post('/UpdatePayment','DataController@UpdatePayment');
+Route::post('/updateAddress/{code}/{addr}','DataController@updateAddress');
 Route::post('/updatecus/{code}','DataController@updatecus');
+Route::post('/updateship/{code}','DataController@updateship');
 Route::post('/updateProduct/{code}','DataController@updateProduct');
 
 //### Insert Function ###
 Route::post('/insertToCart','DataController@insertTocart');
 Route::post('/insertpromotion','DataController@insertpromotion');
 Route::post('/reqSell','DataController@reqSell');
+Route::post('/reqPro','DataController@reqPro');
 Route::post('/getMyEmployee','DataController@getMyEmployee');
 Route::post('/insertcus','DataController@insertcus');
 Route::post('/insertEm','DataController@insertEm');
 Route::post('/insertProduct','DataController@insertProduct');
+Route::post('/addAddress/{code}','DataController@addAddress');
 
 //### Delete Function ###
 Route::delete('/deleteProduct/{code}','DataController@deleteProduct');
@@ -75,3 +76,4 @@ Route::delete('/deleteEm/{code}','DataController@deleteEm');
 Route::delete('/deleteCart','DataController@deleteCart');
 Route::delete('/deletecus/{code}','DataController@deletecus');
 Route::delete('/deletepromotion','DataController@deletepromotion');
+Route::post('/deleteAddress/{code}','DataController@deleteAddress');

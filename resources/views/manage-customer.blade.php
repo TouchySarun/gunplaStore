@@ -10,7 +10,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>Gunpla Store | Plastic Model Shop</title>
+    <title>Customer Management | Gunpla Store Plastic Model Shop</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="./amado-master/img/core-img/favicon.ico">
@@ -38,7 +38,7 @@
                     <div class="search-content">
                         <form action="" method="get">
                             <!-- <input type="search" name="search" id="search" placeholder="Type your keyword..."> -->
-                            <input type="text" id="myInput" onkeyup="filterByProductName()" placeholder="Search for names..">
+                            <input type="text" id="myInput" onkeyup="filter(this.value,4)" placeholder="Search for names..">
                             <button type="submit"><img src="./amado-master/img/core-img/search.png" alt=""></button>
                         </form>
                     </div>
@@ -87,6 +87,15 @@
             <div class="logo">
                 <a  href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
             </div>
+            <p id="showUser"></p>
+            <script>
+                var x = sessionStorage.getItem('employeeNumber');
+                if(x != null ){
+                    document.getElementById('showUser').innerHTML="EmployeeID:" +x;
+                }else{
+                    window.location.href = "/";
+                }
+            </script>
 
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-30">
@@ -95,40 +104,16 @@
 
             <!-- Button Group -->
             <div class="amado-btn-group mt-30 mb-100">
-                <a href="#" onclick="document.getElementById('id04').style.display='block'"  class="btn amado-btn" >AddCustomer +</a>
-                <br>
+                <a href="#" onclick="document.getElementById('id04').style.display='block'" class="btn amado-btn-plus" >AddCustomer +</a>
+                <br><br>
                 <a href="welcome" class="btn amado-btn">Back</a>
                 <br>
                 <a href="/" class="btn amado-btn">Logout</a>
             </div>
             <!-- Pop up -->
                 <!--Login pop up-->
-                <div id="id01" class="modal">
-                    <span onclick="document.getElementById('id01').style.display='none'"
-                        class="close" title="Close Modal">&times;
-                    </span>
-
-                    <!-- Modal Content -->
-                    <form class="modal-content animate" action="/action_page.php">
-                        <div class="container">
-                            <label for="uname"><b>Username</b></label>
-                                <input type="text" placeholder="Enter Username" name="uname" required>
-                            <label for="psw"><b>Password</b></label>
-                                <input type="password" placeholder="Enter Password" name="psw" required>
-                                <button type="submit">Login</button>
-                            <label>
-                                <input type="checkbox" checked="checked" name="remember"> Remember me
-                            </label>
-                            <span class="psw"><a href="#">Forgot password?</a></span>
-                        </div>
-                        <div class="container" style="background-color:#f1f1f1">
-                        <button type="button" onclick="document.getElementById('id01').style.display='none'"
-                            class="cancelbtn">Cancel</button>
-                        </div>
-                    </form>
-                </div>
                 <!-- product pop up -->
-                
+
                 <div id="id03" class="modal" style="display:none">
                     <!-- showProductDetail() -->
                 </div>
@@ -181,11 +166,19 @@
                     </div>
                     </form>
                 </div>
+
+                <div id="id01" class="modal">
+
+                </div>
+                <!-- Pop up for edit address -->
+                <div id="id05" class="modal" style="display:none">
+                    <!-- PopUpAddress() -->
+                </div>
         </header>
         <!-- Header Area End -->
 
         <!-- Product Catagories Area Start -->
-        <div class="products-catagories-area clearfix" id="customerArea"></div>
+        <div class="products-catagories-area clearfix" id="productArea"></div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script type="text/javascript">
             var customer = <?php echo $jsoncustomer?>;

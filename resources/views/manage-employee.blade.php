@@ -87,6 +87,15 @@
             <div class="logo">
                 <a  href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
             </div>
+            <p id="showUser"></p>
+            <script>
+                var x = sessionStorage.getItem('employeeNumber');
+                if(x != null ){
+                    document.getElementById('showUser').innerHTML="EmployeeID:" +x;
+                }else{
+                    window.location.href = "/";
+                }
+            </script>
 
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-30">

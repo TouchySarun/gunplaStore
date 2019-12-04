@@ -24,12 +24,6 @@
 </head>
 
 <body>
-    <div style="display:none" id="key">
-        <p>username</p>
-        <p>jobTitle</p>
-        <p>employeeNumber</p>
-    </div>
-    <!-- Search Wrapper Area Start -->
     <div class="search-wrapper section-padding-100">
         <div class="search-close">
             <i class="fa fa-close" aria-hidden="true"></i>
@@ -79,57 +73,65 @@
             <div class="logo">
                 <a href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
             </div>
+            <p id="showUser"></p>
+            <script>
+                var x = sessionStorage.getItem('employeeNumber');
+                if(x != null ){
+                    document.getElementById('showUser').innerHTML="EmployeeID:" +x;
+                }else{
+                    window.location.href = "/";
+                }
+            </script>
 
-            <!-- Cart Menu -->
-            <!-- <div class="cart-fav-search mb-30">
-                <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
-                <a href="cart.html" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
-                <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
-            </div> -->
-
-            <!-- Button Group -->
-            <div class="amado-btn-group mt-30 mb-100">
-                <a href="/mnod" class="btn amado-btn">Back</a>
-                <br>
-                <a href="/" class="btn amado-btn">Logout</a>
+            <!-- Amado Nav -->
+            <div class="amado-nav" style="cursor: default">
+                <img src="./amado-master/img/core-img/employeeM.png">
+                <!-- Button Group -->
+                <div class="amado-btn-group mt-30 mb-100">
+                    <a href="/mnod" class="btn amado-btn">Back</a>
+                    <br>
+                    <a href="/" class="btn amado-btn">Logout</a>
+                </div>
             </div>
+
             <!-- Pop up -->
             <!-- PopUp Modal -->
             <div id="id01" class="modal">
                 <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;
                 </span>
                 <!-- Form inside popup -->
-                <form class="modal-content animate" action="/action_page.php">
+                <form class="modal-content animate">
                     <div class="container">
                         <h4>Adding Address</h4><br>
-                        <label for="contactFirstName"><b>First Name</b></label>
-                            <input type="text" placeholder="" name="contactFirstName" required>
-                        <label for="contactLastName"><b>Last Name</b></label>
-                            <input type="text" placeholder="" name="contactLastName" required>
-                        <label for="customerName"><b>Company Name</b></label>
-                            <input type="text" placeholder="" name="customerName" required>
-                        <label for="country"><b>Country</b></label>
-                            <input type="text" placeholder="" name="country" required>
                         <label for="addressLine1"><b>Address Line 1</b></label>
-                            <input type="text" placeholder="" name="addressLine1" required>
+                            <input type="text" placeholder="" id="addressLine1" name="addressLine1" required>
                         <label for="addressLine2"><b>Address Line 2</b></label>
-                            <input type="text" placeholder="" name="addressLine2" required>
+                            <input type="text" placeholder="" id="addressLine2" name="addressLine2" required>
                         <label for="city"><b>City</b></label>
-                            <input type="text" placeholder="" name="city" required>
+                            <input type="text" placeholder="" id="city" name="city" required>
                         <label for="state"><b>State</b></label>
-                            <input type="text" placeholder="" name="state" required>
+                            <input type="text" placeholder="" id="state" name="state" required>
+                        <label for="country"><b>Country</b></label>
+                            <input type="text" placeholder="" id="country" name="country" required>
                         <label for="postalCode"><b>Postal Code</b></label>
-                            <input type="text" placeholder="" name="postalCode" required>
-                        <button type="submit" onclick="AddAddress()" name="Confirm">Confirm</button>
+                            <input type="text" placeholder="" id="postalCode" name="postalCode" required>
+                        <label for="addrnum"><b>Address ID</b></label>
+                            <input type="text" placeholder="" id="addrnum" name="addrnum" required>
+                        <label for="custnum"><b>Customer ID</b></label>
+                            <input type="text" placeholder="" id="custnum" name="custnum" required>
+                        <a class="btn amado-btn w-100 mt-30" style="color: #ffffff" onclick="insertAddress()">Confirm</a>
                     </div>
                     <div class="container" style="background-color:#f1f1f1">
-                        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                        <a class="btn amado-btn-cancel" style="color: #ffffff" onclick="document.getElementById('id01').style.display='none'">Cancel</a>
                     </div>
                 </form>
             </div>
             <!-- product pop up -->
             <div id="id02" class="modal" style="display:none">
                 <!-- showProductDetail() -->
+            </div>
+            <div id="id03" class="modal" style="display:none">
+
             </div>
         </header>
         <!-- Header Area End -->
@@ -152,7 +154,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id="order_table_body">
-                                    
+
                                 </tbody>
                             </table>
                         </div>
@@ -163,13 +165,19 @@
                             <h5>Cart Total</h5>
                             <ul class="summary-table">
                                 <li><span>Subtotal :</span><span id="sumprice"></span></li>
-                                <li><span>Promotion Code :</span>
-                                    <div class="col-10">
-                                        <input type="text" class="form-control" style="padding: 5px 10px" id="code" placeholder="Code">
-                                    </div>
+
+                                <li>
+                                    <div class="col-12" style="padding: 0px">
+                                    <div>
+                                        <form style="border: none">
+                                        <input type="text" name="searchPro" id="searchPro" style="max-width:60%" placeholder=" Promotion Code...">
+                                        <a class="btn amado-btn" style="width:20%" onclick="getPromotion()"><img src="./amado-master/img/core-img/search.png" alt=""></a>
+                                        </form>
+                                </div>
+                            </div>
                                 </li>
-                                <li><span>Discount :</span> <span>-</span></li>
-                                <li><span>Total :</span> <span id="sumprice"></span></li>
+                                <li><span>Discount :</span><span id="discount">-</span></li>
+                                <li><span>Total :</span> <span id="total"></span></li>
                                 <li><span>Points :</span> <span id="mempoint"></span><span>Points</span></li>
                                 <li><span>Member Points :</span> <span id="points"></span><span>Points</span></li>
                                 <li><span>Shipping Date :</span>
@@ -183,25 +191,25 @@
                                     <img class="ml-30" src="./amado-master/img/core-img/paypal.png" alt="">
                                     <img class="ml-5" src="./amado-master/img/core-img/paypal2.png" alt="" height="50" width="50">
                             </div>
-                            <h5>Select Shipping Address</h5>
+                            <h5>Customer Address</h5>
                             <div class="col-12" style="padding: 0px">
                                 <div>
                                     <form style="border: none">
-                                        <input type="text" name="searchID" id="searchID" placeholder="Type Customer Number...">
-                                        <a class="btn amado-btn" style="max-width: 22%" onclick="getAddress(document.getElementById('searchID').value, true)"><img src="./amado-master/img/core-img/search.png" alt=""></a>
+                                        <input type="text" name="searchID" id="searchID" style="max-width:60%" placeholder="Type Customer Number...">
+                                        <a class="btn amado-btn" style="width:20%" onclick=" getAddress(document.getElementById('searchID').value, false, 'addressArea', 'shippingAddr'); getAddress(document.getElementById('searchID').value, false, 'addressArea2', 'billingAddr');"><img src="./amado-master/img/core-img/search.png" alt=""></a>
                                     </form>
                                 </div>
                             </div><br>
+                            <h5>Select Shipping Address</h5>
                             <div class="checkout_details_area clearfix col-12" style="padding: 0px">
                                     <form style="border: none">
-                                        <div class="form-control" id="addressArea" style="padding: 15px 20px"></div>
-                                            
-                                        <div class="confirm-control">
-                                            <!-- Add Address Button -->
-                                            <a href="#" onclick="document.getElementById('id01').style.display='block'" class="btn amado-btn" style="width: 48%">
-                                                Add Address
-                                            </a>
-                                            <a href="/order" onclick="AddToOrder()" class="btn amado-btn" style="width: 48%">Checkout</a>
+                                        <h5>Shipping Address</h5>
+                                        <div class="form-control" id="shippingAddr" style="padding: 15px 20px"></div>
+                                        <h5>Billing Address</h5>
+                                        <div class="form-control" id="billingAddr" style="padding: 15px 20px"></div>
+                                        <div>
+                                            <a onclick="document.getElementById('id01').style.display='block'" class="btn amado-btn" style="width:48%;color: #fff;">Add Address</a>
+                                            <a onclick="AddToOrder()" class="btn amado-btn" style="width: 48%;color: #fff;">Checkout</a>
                                         </div>
                                     </form>
                             </div>
