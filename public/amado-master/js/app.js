@@ -6,6 +6,7 @@ var tableaddress = "";
 var tablestock = "";
 var tablepromotion = "";
 var tablecustomer = "";
+var tableoddetail = "";
 //--------------Show script------------------//
 function showCustomerAddress(input, editAble,redioname,id) {
         tableaddress = "";
@@ -557,7 +558,7 @@ function PopUpProduct(a, editAble){
                     <p>Name: <input type="text" id="name" name="text" value="${b.productName}"></p>
                     <p>Scale: <input type="text" id="scale" name="text" value="${b.productScale}"></p>
                     <p>Vendor: <input type="text" id="vendor" name="text" value="${b.productVendor}"></p>
-                    <p>Instock: <input type="text" id="stock" name="text" value="${b.quantityInStock}"></p>
+                    <p>Instock: <input type="text" id="pstock" name="text" value="${b.quantityInStock}"></p>
                 </form>
             </div>
             <div class="short_overview my-5">
@@ -612,12 +613,12 @@ function PopUpAddress(addressLine1, addressLine2,city,state,country,postalCode,c
 
 function PopUpAddaddress(a){
     var box = `
-    <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;
-                </span>
-                <!-- Form inside popup -->
-                <form class="modal-content animate">
+            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <form class="modal-content animate" action="/action_page.php">
                     <div class="container">
                         <h4>Adding Address</h4><br>
+                        <label for="addrnum"><b>Address ID</b></label>
+                            <input type="text" placeholder="" id="addrnum" name="addrnum" required>
                         <label for="addressLine1"><b>Address Line 1</b></label>
                             <input type="text" placeholder="" id="addressLine1" name="addressLine1" required>
                         <label for="addressLine2"><b>Address Line 2</b></label>
@@ -630,10 +631,6 @@ function PopUpAddaddress(a){
                             <input type="text" placeholder="" id="country" name="country" required>
                         <label for="postalCode"><b>Postal Code</b></label>
                             <input type="text" placeholder="" id="postalCode" name="postalCode" required>
-                        <label for="addrnum"><b>Address ID</b></label>
-                            <input type="text" placeholder="" id="addrnum" name="addrnum" required>
-                        <label for="custnum"><b>Customer ID</b></label>
-                            <p id="custnum">${a}</p>
                         <a class="btn amado-btn w-100 mt-30" style="color: #ffffff" onclick="insertAddress('${a}')">Confirm</a>
                     </div>
                     <div class="container" style="background-color:#f1f1f1">
@@ -758,6 +755,7 @@ function insertitem(){
             document.getElementById('code').value = '';
             document.getElementById('number').value = '';
             document.getElementById('prodate').value = '';
+            console.log(data);
             showProduct(data[0],true,false);
             stockin(data[1]);
         }
@@ -878,7 +876,6 @@ function insertAddress(a){
         "state": document.getElementById("state").value.toString(),
         "postalcode": document.getElementById("postalCode").value.toString(),
         "country": document.getElementById("country").value.toString(),
-        "custnum": document.getElementById("custnum").value.toString(),
         "addrnum": document.getElementById("addrnum").value.toString()
     };
     $.ajaxSetup({
@@ -909,7 +906,7 @@ function updateitem(a) {
         // "pline": document.getElementById("line").value.toString(),
         "pscale": document.getElementById("scale").value.toString(),
         "pvendor": document.getElementById("vendor").value.toString(),
-        "pnumber": document.getElementById("stock").value.toString(),
+        "pnumber": document.getElementById("pstock").value.toString(),
         "pprice": document.getElementById("price").value.toString(),
         // "pmsrp": document.getElementById("msrp").value.toString(),
         "pdes": document.getElementById("des").value.toString()
@@ -1065,7 +1062,7 @@ function deleteitem(a) {
         type: 'delete',
         url: '/deleteProduct/' + a,
         success: function (data) {
-            document.getElementById('id03').style.display = 'none';
+            document.getElementById('id02').style.display = 'none';
             showProduct(data, true, false);
         }
     });
@@ -1159,12 +1156,79 @@ function ShowShipping(input) {
             <td><h5>${a.status}</h5></td>
             <td><h5>${a.comments}</h5></td>
             <td><h5>${a.customerNumber}</h5></td>
+            <td><a href="#" onclick="PopUpodDetail(),ShowOdDetail(${a.orderNumber})" class="btn amado-btn" style="min-width:50px">Detail</a></td>
             <td><a href="#" onclick="PopUpodstatus(${a.orderNumber})" class="btn amado-btn" style="min-width:50px">Edit</a></td>
         </tr>
         `;
     });
     document.getElementById('order_table_body').innerHTML = shipping_table;
 }
+
+function ShowOdDetail(a) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'get',
+        url: '/detailstatus/' + a,
+        success: function (data) {
+            var b = JSON.parse(data);
+            console.log(b);
+            tableoddetail = "";
+            b.forEach(function (a) {
+            tableoddetail += `
+            <tr>
+                <td><h5>${a.productCode}</h5></td>
+                <td><h5>${a.quantityOrdered}</h5></td>
+                <td><h5>${a.priceEach}</h5></td>
+                <td><h5>${a.orderLineNumber}</h5></td>
+            </tr>
+            `;
+        });
+        document.getElementById('detailorder').innerHTML = tableoddetail;
+        }
+    });
+}
+
+function PopUpodDetail() {
+    var status = `
+        <span onclick="document.getElementById('popoddetail').style.display='none'"
+            class="close" title="Close Modal">&times;
+        </span>
+        <form class="modal-content animate" action="/action_page.php">
+        <div class="cart-table-area section-padding-60">
+        <div class="container-fluid">
+            <div class="row">
+            <div>
+            <div class="cart-head mt-50 mb-10">
+                <h2>Order Details</h2>
+            </div>
+            <div class="table">
+                <table>
+                    <thead>
+                        <tr style="background-color:#fbb710">
+                            <th >ProductCode</th>
+                            <th >QuantityOrdered</th>
+                            <th >PriceEach</th>
+                            <th >OrderLineNumber</th>
+                        </tr>
+                    </thead>
+                    <tbody id="detailorder">
+                    </tbody>
+                </table>
+            </div>
+            </div>
+            </div>
+        </div>
+        </div>
+        </form>`;
+    document.getElementById("popoddetail").innerHTML = status;
+    document.getElementById("popoddetail").style.display = 'block';
+}
+
+
 
 function AddToOrder(){
     var shippingAddr, billingAddr;
