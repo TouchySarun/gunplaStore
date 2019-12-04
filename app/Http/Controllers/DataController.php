@@ -93,6 +93,13 @@ class DataController extends Controller
         $jsoneditstatus = json_encode($jdata);
         return $jsoneditstatus;
     }
+    public function detailstatus($code){
+        $jdata = DB::select("select * from orderdetails where orderNumber = '$code'");
+        $jsoneditstatus = json_encode($jdata);
+        return $jsoneditstatus;
+    }
+    
+
     public function order(Request $request){
         $product = DB::select('select * from cart');
         return view('cart',['product'=>json_encode($product),'jsonCustomer'=> '']);

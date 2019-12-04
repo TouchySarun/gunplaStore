@@ -41,6 +41,7 @@ Route::get('/getAddress/{code}','DataController@getAddress');
 Route::get('/editproduct/{code}','DataController@editProduct');
 Route::get('/editcus/{code}','DataController@editcus');
 Route::get('/editstatus/{code}','DataController@editstatus');
+Route::get('/detailstatus/{code}','DataController@detailstatus');
 Route::get('/successOrder','DataController@successOrder');
 Route::post('/login', 'DataController@login');
 Route::get('/Subtotal', 'Datacontroller@Subtotal');
