@@ -111,14 +111,14 @@ class DataController extends Controller
         return [json_encode($address),json_encode($point)];
     }
     public function addAddress(Request $request, $code){
-        DB::insert("insert into addresses(addressLine1,addressLine1,city,state,postalCode,country,customerNumber,addressNumber,deleteFlag)
+        DB::insert("insert into addresses(addressLine1,addressLine2,city,state,postalCode,country,customerNumber,addressNumber,deleteFlag)
             values ('$request->addrline1','$request->addrline2','$request->city','$request->state','$request->postalcode','$request->country','$code','$request->addrnum','false')" );
         $product = DB::select("select * from addresses where customerNumber = '$code'");
         $jsonp = json_encode($product);
         return $jsonp;
     }
-    public function editAddress($code){
-        $data = DB::select("select * from addresses where customerNumber = '$code'");
+    public function editAddress($code, $code2){
+        $data = DB::select("select * from addresses where customerNumber = '$code' and addressNumber = '$code2'");
         return json_encode($data);
     }
     public function updateAddress(Request $request, $code, $code2){
