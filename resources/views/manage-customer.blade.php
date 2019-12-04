@@ -38,7 +38,7 @@
                     <div class="search-content">
                         <form action="" method="get">
                             <!-- <input type="search" name="search" id="search" placeholder="Type your keyword..."> -->
-                            <input type="text" id="myInput" onkeyup="filter(this.value,4)" placeholder="Search for names..">
+                            <input type="text" id="myInput" onkeyup="filter(this.value,6)" placeholder="Search for names..">
                             <button type="submit"><img src="./amado-master/img/core-img/search.png" alt=""></button>
                         </form>
                     </div>

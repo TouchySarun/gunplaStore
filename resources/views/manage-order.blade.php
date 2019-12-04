@@ -44,7 +44,7 @@
                     <div class="search-content">
                         <form action="" method="get">
                             <!-- <input type="search" name="search" id="search" placeholder="Type your keyword..."> -->
-                            <input type="text" id="myInput" onkeyup="filterByProductName()" placeholder="Search for names..">
+                            <input type="text" id="myInput" onkeyup="filter(this.value, 6)" placeholder="Search for names..">
                             <button type="submit"><img src="./amado-master/img/core-img/search.png" alt=""></button>
                         </form>
                     </div>
@@ -101,7 +101,7 @@
                         document.getElementById('showUserLName').innerHTML=sessionStorage.getItem('employeeLName');
                 </script>
             </div>
-            
+
             <input type="text" name="OrderID" id="orderId" placeholder="Order ID ...">
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-10">

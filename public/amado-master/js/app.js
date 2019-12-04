@@ -661,7 +661,7 @@ function dropdownVender(Vendor){
     var mostvendor = "";
     Vendor.forEach(function (b) {
         mostvendor += `
-        <a href="#" class="avaibility" onclick="filter('${b.productVendor}',8)">
+        <a href="#" class="avaibility" onclick="filter('${b.productVendor}',9)">
             ${b.productVendor}
         </a>
     `
@@ -674,7 +674,7 @@ function dropdownScale(Scale){
     var mostscale = "";
     Scale.forEach(function (b) {
         mostscale += `
-        <a href="#"  class="avaibility" onclick="filter('${b.productScale}',7)">
+        <a href="#"  class="avaibility" onclick="filter('${b.productScale}',8)">
             ${b.productScale}
         </a>
     `;
@@ -689,15 +689,15 @@ function categorize(input, type) {
     input.forEach(function (a) {
         if (type == 'Vendor') {
             textBox += `<h1>${a.productVendor}</h1>`;
-            textBox += filter(a.productVendor, 8);
+            textBox += filter(a.productVendor, 9);
         }
         if (type == 'Scale') {
             textBox += `<h1>${a.productScale}</h1>`;
-            textBox += filter(a.productScale, 7);
+            textBox += filter(a.productScale, 8);
         }
         if (type == 'Name') {
             textBox += `<h1>${a.productCode}</h1>`;
-            textBox += filter(a.productCode, 5);
+            textBox += filter(a.productCode, 6);
         }
 
     });
@@ -707,7 +707,7 @@ function categorize(input, type) {
 
 //------------------------------filter----------------------------- //
 function filter(input, type) {
-    //name 5 / id 4 / scale 7 / vendor 8
+    //name 6 / id 4 / scale 8 / vendor 9
     var filter, product_area, single, value, i, txtValue, a, returnValue = "";
     filter = input.toUpperCase();
     product_area = document.getElementById("productArea");
