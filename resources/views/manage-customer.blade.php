@@ -186,11 +186,18 @@
                 </div>
 
                 <div id="id01" class="modal">
-
                 </div>
-                <!-- Pop up for edit address -->
                 <div id="id05" class="modal" style="display:none">
                     <!-- PopUpAddress() -->
+                </div>
+
+                <div id = "addrError" class= "modal" style = "display:none">
+                    <form class="modal-content animate" >
+                        <div class="container" style="background-color:#f1f1f1">
+                        <button type="button" onclick="document.getElementById('addrError').style.display='none'"
+                            class="cancelbtn">Please fill out all information.</button>
+                        </div>
+                    </form>
                 </div>
         </header>
         <!-- Header Area End -->

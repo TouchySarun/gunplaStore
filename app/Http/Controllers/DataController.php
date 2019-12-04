@@ -117,7 +117,7 @@ class DataController extends Controller
     public function updateAddress(Request $request, $code, $addr){
         DB::update("update addresses set addressLine1 = ?,addressLine2 = ?,city = ?,state = ?,postalCode = ?,country = ? where addressNumber = ? and customerNumber = ?",
         [$request->addrline1,$request->addrline2,$request->city,$request->state,$request->postalcode,$request->country,$addr,$code]);
-        $data = DB::select("select * from addresses where customerNumber = '$code'");
+        $data = DB::select("select * from addresses where customerNumber = '$code' and deleteFlag = 'false'");
         return json_encode($data);
     }
     public function deleteAddress($code){      //Soft-delete -> still available on shipping details

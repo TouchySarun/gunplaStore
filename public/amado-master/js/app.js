@@ -55,7 +55,6 @@ function getAddress(customerNumber,editAble,redioname,id){
         type: 'get',
         url: '/getAddress/' + customerNumber,
         success: function (data) {
-            console.log(data[0].length)
             if(data[0].length != 2){
                 showCustomerAddress(data[0], editAble,redioname,id);
                 var d = JSON.parse(data[1]);
@@ -564,15 +563,15 @@ function PopUpProduct(a, editAble){
                 box += `<div class="product-meta-data">
                     <div class="line"></div>
                     <form>
-                        <p class="product-price">Price: <input type="text" id="price" name="number" value="${b.buyPrice}"></p>
-                        <p><h3>Name: </h3><input type="text" id="name" name="text" value="${b.productName}"></p>
-                        <p><h4>Scale: </h4><input type="text" id="scale" name="text" value="${b.productScale}"></p>
-                        <p><h5>Vendor: </h5><input type="text" id="vendor" name="text" value="${b.productVendor}"></p>
-                        <p>Instock: <input type="text" id="stock" name="text" value="${b.quantityInStock}"></p>
+                        <p class="product-price">Price: <input type="text" id="${b.productCode}price" name="number" value="${b.buyPrice}"></p>
+                        <p><h3>Name: </h3><input type="text" id="${b.productCode}name" name="text" value="${b.productName}"></p>
+                        <p><h4>Scale: </h4><input type="text" id="${b.productCode}scale" name="text" value="${b.productScale}"></p>
+                        <p><h5>Vendor: </h5><input type="text" id="${b.productCode}vendor" name="text" value="${b.productVendor}"></p>
+                        <p>Instock: <p id="${b.productCode}stock">${b.quantityInStock}</p></p>
                     </form>
                 </div>
                 <div class="short_overview my-5">
-                    <p>Description: <textarea id="des" name="message" style="width:400px; height:250px;">${b.productDescription}</textarea></p>
+                    <p>Description: <textarea id="${b.productCode}des" name="message" style="width:400px; height:250px;">${b.productDescription}</textarea></p>
                 </div>
                 <a href="#" class="btn amado-btn" onclick="deleteitem('${b.productCode}')">Delete</a>
                 <a href="#" class="btn amado-btn" onclick="updateitem('${b.productCode}')">Save</a>
@@ -852,6 +851,11 @@ function insertcus(){
                     "wcoun": document.getElementById("wcoun").value.toString(),
                     "wsale": document.getElementById("wsale").value.toString(),
                     "wcredit": document.getElementById("wcredit").value.toString()};
+    if(customer.wcusnum == '' || customer.wcompany == '' || customer.wfname == '' || customer.wlname == '' || customer.wphone == '' || customer.wcity == '' ||
+    customer.wstate == '' || customer.wpos == ''||customer.wcoun==''||customer.wsale==''||customer.wcredit==''){
+        document.getElementById('addrError').style.display = 'block';
+        return;
+    }
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -892,6 +896,10 @@ function insertAddress(a){
         "custnum": document.getElementById("custnum").value.toString(),
         "addrnum": document.getElementById("addrnum").value.toString()
     };
+    if(address.addrline1 == '' || address.city == '' || address.state == '' || address.country == '' || address.custnum == '' || address.addrnum == ''){
+        document.getElementById('addrError').style.display = 'block';
+        return;
+    }
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -904,7 +912,7 @@ function insertAddress(a){
         dataType: "json",
         success: function (data) {
             x = JSON.stringify(data);
-            document.getElementById('id01').style.display = 'none';
+            document.getElementById('id01').style.display = "none";
             showCustomerAddress(x, true, 'dont need', 'addressArea');
         }
     });
