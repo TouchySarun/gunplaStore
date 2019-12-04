@@ -40,6 +40,7 @@
             </div>
         </div>
     </div>
+    
     <!-- Search Wrapper Area End -->
 
     <!-- ##### Main Content Wrapper Start ##### -->
@@ -130,12 +131,9 @@
                 <a href="#" onclick = "showProduct(json,false,false)" class="btn amado-btn">
                     No Catagorize
                 </a>
-            </div>
+            </div> 
 
-        </header>
-        
-
-    </div>
+   
     <!-- ##### Main Content Wrapper End ##### -->
         <!-- Pop up -->
                 <!--Login pop up-->
@@ -175,7 +173,6 @@
                 <div id="id02" class="modal" style="display:none" >
                     <!-- showProductDetail() -->
                 </div>
-
         </header>
         <!-- Header Area End -->
 

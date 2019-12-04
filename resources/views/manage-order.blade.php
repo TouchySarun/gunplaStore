@@ -48,7 +48,6 @@
                             <button type="submit"><img src="./amado-master/img/core-img/search.png" alt=""></button>
                         </form>
                     </div>
-                    </div>
                 </div>
             </div>
         </div>
