@@ -8,6 +8,7 @@ var tablepromotion = "";
 var tablecustomer = "";
 //--------------Show script------------------//
 function showCustomerAddress(input, editAble,redioname,id) {
+        tableaddress = "";
         x = JSON.parse(input);
         var n = 0;
         var tableaddress = `<table style="width: 100%"><tbody>`;
@@ -32,7 +33,7 @@ function showCustomerAddress(input, editAble,redioname,id) {
                         <img src="./amado-master/img/core-img/pencil.png" width="25" height="25">
                     </a>
                 </td>
-                <td style="width:15%; flex: 0 0 15%; padding-left: 1px">
+                <td style="width:12%; flex: 0 0 15%; padding-left: 1px">
                     <a href="#" onclick="deleteAddr('${a.customerNumber}')" class="btn amado-btn-white" style="min-width:20%; width=100%">
                         <img src="./amado-master/img/core-img/trash.png" width="25" height="25">
                     </a>
@@ -45,7 +46,6 @@ function showCustomerAddress(input, editAble,redioname,id) {
 }
 
 function getAddress(customerNumber,editAble,redioname,id){
-    //console.log(customerNumber);
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -76,10 +76,10 @@ function getAddress(customerNumber,editAble,redioname,id){
 var jasonproduct = "";
 function showProduct(json, editable, orderable) {
 //updateProductList = showProduct(json,true,false)
-                //updateProductOrderList = showProduct(json,false,true)
-                    var i = 0;
-                    tableproduct = '<br><br><br>';
-                    json.forEach(function (a) {
+//updateProductOrderList = showProduct(json,false,true)
+    var i = 0;
+    tableproduct = '<br><br><br>';
+    json.forEach(function (a) {
         tableproduct += `
         <div class="single-products-catagory">
 
@@ -226,7 +226,6 @@ function showEmployee(employee) {
 }
 
 function showCustomer(customer) {
-    console.log(customer);
     tablecustomer = "<br><br><br>";
     jsoncustomer = customer;
     customer.forEach(function (a) {
@@ -256,7 +255,7 @@ function showCustomer(customer) {
         </div>
         `
     });
-    document.getElementById("customerArea").innerHTML = tablecustomer;
+    document.getElementById("productArea").innerHTML = tablecustomer;
 }
 
 //stockin
@@ -281,7 +280,7 @@ function stockin(stock){
 function promotion(promo){
     tablepromotion = "";
     promo.forEach( function(a) {
-        deletepromotion();
+        //deletepromotion();
     tablepromotion += `
         <tr>
             <td><h5>${a.promotionId}</h5></td>
@@ -352,8 +351,9 @@ function PopUpCustomer(a, editAble){
                 </form>
                 </div>
                     <br>
-                    <a href="#" class="btn amado-btn" onclick="deletecus('${b.customerNumber}')">Delete</a>
-                    <a href="#" class="btn amado-btn" onclick="updatecus('${b.customerNumber}')">Save</a>`
+                    <a onclick="PopUpAddaddress(${b.customerNumber})" class="btn amado-btn" style="width:100%;color: #fff;">Add Address</a><br><br>
+                    <a href="#" class="btn amado-btn" onclick="deletecus('${b.customerNumber}')" style="width:49%;color: #fff;">Delete</a>
+                    <a href="#" class="btn amado-btn" onclick="updatecus('${b.customerNumber}')" style="width:49%;color: #fff;">Save</a>`
             }else{
             box += `
             <div class="product-meta-data">
@@ -615,13 +615,44 @@ function PopUpAddress(addressLine1, addressLine2,city,state,country,postalCode,c
                 <p><b>Address ID</b> <p id="addrnum">${addressNumber}</p>
                 <p><b>Customer ID</b> <p>${customerNumber}</p>
                 <a href="#" class="btn amado-btn" onclick="deleteAddr('${customerNumber}')">Delete</a>
-                <a href="#" class="btn amado-btn" onclick="updateAddr('${customerNumber}')">Save</a>
+                <a href="#" class="btn amado-btn" onclick="updateAddr('${customerNumber}','${addressNumber}')">Save</a>
             </div>
         </form>`
     document.getElementById("id05").innerHTML = box;
     document.getElementById("id05").style.display = 'block';
 }
 
+function PopUpAddaddress(a){
+    var box = `
+            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <form class="modal-content animate" action="/action_page.php">
+                    <div class="container">
+                        <h4>Adding Address</h4><br>
+                        <label for="addressLine1"><b>Address Line 1</b></label>
+                            <input type="text" placeholder="" id="addressLine1" name="addressLine1" required>
+                        <label for="addressLine2"><b>Address Line 2</b></label>
+                            <input type="text" placeholder="" id="addressLine2" name="addressLine2" required>
+                        <label for="city"><b>City</b></label>
+                            <input type="text" placeholder="" id="city" name="city" required>
+                        <label for="state"><b>State</b></label>
+                            <input type="text" placeholder="" id="state" name="state" required>
+                        <label for="country"><b>Country</b></label>
+                            <input type="text" placeholder="" id="country" name="country" required>
+                        <label for="postalCode"><b>Postal Code</b></label>
+                            <input type="text" placeholder="" id="postalCode" name="postalCode" required>
+                        <label for="addrnum"><b>Address ID</b></label>
+                            <input type="text" placeholder="" id="addrnum" name="addrnum" required>
+                        <label for="custnum"><b>Customer ID</b></label>
+                            <input type="text" placeholder="" id="custnum" name="custnum" required>
+                        <a class="btn amado-btn w-100 mt-30" style="color: #ffffff" onclick="insertAddress('${a}')">Confirm</a>
+                    </div>
+                    <div class="container" style="background-color:#f1f1f1">
+                        <a class="btn amado-btn-cancel" style="color: #ffffff" onclick="document.getElementById('id01').style.display='none'">Cancel</a>
+                    </div>
+                </form>`
+    document.getElementById("id01").innerHTML = box;
+    document.getElementById("id01").style.display = 'block';
+}
 //------------end show script------------//
 
 //------------drop-down------------//
@@ -718,15 +749,9 @@ function findProductCode(input) {
 //Product
 function insertitem(){
     var product = { "snum": document.getElementById("snumber").value.toString(),
-                    "pname": document.getElementById("name").value.toString(),
                     "pcode": document.getElementById("code").value.toString(),
-                    "pline": document.getElementById("line").value.toString(),
-                    "pscale": document.getElementById("scale").value.toString(),
-                    "pvendor": document.getElementById("vendor").value.toString(),
                     "pnumber": document.getElementById("number").value.toString(),
-                    "pprice": document.getElementById("price").value.toString(),
-                    "pmsrp": document.getElementById("msrp").value.toString(),
-                    "pdes": document.getElementById("pdes").value.toString()};
+                    "pdate": document.getElementById("prodate").value.toString()};
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -739,6 +764,11 @@ function insertitem(){
         dataType: "json",
         success: function (data) {
             document.getElementById('id04').style.display='none';
+            document.getElementById('snumber').value = '';
+            document.getElementById('code').value = '';
+            document.getElementById('number').value = '';
+            document.getElementById('prodate').value = '';
+            console.log(data);
             showProduct(data[0],true,false);
             stockin(data[1]);
         }
@@ -767,6 +797,14 @@ function insertem(){
         dataType: "json",
         success: function (data) {
             document.getElementById('id04').style.display = 'none';
+            document.getElementById('enumber').value = '';
+            document.getElementById('efname').value = '';
+            document.getElementById('elname').value = '';
+            document.getElementById('eex').value = '';
+            document.getElementById('eemail').value = '';
+            document.getElementById('ecode').value = '';
+            document.getElementById('ere').value = '';
+            document.getElementById('ejob').value = '';
             showEmployee(data);
         }
     });
@@ -775,10 +813,10 @@ function insertem(){
 //Promotion
 function insertpromotion(){
     var pro = {"promid": document.getElementById("promid").value.toString(),
-                     "promcode": document.getElementById("promcode").value.toString(),
-                     "promnum": document.getElementById("promnum").value.toString(),
-                     "promdetail": document.getElementById("promdetail").value.toString(),
-                     "promdate": document.getElementById("promdate").value.toString()};
+               "promcode": document.getElementById("promcode").value.toString(),
+               "promnum": document.getElementById("promnum").value.toString(),
+               "promdetail": document.getElementById("promdetail").value.toString(),
+               "promdate": document.getElementById("promdate").value.toString()};
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -791,6 +829,11 @@ function insertpromotion(){
         dataType: "json",
         success: function (data) {
             document.getElementById('id05').style.display='none';
+            document.getElementById('promid').value = '';
+            document.getElementById('promcode').value = '';
+            document.getElementById('promnum').value = '';
+            document.getElementById('promdetail').value = '';
+            document.getElementById('promdate').value = '';
             promotion(data);
         }
     });
@@ -821,13 +864,24 @@ function insertcus(){
         dataType: "json",
         success: function (data) {
             document.getElementById('id04').style.display='none';
+            document.getElementById('wcusnum').value = '';
+            document.getElementById('wcompany').value = '';
+            document.getElementById('wfname').value = '';
+            document.getElementById('wlname').value = '';
+            document.getElementById('wphone').value = '';
+            document.getElementById('wcity').value = '';
+            document.getElementById('wstate').value = '';
+            document.getElementById('wpos').value = '';
+            document.getElementById('wcoun').value = '';
+            document.getElementById('wsale').value = '';
+            document.getElementById('wcredit').value = '';
             showCustomer(data);
         }
     });
 }
 
 // Address
-function insertAddress(){
+function insertAddress(a){
     var address = {
         "addrline1": document.getElementById("addressLine1").value.toString(),
         "addrline2": document.getElementById("addressLine2").value.toString(),
@@ -845,13 +899,13 @@ function insertAddress(){
     });
     $.ajax({
         type: 'post',
-        url: '/addAddress',
+        url: '/addAddress/' + a,
         data: address,
         dataType: "json",
         success: function (data) {
-            console.log(data);
+            x = JSON.stringify(data);
             document.getElementById('id01').style.display = 'none';
-            showCustomerAddress(data, true, 'dont need', 'addressArea');
+            showCustomerAddress(x, true, 'dont need', 'addressArea');
         }
     });
 }
@@ -982,7 +1036,7 @@ function updateship(a){
 }
 
 //Address
-function updateAddr(a){
+function updateAddr(a,b){
     var address = {
         "addrline1": document.getElementById("addressLine1").value.toString(),
         "addrline2": document.getElementById("addressLine2").value.toString(),
@@ -992,7 +1046,6 @@ function updateAddr(a){
         "country": document.getElementById("country").value.toString(),
         "addrnum": document.getElementById("addrnum").innerText
     };
-    console.log(address);
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -1000,15 +1053,17 @@ function updateAddr(a){
     });
     $.ajax({
         type: 'post',
-        url: '/updateAddress/' + a,
+        url: '/updateAddress/' + a + '/' + b,
         data: address,
         dataType: 'json',
         success: function (data) {
+            x = JSON.stringify(data);
             document.getElementById('id05').style.display = 'none';
-            showCustomerAddress(data, true, 'dont need', 'addressArea');
+            showCustomerAddress(x, true, 'dont need', 'addressArea');
         }
     });
 }
+
 function deleteAddr(a){
     $.ajaxSetup({
         headers: {
@@ -1089,7 +1144,6 @@ function deletepromotion(){
         type: 'delete',
         url: '/deletepromotion',
         success: function (data) {
-            console.log(data);
             promotion(data);
             // document.getElementById('id03').style.display = 'none';
             // showProduct(data, true, false);
@@ -1108,7 +1162,6 @@ function order_calculator(){
     for (var i = 0; i < tr.length; i++) {
         var price = tr[i].getElementsByTagName("td")[2].innerText;
         var num = document.getElementById(`qty${i}`).value;
-        //console.log(num);
         sum += price * num;
     }
     mempoint = Math.floor(sum / 100) * 3;
@@ -1142,20 +1195,6 @@ function ShowShipping(input) {
     document.getElementById('order_table_body').innerHTML = shipping_table;
 }
 
-function stock(){
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    $.ajax({
-        type: 'post',
-        url: '/stock',
-        success: function (data) {
-            //console.log(data);
-        }
-    });
-}
 function AddToOrder(){
 
     var customer = document.getElementById("searchID").value.toString();
@@ -1220,6 +1259,7 @@ function deleteCart(){
     document.getElementById("NumberCart").innerHTML = 0;
 }
 function AddToCart(orderNumber,Name,price, pdCode, num ,n){
+    document.getElementById(n).value = 0;
     if(orderNumber != "" && orderNumber != null){
     document.getElementById(n).value = 0;
     var product = {
@@ -1256,7 +1296,7 @@ function NumberCart(){
         url: '/NumberCart',
         success: function (data){
             var d = JSON.parse(data);
-            console.log(d[0].Qty);
+            //console.log(d[0].Qty);
             if(d[0].Qty !== null) document.getElementById("NumberCart").innerHTML = d[0].Qty;
         }
     });
@@ -1348,11 +1388,12 @@ function AddToPayment(){
         data: Payment,
         dataType:"json",
         success : (function(data){
-            if(data != 'error'){
-                window.location.replace('/mnem');
-            }else{
-                document.getElementById('typeError').style.display = 'block';
-            }
+            document.getElementById('id04').style.display='none';
+            document.getElementById('customerNumber').value = '';
+            document.getElementById('checkNumber').value = '';
+            document.getElementById('paymentDate').value = '';
+            document.getElementById('amount').value = '';
+            ShowPayment(data);
         })
     });
 }

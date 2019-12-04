@@ -103,27 +103,21 @@ class DataController extends Controller
         $point = DB::select("select point from customers where customerNumber like '$code'");
         return [json_encode($address),json_encode($point)];
     }
-    public function addAddress(Request $request){
-        DB::insert("insert into addresses
-            values ('$request->addrline1',
-                    '$request->addrline2',
-                    '$request->city',
-                    '$request->state',
-                    '$request->postalcode',
-                    '$request->country',
-                    '$request->custnum',
-                    '$request->addrnum',
-                    'false')"
-        );
+    public function addAddress(Request $request, $code){
+        DB::insert("insert into addresses(addressLine1,addressLine1,city,state,postalCode,country,customerNumber,addressNumber,deleteFlag)
+            values ('$request->addrline1','$request->addrline2','$request->city','$request->state','$request->postalcode','$request->country','$code','$request->addrnum','false')" );
+        $product = DB::select("select * from addresses where customerNumber = '$code'");
+        $jsonp = json_encode($product);
+        return $jsonp;
     }
     public function editAddress($code){
         $data = DB::select("select * from addresses where customerNumber = '$code'");
         return json_encode($data);
     }
-    public function updateAddress(Request $request, $code){
+    public function updateAddress(Request $request, $code, $addr){
         DB::update("update addresses set addressLine1 = ?,addressLine2 = ?,city = ?,state = ?,postalCode = ?,country = ? where addressNumber = ? and customerNumber = ?",
-        [$request->addrline1,$request->addrline2,$request->city,$request->state,$request->postalcode,$request->country,$request->addrnum,$code]);
-        $data = DB::select("select * from addresses");
+        [$request->addrline1,$request->addrline2,$request->city,$request->state,$request->postalcode,$request->country,$addr,$code]);
+        $data = DB::select("select * from addresses where customerNumber = '$code'");
         return json_encode($data);
     }
     public function deleteAddress($code){      //Soft-delete -> still available on shipping details
@@ -225,10 +219,19 @@ class DataController extends Controller
         return json_encode($x);
     }
     public function insertProduct(Request $request){
-        DB::insert("insert into products(productName,productCode,productLine,productScale,productVendor,productDescription,quantityInstock,buyPrice,MSRP)
-        values ('$request->pname','$request->pcode','$request->pline','$request->pscale','$request->pvendor','$request->pdes','$request->pnumber','$request->pprice','$request->pmsrp')");
+        $pro = DB::select("select * from products where productCode = '$request->pcode'");
+        if($pro != null){
+            $qtyjson = DB::select("select quantityInStock from products where productCode = '$request->pcode'");
+            $qtystring = $qtyjson[0]->quantityInStock;
+            $qty = (int)$qtystring+(int)$request->pnumber;
+            DB::update("update products set quantityInstock = ? where productCode = ?",
+            [$qty,$request->pcode]);
+        }else{
+            DB::insert("insert into products(productCode,quantityInstock)
+            values ('$request->pcode','$request->pnumber')");
+        }
         DB::insert("insert into stock(stockNumber,stockDate,productCode,qty)
-        values ('$request->snum',date('now','localtime'),'$request->pcode','$request->pnumber')");
+        values ('$request->snum','$request->pdate','$request->pcode','$request->pnumber')");
         $data = DB::select('select * from products');
         $datastock = DB::select('select * from stock');
         $jsonProduct = json_encode(array($data,$datastock));
@@ -243,11 +246,11 @@ class DataController extends Controller
         return $jsonProduct;
     }
     public function updatePayment(Request $request){
-        DB::insert("
-                insert into payments(customerNumber,checkNumber,paymentDate,amount)
-                values ('$request->customerNumber','$request->checkNumber','$request->paymentDate','$request->amount')
-        ");
-        return $request ;
+        DB::insert("insert into payments(customerNumber,checkNumber,paymentDate,amount)
+        values ('$request->customerNumber','$request->checkNumber','$request->paymentDate','$request->amount')");
+        $Payment = DB::select('select * from payments');
+        $jsonPayment = json_encode($Payment);
+        return $jsonPayment;
     }
 
     public function insertcus(Request $request){
@@ -318,7 +321,7 @@ class DataController extends Controller
     }
 
     public function promotion(){
-        $data = DB::select("delete from promotion where expairDate = date('now','localtime')");
+        // $data = DB::select("delete from promotion where expairDate = date('now','localtime')");
         $pro = DB::select('select * from promotion');
         $jsonpro = json_encode($pro);
         return view('welcome',['jsonpro'=>$jsonpro]);

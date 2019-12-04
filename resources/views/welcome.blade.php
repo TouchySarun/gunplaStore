@@ -237,7 +237,7 @@
             <img src="./amado-master/img/core-img/customers.png"><br><br>
             Customers
         </a>
-        <a href="#" onclick="reqTomnpr(sessionStorage.getItem('employeeNumber'))" class="btn amado-big-btn">
+        <a href="#" onclick="reqTomnpr(sessionStorage.getItem('employeeNumber')),deletepromotion()" class="btn amado-big-btn">
             <br><br><br>
             <img src="./amado-master/img/core-img/promotion.png"><br><br>
             Promotion
