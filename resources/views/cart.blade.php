@@ -88,7 +88,25 @@
             <div class="logo">
                 <a href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
             </div>
-            <p id="showUser"></p>
+            <div class="amado-nav" style="cursor: default">
+                <img src="./amado-master/img/core-img/employeeM.png">
+                <h5 class="mt-30"><span id="showUserFName"></span> <span id="showUserLName"></span></h5>
+                    <p id="showUserTitle" style="margin-bottom: 5px"></p>
+                    <p><span>Employee ID: </span><span id="showUserID"></span></p>
+                <script>
+                    document.getElementById('showUserID').innerHTML=sessionStorage.getItem('employeeNumber');
+                    document.getElementById('showUserTitle').innerHTML=sessionStorage.getItem('title');
+                    document.getElementById('showUserFName').innerHTML=sessionStorage.getItem('employeeFName');
+                    document.getElementById('showUserLName').innerHTML=sessionStorage.getItem('employeeLName');
+                </script>
+            <!-- Button Group -->
+               <div class="amado-btn-group mt-30 mb-100">
+                    <a href="/mnod" class="btn amado-btn">Back</a>
+                    <br>
+                    <a href="/" class="btn amado-btn">Logout</a>
+                </div>
+            </div>
+            <!-- <p id="showUser"></p>
             <script>
                 var x = sessionStorage.getItem('employeeNumber');
                 if(x != null ){
@@ -96,18 +114,7 @@
                 }else{
                     window.location.href = "/";
                 }
-            </script>
-
-            <!-- Amado Nav -->
-            <div class="amado-nav" style="cursor: default">
-                <img src="./amado-master/img/core-img/employeeM.png">
-                <!-- Button Group -->
-                <div class="amado-btn-group mt-30 mb-100">
-                    <a href="/mnod" class="btn amado-btn">Back</a>
-                    <br>
-                    <a href="/" class="btn amado-btn">Logout</a>
-                </div>
-            </div>
+            </script> -->
 
             <!-- Pop up -->
             <!-- PopUp Modal -->
@@ -177,19 +184,18 @@
 
                     <div class="col-lg-4">
                         <div class="cart-summary">
-                            <h5>Cart Total</h5>
+                            <h5 style="background-color:rgb(255, 155, 99);">Cart Total</h5>
                             <ul class="summary-table">
                                 <li><span>Subtotal :</span><span id="sumprice"></span></li>
-
                                 <li>
-                                    <div class="col-12" style="padding: 0px">
+                                <div class="col-12" style="padding: 0px">
                                     <div>
                                         <form style="border: none">
                                         <input type="text" name="searchPro" id="searchPro" style="max-width:60%" placeholder=" Promotion Code...">
-                                        <a class="btn amado-btn" style="width:20%" onclick="getPromotion()"><img src="./amado-master/img/core-img/search.png" alt=""></a>
+                                        <a class="btn amado-btn-search" style="width:10%" onclick="getPromotion()"><img src="./amado-master/img/core-img/search.png" alt=""></a>
                                         </form>
+                                    </div>
                                 </div>
-                            </div>
                                 </li>
                                 <li><span>Discount :</span><span id="discount">-</span></li>
                                 <li><span>Total :</span> <span id="total"></span></li>
@@ -197,7 +203,7 @@
                                 <li><span>Member Points :</span> <span id="points"></span><span>Points</span></li>
                                 <li><span>Shipping Date :</span>
                                     <div class="col-10">
-                                        <input type="text" class="form-control" style="padding: 5px 10px" id="shipDate" placeholder="Shipping Date">
+                                        <input type="date" class="form-control" style="padding: 5px 10px" id="shipDate" placeholder="Shipping Date">
                                     </div>
                                 </li>
                             </ul>
@@ -206,21 +212,21 @@
                                     <img class="ml-30" src="./amado-master/img/core-img/paypal.png" alt="">
                                     <img class="ml-5" src="./amado-master/img/core-img/paypal2.png" alt="" height="50" width="50">
                             </div>
-                            <h5>Customer Address</h5>
+                            <h5 style="background-color:rgb(255, 155, 99);">Customer Address</h5><br>
                             <div class="col-12" style="padding: 0px">
                                 <div>
                                     <form style="border: none">
                                         <input type="text" name="searchID" id="searchID" style="max-width:60%" placeholder="Type Customer Number...">
-                                        <a class="btn amado-btn" style="width:20%" onclick=" getAddress(document.getElementById('searchID').value, false, 'addressArea', 'shippingAddr'); getAddress(document.getElementById('searchID').value, false, 'addressArea2', 'billingAddr');"><img src="./amado-master/img/core-img/search.png" alt=""></a>
+                                        <a class="btn amado-btn-search" style="width:20%" onclick=" getAddress(document.getElementById('searchID').value, false, 'addressArea', 'shippingAddr'); getAddress(document.getElementById('searchID').value, false, 'addressArea2', 'billingAddr');"><img src="./amado-master/img/core-img/search.png" alt=""></a>
                                     </form>
                                 </div>
                             </div><br>
-                            <h5>Select Shipping Address</h5>
+                            <h5 style="background-color:rgb(255, 155, 99);">Select Shipping Address</h5><br>
                             <div class="checkout_details_area clearfix col-12" style="padding: 0px">
                                     <form style="border: none">
-                                        <h5>Shipping Address</h5>
+                                        <h5>Shipping Address :</h5>
                                         <div class="form-control" id="shippingAddr" style="padding: 15px 20px"></div>
-                                        <h5>Billing Address</h5>
+                                        <h5>Billing Address :</h5>
                                         <div class="form-control" id="billingAddr" style="padding: 15px 20px"></div>
                                         <div>
                                             <a onclick="document.getElementById('id01').style.display='block'" class="btn amado-btn" style="width:48%;color: #fff;">Add Address</a>

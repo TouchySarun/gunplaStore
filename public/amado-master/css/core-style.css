@@ -569,7 +569,7 @@ img {
 /* Essence  Button */
 .amado-btn {
   display: inline-block;
-  min-width: 160px;
+  min-width: 200px;
   height: 55px;
   color: #ffffff;
   border: none;
@@ -585,9 +585,9 @@ img {
     background-color: #fb8210;
 }
 
-.amado-btn-plus {
+.amado-btn-search {
   display: inline-block;
-  min-width: 160px;
+  min-width: 120px;
   height: 55px;
   color: #ffffff;
   border: none;
@@ -595,7 +595,25 @@ img {
   padding: 0 7px;
   font-size: 18px;
   line-height: 56px;
-  background-color: #fa9004;
+  background-color: #131212;
+  font-weight: 400; }
+  .amado-btn-search.active, .amado-btn-search:hover, .amado-btn-search:focus {
+    font-size: 18px;
+    color: #ffffff;
+    background-color: #fb8210;
+}
+
+.amado-btn-plus {
+  display: inline-block;
+  min-width: 200px;
+  height: 55px;
+  color: #ffffff;
+  border: none;
+  border-radius: 0;
+  padding: 0 7px;
+  font-size: 18px;
+  line-height: 56px;
+  background-color: #f07f33;
   font-weight: 400; }
   .amado-btn-plus.active, .amado-btn-plus:hover, .amado-btn-plus:focus {
     font-size: 18px;
@@ -2184,7 +2202,7 @@ input[type=text], input[type=password] {
 
 /* Set a style for all buttons */
 button {
-  background-color: #fbb710;
+  background-color: #e47216;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;

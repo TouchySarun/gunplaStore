@@ -48,7 +48,6 @@
                             <button type="submit"><img src="./amado-master/img/core-img/search.png" alt=""></button>
                         </form>
                     </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -78,7 +77,10 @@
             <div class="logo">
                 <a  href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
             </div>
-            <p id="showUser"></p>
+            <div class="cart-fav-search mb-10">
+                <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
+            </div><br>
+            <!-- <p id="showUser"></p>
             <script>
                 var x = sessionStorage.getItem('employeeNumber');
                 if(x != null ){
@@ -86,11 +88,25 @@
                 }else{
                     window.location.href = "/";
                 }
-            </script>
+            </script> -->
+            <div class="amado-nav" style="cursor: default">
+            <img src="./amado-master/img/core-img/employeeM.png">
+                <h5 class="mt-30"><span id="showUserFName"></span> <span id="showUserLName"></span></h5>
+                <p id="showUserTitle" style="margin-bottom: 5px"></p>
+                <p><span>Employee ID: </span><span id="showUserID"></span></p>
+                <script>
+                        document.getElementById('showUserID').innerHTML=sessionStorage.getItem('employeeNumber');
+                        document.getElementById('showUserTitle').innerHTML=sessionStorage.getItem('title');
+                        document.getElementById('showUserFName').innerHTML=sessionStorage.getItem('employeeFName');
+                        document.getElementById('showUserLName').innerHTML=sessionStorage.getItem('employeeLName');
+                </script>
+            </div>
+            
             <input type="text" name="OrderID" id="orderId" placeholder="Order ID ...">
             <!-- Cart Menu -->
-            <div class="cart-fav-search mb-30">
-                <a href="/order" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Order ( <span id="NumberCart">0</span> )</a>
+            <div class="cart-fav-search mb-10">
+                <a href="/order" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Order ( <span id="NumberCart"></span> )</a>
+                <button onclick="deleteCart()">Delete cart</button>
                 <!-- <a href="#" onclick="console.log(GetOrder())" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a> -->
             </div>
 
@@ -137,12 +153,10 @@
             </nav>
 
             <!-- Button Group -->
-            <div class="amado-btn-group mt-30 mb-100">
+            <div class="amado-btn-group mt-20 mb-100">
                 <a href="/welcome" class="btn amado-btn">Back</a>
                 <br>
                 <a href="/" class="btn amado-btn">Logout</a>
-                <br>
-                <button onclick="deleteCart()">delete cart</button>
             </div>
             <!-- Pop up -->
                 <!--Login pop up-->

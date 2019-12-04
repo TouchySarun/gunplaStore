@@ -9,7 +9,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>Amado - Furniture Ecommerce Template | Payments</title>
+    <title>Payments | Gunpla Store Plastic Model Shop</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="./amado-master/img/core-img/favicon.ico">
@@ -73,7 +73,7 @@
             <div class="logo">
                 <a href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
             </div>
-            <p id="showUser"></p>
+            <!-- <p id="showUser"></p>
             <script>
                 var x = sessionStorage.getItem('employeeNumber');
                 if(x != null ){
@@ -81,64 +81,25 @@
                 }else{
                     window.location.href = "/";
                 }
-            </script>
-
-            <!-- Cart Menu -->
-            <div class="cart-fav-search mb-30">
-                <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
-                <!-- <a href="cart.html" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
-                <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a> -->
-            </div>
-
-            <!-- Amado Nav -->
-            <nav class="amado-nav">
-                <ul>
-                <div class="amado-nav">
-                    <!--Scale bar-->
-                    <button
-                        class="navbar-toggler"
-                        type="button"
-                        data-toggle="collapse"
-                        data-target="#footerNavContent"
-                        aria-controls="footerNavContent"
-                        aria-expanded="false"
-                        >SCALE
-                        <i class="fa fa-caret-down"></i>
-                    </button>
-                    <div class="collapse navbar-collapse" id="footerNavContent">
-                        <ul>
-                            <li class="nav-item" id="Scale">
-                            </li>
-                        </ul>
-                    </div>
-                    <!--Vendor bar-->
-                    <button
-                        class="navbar-toggler"
-                        type="button"
-                        data-toggle="collapse"
-                        data-target="#footer"
-                        aria-controls="footerNavContent"
-                        aria-expanded="false"
-                        >VENDOR
-                        <i class="fa fa-caret-down"></i>
-                    </button>
-                    <div class="collapse navbar-collapse" id="footer">
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item" id="Vendor">
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                </ul>
-            </nav>
-
-          <!-- Button Group -->
-          <div class="amado-btn-group mt-30 mb-100">
-                <a href="#" onclick="document.getElementById('id04').style.display='block'" class="btn amado-btn-plus">Add Payment+</a>
+            </script> -->
+            <div class="amado-nav" style="cursor: default">
+                <img src="./amado-master/img/core-img/employeeM.png">
+                <h5 class="mt-30"><span id="showUserFName"></span> <span id="showUserLName"></span></h5>
+                    <p id="showUserTitle" style="margin-bottom: 5px"></p>
+                    <p><span>Employee ID: </span><span id="showUserID"></span></p>
+                <script>
+                    document.getElementById('showUserID').innerHTML=sessionStorage.getItem('employeeNumber');
+                    document.getElementById('showUserTitle').innerHTML=sessionStorage.getItem('title');
+                    document.getElementById('showUserFName').innerHTML=sessionStorage.getItem('employeeFName');
+                    document.getElementById('showUserLName').innerHTML=sessionStorage.getItem('employeeLName');
+                </script>
+            <!-- Button Group -->
+                <div class="amado-btn-group mt-20 mb-100">
+                    <a href="#" onclick="document.getElementById('id04').style.display='block'" class="btn amado-btn-plus">Add Payment+</a>
                 <br><br>
-                <a href="/welcome" class="btn amado-btn">Back</a>
+                    <a href="/shipping" class="btn amado-btn">Back</a>
                 <br>
-                <a href="/" class="btn amado-btn">Logout</a>
+                    <a href="/" class="btn amado-btn">Logout</a>
             </div>
 
             <!-- Pop up -->
@@ -189,10 +150,10 @@
                                         <table>
                                             <thead>
                                                 <tr style="background-color:#fbb710">
-                                                    <th style="width:25%">CustomerNumber</th>
-                                                    <th style="width:25%">CheckNumber</th>
-                                                    <th style="width:25%">Payment Date</th>
-                                                    <th style="width:25%">Amount</th>
+                                                    <th style="width: 275px">CustomerNumber</th>
+                                                    <th style="width: 275px">CheckNumber</th>
+                                                    <th style="width: 275px">Payment Date</th>
+                                                    <th style="width: 275px">Amount</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="payment_table_body">
@@ -225,7 +186,7 @@
                                     <form>
                                         <p>Customer Number: <input type="text" id="customerNumber"></p>
                                         <p>Check Number: <input type="text" id="checkNumber"></p>
-                                        <p>Payment Date: <input type="text" id="paymentDate"></p>
+                                        <p>Payment Date: <input type="date" style="width: 520px" id="paymentDate"></p>
                                         <p>Amount: <input type="text" id="amount"></p>
                                         <!-- <div class="dropdown">
                                             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="order_status">STATUS

@@ -103,7 +103,7 @@
             </div>
 
             <!-- Cart Menu -->
-            <div class="cart-fav-search mb-30">
+            <!-- <div class="cart-fav-search mb-30">
                 <p id="showUser"></p>
                 <script>
                     var x = sessionStorage.getItem('employeeNumber');
@@ -114,9 +114,7 @@
                         window.location.href = "/";
                 }
                 </script>
-                <a href="cart.html" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
-                <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
-            </div>
+            </div> -->
 
             <!-- Amado Nav -->
             <nav class="amado-nav">

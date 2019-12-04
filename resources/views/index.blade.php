@@ -40,6 +40,7 @@
             </div>
         </div>
     </div>
+    
     <!-- Search Wrapper Area End -->
 
     <!-- ##### Main Content Wrapper Start ##### -->
@@ -67,10 +68,8 @@
             </div>
 
             <!-- Cart Menu -->
-            <div class="cart-fav-search mb-30">
+            <div class="cart-fav-search mb-10">
                 <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
-                <a href="cart.html" class="cart-nav"><img src="./amado-master/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
-                <a href="#" class="fav-nav"><img src="./amado-master/img/core-img/favorites.png" alt=""> Favourite</a>
             </div>
 
             <!-- Amado Nav -->
@@ -116,13 +115,11 @@
             </nav>
 
             <!-- Button Group -->
-            <div class="amado-btn-group mt-30 mb-100">
-                <a href="#" class="btn amado-btn" >Discount</a>
-                <br>
-                <a href="#" onclick = "document.getElementById('id01').style.display='block'" class="btn amado-btn">
+            <div class="amado-btn-group mt-20 mb-100">
+                <a href="#" onclick = "document.getElementById('id01').style.display='block'" class="btn amado-btn-plus">
                     Login
                 </a>
-                <br>
+                <br><br>
                 <a href="#" onclick = "categorize(Vendor,'Vendor')" class="btn amado-btn">
                     Catagorize by Vendor
                 </a>
@@ -134,12 +131,9 @@
                 <a href="#" onclick = "showProduct(json,false,false)" class="btn amado-btn">
                     No Catagorize
                 </a>
-            </div>
+            </div> 
 
-        </header>
-
-
-    </div>
+   
     <!-- ##### Main Content Wrapper End ##### -->
         <!-- Pop up -->
                 <!--Login pop up-->
@@ -179,23 +173,24 @@
                 <div id="id02" class="modal" style="display:none" >
                     <!-- showProductDetail() -->
                 </div>
-
         </header>
         <!-- Header Area End -->
 
         <!-- Product Catagories Area Start -->
         <div class="products-catagories-area clearfix" id="productArea" >
+        
         </div>
-
-        <script>
+        <script type="text/javascript">
             var json = <?php echo $jsonProduct?>;
             var Vendor = <?php echo $jsonVendor?>;
             var Scale = <?php echo $jsonScale?>;
-            showProduct(json, false, false);
             dropdownVender(Vendor);
             dropdownScale(Scale);
-            sessionStorage.clear();
+            showProduct(json, false, false);
         </script>
+        
+
+        
         <!-- Product Catagories Area End -->
 
     </div>

@@ -87,7 +87,11 @@
             <div class="logo">
                 <a  href="/welcome"><img src="./amado-master/img/core-img/logoGunpla1.png" alt=""></a>
             </div>
-            <p id="showUser"></p>
+            <div class="cart-fav-search mb-10">
+                <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
+            </div>
+
+            <!-- <p id="showUser"></p>
             <script>
                 var x = sessionStorage.getItem('employeeNumber');
                 if(x != null ){
@@ -95,21 +99,27 @@
                 }else{
                     window.location.href = "/";
                 }
-            </script>
-
-            <!-- Cart Menu -->
-            <div class="cart-fav-search mb-30">
-                <a href="#" class="search-nav"><img src="./amado-master/img/core-img/search.png" alt=""> Search</a>
-            </div>
-
+            </script> -->
+            <div class="amado-nav" style="cursor: default">
+                <img src="./amado-master/img/core-img/employeeM.png">
+                <h5 class="mt-30"><span id="showUserFName"></span> <span id="showUserLName"></span></h5>
+                    <p id="showUserTitle" style="margin-bottom: 5px"></p>
+                    <p><span>Employee ID: </span><span id="showUserID"></span></p>
+                <script>
+                    document.getElementById('showUserID').innerHTML=sessionStorage.getItem('employeeNumber');
+                    document.getElementById('showUserTitle').innerHTML=sessionStorage.getItem('title');
+                    document.getElementById('showUserFName').innerHTML=sessionStorage.getItem('employeeFName');
+                    document.getElementById('showUserLName').innerHTML=sessionStorage.getItem('employeeLName');
+                </script>
             <!-- Button Group -->
-            <div class="amado-btn-group mt-30 mb-100">
-                <a href="#" onclick="document.getElementById('id04').style.display='block'"  class="btn amado-btn" >AddEmployee +</a>
-                <br>
+                <div class="amado-btn-group mt-20 mb-100">
+                <a href="#" onclick="document.getElementById('id04').style.display='block'"  class="btn amado-btn-plus" >AddEmployee +</a>
+                <br><br>
                 <a href="welcome" class="btn amado-btn">Back</a>
                 <br>
                 <a href="/" class="btn amado-btn">Logout</a>
             </div>
+
             <!-- Pop up -->
                 <!--Login pop up-->
                 <div id="id01" class="modal">
