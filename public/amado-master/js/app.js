@@ -29,16 +29,12 @@ function showCustomerAddress(input, editAble,redioname,id) {
                 </td>`;
                 if(editAble === true){
                 tableaddress += `
-                <td style="width:15%; flex: 0 0 15%; padding-right: 1px; border-right: 1px solid #6d6d6d">
-                    <a href="#" onclick="PopUpAddress('${a.addressLine1}', '${a.addressLine2}','${a.city}', '${a.state}', '${a.country}', '${a.postalCode}','${a.customerNumber}','${a.addressNumber}')" class="btn amado-btn-white" style="min-width:20%; width=100%">
+                <td style="width:20%; flex: 0 0 20%; padding-right: 1px; border-right: 1px solid #6d6d6d;">
+                    <a href="#" onclick="PopUpAddress('${a.addressLine1}', '${a.addressLine2}','${a.city}', '${a.state}', '${a.country}', '${a.postalCode}','${a.customerNumber}','${a.addressNumber}')"
+                        class="btn amado-btn-white" style="min-width:20%; width=100%; padding: .35rem .35rem;">
                         <img src="./amado-master/img/core-img/pencil.png" width="25" height="25">
                     </a>
-                </td>
-                <td style="width:12%; flex: 0 0 15%; padding-left: 1px">
-                    <a href="#" onclick="deleteAddr('${a.customerNumber}','${a.addressNumber}')" class="btn amado-btn-white" style="min-width:20%; width=100%">
-                        <img src="./amado-master/img/core-img/trash.png" width="25" height="25">
-                    </a>
-                </td>  `;}
+                </td>`;}
                 tableaddress+= `
             </tr>`;
         });
@@ -637,7 +633,7 @@ function PopUpAddaddress(a){
                         <label for="addrnum"><b>Address ID</b></label>
                             <input type="text" placeholder="" id="addrnum" name="addrnum" required>
                         <label for="custnum"><b>Customer ID</b></label>
-                            <p>${a}</p>
+                            <p id="custnum">${a}</p>
                         <a class="btn amado-btn w-100 mt-30" style="color: #ffffff" onclick="insertAddress('${a}')">Confirm</a>
                     </div>
                     <div class="container" style="background-color:#f1f1f1">
