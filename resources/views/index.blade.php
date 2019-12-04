@@ -179,12 +179,8 @@
                 <div id="id02" class="modal" style="display:none" >
                     <!-- showProductDetail() -->
                 </div>
-
-        </header>
-        <!-- Header Area End -->
-
-        <!-- Product Catagories Area Start -->
-        <div class="products-catagories-area clearfix" id="productArea" >
+            <!-- Product Catagories Area Start -->
+        <div class="products-catagories-area clearfix" id="productArea">
         </div>
 
         <script>
@@ -197,6 +193,10 @@
             sessionStorage.clear();
         </script>
         <!-- Product Catagories Area End -->
+        </header>
+        <!-- Header Area End -->
+
+        
 
     </div>
     <!-- ##### Main Content Wrapper End ##### -->

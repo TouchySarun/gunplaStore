@@ -38,7 +38,7 @@
                     <div class="search-content">
                         <form action="" method="get">
                             <!-- <input type="search" name="search" id="search" placeholder="Type your keyword..."> -->
-                            <input type="text" id="myInput" onkeyup="filterByProductName()" placeholder="Search for names..">
+                            <input type="text" id="myInput" onkeyup="filter(this.value,4)" placeholder="Search for names..">
                             <button type="submit"><img src="./amado-master/img/core-img/search.png" alt=""></button>
                         </form>
                     </div>
@@ -112,48 +112,24 @@
             </div>
             <!-- Pop up -->
                 <!--Login pop up-->
-                <div id="id01" class="modal">
-                    <span onclick="document.getElementById('id01').style.display='none'"
-                        class="close" title="Close Modal">&times;
-                    </span>
-
-                    <!-- Modal Content -->
-                    <form class="modal-content animate" action="/action_page.php">
-                        <div class="container">
-                            <label for="uname"><b>Username</b></label>
-                                <input type="text" placeholder="Enter Username" name="uname" required>
-                            <label for="psw"><b>Password</b></label>
-                                <input type="password" placeholder="Enter Password" name="psw" required>
-                                <button type="submit">Login</button>
-                            <label>
-                                <input type="checkbox" checked="checked" name="remember"> Remember me
-                            </label>
-                            <span class="psw"><a href="#">Forgot password?</a></span>
-                        </div>
-                        <div class="container" style="background-color:#f1f1f1">
-                        <button type="button" onclick="document.getElementById('id01').style.display='none'"
-                            class="cancelbtn">Cancel</button>
-                        </div>
-                    </form>
-                </div>
                 <!-- product pop up -->
 
                 <div id="id03" class="modal" style="display:none">
                     <!-- showProductDetail() -->
                 </div>
                 <!-- popup add new employee -->
-                <div id="id04" style="display:none">
+                <div id="id04" class="modal" style="display:none">
                     <span onclick="document.getElementById('id04').style.display='none'"
-                        class="close" title="Close Modal">&times;
+                        class="close-small" title="Close Modal">&times;
                     </span>
                     <!-- product-order -->
-                    <form class="modal-content animate" action="/action_page.php">
-                    <div class="cart-table-area section-padding-60">
+                    <form class="modal-content-small animate" action="/action_page.php">
+                    <div class="container">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-12 col-lg-8">
-                                <div class="cart-title mt-50">
-                                    <h2>New Customer</h2>
+                            <div class="col-12">
+                                <div class="mt-15 mb-30">
+                                    <h4>New Customer</h4>
                                 </div>
                                 <div class="product-meta-data">
                                 <label for="customerNum"><b>Customer Number</b></label>
@@ -190,15 +166,18 @@
                     </div>
                     </form>
                 </div>
+
+                <div id="id01" class="modal" style="display:none">
+                </div>
                 <!-- Pop up for edit address -->
-                <div id="id05" class="modal">
+                <div id="id05" class="modal" style="display:none">
                     <!-- PopUpAddress() -->
                 </div>
         </header>
         <!-- Header Area End -->
 
         <!-- Product Catagories Area Start -->
-        <div class="products-catagories-area clearfix" id="customerArea"></div>
+        <div class="products-catagories-area clearfix" id="productArea"></div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script type="text/javascript">
             var customer = <?php echo $jsoncustomer?>;
