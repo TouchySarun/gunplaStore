@@ -55,14 +55,17 @@ function getAddress(customerNumber,editAble,redioname,id){
         type: 'get',
         url: '/getAddress/' + customerNumber,
         success: function (data) {
-            //console.log(data);
-            showCustomerAddress(data[0], editAble,redioname,id);
-            var d = JSON.parse(data[1]);
-            var points = document.getElementById("points");
-            if(points != null){
-                points.innerHTML = d[0].point;
+            console.log(data[0].length)
+            if(data[0].length != 2){
+                showCustomerAddress(data[0], editAble,redioname,id);
+                var d = JSON.parse(data[1]);
+                var points = document.getElementById("points");
+                if(points != null){
+                    points.innerHTML = d[0].point;
+                }
+            }else{
+                document.getElementById("nocustomer").style.display = 'block';
             }
-
             // console.log(x[0].customerNumber);
             // return x[0];
         }
@@ -85,6 +88,7 @@ function showProduct(json, editable, orderable) {
                 <div class="hover-content">
                 <div class="line"></div>
                 <p>Stock ${a.quantityInStock}</p>
+                    <p>${a.productCode}</p>
                     <p>$${a.buyPrice}</p>
                     <p>${a.productScale}</p>
                     <p>${a.productVendor}</p>
@@ -128,13 +132,11 @@ function getPromotion(){
     var Code = {
         'code' : document.getElementById('searchPro').value
     };
-    console.log(Code);
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    console.log('ajax');
     $.ajax({
         type: 'post',
         url: '/getPro',
@@ -142,8 +144,9 @@ function getPromotion(){
         dataType:'Text',
         success: function (data){
             var d = JSON.parse(data);
-            if(d[0] === undefined){
+            if(d[0].length === 0){
                 document.getElementById("discount").innerHTML = 'Code invalid';
+                document.getElementById("nopromotion").style.display = 'block';
             }else if((JSON.parse(d[1])[0].qty) == 0){
                 document.getElementById("discount").innerHTML = 'Run out of quota';
             } else {
@@ -559,15 +562,15 @@ function PopUpProduct(a, editAble){
                 box += `<div class="product-meta-data">
                 <div class="line"></div>
                 <form>
-                    <p>Price: <input type="text" id="price" name="number" value="${b.buyPrice}"></p>
-                    <p>Name: <input type="text" id="name" name="text" value="${b.productName}"></p>
-                    <p>Scale: <input type="text" id="scale" name="text" value="${b.productScale}"></p>
-                    <p>Vendor: <input type="text" id="vendor" name="text" value="${b.productVendor}"></p>
-                    <p>Instock: <input type="text" id="stock" name="text" value="${b.quantityInStock}"></p>
+                    <p>Price: <input type="text" id="${b.productCode}price" name="number" value="${b.buyPrice}"></p>
+                    <p>Name: <input type="text" id="${b.productCode}name" name="text" value="${b.productName}"></p>
+                    <p>Scale: <input type="text" id="${b.productCode}scale" name="text" value="${b.productScale}"></p>
+                    <p>Vendor: <input type="text" id="${b.productCode}vendor" name="text" value="${b.productVendor}"></p>
+                    <p>Instock: <p id="${b.productCode}stock">${b.quantityInStock}</p>
                 </form>
             </div>
             <div class="short_overview my-5">
-                <p>Description: <textarea id="des" name="message" style="width:400px; height:250px;">${b.productDescription}</textarea></p>
+                <p>Description: <textarea id="${b.productCode}des" name="message" style="width:400px; height:250px;">${b.productDescription}</textarea></p>
             </div>
             <a href="#" class="btn amado-btn" onclick="deleteitem('${b.productCode}')">Delete</a>
             <a href="#" class="btn amado-btn" onclick="updateitem('${b.productCode}')">Save</a>
@@ -855,15 +858,15 @@ function insertAddress(){
 // Product
 function updateitem(a) {
     var product = {
-        "pname": document.getElementById("name").value.toString(),
+        "pname": document.getElementById(`${a}name`).value.toString(),
         // "pcode": document.getElementById("code").value.toString(),
         // "pline": document.getElementById("line").value.toString(),
-        "pscale": document.getElementById("scale").value.toString(),
-        "pvendor": document.getElementById("vendor").value.toString(),
-        "pnumber": document.getElementById("stock").value.toString(),
-        "pprice": document.getElementById("price").value.toString(),
+        "pscale": document.getElementById(`${a}scale`).value.toString(),
+        "pvendor": document.getElementById(`${a}vendor`).value.toString(),
+        "pnumber": document.getElementById(`${a}stock`).innerText,
+        "pprice": document.getElementById(`${a}price`).value.toString(),
         // "pmsrp": document.getElementById("msrp").value.toString(),
-        "pdes": document.getElementById("des").value.toString()
+        "pdes": document.getElementById(`${a}des`).value.toString()
     };
     $.ajaxSetup({
         headers: {
@@ -880,6 +883,23 @@ function updateitem(a) {
             document.getElementById('id02').style.display = 'none';
             showProduct(data, true, false);
         }
+    });
+}
+
+function updateinstock(a) {
+    var product = {
+        "pnumber": document.getElementById(`${a}stock`).value.toString
+    };
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: '/updateinstock/' + a,
+        data: product,
+        dataType: "json"
     });
 }
 
@@ -1134,6 +1154,11 @@ function stock(){
     });
 }
 function AddToOrder(){
+
+    var customer = document.getElementById("searchID").value.toString();
+    if(customer == ''){
+        document.getElementById("nocustomer").style.display = "block";
+    }
     var shippingAddr, billingAddr;
     var radios = document.getElementsByName('addressArea');
     for (var i = 0; i < radios.length; i++){
@@ -1153,17 +1178,16 @@ function AddToOrder(){
     }
     var shipDate = document.getElementById("shipDate").value.toString();
     if(shipDate == ""){
-        shipDate = "order date +7";
+        shipDate = "orderdate_7";
     }
     var Billing = {
-        'customerNumber' : document.getElementById("searchID").value.toString(),
+        'customerNumber' : customer,
         'Point' : document.getElementById("mempoint").innerText,
         'shippingDate' : shipDate,
         'shippingAddr' : shippingAddr,
         'billingAddr' : billingAddr,
         'code' : code
     };
-    console.log(Billing);
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -1174,8 +1198,8 @@ function AddToOrder(){
         url: '/successOrder',
         data: Billing,
         success: function (data){
-            //console.log(data);
-                window.location.replace('/welcome');
+            // console.log(data);
+            window.location.replace('/welcome');
         }
     });
 }
@@ -1190,11 +1214,11 @@ function deleteCart(){
         type: 'delete',
         url: '/deleteCart'
     });
+    document.getElementById("NumberCart").innerHTML = 0;
 }
 function AddToCart(orderNumber,Name,price, pdCode, num ,n){
-    document.getElementById(n).value = 0;
-    console.log(orderNumber);
     if(orderNumber != "" && orderNumber != null){
+    document.getElementById(n).value = 0;
     var product = {
         "orderNumber": orderNumber,
         "Name" : Name,
@@ -1202,7 +1226,6 @@ function AddToCart(orderNumber,Name,price, pdCode, num ,n){
         "productCode": pdCode,
         "qty": num
     };
-    NumberCart();
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -1211,19 +1234,15 @@ function AddToCart(orderNumber,Name,price, pdCode, num ,n){
     $.ajax({
         type: 'post',
         url: '/insertToCart',
-        data: product,
-        success: function (data){
-            console.log(data);
-            promotion(data);
-        }
+        data: product
     });
+    NumberCart();
     }else{
         document.getElementById('error').style.display = "block";
     }
 }
 
 function NumberCart(){
-    console.log('Number Open');
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -1323,7 +1342,7 @@ function AddToPayment(){
     $.ajax({
         type: 'post',
         url: '/reqSell',
-        data: a,
+        data: Payment,
         dataType:"json",
         success : (function(data){
             if(data != 'error'){

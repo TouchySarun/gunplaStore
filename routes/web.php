@@ -25,7 +25,6 @@ Route::get('/test', function () {
 });
 //### normal page ####
 Route::get('/','DataController@index');
-Route::get('/welcome','DataController@promotion');
 Route::get('/mnpd','DataController@mnproduct');
 Route::get('/mncus','DataController@mncus');
 Route::get('/mnod','DataController@mnorder');
@@ -36,7 +35,8 @@ Route::get('/shipping','DataController@shipping');
 Route::get('/promotion','DataController@promotion');
 Route::get('/payment','DataController@payment');
 
-Route::get('/welcome','DataController@employeeInfo');
+Route::get('/welcome','DataController@promotion');
+//Route::get('/welcome','DataController@employeeInfo');
 
 //### get function ###
 Route::get('/getAddress/{code}','DataController@getAddress');
@@ -53,6 +53,7 @@ Route::get('/Subtotal', 'Datacontroller@Subtotal');
 //### Update Function ###
 Route::post('/updateship/{code}','DataController@updateship');
 Route::post('/updateProduct/{code}','DataController@updateProduct');
+Route::post('/updateinstock/{code}','DataController@updateinstock');
 Route::post('/updateEm/{code}','DataController@updateEm');
 Route::post('/NumberCart','DataController@NumberCart');
 Route::post('/getPro','DataController@getPromotion');

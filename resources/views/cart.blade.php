@@ -42,7 +42,22 @@
         </div>
     </div>
     <!-- Search Wrapper Area End -->
-
+    <div id = "nocustomer" class= "modal" style = "display:none">
+        <form class="modal-content animate" >
+            <div class="container" style="background-color:#f1f1f1">
+            <button type="button" onclick="document.getElementById('nocustomer').style.display='none'"
+                class="cancelbtn">Please enter Customer Number.</button>
+            </div>
+        </form>
+    </div>
+    <div id = "nopromotion" class= "modal" style = "display:none">
+        <form class="modal-content animate" >
+            <div class="container" style="background-color:#f1f1f1">
+            <button type="button" onclick="document.getElementById('nopromotion').style.display='none'"
+                class="cancelbtn">Invalid promotion code.</button>
+            </div>
+        </form>
+    </div>
     <!-- ##### Main Content Wrapper Start ##### -->
     <div class="main-content-wrapper d-flex clearfix">
 

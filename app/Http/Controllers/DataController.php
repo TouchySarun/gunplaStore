@@ -134,7 +134,7 @@ class DataController extends Controller
 
     public function successOrder(Request $request){
         $OrderNumber = DB::select('select distinct orderNumber from cart ');
-        $ProductCode = DB :: select('select distinct productCode from cart ');
+        $ProductCode = DB::select('select distinct productCode from cart ');
         $x = $OrderNumber[0];
         $date = date('Y-m-d',time());
         DB::insert("
@@ -148,13 +148,13 @@ class DataController extends Controller
         foreach($ProductCode as $P){
             $p = $P->productCode ;
             $Qty = DB::select("select sum(qty) as QTY from cart where productCode like '$p' Group by productCode");
-            $pricEach = DB::select("select buyPrice from products where productCode like '$p'");
+            $pricEach = DB::select("select buyPrice, quantityInStock from products where productCode like '$p'");
             $qty = $Qty[0];
             $price = $pricEach[0];
-            DB:: insert("
-                insert into orderdetails(orderNumber,productCode,quantityOrdered,priceEach,orderLineNumber)
-                values ('$x->orderNumber','$P->productCode', '$qty->QTY', '$price->buyPrice', '$i')
-            ");
+            DB:: insert("insert into orderdetails(orderNumber,productCode,quantityOrdered,priceEach,orderLineNumber)values ('$x->orderNumber','$P->productCode', '$qty->QTY', '$price->buyPrice', '$i')");
+            //update qty of product in stock
+            $newstock = $price->quantityInStock - $qty->QTY;
+            DB::update("update products set quantityInStock = '$newstock' where productCode = '$p'");
             $i = $i + $j;
         }
 
@@ -165,15 +165,15 @@ class DataController extends Controller
         $y = $x->point;
         $x = $z+$y;
         DB::update("update customers set point =$x where customerNumber like '$request->customerNumber'");
-
-        $x=json_encode($request->code);
         //update qty of promotion in promotion table
-        DB::update("update promotion set qty =qty-1 where promotionCode like '$x'");
 
+        $oldPromotionQTY = DB::select("select qty from promotion where promotionCode like '$request->code'");
+        $newPQTY = (int)$oldPromotionQTY[0]->qty - $j;
+        DB::update("update promotion set qty = $newPQTY where promotionCode like '$request->code'");
         //delete cart
         DB::delete('delete from cart');
 
-         return view('welcome');
+        return view('welcome');
     }
 
     public function login(Request $request)
@@ -269,6 +269,14 @@ class DataController extends Controller
     public function updateProduct(Request $request,$code){
         DB::update("update products set productName = ?,productScale = ?,productVendor = ?,productDescription = ?,quantityInstock = ?,buyPrice = ? where productCode = ?",
         [$request->pname,$request->pscale,$request->pvendor,$request->pdes,$request->pnumber,$request->pprice,$code]);
+        $data = DB::select('select * from products');
+        $jsonProduct = json_encode($data);
+        return $jsonProduct;
+    }
+
+    public function updateinstock(Request $request,$code){
+        DB::update("update products set quantityInstock = ? where productCode = ?",
+        [$request->pnumber,$code]);
         $data = DB::select('select * from products');
         $jsonProduct = json_encode($data);
         return $jsonProduct;
