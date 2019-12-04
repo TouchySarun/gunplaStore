@@ -93,6 +93,13 @@ class DataController extends Controller
         $jsoneditstatus = json_encode($jdata);
         return $jsoneditstatus;
     }
+    public function detailstatus($code){
+        $jdata = DB::select("select * from orderdetails where orderNumber = '$code'");
+        $jsoneditstatus = json_encode($jdata);
+        return $jsoneditstatus;
+    }
+    
+
     public function order(Request $request){
         $product = DB::select('select * from cart');
         return view('cart',['product'=>json_encode($product),'jsonCustomer'=> '']);
@@ -104,7 +111,7 @@ class DataController extends Controller
         return [json_encode($address),json_encode($point)];
     }
     public function addAddress(Request $request, $code){
-        DB::insert("insert into addresses(addressLine1,addressLine1,city,state,postalCode,country,customerNumber,addressNumber,deleteFlag)
+        DB::insert("insert into addresses(addressLine1,addressLine2,city,state,postalCode,country,customerNumber,addressNumber,deleteFlag)
             values ('$request->addrline1','$request->addrline2','$request->city','$request->state','$request->postalcode','$request->country','$code','$request->addrnum','false')" );
         $product = DB::select("select * from addresses where customerNumber = '$code'");
         $jsonp = json_encode($product);

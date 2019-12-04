@@ -177,7 +177,6 @@
 
         <!-- pop up shipping details -->
         <div id="id08" class="modal" style="display:none"></div>
-
                     <!-- product-order -->
                     <form class="modal-content animate" style="padding-top:5%">
                     <!-- cart-table-area  -->
@@ -199,6 +198,7 @@
                                                     <th style="width:25%">Comments</th>
                                                     <th >CustomerNumber</th>
                                                     <th > </th>
+                                                    <th > </th>
                                                 </tr>
 
                                             </thead>
@@ -214,9 +214,9 @@
                             </div>
                         </div>
                     </form>
+    <div id="popoddetail" class="modal" style="display:none"></div>
 
-
-            <!-- pop-up add order to shipping -->
+    <!-- pop-up add order to shipping -->
 
 
     </div>
