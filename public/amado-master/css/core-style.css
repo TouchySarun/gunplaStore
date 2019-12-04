@@ -2260,13 +2260,29 @@ span.psw {
   padding-top: 60px;
 }
 
-/* Modal Content/Box */
+/* Modal Content Box */
 .modal-content {
   background-color: #fefefe;
   margin: 5px auto; /* 15% from the top and centered */
   border: 1px solid #888;
   padding: 25px;
   width: 80%; /* Could be more or less, depending on screen size */
+}
+.modal-content-small {
+  background-color: #fefefe;
+  margin: 5px auto; /* 15% from the top and centered */
+  border: 1px solid #888;
+  padding: 25px;
+  width: 60%; /* Could be more or less, depending on screen size */
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  pointer-events: auto;
+  background-clip: padding-box;
+  border-radius: .3rem;
+  outline: 0;
 }
 
 /* The Close Button */
@@ -2280,13 +2296,33 @@ span.psw {
   /* font-size: 35px;
   font-weight: bold; */
 }
-
 /* Close button on hover */
 .close:hover,
 .close:focus {
   color: #242424;
   cursor: pointer;
   text-decoration: none;
+}
+
+.close-small {
+  position: relative;
+  z-index: 1;
+  right: 23%;
+  top: 5%;
+  color: #000;
+  float: right;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  opacity: .5;
+}
+.close-small:hover,
+.close-small:focus {
+    color: #242424;
+    cursor: pointer;
+    text-decoration: none;
 }
 
 /* Add Zoom Animation */

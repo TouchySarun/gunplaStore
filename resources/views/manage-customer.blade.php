@@ -138,16 +138,16 @@
                 <!-- popup add new employee -->
                 <div id="id04" class="modal">
                     <span onclick="document.getElementById('id04').style.display='none'"
-                        class="close" title="Close Modal">&times;
+                        class="close-small" title="Close Modal">&times;
                     </span>
                     <!-- product-order -->
-                    <form class="modal-content animate" action="/action_page.php">
-                    <div class="cart-table-area section-padding-60">
+                    <form class="modal-content-small animate" action="/action_page.php">
+                    <div class="container">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-12 col-lg-8">
-                                <div class="cart-title mt-50">
-                                    <h2>New Customer</h2>
+                            <div class="col-12">
+                                <div class="mt-15 mb-30">
+                                    <h4>New Customer</h4>
                                 </div>
                                 <div class="product-meta-data">
                                 <label for="customerNum"><b>Customer Number</b></label>
@@ -185,7 +185,7 @@
                     </form>
                 </div>
 
-                <div id="id01" class="modal">
+                <div id="id01" class="modal" style="display:none">
                 </div>
                 <div id="id05" class="modal" style="display:none">
                     <!-- PopUpAddress() -->

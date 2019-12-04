@@ -6,6 +6,7 @@ var tableaddress = "";
 var tablestock = "";
 var tablepromotion = "";
 var tablecustomer = "";
+var tableoddetail = "";
 //--------------Show script------------------//
 function showCustomerAddress(input, editAble,redioname,id) {
         tableaddress = "";
@@ -27,17 +28,14 @@ function showCustomerAddress(input, editAble,redioname,id) {
                     <p>${a.addressLine1} ${a.addressLine2}<br>${a.city} ${a.state} ${a.country} ${a.postalCode}</p>`;
                     if(n != x.length-1) tableaddress+= `<a class="line"></a>`;n++;tableaddress += `
                 </td>`;
-                if(editAble === true){tableaddress += `
-                <td style="width:15%; flex: 0 0 15%; padding-right: 1px; border-right: 1px solid #6d6d6d">
-                    <a href="#" onclick="PopUpAddress('${a.addressLine1}', '${a.addressLine2}','${a.city}', '${a.state}', '${a.country}', '${a.postalCode}','${a.customerNumber}','${a.addressNumber}')" class="btn amado-btn-white" style="min-width:20%; width=100%">
+                if(editAble === true){
+                tableaddress += `
+                <td style="width:20%; flex: 0 0 20%; padding-right: 1px; border-right: 1px solid #6d6d6d;">
+                    <a href="#" onclick="PopUpAddress('${a.addressLine1}', '${a.addressLine2}','${a.city}', '${a.state}', '${a.country}', '${a.postalCode}','${a.customerNumber}','${a.addressNumber}')"
+                        class="btn amado-btn-white" style="min-width:20%; width=100%; padding: .35rem .35rem;">
                         <img src="./amado-master/img/core-img/pencil.png" width="25" height="25">
                     </a>
-                </td>
-                <td style="width:12%; flex: 0 0 15%; padding-left: 1px">
-                    <a href="#" onclick="deleteAddr('${a.customerNumber}')" class="btn amado-btn-white" style="min-width:20%; width=100%">
-                        <img src="./amado-master/img/core-img/trash.png" width="25" height="25">
-                    </a>
-                </td>  `;}
+                </td>`;}
                 tableaddress+= `
             </tr>`;
         });
@@ -612,8 +610,8 @@ function PopUpAddress(addressLine1, addressLine2,city,state,country,postalCode,c
                 <p><b>Country</b> <input type="text" placeholder="" id="country" name="country" value="${country}"></p>
                 <p><b>Postal Code</b> <input type="text" placeholder="" id="postalCode" name="postalCode" value="${postalCode}"></p>
                 <p><b>Address ID</b> <p id="addrnum">${addressNumber}</p>
-                <p><b>Customer ID</b> <p>${customerNumber}</p>
-                <a href="#" class="btn amado-btn" onclick="deleteAddr('${customerNumber}')">Delete</a>
+                <p><b>Customer ID</b> <p id="custnum">${customerNumber}</p>
+                <a href="#" class="btn amado-btn" onclick="deleteAddr('${customerNumber}','${addressNumber}')">Delete</a>
                 <a href="#" class="btn amado-btn" onclick="updateAddr('${customerNumber}','${addressNumber}')">Save</a>
             </div>
         </form>`
@@ -627,6 +625,8 @@ function PopUpAddaddress(a){
                 <form class="modal-content animate" action="/action_page.php">
                     <div class="container">
                         <h4>Adding Address</h4><br>
+                        <label for="addrnum"><b>Address ID</b></label>
+                            <input type="text" placeholder="" id="addrnum" name="addrnum" required>
                         <label for="addressLine1"><b>Address Line 1</b></label>
                             <input type="text" placeholder="" id="addressLine1" name="addressLine1" required>
                         <label for="addressLine2"><b>Address Line 2</b></label>
@@ -639,10 +639,6 @@ function PopUpAddaddress(a){
                             <input type="text" placeholder="" id="country" name="country" required>
                         <label for="postalCode"><b>Postal Code</b></label>
                             <input type="text" placeholder="" id="postalCode" name="postalCode" required>
-                        <label for="addrnum"><b>Address ID</b></label>
-                            <input type="text" placeholder="" id="addrnum" name="addrnum" required>
-                        <label for="custnum"><b>Customer ID</b></label>
-                            <input type="text" placeholder="" id="custnum" name="custnum" required>
                         <a class="btn amado-btn w-100 mt-30" style="color: #ffffff" onclick="insertAddress('${a}')">Confirm</a>
                     </div>
                     <div class="container" style="background-color:#f1f1f1">
@@ -893,7 +889,6 @@ function insertAddress(a){
         "state": document.getElementById("state").value.toString(),
         "postalcode": document.getElementById("postalCode").value.toString(),
         "country": document.getElementById("country").value.toString(),
-        "custnum": document.getElementById("custnum").value.toString(),
         "addrnum": document.getElementById("addrnum").value.toString()
     };
     if(address.addrline1 == '' || address.city == '' || address.state == '' || address.country == '' || address.custnum == '' || address.addrnum == ''){
@@ -911,9 +906,9 @@ function insertAddress(a){
         data: address,
         dataType: "json",
         success: function (data) {
-            x = JSON.stringify(data);
-            document.getElementById('id01').style.display = "none";
-            showCustomerAddress(x, true, 'dont need', 'addressArea');
+            document.getElementById('id05').style.display = "none";
+            data = JSON.stringify(data);
+            showCustomerAddress(data, true, 'dont need', 'addressArea');
         }
     });
 }
@@ -1071,8 +1066,7 @@ function updateAddr(a,b){
         }
     });
 }
-
-function deleteAddr(a){
+function deleteAddr(a,b){
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -1080,11 +1074,11 @@ function deleteAddr(a){
     });
     $.ajax({
         type: 'post',
-        url: '/deleteAddress/' + a,
+        url: '/deleteAddress/' + a + '/' + b,
         success: function (data) {
-            document.getElementById('id04').style.display = 'none';
-            data1 = JSON.parse(data);
-            showCustomer(data1);
+            x = JSON.stringify(data);
+            document.getElementById('id05').style.display = 'none';
+            showCustomerAddress(x, true, 'dont need', 'addressArea');
         }
     });
 }
@@ -1102,7 +1096,7 @@ function deleteitem(a) {
         type: 'delete',
         url: '/deleteProduct/' + a,
         success: function (data) {
-            document.getElementById('id03').style.display = 'none';
+            document.getElementById('id02').style.display = 'none';
             showProduct(data, true, false);
         }
     });
@@ -1196,12 +1190,79 @@ function ShowShipping(input) {
             <td><h5>${a.status}</h5></td>
             <td><h5>${a.comments}</h5></td>
             <td><h5>${a.customerNumber}</h5></td>
+            <td><a href="#" onclick="PopUpodDetail(),ShowOdDetail(${a.orderNumber})" class="btn amado-btn" style="min-width:50px">Detail</a></td>
             <td><a href="#" onclick="PopUpodstatus(${a.orderNumber})" class="btn amado-btn" style="min-width:50px">Edit</a></td>
         </tr>
         `;
     });
     document.getElementById('order_table_body').innerHTML = shipping_table;
 }
+
+function ShowOdDetail(a) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'get',
+        url: '/detailstatus/' + a,
+        success: function (data) {
+            var b = JSON.parse(data);
+            console.log(b);
+            tableoddetail = "";
+            b.forEach(function (a) {
+            tableoddetail += `
+            <tr>
+                <td><h5>${a.productCode}</h5></td>
+                <td><h5>${a.quantityOrdered}</h5></td>
+                <td><h5>${a.priceEach}</h5></td>
+                <td><h5>${a.orderLineNumber}</h5></td>
+            </tr>
+            `;
+        });
+        document.getElementById('detailorder').innerHTML = tableoddetail;
+        }
+    });
+}
+
+function PopUpodDetail() {
+    var status = `
+        <span onclick="document.getElementById('popoddetail').style.display='none'"
+            class="close" title="Close Modal">&times;
+        </span>
+        <form class="modal-content animate" action="/action_page.php">
+        <div class="cart-table-area section-padding-60">
+        <div class="container-fluid">
+            <div class="row">
+            <div>
+            <div class="cart-head mt-50 mb-10">
+                <h2>Order Details</h2>
+            </div>
+            <div class="table">
+                <table>
+                    <thead>
+                        <tr style="background-color:#fbb710">
+                            <th >ProductCode</th>
+                            <th >QuantityOrdered</th>
+                            <th >PriceEach</th>
+                            <th >OrderLineNumber</th>
+                        </tr>
+                    </thead>
+                    <tbody id="detailorder">
+                    </tbody>
+                </table>
+            </div>
+            </div>
+            </div>
+        </div>
+        </div>
+        </form>`;
+    document.getElementById("popoddetail").innerHTML = status;
+    document.getElementById("popoddetail").style.display = 'block';
+}
+
+
 
 function AddToOrder(){
 

@@ -43,6 +43,7 @@ Route::get('/getAddress/{code}','DataController@getAddress');
 Route::get('/editproduct/{code}','DataController@editProduct');
 Route::get('/editcus/{code}','DataController@editcus');
 Route::get('/editstatus/{code}','DataController@editstatus');
+Route::get('/detailstatus/{code}','DataController@detailstatus');
 Route::get('/successOrder','DataController@successOrder');
 Route::post('/login', 'DataController@login');
 Route::get('/Subtotal', 'Datacontroller@Subtotal');
@@ -57,10 +58,8 @@ Route::post('/updateEm/{code}','DataController@updateEm');
 Route::post('/NumberCart','DataController@NumberCart');
 Route::post('/getPro','DataController@getPromotion');
 Route::post('/UpdatePayment','DataController@UpdatePayment');
-Route::post('/updateAddress/{code}/{addr}','DataController@updateAddress');
+Route::post('/updateAddress/{code}/{code2}','DataController@updateAddress');
 Route::post('/updatecus/{code}','DataController@updatecus');
-Route::post('/updateship/{code}','DataController@updateship');
-Route::post('/updateProduct/{code}','DataController@updateProduct');
 
 //### Insert Function ###
 Route::post('/insertToCart','DataController@insertTocart');
@@ -79,4 +78,4 @@ Route::delete('/deleteEm/{code}','DataController@deleteEm');
 Route::delete('/deleteCart','DataController@deleteCart');
 Route::delete('/deletecus/{code}','DataController@deletecus');
 Route::delete('/deletepromotion','DataController@deletepromotion');
-Route::post('/deleteAddress/{code}','DataController@deleteAddress');
+Route::post('/deleteAddress/{code}/{code2}','DataController@deleteAddress');
