@@ -36,8 +36,6 @@ Route::get('/shipping','DataController@shipping');
 Route::get('/promotion','DataController@promotion');
 Route::get('/payment','DataController@payment');
 
-Route::get('/welcome','DataController@employeeInfo');
-
 //### get function ###
 Route::get('/getAddress/{code}','DataController@getAddress');
 Route::get('/editproduct/{code}','DataController@editProduct');
@@ -45,7 +43,6 @@ Route::get('/editcus/{code}','DataController@editcus');
 Route::get('/editstatus/{code}','DataController@editstatus');
 Route::get('/successOrder','DataController@successOrder');
 Route::post('/login', 'DataController@login');
-Route::post('/stock', 'DataController@stock');
 Route::get('/Subtotal', 'Datacontroller@Subtotal');
 Route::get('/editAddress/{code}','DataController@editAddress');
 Route::get('/Subtotal', 'Datacontroller@Subtotal');
@@ -56,8 +53,8 @@ Route::post('/updateProduct/{code}','DataController@updateProduct');
 Route::post('/updateEm/{code}','DataController@updateEm');
 Route::post('/NumberCart','DataController@NumberCart');
 Route::post('/getPro','DataController@getPromotion');
-Route::get('/UpdatePayment','DataController@UpdatePayment');
-Route::post('/updateAddress/{code}','DataController@updateAddress');
+Route::post('/UpdatePayment','DataController@UpdatePayment');
+Route::post('/updateAddress/{code}/{addr}','DataController@updateAddress');
 Route::post('/updatecus/{code}','DataController@updatecus');
 Route::post('/updateship/{code}','DataController@updateship');
 Route::post('/updateProduct/{code}','DataController@updateProduct');
@@ -71,7 +68,7 @@ Route::post('/getMyEmployee','DataController@getMyEmployee');
 Route::post('/insertcus','DataController@insertcus');
 Route::post('/insertEm','DataController@insertEm');
 Route::post('/insertProduct','DataController@insertProduct');
-Route::post('/addAddress','DataController@addAddress');
+Route::post('/addAddress/{code}','DataController@addAddress');
 
 //### Delete Function ###
 Route::delete('/deleteProduct/{code}','DataController@deleteProduct');

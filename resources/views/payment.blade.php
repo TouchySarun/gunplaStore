@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="UTF-8">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -184,22 +185,10 @@
                                 </div>
                                 <div class="product-meta-data">
                                     <form>
-                                        <p>Customer Number: <input type="text" id="customerNumber"></p>
-                                        <p>Check Number: <input type="text" id="checkNumber"></p>
-                                        <p>Payment Date: <input type="date" style="width: 520px" id="paymentDate"></p>
-                                        <p>Amount: <input type="text" id="amount"></p>
-                                        <!-- <div class="dropdown">
-                                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="order_status">STATUS
-                                            <span class="caret"></span></button>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="btn btn-primary" href="#" onclick="document.getElementById('order_status').innerHTML='Cancelled'">Cancelled</a></li>
-                                                <li><a class="btn btn-primary" href="#" onclick="document.getElementById('order_status').innerHTML='Disputed'">Disputed</a></li>
-                                                <li><a class="btn btn-primary" href="#" onclick="document.getElementById('order_status').innerHTML='In process'">In process</a></li>
-                                                <li><a class="btn btn-primary" href="#" onclick="document.getElementById('order_status').innerHTML='On hold'">On hold</a></li>
-                                                <li><a class="btn btn-primary" href="#" onclick="document.getElementById('order_status').innerHTML='Resolved'">Resolved</a></li>
-                                                <li><a class="btn btn-primary" href="#" onclick="document.getElementById('order_status').innerHTML='Shipped'">Shipped</a></li>
-                                            </ul>
-                                        </div> -->
+                                        <p>Customer Number: <input type="text" id="customerNumber" placeholder="260"></p>
+                                        <p>Check Number: <input type="text" id="checkNumber" placeholder="HE84936"></p>
+                                        <p>Payment Date: <br><input type="date" style="width: 520px" id="paymentDate"></p>
+                                        <p>Amount: <input type="text" id="amount" placeholder="2500.00"></p>
                                     </form>
                                     <br>
                                     <a href="#" onclick="AddToPayment()" class="btn amado-btn">SAVE</a>
@@ -214,6 +203,8 @@
 
     </div>
     <!-- ##### Main Content Wrapper End ##### -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <br>
     <footer class="footer_area">

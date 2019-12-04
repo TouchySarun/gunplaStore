@@ -14,7 +14,7 @@ function showCustomerAddress(input, editAble,redioname,id) {
         x.forEach( function (a) {
             tableaddress += `
             <tr>`;
-                if(editAble != true){tableaddress += `
+                if(editAble != true && redioname != "dont need"){tableaddress += `
                 <td style="text-align: left; margin-right: 10px; max-width: 10%; border-bottom: none;">
                     <label class="radio-container">
                         <input type="radio" name="${redioname}" value="${n}">
@@ -253,7 +253,7 @@ function showCustomer(customer) {
         </div>
         `
     });
-    document.getElementById("customerArea").innerHTML = tablecustomer;
+    document.getElementById("productArea").innerHTML = tablecustomer;
 }
 
 //stockin
