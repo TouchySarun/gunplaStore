@@ -107,14 +107,16 @@ class DataController extends Controller
     //and deleteFlag = 'flase'
     public function getAddress($code){
         $address = DB::select("select * from addresses where customerNumber like '$code' and deleteFlag = 'false'");
+        $primaryAddr = DB::select("select * from customers where customerNumber like '$code'");
         $point = DB::select("select point from customers where customerNumber like '$code'");
-        return [json_encode($address),json_encode($point)];
+        return [json_encode($address),json_encode($point),json_encode($primaryAddr)];
     }
     public function addAddress(Request $request, $code){
         DB::insert("insert into addresses(addressLine1,addressLine2,city,state,postalCode,country,customerNumber,addressNumber,deleteFlag)
             values ('$request->addrline1','$request->addrline2','$request->city','$request->state','$request->postalcode','$request->country','$code','$request->addrnum','false')" );
         $product = DB::select("select * from addresses where customerNumber = '$code' and deleteFlag = 'false' ");
-        return $product;
+        $primaryAddr = DB::select("select * from customers where customerNumber like '$code'");
+        return [$product,$primaryAddr];
     }
     public function editAddress($code, $code2){
         $data = DB::select("select * from addresses where customerNumber = '$code' and addressNumber = '$code2'");
@@ -124,12 +126,14 @@ class DataController extends Controller
         DB::update("update addresses set addressLine1 = ?,addressLine2 = ?,city = ?,state = ?,postalCode = ?,country = ? where addressNumber = ? and customerNumber = ?",
         [$request->addrline1,$request->addrline2,$request->city,$request->state,$request->postalcode,$request->country,$request->addrnum,$code]);
         $data = DB::select("select * from addresses where customerNumber = '$code' and deleteFlag = 'false'");
-        return json_encode($data);
+        $primaryAddr = DB::select("select * from customers where customerNumber like '$code'");
+        return [json_encode($data),json_encode($primaryAddr)];
     }
     public function deleteAddress($code, $code2){      //Soft-delete -> still available on shipping details
-        $data = DB::select("select * from addresses where customerNumber = '$code' and deleteFlag = 'false'");
         DB::update("update addresses set deleteFlag = 'true' where customerNumber = '$code' and addressNumber = '$code2'");
-        return $data;
+        $data = DB::select("select * from addresses where customerNumber = '$code' and deleteFlag = 'false'");
+        $primaryAddr = DB::select("select * from customers where customerNumber like '$code'");
+        return [$data,$primaryAddr];
     }
 
     public function successOrder(Request $request){
@@ -162,15 +166,21 @@ class DataController extends Controller
         $z = (int)$request->Point;
         $Point = DB::select("select point from customers where customerNumber like '$request->customerNumber'");
         $x = $Point[0];
-        $y = $x->point;
-        $x = $z+$y;
+        if($x->point == null){
+            $x = $y;
+        }else{
+            $y = $x->point;
+            $x = $z+$y;
+        }
         DB::update("update customers set point =$x where customerNumber like '$request->customerNumber'");
         //update qty of promotion in promotion table
 
         $oldPromotionQTY = DB::select("select qty from promotion where promotionCode like '$request->code'");
-        $newPQTY = (int)$oldPromotionQTY[0]->qty - $j;
-        DB::update("update promotion set qty = $newPQTY where promotionCode like '$request->code'");
-        //delete cart
+        if($oldPromotionQTY != null){
+            $newPQTY = (int)$oldPromotionQTY[0]->qty - $j;
+            DB::update("update promotion set qty = $newPQTY where promotionCode like '$request->code'");
+        }
+        // delete cart
         DB::delete('delete from cart');
 
         return view('welcome');
@@ -260,8 +270,8 @@ class DataController extends Controller
     }
 
     public function insertcus(Request $request){
-        DB::insert("insert into customers(customerNumber,customerName,contactLastName,contactFirstName,phone,city,state,postalCode,country,salesRepEmployeeNumber,creditLimit)
-        values ('$request->wcusnum','$request->wcompany','$request->wlname','$request->wfname','$request->wphone','$request->wcity','$request->wstate','$request->wpos','$request->wcoun','$request->wsale','$request->wcredit')");
+        DB::insert("insert into customers(customerNumber,customerName,contactLastName,contactFirstName,phone,addressLine1, addressLine2,city,state,postalCode,country,salesRepEmployeeNumber,creditLimit)
+        values ('$request->wcusnum','$request->wcompany','$request->wlname','$request->wfname','$request->wphone','$request->wadd1','$request->wadd2','$request->wcity','$request->wstate','$request->wpos','$request->wcoun','$request->wsale','$request->wcredit')");
         $data = DB::select('select * from customers');
         $jsonProduct = json_encode($data);
         return $jsonProduct;

@@ -8,18 +8,41 @@ var tablepromotion = "";
 var tablecustomer = "";
 var tableoddetail = "";
 //--------------Show script------------------//
-function showCustomerAddress(input, editAble,redioname,id) {
+function showCustomerAddress(input, editAble,redioname,id,input2) {
         tableaddress = "";
+        console.log(input +" " +input2)
         x = JSON.parse(input);
+        py = JSON.parse(input2);
+        y = py[0];
         var n = 0;
         var tableaddress = `<table style="width: 100%"><tbody>`;
+        tableaddress +=
+            `<tr>`;
+            if(editAble != true && redioname != "dont need"){tableaddress += `
+                <td style="text-align: left; margin-right: 10px; max-width: 10%; border-bottom: none;">
+                    <label class="radio-container">
+                        <input type="radio" name="${redioname}" value="0">
+                        <span class="checkmark"></span>
+                    </label>
+                </td>`;}
+            tableaddress +=`
+                <td style="text-align: left; flex: 0 0 100%; width: 90%; max-width: 90%; border-bottom: none">
+                    <p>${y.addressLine1} ${y.addressLine2}<br>${y.city} ${y.state} ${y.country} ${y.postalCode}</p>
+                    <a class="line"></a>
+                </td>
+                <td style="width:20%; flex: 0 0 20%; padding-right: 1px; border-right: 1px solid #6d6d6d;">
+                    <a href="#" style="min-width:20%; width=100%; padding: .35rem .35rem;">
+                        primary addr
+                    </a>
+                </td>
+            </tr>`;
         x.forEach( function (a) {
             tableaddress += `
             <tr>`;
-                if(editAble != true){tableaddress += `
+                if(editAble != true && redioname != "dont need"){tableaddress += `
                 <td style="text-align: left; margin-right: 10px; max-width: 10%; border-bottom: none;">
                     <label class="radio-container">
-                        <input type="radio" name="${redioname}" value="${n}">
+                        <input type="radio" name="${redioname}" value="${a.addressNumber}">
                         <span class="checkmark"></span>
                     </label>
                 </td>`;}
@@ -53,8 +76,9 @@ function getAddress(customerNumber,editAble,redioname,id){
         type: 'get',
         url: '/getAddress/' + customerNumber,
         success: function (data) {
-            if(data[0].length != 2){
-                showCustomerAddress(data[0], editAble,redioname,id);
+            console.log(data);
+            if(data[0].length != 2 || data[2].length != 2){
+                showCustomerAddress(data[0], editAble,redioname,id,data[2]);
                 var d = JSON.parse(data[1]);
                 var points = document.getElementById("points");
                 if(points != null){
@@ -842,6 +866,8 @@ function insertcus(){
                     "wlname": document.getElementById("wlname").value.toString(),
                     "wphone": document.getElementById("wphone").value.toString(),
                     "wcity": document.getElementById("wcity").value.toString(),
+                    "wadd1":document.getElementById("wadd1").value.toString(),
+                    "wadd2":document.getElementById("wadd2").value.toString(),
                     "wstate": document.getElementById("wstate").value.toString(),
                     "wpos": document.getElementById("wpos").value.toString(),
                     "wcoun": document.getElementById("wcoun").value.toString(),
@@ -907,8 +933,9 @@ function insertAddress(a){
         dataType: "json",
         success: function (data) {
             document.getElementById('id01').style.display = "none";
-            data = JSON.stringify(data);
-            showCustomerAddress(data, true, 'dont need', 'addressArea');
+            data1 = JSON.stringify(data[0]);
+            data2 = JSON.stringify(data[1]);
+            showCustomerAddress(data1, true, 'dont need', 'addressArea', data2);
         }
     });
 }
@@ -1060,9 +1087,10 @@ function updateAddr(a,b){
         data: address,
         dataType: 'json',
         success: function (data) {
-            x = JSON.stringify(data);
+            x = JSON.stringify(data[0]);
+            y = JSON.stringify(data[1]);
             document.getElementById('id05').style.display = 'none';
-            showCustomerAddress(x, true, 'dont need', 'addressArea');
+            showCustomerAddress(x, true, 'dont need', 'addressArea', y);
         }
     });
 }
@@ -1076,9 +1104,10 @@ function deleteAddr(a,b){
         type: 'post',
         url: '/deleteAddress/' + a + '/' + b,
         success: function (data) {
-            x = JSON.stringify(data);
+            x = JSON.stringify(data[0]);
+            y = JSON.stringify(data[1]);
             document.getElementById('id05').style.display = 'none';
-            showCustomerAddress(x, true, 'dont need', 'addressArea');
+            showCustomerAddress(x, true, 'dont need', 'addressArea',y);
         }
     });
 }
@@ -1299,6 +1328,7 @@ function AddToOrder(){
         'billingAddr' : billingAddr,
         'code' : code
     };
+    console.log(Billing);
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
