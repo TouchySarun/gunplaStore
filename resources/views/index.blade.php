@@ -165,6 +165,7 @@
         dropdownScale(Scale);
         sessionStorage.clear();
     </script>
+    
     <!-- Product Catagories Area End -->
 
     <!-- ##### Main Content Wrapper End ##### -->

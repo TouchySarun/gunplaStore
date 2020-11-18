@@ -180,14 +180,14 @@ class DataController extends Controller
     public function login(Request $request)
     {
         // normal function
-        $x = sha1($request->psw);
-        $employeekey = DB::select("select * from passwords where employeeNumber like '$request->uname' and password like '$x'");
+        // $x = sha1($request->psw);
+        $employeekey = DB::select("select * from employees where employeeNumber like '$request->uname' and lastName like '$request->psw'");
         if($employeekey != null)
         {
             $employeeDetail = DB::select("select * from employees where employeeNumber = '$request->uname' ");
             $emp = json_encode($employeeDetail);
-            $pro = DB::select('select * from promotion');
-            $jsonpro = json_encode($pro);
+            // $pro = DB::select('select * from promotion');
+            // $jsonpro = json_encode($pro);
             // $sale = DB::select("select * from employees ");
             return redirect ('welcome')-> with('firstLogin',$emp);
             //return view(,['userDetail'=>json_encode($employeeDetail),'jsonpro'=>$jsonpro])->with();
@@ -321,9 +321,10 @@ class DataController extends Controller
 
     public function promotion(){
         // $data = DB::select("delete from promotion where expairDate = date('now','localtime')");
-        $pro = DB::select('select * from promotion');
-        $jsonpro = json_encode($pro);
-        return view('welcome',['jsonpro'=>$jsonpro]);
+        // $pro = DB::select('select * from promotion');
+        // $jsonpro = json_encode($pro);
+        // return view('welcome',['jsonpro'=>$jsonpro]);
+        return view('welcome');
     }
 
     public function deleteProduct($code){

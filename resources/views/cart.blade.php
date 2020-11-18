@@ -216,7 +216,7 @@
                         </div>
                     </div>
                     <script>
-                        var json = <?php echo $product?>;
+                        var json = <?php echo $product ?? ''?>;
                         showCart(json);
                         order_calculator() ;
                     </script>
